@@ -27,7 +27,7 @@ day 3: 14/07/2018
 		-creat project.
 		-add laravel folder.
 		-add conception folder.
-
+                -set env de travail .. (noha)
 	- validation /modification des diagramme
 
 	- php myadmine database /laravel migration
