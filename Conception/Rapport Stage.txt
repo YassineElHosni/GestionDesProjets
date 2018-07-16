@@ -28,6 +28,7 @@ day 3: 14/07/2018
 		-add laravel folder.
 		-add conception folder.
                 -set env de travail .. (noha)
+                -set env de travail backup .. (yassine)
 	- validation /modification des diagramme
 
 	- php myadmine database /laravel migration
