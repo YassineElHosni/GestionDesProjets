@@ -30,5 +30,10 @@ day 3: 14/07/2018
                 -set env de travail .. (noha)
                 -set env de travail backup .. (yassine)
 	- validation /modification des diagramme
+        - uml diagramme use case (modification ..)
+day 4: 15/07/2018
 
+>morning / afternn :
+        - diagramme de classes ( a faire !)
+        - modification des diagrammes de séquences ( a faire !)
 	- php myadmine database /laravel migration
