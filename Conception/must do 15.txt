@@ -2,8 +2,10 @@
 
 yassine:
 -uml diagramme use case (modify)
--diagramme d'états
+-diagramme d'états 
+
 nouha: 
 
-diagramme de classe (modifiable à fûre et à mesure )
--diagrammes de séquence
+-diagramme de classe (modifiable à fûre et à mesure )
+-diagrammes de séquence (annulé)
+-phpmyadmin / migration

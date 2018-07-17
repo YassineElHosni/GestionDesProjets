@@ -14,12 +14,16 @@ class CreateTachesTable extends Migration
     public function up()
     {
         //
-        Schema::create('projets', function (Blueprint $table) {
+        Schema::create('taches', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('description');
+            $table->DateTime('date_limite');
             $table->enum('état',array('en-coure','fini','validée','non-validée'));
                     $table->enum('type',array('final','non-final'));
-                    $table->rememberToken();
+                    $table->integer('déroulement'); /* avec % */
+                    $table->integer('priorité'); /* de 0....*  colors red...green*/
+            $table->longText('commentaire');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
