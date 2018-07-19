@@ -32,9 +32,9 @@ day 3: 14/07/2018
 	- validation avec notre chef /modification des diagramme
         - uml diagramme use case (modification ..)
 day 4: 15/07/2018:
-
+samedi
 day 5: 16/07/2018:
-
+dim
 day 6: 17/07/2018:
 
 >morning / afternn :
@@ -48,6 +48,14 @@ nouha:
 
 -diagramme de classe (modifiable .. )
 -diagrammes de séquence (annulé)
--phpmyadmin / migration
+-phpmyadmin / migration /*start coding*/
 
-<home> migration's table..
+day 7: 18/07/2018: 
+-bugs day(fixed)
+
+day 8: 19/07/2018: 
+-migrations 
+1(yassine-> Projet with Tasks)
+2(noha-> User with Tasks)
+3(noha-> User with Projet)
+(yassine-> combinaisons des 3 migrations)
