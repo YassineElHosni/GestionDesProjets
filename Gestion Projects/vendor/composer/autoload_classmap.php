@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddClientFkeyToProject' => $baseDir . '/database/migrations/m6/2018_07_20_112939_add_client_fkey_to_project.php',
     'AddProjectFkeyToTask' => $baseDir . '/database/migrations/m6/2018_07_20_104448_add_project_fkey_to_task.php',
+    'AddUserFkeyToProject' => $baseDir . '/database/migrations/m7/2018_07_20_122020_add_user_fkey_to_project.php',
+    'App\\Client' => $baseDir . '/app/Client.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',

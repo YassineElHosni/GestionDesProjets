@@ -22,7 +22,7 @@ class CreateProjetsTable extends Migration
               $table->dateTime('date_debut');/* modifiable */
                 $table->dateTime('date_fin');
                 $table->enum('deplacement',array('O','N'));
-                    $table->enum('état',array('en-coure','clos'));
+                    $table->enum('état',array('en-cours','clos'));
                 $table->longText('commentaire');
             $table->rememberToken();
             $table->timestamps();
