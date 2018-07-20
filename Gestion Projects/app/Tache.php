@@ -14,4 +14,8 @@ class Tache extends Model
         // return $this->belongsToMany('App\User','tache_user','tache_id','user_id')->withPivot('date_debut', 'date_fin');
      return $this->belongsToMany('App\User')->withPivot('date_debut', 'date_fin');
     }
+
+	public function projets(){
+		return $this->belongsTo('App\Projet');
+	}
 }
