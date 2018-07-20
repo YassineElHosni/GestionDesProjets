@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ProjetController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all Projects
      *
      * @return \Illuminate\Http\Response
      */
@@ -17,13 +17,13 @@ class ProjetController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Project
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -38,7 +38,7 @@ class ProjetController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Project.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
