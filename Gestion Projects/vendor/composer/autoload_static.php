@@ -318,6 +318,8 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
     public static $classMap = array (
         'AddClientFkeyToProject' => __DIR__ . '/../..' . '/database/migrations/m6/2018_07_20_112939_add_client_fkey_to_project.php',
         'AddProjectFkeyToTask' => __DIR__ . '/../..' . '/database/migrations/m6/2018_07_20_104448_add_project_fkey_to_task.php',
+        'AddUserFkeyToProject' => __DIR__ . '/../..' . '/database/migrations/m7/2018_07_20_122020_add_user_fkey_to_project.php',
+        'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
