@@ -38,5 +38,15 @@ class User extends Authenticatable
 
      return $this->belongsToMany('App\Projet');
     }
+    /*
+    *checking the roles
+    */
+    public function hasRole($role){
+      $user=User::where('id','=',auth()->id())->get();/*l'user authentifié*/
 
+      if($user->role==$role){
+        return true;
+      }
+        return false;
+    }
 }
