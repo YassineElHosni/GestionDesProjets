@@ -28,6 +28,8 @@
       {{ Form::label('commentaire','Commentaire:') }}
       {{ Form::textarea('commentaire',null, ['class'=>'form-control'])}}
 
+      {{ Form::label('representant','Chef de Projet:') }}
+      {!! Form:: select('user_id',$chef_club,null, ['class' => 'form-control']) !!}
 
  <hr>
 {{ Form::button('Ajouter', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}

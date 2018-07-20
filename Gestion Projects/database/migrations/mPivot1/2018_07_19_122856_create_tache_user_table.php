@@ -17,10 +17,10 @@ class CreateTacheUserTable extends Migration
          Schema::create('tache_user', function (Blueprint $table) {
 
            $table->integer('user_id')->unsigned()->index();
-           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           $table->foreign('user_id')->references('id')->on('users');
 
            $table->integer('tache_id')->unsigned()->index();
-           $table->foreign('tache_id')->references('id')->on('taches')->onDelete('cascade');
+           $table->foreign('tache_id')->references('id')->on('taches');
 
         $table->primary(['tache_id','user_id']);
         $table->DateTime('date_debut');

@@ -16,10 +16,10 @@ class CreateProjetUserTable extends Migration
          Schema::create('projet_user', function (Blueprint $table) {
 
            $table->integer('user_id')->unsigned()->index();
-           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           $table->foreign('user_id')->references('id')->on('users');
 
            $table->integer('projet_id')->unsigned()->index();
-           $table->foreign('projet_id')->references('id')->on('projets')->onDelete('cascade');
+           $table->foreign('projet_id')->references('id')->on('projets');
 
         $table->primary(['projet_id','user_id']);
          });
