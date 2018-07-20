@@ -31,10 +31,11 @@ $factory->define(App\Tache::class, function (Faker\Generator $faker) {
 return [
 	'description' =>$faker->realText($maxNbChars = 100),
 	'date_limite' =>$faker->date($format = 'Y-m-d', $max = 'now'),
-	'état' =>  $faker->randomElement(['en-coure','fini','validée']),
+	'état' =>  $faker->randomElement(['en-cours','fini','validée']),
 	'déroulement' =>  $faker->randomDigit ,
   'priorité' =>  $faker->randomDigit ,
 	'commentaire' =>  $faker->text,
+  '' => random_int(1, App\Projet::count())
 ];
 });
 
@@ -48,7 +49,56 @@ return [
   'date_debut' =>$faker->date($format = 'Y-m-d', $max = '2018-08-01'),
   'date_fin' =>$faker->date($format = 'Y-m-d', $max = '2018-08-25'),
 	'deplacement' =>  $faker->randomElement(['O','N']),
-  	'état' =>  $faker->randomElement(['en-coure','clos']),
+  	'état' =>  $faker->randomElement(['en-cours','clos']),
 	'commentaire' =>  $faker->text,
+  'client_id' => random_int(1, App\Client::count())
+];
+});
+/*
+'numeroClient','Nom','email','adresse','num_tel','commentaire'
+*/
+$factory->define(App\Client::class, function (Faker\Generator $faker) {
+    static $password;
+
+return [
+  'numeroClient' =>$faker->realText($maxNbChars = 100),
+  'nom' =>$faker->name($gender = null|'male'|'female'),
+  'email' =>$faker->email,
+  'adresse' =>$faker->address,
+  'num_tel' =>$faker->phoneNumber,
+  'commentaire' =>  $faker->realText($maxNbChars = 100),
+];
+});
+/*
+tache_user
+*/
+$factory->define(App\Tache_User::class, function (Faker\Generator $faker) {
+    static $password;
+
+return [
+  'user_id' => random_int(1, App\User::count()),
+  'tache_id' => random_int(1, App\Tache::count()),
+];
+});
+/*
+tache_user                not sure it will work more the one time hhhh
+*/
+$factory->define(App\Tache_User::class, function (Faker\Generator $faker) {
+    static $password;
+
+return [
+  'user_id' => random_int(1, App\User::count()),
+  'tache_id' => random_int(1, App\Tache::count()),
+];
+});
+/*
+projet_user                not sure it will work more the one time hhhh
+*/
+$factory->define(App\Projet_User::class, function (Faker\Generator $faker) {
+    static $password;
+
+return [
+  'user_id' => random_int(1, App\User::count()),
+  'project_id' => random_int(1, App\Tache::count()),
 ];
 });
