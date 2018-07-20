@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Tache;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /*
+    * The tache that belongs to user
+    */
+    public function taches(){
+         return $this->belongsToMany('App\Tache')->as('tache_user')->withPivot('date_debut','date_fin')->using('App\Tache_User');
+
+    }
 }

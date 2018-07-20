@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', function () {
+/*Route::get('home', function () {
     return 'welcome';
-});
+});*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/tache', 'TacheController@index');

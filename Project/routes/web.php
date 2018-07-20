@@ -12,9 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'test';
 });
 
 Route::get('/home', function(){
 	return "laravel5";
 });
+//Route::get('/test','TacheController@index');
+Route::resource('/User','UserController');
+Route::resource('/Projet','ProjetController');
+Route::resource('/Tache','TacheController');
+Route::resource('/Client','ClientController');
+?>
