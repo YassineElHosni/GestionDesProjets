@@ -51,21 +51,19 @@ return [
 	'deplacement' =>  $faker->randomElement(['O','N']),
   	'état' =>  $faker->randomElement(['en-cours','clos']),
 	'commentaire' =>  $faker->text,
-  'client_id' => random_int(1, App\Client::count())
+  'client_id' => random_int(1, App\Client::count()),
+  'user_id' => random_int(1, App\User::count()),
 ];
 });
-/*
-'numeroClient','Nom','email','adresse','num_tel','commentaire'
-*/
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     static $password;
 
 return [
-  'numeroClient' =>$faker->realText($maxNbChars = 100),
+  'numeroClient' =>$faker->numberBetween($min = 10000, $max = 90000),
   'nom' =>$faker->name($gender = null|'male'|'female'),
   'email' =>$faker->email,
   'adresse' =>$faker->address,
-  'num_tel' =>$faker->phoneNumber,
+  'num_tel' =>$faker->e164PhoneNumber,
   'commentaire' =>  $faker->realText($maxNbChars = 100),
 ];
 });
@@ -102,3 +100,14 @@ return [
   'project_id' => random_int(1, App\Tache::count()),
 ];
 });
+
+/*
+//tache
+'description','date_limit','stat','priority','comments'
+
+//projet
+'title','description','date_limit','date_start','date_end','deplacement','stat','comment'
+
+//client
+'numeroClient','Nom','email','adresse','num_tel','commentaire'
+*/

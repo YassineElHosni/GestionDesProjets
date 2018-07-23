@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Projet;
 
 class ProjetController extends Controller
 {
@@ -13,7 +14,8 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        //
+        $ps = Projet::all();
+        return view('projets.index' ,compact($ps))->withProjets($ps);
     }
 
     /**
@@ -45,7 +47,8 @@ class ProjetController extends Controller
      */
     public function show($id)
     {
-        //
+        $p = Projet::find($id);
+        return view('projets.show')->withProjet($p);
     }
 
     /**
@@ -56,7 +59,8 @@ class ProjetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $p = Project::find($id);
+        return view('projets.update')->withProjets($p);
     }
 
     /**

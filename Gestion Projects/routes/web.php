@@ -20,4 +20,12 @@ Route::get('/home', function(){
 });
 
 Route::get('/Tache','TacheController@index');
+
+Route::resource('Projet','ProjetController');
+
+
+
+
+
 ?>
+
