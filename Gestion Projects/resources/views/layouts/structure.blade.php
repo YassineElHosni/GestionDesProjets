@@ -6,11 +6,11 @@
 
 </head>
 
-    <div class="text-center">
+  {{--   <div class="text-center">
 
-      <h1 >Projects Follow Up</h1>
+      <h1>Projects Follow Up</h1>
   
-   </div>
+   </div> --}}
     <!-- Styles -->
  @include('partials._style')
 
@@ -18,7 +18,7 @@
 
    
  <!--mes boutons-->
- <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+ <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success">
    <a class="navbar-brand" href="{{ url('/Projets') }}">Projects Follow Up</a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="">
      <span class="navbar-toggler-icon"></span>
@@ -77,7 +77,7 @@
      </form>
    </div>
  </nav>
-
+<br><br><br>
 <!--recherche barr!-->
 
       @if(session()->has('flash'))
