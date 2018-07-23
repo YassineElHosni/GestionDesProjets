@@ -23,6 +23,8 @@ Route::get('/Tache','TacheController@index');
 
 Route::resource('Projet','ProjetController');
 
+Auth::routes();
+
 
 
 

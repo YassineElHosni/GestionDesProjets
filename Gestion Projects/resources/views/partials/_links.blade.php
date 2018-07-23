@@ -14,4 +14,4 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-     <title>{{  Projects Follow up }}</title>
+     <title>Projects Follow up</title>

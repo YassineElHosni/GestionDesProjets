@@ -24,7 +24,7 @@
 		 			<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
-		 			<td>{{$p->deplacement}}</td>
+		 			<td>{{($p->deplacement=='O')?'OUI':'NO'}}</td>
 		 			<td>{{$p->état}}</td>
 		 		
 		 		</tr>
