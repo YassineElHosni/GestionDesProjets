@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layouts.structure')
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title></title>
-</head>
-<body>
-<div class="container">
+@section('content')
     <div class="col-sm-12">
     	<label class="col-sm-4">intitulee</label>
     	<div>{{ $projet->intitulee }}</div>
@@ -32,6 +25,4 @@
     	<label class="col-sm-4">date_limite</label>
     	<div class="col-sm-8">{{date("M j,Y", strtotime($projet->date_limite))}}</div>
     </div>
-</div>
-</body>
-</html>
+@endsection

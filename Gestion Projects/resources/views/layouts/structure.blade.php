@@ -8,20 +8,15 @@
 
     <div class="text-center">
 
-      <h1 >Events Follow Up</h1>
-    <h3 >Application pour la gestion des evenements de l'EMSI</h3>
+      <h1 >Projects Follow Up</h1>
+  
    </div>
     <!-- Styles -->
  @include('partials._style')
 
 <body>
 
-    <!--  <nav class="navbar navbar-dark bg-success mb-4">
-        <! Branding Image
-                <a class="navbar-brand" href="{{ url('/Events') }}">
-                    Events Follow Up
-                </a>
-      <div class="navbar-center mb-3" >-->
+   
  <!--mes boutons-->
  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
    <a class="navbar-brand" href="{{ url('/Projets') }}">Projects Follow Up</a>
@@ -42,21 +37,22 @@
                            @if (Auth::guest())
                               <ul class="nav-item navbar-right">
                              <a class="nav-link" href="{{ route('login') }}">Login</a>
-                              <!-- <a class="nav-link" href="{{ route('register') }}">Register</a>-->
+
+                           <!-- tester si db est vide -- if()..route('register') }}">Register</a>-->
                                 </li>
                               </ul>
                                  @else <!-- si  authentifié -->
                                  <li class="nav-item">
                                    <?php $id=Auth::user()->id ?>
-                                   <a class="nav-link" href="{{ route('Users.show',$id ) }}">Mon profile</a>
+                                   <a class="nav-link" href="#">Mon profile</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('Users.index') }}">Gestion Utilisateurs</a>
+                                    <a class="nav-link" href="#">Gestion Utilisateurs</a>
                                  </li>
                                  <li class="nav-item">
-                                   <a class="nav-link" href="Events/create">Ajouter Evenement</a>
+                                   <a class="nav-link" href="#">Gestion Projets</a>
                                  </li>
-                                   <a class="nav-link" href="/message">Envoyer Message</a> </li>
+                                  
                                  <a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
                                   </li>
                                      <ul class="nav-item navbar-right">
@@ -90,10 +86,8 @@
          </div>
       @endif
         <div class="container">
-          @yield('content') </div>
-        <!-- Scripts
-        <script src="{{ asset('js/app.js') }}"></script>-->
-
+          @yield('content') 
+        </div>
 
         <hr>
   </body>

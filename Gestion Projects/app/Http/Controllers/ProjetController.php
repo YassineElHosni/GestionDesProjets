@@ -25,9 +25,7 @@ class ProjetController extends Controller
      */
     public function create()
     {
-      $user=User::findall();/*all users*/
-      while($user)
-     $chef_club=
+    
     }
 
     /**

@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+@extends('layouts.structure')
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title></title>
-</head>
-<body>
-	<div class="container">
+@section('content')
 		 <table class="table table-condensed">
 		 	<thead>
 		 		<tr>
@@ -33,11 +26,9 @@
 		 			<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
 		 			<td>{{$p->deplacement}}</td>
 		 			<td>{{$p->état}}</td>
-		 		{{-- 	<td>{{$p->commentaire}}</td> --}}
+		 		
 		 		</tr>
 		 		@endforeach
 		 	</tbody>
 		 </table> 
-	</div>
-</body>
-</html>
+@endsection
