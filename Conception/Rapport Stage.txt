@@ -59,3 +59,7 @@ day 8: 19/07/2018:
 2(noha-> User with Tasks)
 3(noha-> User with Projet)
 (yassine-> combinaisons des 3 migrations)
+day 9: 20/07/2018: 
+database (finished)
+ ..
+<--home tasks--> ProjetController ( Project views..)
