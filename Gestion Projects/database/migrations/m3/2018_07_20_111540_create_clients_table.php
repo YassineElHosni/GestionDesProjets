@@ -19,7 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('Nom');
             $table->string('email');
             $table->string('adresse');/*ville continant..*/
-            $table->integer('num_tel');
+            $table->string('num_tel',15);
             $table->longText('commentaire');
             $table->rememberToken();
             $table->timestamps();

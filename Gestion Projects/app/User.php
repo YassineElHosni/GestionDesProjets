@@ -39,9 +39,9 @@ class User extends Authenticatable
      return $this->belongsToMany('App\Projet');
     }
     /*
-    *checking the roles
+    *checking the role of the  authentificated user
     */
-    public function hasRole($role){
+    public function Auth_hasRole($role){
       $user=User::where('id','=',auth()->id())->get();/*l'user authentifié*/
 
       if($user->role==$role){
@@ -49,4 +49,12 @@ class User extends Authenticatable
       }
         return false;
     }
+    /*
+    *checking the role of the  authentificated user
+    */
+    public static function hasRole($role){
+     return User::where('role','===',$role);
+
+    }
+
 }

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use App\Projet;
+use App\User;
 class ProjetController extends Controller
 {
     /**
@@ -13,7 +13,10 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        //
+
+        $ps = Projet::all();
+        return view('projets.index' ,compact($ps))->withProjets($ps);
+
     }
 
     /**
@@ -23,9 +26,19 @@ class ProjetController extends Controller
      */
     public function create()
     {
-      $user=User::findall();/*all users*/
-      while($user)
-     $chef_club=
+
+
+      //$chef_projets=new User();
+      //$n=User::count();  App\User::count()
+     $chef_projets=User::hasRole('CHEF_PROJET')->get();
+      $select=[];
+        foreach($chef_projets as $chef_projet){
+         $select[$chef_projet->id] =$chef_projet->Nom;
+       }
+    //  $employe=User::hasRole(EMPLOYE)->getall();
+    //$select=array('hello','goodbye');="2";
+
+     return view('projets.create',compact('select'));
     }
 
     /**
@@ -36,7 +49,9 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      /*  $Projet=Projet::create($request->all());
+        return redirect()->view('projets.show');*/
+        return 'test';
     }
 
     /**
@@ -47,7 +62,8 @@ class ProjetController extends Controller
      */
     public function show($id)
     {
-        //
+        $p = Projet::find($id);
+        return view('projets.show')->withProjet($p);
     }
 
     /**
@@ -58,7 +74,8 @@ class ProjetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $p = Project::find($id);
+        return view('projets.update')->withProjets($p);
     }
 
     /**

@@ -10,14 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes();
 Route::get('/', function () {
     return 'test';
 });
 
-Route::get('/home', function(){
+Route::get('/test', function(){
 	return "laravel5";
 });
 
+Route::resource('Projets','ProjetController');
 Route::get('/Tache','TacheController@index');
+
+Route::resource('Projet','ProjetController');
+
+Auth::routes();
+
+
+
+
+
 ?>
+

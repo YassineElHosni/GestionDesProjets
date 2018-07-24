@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Projet extends Model
 {
+	protected $fillable = [
+			 'intitulee','description','date_limite','deplacement',
+			 'état','commentaire',
+					 // add all other fields
+	 ];
 	//
 	public function users(){
 		// return $this->belongsToMany('App\User','tache_user','tache_id','user_id')->withPivot('date_debut', 'date_fin');
