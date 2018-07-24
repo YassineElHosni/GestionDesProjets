@@ -13,10 +13,8 @@ class ProjetController extends Controller
      */
     public function index()
     {
-
         $ps = Projet::all();
         return view('projets.index' ,compact($ps))->withProjets($ps);
-
     }
 
     /**

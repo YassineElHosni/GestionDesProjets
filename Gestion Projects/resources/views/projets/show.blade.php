@@ -1,13 +1,6 @@
 @extends('layouts.structure')
 
 @section('content')
-<<<<<<< HEAD
-<<<<<<< HEAD
-{{ ok !}}
-@endsection
-=======
-=======
->>>>>>> 1bfe562b8188db4980c69a32d4f0fde71cab981a
 
     <div class="form-group row">
     	<label class="col-sm-2 col-form-label-lg">Intitulee :</label>
@@ -133,9 +126,4 @@
     <br>
     <br>
     <br>
-<<<<<<< HEAD
 @endsection
->>>>>>> 1bfe562b8188db4980c69a32d4f0fde71cab981a
-=======
-@endsection
->>>>>>> 1bfe562b8188db4980c69a32d4f0fde71cab981a
