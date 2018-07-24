@@ -2,7 +2,7 @@
 
 <html lang="{{ app()->getLocale() }}">
 <head>
-  @include('partials._links')
+  @include('partials._linksPrincipal')
 
 </head>
 
@@ -32,7 +32,7 @@
                               <ul class="nav-item navbar-right">
                              <a class="nav-link" href="{{ route('login') }}">Login</a>
 
-                           <!-- tester si db est vide -- if()..route('register') }}">Register</a>-->
+                           <!-- tester si db est vide if()..route('register') }}">Register</a>-->
                                 </li>
                               </ul>
                                  @else <!-- si  authentifié -->

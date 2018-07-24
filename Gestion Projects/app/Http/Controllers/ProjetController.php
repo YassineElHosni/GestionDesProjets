@@ -25,18 +25,17 @@ class ProjetController extends Controller
     public function create()
     {
 
+    //  $user=User::where('id','=',auth()->id())->first();/*l'user authentifié*/
+      $chef_projets=User::where('role','Like','CHEF_PROJET')->get();
+      $select=array();
+      $selected_id=array();
 
-      //$chef_projets=new User();
-      //$n=User::count();  App\User::count()
-     $chef_projets=User::hasRole('CHEF_PROJET')->get();
-      $select=[];
         foreach($chef_projets as $chef_projet){
-         $select[$chef_projet->id] =$chef_projet->Nom;
+         $select[] =$chef_projet->Nom;
+         $selected_id[]=$chef_projet->id;
        }
-    //  $employe=User::hasRole(EMPLOYE)->getall();
-    //$select=array('hello','goodbye');="2";
-
-     return view('projets.create',compact('select'));
+      // $select[]=$user->Nom;
+     return view('projets.create',compact('select'),compact('selected_id'));
     }
 
     /**
@@ -47,13 +46,29 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
-      /*  $Projet=Projet::create($request->all());
-        return redirect()->view('projets.show');*/
-        return 'test';
-    }
+        $Projet=new Projet;
+        /*attribuer le representant /au projet -->avec la table pivot*/
+        //$rep=User::where('id',$selected_id)->first();
+        $name_chef=$request['ChefProjet'];
+        $rep=User::where('Nom',$name_chef)->first();
+       /* attaching project to the responsable(chef Projet)*/
+      $Projet=Projet::create($request->all());
 
+      $rep->Projet()->attach($Projet);/*attaching role to the user*/
+
+        return redirect()->view('projets.show')->with('flash','Projet created!');
+    }
+/*
+* Attribuer représentant User(CHEF_PROJET)->Projets
+*/
+public function AttribuerRep(Request $request,$id){
+    $chef=User::get($id);
+    $chef=request['ChefProjet'];
+    $Projet->Users()->attach(User::where('Nom',$chef)->first());
+
+}
     /**
-     * Display the specified Project.
+     * Display the  Project.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
