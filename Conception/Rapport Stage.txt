@@ -59,7 +59,23 @@ day 8: 19/07/2018:
 2(noha-> User with Tasks)
 3(noha-> User with Projet)
 (yassine-> combinaisons des 3 migrations)
+
 day 9: 20/07/2018: 
 database (finished)
  ..
 <--home tasks--> ProjetController ( Project views..)
+day 10: 21
+
+samedi
+day 11: 22
+dimanche
+
+day 12: 23
+yassin : Projet -> index - show /JS: calendar
+
+nouha: create - store 
+
+day 12: 24
+yassin : .. date time picker..
+
+nouha: create (relations ..) - store (still  on progress)

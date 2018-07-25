@@ -26,6 +26,7 @@
     	<label class="col-sm-2 col-form-label-lg">Date Limite :</label>
     	<div class="col-sm-10 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_limite))}}</div>
     </div>
+
     <br>
     <br>
     <br>

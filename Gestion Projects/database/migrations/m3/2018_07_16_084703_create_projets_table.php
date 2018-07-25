@@ -16,11 +16,11 @@ class CreateProjetsTable extends Migration
         //
         Schema::create('projets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('intitulee',100)->unique();/*Subject*/
+            $table->string('intitulee')->unique();/*Subject*/
             $table->longText('description');
             $table->dateTime('date_limite');
-              $table->dateTime('date_debut');/* modifiable */
-                $table->dateTime('date_fin');
+              $table->dateTime('date_debut')->nullable()->change();/* modifiable */
+                $table->dateTime('date_fin')->nullable()->change();
                 $table->enum('deplacement',array('O','N'));
                     $table->enum('état',array('en-cours','clos'));
                 $table->longText('commentaire');

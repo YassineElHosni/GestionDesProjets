@@ -53,8 +53,8 @@ class User extends Authenticatable
     *checking the role of the  authentificated user
     */
     public static function hasRole($role){
-     return User::where('role','===',$role);
 
+      return User::where('role','Like',$role)->get();
     }
 
 }

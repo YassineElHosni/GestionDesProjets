@@ -10,16 +10,20 @@
 
       <h3> Nouveau Projet </h3><br>
   <hr>
+
 {{-- {!! Form::model($projet, ['route'=>['projets.store'], 'method' => 'POST' ])!!} --}}
 {!! Form::open(['action'=>['ProjetController@store'], 'method' => 'POST' ])!!}
 
-   {{ Form::label('intitule','Sujet:') }}
-   {{ Form::text('intitule',null, ['class'=>'form-control']) }}
+{!! Form::open(['action'=>['ProjetController@store'],'method' => 'POST' ])!!}
+<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+   {{ Form::label('intitulee','Sujet:') }}
+   {{ Form::text('intitulee','Sujet', ['class'=>'form-control']) }}
 
    {{ Form::label('description','Description:') }}
    {{ Form::textarea('description',null, ['class'=>'form-control'])}}
 
    {{ Form::label('date_limite','Date limite:') }}
+<<<<<<< HEAD
    {{ Form::DateTime('date_limite',null, [
             'class'=>'form-control'])}}
  {{-- 'class'=>'form_datetime' ,@include('script._datetime') --}}
@@ -48,6 +52,29 @@ $movings = array( 0 => 'N', 1 => 'O');
 
       {!! Form::label('representant','Chef de Projet:') !!}
       {!! Form::select('representant',$select,chef projet,['class'=>'form-control','id'=>'ChefProjet']) !!} --}}
+
+   {{ Form::DateTime('date_limite','Y-m-d HH:MM:SS', [
+          'class'=>'form-control'])}}
+
+
+<!--deplacement-->
+<ul> Déplacement:<br>
+  <input type="checkbox" name="deplacement" value="1">O<br>
+  <input type="checkbox" name="deplacement" value="0" checked>N<br>
+</ul>
+  <!--état-->
+  <ul> Etat: <br>
+    <input type="checkbox" name="état" value="1" checked>en_cours<br>
+    <input type="checkbox" name="état" value="0">clos<br>
+  </ul>
+          {{ Form::label('commentaire','Commentaire:') }}
+          {{ Form::textarea('commentaire','comment', ['class'=>'form-control']) }}
+
+          {!! Form::label('user_id','Chef de Projet:') !!}
+          {!! Form::select('user_id',$selected_id,null,['class'=>'form-control','id'=>'ChefProjet']) !!}
+
+          {!! Form::label('client_id','Client:') !!}
+          {!! Form::select('client_id',$selected_client_id,null,['class'=>'form-control','id'=>'Client']) !!}
 
  <hr>
   {{ Form::button('Ajouter', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}
