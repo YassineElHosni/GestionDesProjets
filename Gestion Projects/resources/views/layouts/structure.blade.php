@@ -1,6 +1,7 @@
 <!Doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+	@include('partials._metas')
 	@section('csss')<!--styles-->
 		@include('partials._csss')
 	@show
@@ -8,7 +9,7 @@
 <body>
 
 	@include('partials._mainMenu')<!--Menu-->
-	
+
 	<div class="container"><!--Content-->
 		@yield('content')
 	</div>
