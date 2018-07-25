@@ -230,7 +230,8 @@ return [
         /*added*/
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        /*added */
+        'Input' => Illuminate\Support\Facades\Input::class,
     ],
 
 ];

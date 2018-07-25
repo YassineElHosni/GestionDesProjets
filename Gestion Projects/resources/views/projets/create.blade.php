@@ -37,8 +37,11 @@
           {{ Form::label('commentaire','Commentaire:') }}
           {{ Form::textarea('commentaire','comment', ['class'=>'form-control']) }}
 
-          {!! Form::label('representant','Chef de Projet:') !!}
-          {!! Form::select('representant',$select,null,['class'=>'form-control','id'=>'ChefProjet']) !!}
+          {!! Form::label('user_id','Chef de Projet:') !!}
+          {!! Form::select('user_id',$selected_id,null,['class'=>'form-control','id'=>'ChefProjet']) !!}
+
+          {!! Form::label('client_id','Client:') !!}
+          {!! Form::select('client_id',$selected_client_id,null,['class'=>'form-control','id'=>'Client']) !!}
 
  <hr>
   {{ Form::button('Ajouter', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}

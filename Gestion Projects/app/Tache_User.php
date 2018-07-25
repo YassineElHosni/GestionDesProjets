@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tache_User extends Model
 {
-    //
-  //  protected $primaryKey = ['tache_id','user_id'];
+//    protected $fillable = [ 'user_id','projet_id'.. ];
 
 }

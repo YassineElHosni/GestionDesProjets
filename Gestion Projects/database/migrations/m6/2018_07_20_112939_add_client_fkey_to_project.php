@@ -14,8 +14,8 @@ class AddClientFkeyToProject extends Migration
     public function up()
     {
         Schema::table('projets', function(Blueprint $table)
-        { 
-            $table->integer('client_id')->unsigned();
+        {
+            $table->integer('client_id')->nullable()->unsigned();
             $table->foreign('client_id')->references('id')
                 ->on('clients')->onDelete('cascade');
         });
