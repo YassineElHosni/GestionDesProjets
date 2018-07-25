@@ -1,4 +1,4 @@
-{{-- @extends('layouts.structure')
+@extends('layouts.structure')
 
 @section('content')
 
@@ -128,4 +128,3 @@
     <br>
     <br>
 @endsection
- --}}
