@@ -16,20 +16,6 @@
 	@section('jss')	<!--javaScripts-->
 		@include('partials._jss')
 	@show
-                           <!-- tester si db est vide if()..route('register') }}">Register</a>-->
-                            {{--     </li>
-                              </ul>
-                                 @else <!-- si  authentifié -->
-                                 <li class="nav-item">
-                                   <?php $id=Auth::user()->id ?>
-                                   <a class="nav-link" href="#">Mon profile</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Gestion Utilisateurs</a>
-                                 </li>
-                                 <li class="nav-item">
-                                   <a class="nav-link" href="#">Gestion Projets</a>
-                                 </li> --}}
 
 </body>
 </html>
