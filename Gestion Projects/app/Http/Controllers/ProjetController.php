@@ -31,10 +31,6 @@ class ProjetController extends Controller
       /*--select representant--*/
       $chef_projets=User::where('role','Like','CHEF_PROJET')->get();
 
-         $selected_id=array();
-        foreach($chef_projets as $chef_projet){
-         $selected_id[]=$chef_projet->id;
-        }
       /*$select=array();
       $selected_id=array();
 
@@ -45,11 +41,7 @@ class ProjetController extends Controller
 
        /*--select client--*/
        $clients=Client::all();
-       $selected_client_id=array();
-           foreach($clients as $client){
-           $selected_client_id[]=$client->id;
-           }
-     return view('projets.create',compact('selected_id','selected_client_id'));
+     return view('projets.create',compact('chef_projets','clients'));//,compact('chef_projets','selected_client_id'));
     }
 
     /**
@@ -66,22 +58,22 @@ class ProjetController extends Controller
     //  $newProjet=Projet::create($request->all());/*storing all the new data in new projet
       /*  $id_chef=$request->input('user_id');
           $id_client=$request->input('client_id');*/
-         $id_chef=$request['user_id'];
-         $id_client=$request['client_id'];
-         dd($id_chef." ".$id_client);
 
         $newProjet=Projet::create([
               'intitulee' => request('intitulee'),'description' => request('description'),
               'date_limite' => request('date_limite'),'deplacement' => request('deplacement'),
               'état' => request('état'),'commentaire' => request('commentaire'),
-              'user_id' =>2,'client_id' => 1,
+              'user_id' =>request('user_id'),'client_id'=>request('client_id'),
             ]);
        $newProjet->save();
 
-    // $rep=User::where('Nom',$name_chef)->first();
-      $rep=User::where('id',$id_chef)->first();
-      $rep->projets()->attach($newProjet);/*attaching newProjet to the user (representant)*/
+       $id_chef=$request['user_id'];
+       $id_client=$request['client_id'];
 
+    // $rep=User::where('Nom',$name_chef)->first();
+    /*  $rep=User::where('id',$id_chef)->first();
+      $rep->projets()->attach($newProjet);/*attaching newProjet to the user (representant)
+    */
         return redirect()->view('projets.show')->with('flash','Projet created!');
     }
 /*
