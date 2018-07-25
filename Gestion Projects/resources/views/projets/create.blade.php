@@ -37,12 +37,24 @@
           {{ Form::label('commentaire','Commentaire:') }}
           {{ Form::textarea('commentaire','comment', ['class'=>'form-control']) }}
 
-          {!! Form::label('user_id','Chef de Projet:') !!}
-          {!! Form::select('user_id',$selected_id,null,['class'=>'form-control','id'=>'ChefProjet']) !!}
+          <div class="form-group">
+            <label>Chef de Projet</label>
+            <select name = "user_id[]" id="user_id" class="form-control">
+              @foreach ($chef_projets as $chef_projet)
+                <option value="{{ $chef_projet['id'] }}">{{ $chef_projet['Nom'] }}</option>
+              @endforeach
+            </select>
+          </div>
 
-          {!! Form::label('client_id','Client:') !!}
-          {!! Form::select('client_id',$selected_client_id,null,['class'=>'form-control','id'=>'Client']) !!}
-
+          <div class="form-group">
+            <label>Client</label>
+            <select name = "client_id[]" id="client_id" class="form-control">
+              @foreach ($clients as $client)
+                <option value="{{ $client['id'] }}">{{ $client['Nom'] }}</option>
+              @endforeach
+            </select>
+          </div>
+      
  <hr>
   {{ Form::button('Ajouter', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}
   {!!Form::close()!!}
