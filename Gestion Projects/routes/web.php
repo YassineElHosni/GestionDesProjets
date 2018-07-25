@@ -11,25 +11,13 @@
 |
 */
 Auth::routes();
-Route::get('/', function () {
-    return 'test';
-});
-Route::get('/lol', function () {
-    return view('index');
-});
 
-Route::get('/test', function(){
-	return "laravel5";
-});
-Route::get('/testing', function(){
-	return view('projets.create2');
-});
 
 Route::resource('Projets','ProjetController');
 Route::get('/Tache','TacheController@index');
 
 Route::resource('Projet','ProjetController');
 
-Auth::routes();
+
 
 ?>

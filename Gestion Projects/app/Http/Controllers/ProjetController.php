@@ -53,28 +53,27 @@ class ProjetController extends Controller
     public function store(Request $request)
     {
 
-        //$rep=User::where('id',$selected_id)->first();
+    /* converting string from array */
+          $id_chef_array=$request['user_id'];
+          $id_chef= array_shift($id_chef_array);
+          $id_client_array=$request['client_id'];
+          $id_client= array_shift($id_client_array);
 
-    //  $newProjet=Projet::create($request->all());/*storing all the new data in new projet
-      /*  $id_chef=$request->input('user_id');
-          $id_client=$request->input('client_id');*/
-
+          /*storing all the new data in new projet*/
         $newProjet=Projet::create([
               'intitulee' => request('intitulee'),'description' => request('description'),
               'date_limite' => request('date_limite'),'deplacement' => request('deplacement'),
               'état' => request('état'),'commentaire' => request('commentaire'),
-              'user_id' =>request('user_id'),'client_id'=>request('client_id'),
+              'user_id' =>$id_chef,'client_id'=>$id_client,
             ]);
        $newProjet->save();
 
-       $id_chef=$request['user_id'];
-       $id_client=$request['client_id'];
 
-    // $rep=User::where('Nom',$name_chef)->first();
-    /*  $rep=User::where('id',$id_chef)->first();
-      $rep->projets()->attach($newProjet);/*attaching newProjet to the user (representant)
-    */
-        return redirect()->view('projets.show')->with('flash','Projet created!');
+  /*attaching newProjet to the user (representant)*/
+    $rep=User::where('id',$id_chef)->first();
+      $rep->projets()->attach($newProjet);
+
+        return redirect()->view('projets.index')->with('flash','Projet created!');
     }
 /*
 * Attribuer représentant User(CHEF_PROJET)->Projets
