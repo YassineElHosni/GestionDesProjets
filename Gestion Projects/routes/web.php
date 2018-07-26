@@ -12,6 +12,8 @@
 */
 Auth::routes();
 
+Route::resource('/', 'HomeController');
+
 Route::get('/Projet/create2',function (){
 	return view('projets.create2');
 });

@@ -29,13 +29,13 @@ $factory->define(App\Tache::class, function (Faker\Generator $faker) {
     static $password;
 
 return [
-	'description' =>$faker->realText($maxNbChars = 100),
+	'description' =>$faker->realText($maxNbChars = 20),
 	'date_limite' =>$faker->date($format = 'Y-m-d', $max = 'now'),
 	'état' =>  $faker->randomElement(['en-cours','fini','validée']),
 	'déroulement' =>  $faker->randomDigit ,
   'priorité' =>  $faker->randomDigit ,
 	'commentaire' =>  $faker->text,
-  '' => random_int(1, App\Projet::count())
+  'projet_id' => random_int(1, App\Projet::count())
 ];
 });
 

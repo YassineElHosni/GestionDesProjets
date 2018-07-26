@@ -27,9 +27,12 @@ class DatabaseSeeder extends Seeder
         // $cs = factory(App\Client::class, 5)->make();
         // foreach ($cs as $c)
         //   $c->save();
-        $ps = factory(App\Projet::class, 5)->make();
-        foreach ($ps as $p)
-        	$p->save();
+        // $ps = factory(App\Projet::class, 5)->make();
+        // foreach ($ps as $p)
+        //     $p->save();
+        $ts = factory(App\Tache::class, 5)->make();
+        foreach ($ts as $t)
+            $t->save();
 
     }
 }
