@@ -75,7 +75,14 @@ yassin : Projet -> index - show /JS: calendar
 
 nouha: create - store 
 
-day 12: 24
+day 13: 24
 yassin : .. date time picker..
 
 nouha: create (relations ..) - store (still  on progress)
+day 14: 25
+create/store projet (done) - edit ( begin.)
+
+day 15: 26
+y/n : tasks to finish ->( ProjetController/views)
+n-> edit /update
+y-> destroy projet+ begin taskController

@@ -72,7 +72,7 @@ class ProjetController extends Controller
   /*attaching newProjet to the user (representant)*/
     $rep=User::where('id',$id_chef)->first();
       $rep->projets()->attach($newProjet);
-
+   Session::flash('success','Projet enregistré!');
         return redirect()->view('projets.index')->with('flash','Projet created!');
     }
 /*
@@ -93,7 +93,8 @@ public function AttribuerRep(Request $request,$id){
     public function show($id)
     {
         $p = Projet::find($id);
-        return view('projets.show')->withProjet($p);
+        $client=$p->clients->first();
+          return view('projets.show')->withProjet($p)->withClient($client);
     }
 
     /**
@@ -104,8 +105,14 @@ public function AttribuerRep(Request $request,$id){
      */
     public function edit($id)
     {
-        $p = Project::find($id);
-        return view('projets.update')->withProjets($p);
+        $p = Projet::find($id);
+         /*getting the chef_Projet */
+        $p_chef=$p->users->first();
+        //$p_chef= array_shift($p_chef_array);
+        /*getting the client */
+       $client=$p->clients->first();
+       //$p_chef= array_shift($p_chef_array);
+        return view('projets.edit')->withProjet($p)->withP_chef($p_chef)->withClient($client);
     }
 
     /**
@@ -117,7 +124,20 @@ public function AttribuerRep(Request $request,$id){
      */
     public function update(Request $request, $id)
     {
-        //
+      $projet =Projet::find($id);//get the data with request
+
+      $projet->intitulee =$request->input('intitulee');//setint the coloms with the new values..
+      $projet->description =$request->input('description');
+      $projet->date_limite =$request->input('date_limite');
+      $projet->deplacement =$request->input('deplacement');
+      $projet->état =$request->input('état');//setint the coloms with the new values..
+      $projet->commentaire =$request->input('commentaire');
+
+      $projet->save();  /*save*/
+      /*flash data with success message*/
+      Session::flash('success','Modification enregistré!');
+      //redirect to show whith the flash messg
+      return redirect()->route('projets.show',$projet->id);
     }
 
     /**

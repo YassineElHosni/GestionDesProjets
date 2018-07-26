@@ -7,6 +7,10 @@
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{ $projet->intitulee }}</div>
     </div>
     <div class="form-group row">
+    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Client :</label>
+    	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{ $client->Nom }}</div>
+    </div>
+    <div class="form-group row">
     	<label class="col-lg-2 col-sm-12 col-form-label-lg">Description :</label>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{$projet->description}}</div>
     </div>
