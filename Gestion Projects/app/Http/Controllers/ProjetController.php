@@ -18,7 +18,7 @@ class ProjetController extends Controller
     {
         $ps = Projet::all();
         foreach ($ps as $p) {
-          $c=Client::find($p->client_id);
+          $c[$p->id]=Client::find($p->client_id)->Nom;
         }
 
         return view('projets.index' ,compact('ps','c'));
@@ -57,31 +57,22 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
-   /*deplacement & état from radiobox*/
-   $dep=($request['deplacement']=='yes')?'O':'N';
-   $etat=($request['état']=='no')?'en_cours':'clos';
-
-    /* converting string from array */
-          $id_chef_array=$request['user_id'];
-          $id_chef= array_shift($id_chef_array);
-          $id_client_array=$request['client_id'];
-          $id_client= array_shift($id_client_array);
-
-          /*storing all the new data in new projet*/
-        $newProjet=Projet::create([
-              'intitulee' => request('intitulee'),'description' => request('description'),
-              'date_limite' => request('date_limite'),'deplacement' =>$dep,
-              'état' =>$etat,'commentaire' => request('commentaire'),
-              'user_id' =>$id_chef,'client_id'=>$id_client,
+        /*storing all the new data in new projet*/
+        $newProjet = new Projet([
+              'intitulee' => request('intitulee'),
+              'description' => request('description'),
+              'date_limite' => request('date_limite'),
+              'date_debut' => '2018-07-26 11:36:04',
+              'date_fin' => '2018-07-26 11:36:04',
+              'deplacement' =>($request->has('deplacement'))?'O':'N',
+              'état' =>(!$request->input('Etat_RadioBtn'))?'en-cours':'clos',
+              'commentaire' => request('commentaire'),
+              'user_id' =>$request->get('user_id')[0],
+              'client_id'=>$request->get('client_id')[0],
             ]);
-       $newProjet->save();
+      $newProjet->save();
 
-
-  /*attaching newProjet to the user (representant)*/
-    $rep=User::where('id',$id_chef)->first();
-      $rep->projets()->attach($newProjet);
-   //Session::flash('success','Projet enregistré!');
-        return redirect()->view('projets.index')->with('flash','Projet created!');
+      return redirect()->route('Projets.index');
     }
 /*
 * Attribuer représentant User(CHEF_PROJET)->Projets

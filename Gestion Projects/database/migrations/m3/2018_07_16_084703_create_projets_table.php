@@ -19,8 +19,8 @@ class CreateProjetsTable extends Migration
             $table->string('intitulee')->unique();/*Subject*/
             $table->longText('description');
             $table->dateTime('date_limite');
-              $table->dateTime('date_debut')->nullable()->change();/* modifiable */
-                $table->dateTime('date_fin')->nullable()->change();
+              $table->dateTime('date_debut')->nullable();/* modifiable */
+                $table->dateTime('date_fin')->nullable();
                 $table->enum('deplacement',array('O','N'));
                     $table->enum('état',array('en-cours','clos'));
                 $table->longText('commentaire');

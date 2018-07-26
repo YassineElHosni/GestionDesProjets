@@ -13,6 +13,8 @@
 		 			<th scope="col">date fin</th>
 		 			<th scope="col">deplacement</th>
 		 			<th scope="col">etat</th>
+		 			<th scope="col"></th>
+		 			<th scope="col"></th>
 		 			{{-- <th>commentaire</th> --}}
 		 		</tr>
 		 	</thead>
@@ -22,7 +24,7 @@
 
 		 			<th scope="row">{{$p->intitulee}}</th>
 		 			{{-- <td>{{$p->description}}</td> --}}
-					<td>{{$c->Nom}}</td>
+					<td>{{$c[$p->id]}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
