@@ -15,6 +15,27 @@
   {!! Form::open( ['action' => ['ProjetController@update',$p->id], 'method' => 'POST'] ) !!}
 
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+
+<div class="form-row align-items-center">
+  <div class="col-auto">
+      <label for="intitulee" class="col-sm-3 col-form-label" >Sujet:</label>
+       <input type="text" class="form-control  mb-2" name="intitulee" value="{{$p->intitulee}}"><br>
+</div>
+
+
+ <div class="col-auto">
+     <label for="description" class="col-sm-3 col-form-label" >Description:</label>
+        <div class="col-sm-10 mb-3">
+       <textarea class="form-control" rows="6" name="description" value="{{$p->description}}"></textarea>
+       </div>
+ </div>
+ <div class="form-row align-items-center">
+   <div class="col-auto">
+   {{ Form::label('date_limite','Date limite:') }}
+   {{ Form::DateTime('date_limite','{{$p->date_limite}}, ['class'=>'form-control'])}}
+   </div>
+</div>
+
 <!--deplacement-->
 <div class="form-row align-items-center">
   <div class="col-auto">
@@ -37,6 +58,12 @@
   </div>
 </div>
 
+<div class="form-row align-items-center">
+  <div class="col-auto">
+    <label class="col-sm-3 col-form-label" >Commentaire</label>
+    <input type="text" class="form-control" name="commentaire" value="{{$p->commentaire}}"><br>
+  </div>
+</div>
 
 <div class="form-row align-items-center">
   <div class="col-auto">
