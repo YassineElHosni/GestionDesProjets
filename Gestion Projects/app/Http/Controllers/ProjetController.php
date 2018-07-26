@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Projet;
 use App\User;
 use App\Client;
+use Session;
 class ProjetController extends Controller
 {
     /**
@@ -16,7 +17,11 @@ class ProjetController extends Controller
     public function index()
     {
         $ps = Projet::all();
-        return view('projets.index' ,compact($ps))->withProjets($ps);
+        foreach ($ps as $p) {
+          $c=Client::find($p->client_id);
+        }
+
+        return view('projets.index' ,compact('ps','c'));
     }
 
     /**
@@ -52,6 +57,9 @@ class ProjetController extends Controller
      */
     public function store(Request $request)
     {
+   /*deplacement & état from radiobox*/
+   $dep=($request['deplacement']=='yes')?'O':'N';
+   $etat=($request['état']=='no')?'en_cours':'clos';
 
     /* converting string from array */
           $id_chef_array=$request['user_id'];
@@ -62,8 +70,8 @@ class ProjetController extends Controller
           /*storing all the new data in new projet*/
         $newProjet=Projet::create([
               'intitulee' => request('intitulee'),'description' => request('description'),
-              'date_limite' => request('date_limite'),'deplacement' => request('deplacement'),
-              'état' => request('état'),'commentaire' => request('commentaire'),
+              'date_limite' => request('date_limite'),'deplacement' =>$dep,
+              'état' =>$etat,'commentaire' => request('commentaire'),
               'user_id' =>$id_chef,'client_id'=>$id_client,
             ]);
        $newProjet->save();
@@ -72,7 +80,7 @@ class ProjetController extends Controller
   /*attaching newProjet to the user (representant)*/
     $rep=User::where('id',$id_chef)->first();
       $rep->projets()->attach($newProjet);
-   Session::flash('success','Projet enregistré!');
+   //Session::flash('success','Projet enregistré!');
         return redirect()->view('projets.index')->with('flash','Projet created!');
     }
 /*
@@ -93,8 +101,8 @@ public function AttribuerRep(Request $request,$id){
     public function show($id)
     {
         $p = Projet::find($id);
-        $client=$p->clients->first();
-          return view('projets.show')->withProjet($p)->withClient($client);
+        $c=Client::find($p->client_id);
+          return view('projets.show')->withProjet($p)->withClient($c);
     }
 
     /**
@@ -107,12 +115,13 @@ public function AttribuerRep(Request $request,$id){
     {
         $p = Projet::find($id);
          /*getting the chef_Projet */
-        $p_chef=$p->users->first();
+        $c=Client::find($p->client_id);
+        $u=User::find($p->user_id);
         //$p_chef= array_shift($p_chef_array);
         /*getting the client */
-       $client=$p->clients->first();
+      // $client=$p->clients();
        //$p_chef= array_shift($p_chef_array);
-        return view('projets.edit')->withProjet($p)->withP_chef($p_chef)->withClient($client);
+        return view('projets.edit')->withProjet($p)->withClient($c)->withChef($u);
     }
 
     /**
@@ -132,6 +141,8 @@ public function AttribuerRep(Request $request,$id){
       $projet->deplacement =$request->input('deplacement');
       $projet->état =$request->input('état');//setint the coloms with the new values..
       $projet->commentaire =$request->input('commentaire');
+      $projet->user_id =$request->input('user_id');
+      $projet->client_id =$request->input('client_id');
 
       $projet->save();  /*save*/
       /*flash data with success message*/
@@ -139,7 +150,13 @@ public function AttribuerRep(Request $request,$id){
       //redirect to show whith the flash messg
       return redirect()->route('projets.show',$projet->id);
     }
+    /*
+    * changer le chef de projet
+    */
+   public function chef_modify($chef){
 
+   return "modify chef..";
+   }
     /**
      * Remove the specified resource from storage.
      *

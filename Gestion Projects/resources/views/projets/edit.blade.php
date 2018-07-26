@@ -19,14 +19,14 @@
 <div class="form-row align-items-center">
   <div class="col-auto">
       <label for="intitulee" class="col-sm-3 col-form-label" >Sujet:</label>
-       <input type="text" class="form-control  mb-2" value="{{$projet->intitulee}}"><br>
+       <input type="text" class="form-control  mb-2" name="intitulee" value="{{$projet->intitulee}}"><br>
 </div>
 
 
  <div class="col-auto">
      <label for="description" class="col-sm-3 col-form-label" >Description:</label>
         <div class="col-sm-10 mb-3">
-       <textarea class="form-control" rows="6" id="description" value="{{$projet->description}}"></textarea>
+       <textarea class="form-control" rows="6" name="description" value="{{$projet->description}}"></textarea>
        </div>
  </div>
  <div class="form-row align-items-center">
@@ -61,7 +61,7 @@
 <div class="form-row align-items-center">
   <div class="col-auto">
     <label class="col-sm-3 col-form-label" >Commentaire</label>
-    <input type="text" class="form-control" value="{{$projet->commentaire}}"><br>
+    <input type="text" class="form-control" name="commentaire" value="{{$projet->commentaire}}"><br>
   </div>
 </div>
 
@@ -69,8 +69,8 @@
   <div class="col-auto">
       <label class="col-sm-6 col-form-label" >Chef de Projet</label>
 
-          <label class="col-sm-3 col-form-label" > {{$p_chef->Nom}}   </label>
-      {!! Form::open(['route' =>['Projet.chef_modify',$p_chef],'method'=>'get'])!!}
+          <label class="col-sm-3 col-form-label" name="user_id" value="{{$chef->Nom}}"   </label>
+      {!! Form::open(['route' =>['Projet.chef_modify',$chef,$projet ],'method'=>'get'])!!}
                {{ Form::button('Modifier', array('class'=>'btn btn-primary ', 'type'=>'submit')) }}
       {!!Form::close()!!}
  </div>
@@ -79,10 +79,8 @@
 <div class="form-row align-items-center">
   <div class="col-auto">
             <label class="col-sm-3 col-form-label">Client</label>
-              <label class="col-sm-3 col-form-label" >{{$client->Nom}} </label>
-          {!! Form::open(['route' =>['Projet.client_modify',$client],'method'=>'get'])!!}
-               {{ Form::button('Modifier', array('class'=>'btn btn-primary ', 'type'=>'submit')) }}
-          {!!Form::close()!!}
+              <label class="col-sm-3 col-form-label" name="client_id" value="{{$client->Nom}}"></label>
+
   </div>
 </div>
  <hr>

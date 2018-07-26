@@ -6,6 +6,7 @@
 		 		<tr>
 
 		 			<th>Title</th>
+						<th>Client</th>
 		 			{{-- <th>description</th> --}}
 		 			<th scope="col">date limite</th>
 		 			<th scope="col">date debut</th>
@@ -16,11 +17,12 @@
 		 		</tr>
 		 	</thead>
 		 	<tbody>
-		 		@foreach($projets as $p)
+		 		@foreach($ps as $p)
 		 		<tr>
 
 		 			<th scope="row">{{$p->intitulee}}</th>
 		 			{{-- <td>{{$p->description}}</td> --}}
+					<td>{{$c->Nom}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
 		 			<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
