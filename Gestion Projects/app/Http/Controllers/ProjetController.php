@@ -151,7 +151,7 @@ public function AttribuerRep(Request $request,$id){
       /*flash data with success message*/
       Session::flash('success','Modification enregistré!');
       //redirect to show whith the flash messg
-      return redirect()->route('projets.show',$projet->id);
+      return redirect()->view('projets.show')->withProjet($projet);
     }
     /*
     * changer le chef de projet

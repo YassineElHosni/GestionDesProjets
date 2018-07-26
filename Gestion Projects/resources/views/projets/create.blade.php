@@ -41,23 +41,23 @@ clos
 <div class="form-group">
 <label for="date_limite" class="col-md-2 col-form-label">Date Limite</label>
 <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-<input id="date_limite" class="form-control" size="16" type="text" value="2018-07-26 11:36:04" readonly>
-<span class="input-group-append">
-<span class="input-group-text fa fa-times fa-lg"></span>
-</span>
-<span class="input-group-append">
-<span class="input-group-text fa fa-calendar-alt fa-lg"></span>
-</span>
+  <input id="date_limite" class="form-control" size="16" type="text" value="2018-07-26 11:36:04" readonly>
+  <span class="input-group-append">
+  <span class="input-group-text fa fa-times fa-lg"></span>
+  </span>
+  <span class="input-group-append">
+  <span class="input-group-text fa fa-calendar-alt fa-lg"></span>
+  </span>
 </div>
 <input type="hidden" id="dtp_input1" value=""/><br/>
 </div>
 
 <div class="form-group col-lg-12">
 <div class="form-check">
-<input class="form-check-input" type="checkbox" id="deplacement">
-<label class="form-check-label" for="deplacement">
-Deplacement
-</label>
+  <input class="form-check-input" type="checkbox" id="deplacement">
+  <label class="form-check-label" for="deplacement">
+  Deplacement
+  </label>
 </div>
 </div>
 
@@ -68,11 +68,11 @@ Deplacement
 
 <div class="form-group">
 <label class="col-form-label">Chef de Projet</label>
-<select name = "user_id[]" id="user_id" class="form-control">
-@foreach ($chef_projets as $chef_projet)
-<option value="{{ $chef_projet['id'] }}">{{ $chef_projet['Nom'] }}</option>
-@endforeach
-</select>
+  <select name = "user_id[]" id="user_id" class="form-control">
+  @foreach ($chef_projets as $chef_projet)
+  <option value="{{ $chef_projet['id'] }}">{{ $chef_projet['Nom'] }}</option>
+  @endforeach
+  </select>
 </div>
 
 <div class="form-group">

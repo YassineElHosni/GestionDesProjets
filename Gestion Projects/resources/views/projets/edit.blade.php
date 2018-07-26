@@ -12,56 +12,54 @@
   <hr>
 
 
-  {!! Form::open( ['action' => ['ProjetController@update',$p->id], 'method' => 'POST'] ) !!}
-
-<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+  {{--{!! Form::open( ['action' => ['ProjetController@update',$p->id], 'method' => 'POST'] ) !!}--}}
+  <form action="{{ route('Projets.update', $p) }}" method="POST" class="form-horizontal">
+         <input type="hidden" name="_method" value="PUT">
+         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 <div class="form-row align-items-center">
-  <div class="col-auto">
-      <label for="intitulee" class="col-sm-3 col-form-label" >Sujet:</label>
-       <input type="text" class="form-control  mb-2" name="intitulee" value="{{$p->intitulee}}"><br>
+  <div class="form-group">
+      <label for="intitulee" class="col-form-label" >Sujet:</label>
+       <input type="text" class="form-control  mb-2" name="intitulee" value="intitulee" >{{$p->intitulee}}<br>
+  </div>
 </div>
 
-
- <div class="col-auto">
-     <label for="description" class="col-sm-3 col-form-label" >Description:</label>
-        <div class="col-sm-10 mb-3">
-       <textarea class="form-control" rows="6" name="description" value="{{$p->description}}"></textarea>
+<div class="form-row align-items-center">
+      <div class="form-group">
+       <label for="description" class="col-form-label" >Description:</label>
+       <textarea class="form-control" rows="6" name="description" value="description">{{$p->description}}</textarea>
        </div>
  </div>
  <div class="form-row align-items-center">
-   <div class="col-auto">
+   <div class="form-group">
    {{ Form::label('date_limite','Date limite:') }}
-   {{ Form::DateTime('date_limite','{{$p->date_limite}}, ['class'=>'form-control'])}}
+   {{$p->date_limite}}
    </div>
 </div>
 
 <!--deplacement-->
-<div class="form-row align-items-center">
-  <div class="col-auto">
-    <label class="col-sm-5 col-form-label" >Déplacement:</label>
-      <div class="form-check form-check-inline">
-        <input type="radio" name="deplacement" value='yes'<?php echo ($dep=='O')?'checked':'' ?>><label>O</label>
-        <input type="radio" name="deplacement" value='no'<?php echo ($dep=='N')?'checked':'' ?>><label>N</label>
-  </div>
-  </div>
+<div class="form-group col-lg-12">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="deplacement" id="deplacement" <?php echo ($dep=='O')?'checked':'' ?> >
+  <label class="form-check-label" for="deplacement">
+  Deplacement
+  </label>
 </div>
-
+</div>
 <!--état-->
-<div class="form-row align-items-center">
-  <div class="col-auto">
-    <label class="col-sm-3 col-form-label" >Etat:</label>
-    <div class="form-check form-check-inline">
-      <input class="radio" name="état" value='no'<?php echo ($etat=='en_cours')?'checked':'' ?> ><label>en_cours</label>
-      <input class="radio" name="état" value='yes' <?php echo ($etat=='clos')?'checked':'' ?>><label>clos</label>
-    </div>
-  </div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0"<?php echo ($etat=='en_cours')?'checked':'' ?>>
+  <label class="form-check-label" for="EnCours_RadioBtn">en-cours</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="Clos_RadioBtn" value="1"<?php echo ($etat=='clos')?'checked':'' ?>>
+  <label class="form-check-label" for="Clos_RadioBtn">clos</label>
 </div>
 
 <div class="form-row align-items-center">
   <div class="col-auto">
     <label class="col-sm-3 col-form-label" >Commentaire</label>
-    <input type="text" class="form-control" name="commentaire" value="{{$p->commentaire}}"><br>
+    <input type="text" class="form-control" name="commentaire" >{{$p->commentaire}}<br>
   </div>
 </div>
 
@@ -85,8 +83,10 @@
   </div>
 </div>
  <hr>
-  {{ Form::button('Modifier', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}
-  {!!Form::close()!!}
+ <button type="submit" name="submit" class="btn btn-primary">Save</button>
+    </form>
+  {{--{{ Form::button('Modifier', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}
+  {!!Form::close()!!} --}}}
  <hr>
 
 
