@@ -113,19 +113,18 @@ public function AttribuerRep(Request $request,$id){
      */
     public function edit($id)
     {
-        $p = Projet::find($id);
-          $id_client=$p->client_id;
-        $c=Client::find($id_client);
-          $id_chef=$p->user_id;
-        $u=User::find($id_chef);
+        $p= Projet::find($id);
+
+        $c=Client::find($p->client_id);
+
+        $u=User::find($p->user_id);
         /*old radio button values*/
         $deplacement=$p->deplacement;
         $etat=$p->état;
-        //$p_chef= array_shift($p_chef_array);
-        /*getting the client */
-      // $client=$p->clients();
-       //$p_chef= array_shift($p_chef_array);
-        return view('projets.edit',compact('p','c','u'))->withDep($deplacement)->withEtat($etat);
+        /*all chef_projets*/
+        $chef_projets=User::where('role','Like','CHEF_PROJET')->get();
+
+        return view('projets.edit',compact('p','c','u','chef_projets'))->withDep($deplacement)->withEtat($etat);
     }
 
     /**
