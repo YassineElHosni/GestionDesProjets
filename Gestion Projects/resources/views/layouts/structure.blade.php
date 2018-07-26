@@ -13,7 +13,10 @@
 	<div class="container"><!--Content-->
 		@yield('content')
 	</div>
-
+<br>
+<br>
+<br>
+<br>
 	@section('jss')	<!--javaScripts-->
 		@include('partials._jss')
 	@show

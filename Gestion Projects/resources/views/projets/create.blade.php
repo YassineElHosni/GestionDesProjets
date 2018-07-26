@@ -1,98 +1,98 @@
 @extends('layouts.structure')
-@section('bouttons')
 
-
+@section('csss')
+	@parent
+	<link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
-  <div>
-
-      <h3> Nouveau Projet </h3><br>
-  <hr>
-
-
-{!! Form::open(['action'=>['ProjetController@store'],'method' => 'POST' ])!!}
-
+<form role="form" method="post" action="{{action('ProjetController@store')}}">
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
-<div class="form-row align-items-center">
-  <div class="col-auto">
-      <label for="intitulee" class="col-sm-3 col-form-label" >Sujet:</label>
-       <input type="text" class="form-control  mb-2" value="intitulee"><br>
+<div class="form-group">
+	<label for="intitulee" class="col-form-label">Sujet:</label>
+	<input type="text" class="form-control" value="intitulee">
+</div>
+
+<div class="form-group">
+<label class="col-form-label col-md-2 col-sm-12">Etat:</label>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0" checked>
+  <label class="form-check-label" for="EnCours_RadioBtn">
+    en_cours
+  </label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="Clos_RadioBtn" value="1">
+  <label class="form-check-label" for="Clos_RadioBtn">
+    clos
+  </label>
+</div>
+</div>
+
+<div class="form-group">
+	<label for="description" class="col-form-label">Description:</label>
+	<textarea class="form-control" rows="6" id="description">desc</textarea>
 </div>
 
 
- <div class="col-auto">
-     <label for="description" class="col-sm-3 col-form-label" >Description:</label>
-        <div class="col-sm-10 mb-3">
-       <textarea class="form-control" rows="6" id="description"></textarea>
-       </div>
- </div>
- <div class="form-row align-items-center">
-   <div class="col-auto">
-   {{ Form::label('date_limite','Date limite:') }}
-   {{ Form::DateTime('date_limite','Y-m-d HH:MM:SS', ['class'=>'form-control'])}}
-   </div>
+<div class="form-group">
+	<label for="date_limite" class="col-md-2 col-form-label">Date Limite</label>
+		<div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
+			<input id="date_limite" class="form-control" size="16" type="text" value="2018-07-26 11:36:04" readonly>
+			<span class="input-group-append">
+				<span class="input-group-text fa fa-times fa-lg"></span>
+			</span>
+			<span class="input-group-append">
+				<span class="input-group-text fa fa-calendar-alt fa-lg"></span>
+			</span>
+		</div>
+	<input type="hidden" id="dtp_input1" value=""/><br/>
 </div>
 
-<!--deplacement-->
-<div class="form-row align-items-center">
-  <div class="col-auto">
-    <label class="col-sm-5 col-form-label" >Déplacement:</label>
-      <div class="form-check form-check-inline">
-    <label class="radio-inline"><input type="radio" name="optradio" >O</label>
-    <label class="radio-inline"><input type="radio" name="optradio" checked>N</label>
-  </div>
-  </div>
+<div class="form-group col-lg-12">
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" id="deplacement">
+  <label class="form-check-label" for="deplacement">
+    Deplacement
+  </label>
+</div>
 </div>
 
-<!--état-->
-<div class="form-row align-items-center">
-  <div class="col-auto">
-    <label class="col-sm-3 col-form-label" >Etat:</label>
-    <div class="form-check form-check-inline">
-    <input type="checkbox" name="état" value="1" checked>en_cours<br>
-    <input type="checkbox" name="état" value="0">clos<br>
-  </div>
-  </div>
+<div class="form-group">
+	<label class="col-form-label">Commentaire</label>
+	<input type="text" class="form-control" value="comment">
 </div>
 
-<div class="form-row align-items-center">
-  <div class="col-auto">
-    <label class="col-sm-3 col-form-label" >Commentaire</label>
-    <input type="text" class="form-control" value="comment"><br>
-  </div>
+<div class="form-group">
+	<label class="col-form-label">Chef de Projet</label>
+	<select name = "user_id[]" id="user_id" class="form-control">
+		@foreach ($chef_projets as $chef_projet)
+			<option value="{{ $chef_projet['id'] }}">{{ $chef_projet['Nom'] }}</option>
+		@endforeach
+	</select>
 </div>
 
-<div class="form-row align-items-center">
-  <div class="col-auto">
-      <label class="col-sm-6 col-form-label" >Chef de Projet</label>
-            <select name = "user_id[]" id="user_id" class="form-control">
-              @foreach ($chef_projets as $chef_projet)
-                <option value="{{ $chef_projet['id'] }}">{{ $chef_projet['Nom'] }}</option>
-              @endforeach
-            </select>
- </div>
+<div class="form-group">
+	<label class="col-form-label">Client</label>
+	<select name = "client_id[]" id="client_id" class="form-control">
+		@foreach ($clients as $client)
+			<option value="{{ $client['id'] }}">{{ $client['Nom'] }}</option>
+		@endforeach
+	</select>
 </div>
 
-<div class="form-row align-items-center">
-  <div class="col-auto">
-            <label class="col-sm-3 col-form-label">Client</label>
-            <select name = "client_id[]" id="client_id" class="form-control">
-              @foreach ($clients as $client)
-                <option value="{{ $client['id'] }}">{{ $client['Nom'] }}</option>
-              @endforeach
-            </select>
-  </div>
-</div>
- <hr>
-  {{ Form::button('Ajouter', array('class'=>'btn btn-success btn-h1-spacing','type'=>'submit')) }}
-  {!!Form::close()!!}
- <hr>
+<input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Ajouter">
+</form>
+
+@endsection
 
 
-</div>
-
-
+@section('jss')
+@parent
+<script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap-datetimepicker.fr.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}"  type="text/javascript"></script>
 @endsection
