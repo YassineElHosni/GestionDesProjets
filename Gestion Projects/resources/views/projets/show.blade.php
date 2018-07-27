@@ -19,6 +19,10 @@
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{($projet->deplacement=='O')?'OUI':'NON'}}</div>
     </div>
     <div class="form-group row">
+    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Etat :</label>
+    	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{($projet->Etat=='en_cours')?'en_cours':'clos'}}</div>
+    </div>
+    <div class="form-group row">
     	<label class="col-lg-2 col-sm-12 col-form-label-lg">Date Debut :</label>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_debut))}}</div>
     </div>

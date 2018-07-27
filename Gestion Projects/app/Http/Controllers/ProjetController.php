@@ -123,25 +123,19 @@ class ProjetController extends Controller
       $projet->intitulee =$request->input('intitulee');//setint the coloms with the new values..
       $projet->description =$request->input('description');
       $projet->date_limite =$request->input('date_limite');
-      $projet->deplacement =$request->input('deplacement');
-      $projet->état =$request->input('état');//setint the coloms with the new values..
+      $projet->deplacement =($request->has('deplacement'))?'O':'N';
+      $projet->état =(!$request->input('Etat_RadioBtn'))?'en-cours':'clos';
       $projet->commentaire =$request->input('commentaire');
-      $projet->user_id =$request->input('user_id');
-      $projet->client_id =$request->input('client_id');
+      $projet->user_id =$request->get('user_id')[0];
+      $projet->client_id =$request->get('client_id')[0];
 
       $projet->save();  /*save*/
       /*flash data with success message*/
       Session::flash('success','Modification enregistré!');
       //redirect to show whith the flash messg
-      return redirect()->route('projets.show',$projet->id);
+      return redirect()->view('projets.show')->withProjet($projet);
     }
-    /*
-    * changer le chef de projet
-    */
-   public function chef_modify($chef){
 
-   return "modify chef..";
-   }
     /**
      * Remove the specified resource from storage.
      *
@@ -150,6 +144,15 @@ class ProjetController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $projet =Projet::find($id);
+      //$c=Client::find($p->client_id);
+
+      $u=User::find($projet->user_id);
+
+      $projet->Users()->detach(User::where('id',$u)->first());
+      $projet->Clients()->dissociate();
+
+      $projet->delete();
+      return redirect()->view('projets.index');
     }
 }
