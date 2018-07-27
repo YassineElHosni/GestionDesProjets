@@ -20,7 +20,7 @@ class ProjetController extends Controller
         foreach ($ps as $p) {
           $c[$p->id]=Client::find($p->client_id)->Nom;
         }
-
+        
         return view('projets.index' ,compact('ps','c'));
     }
 
@@ -74,15 +74,6 @@ class ProjetController extends Controller
 
       return redirect()->route('Projets.index');
     }
-/*
-* Attribuer représentant User(CHEF_PROJET)->Projets
-*/
-public function AttribuerRep(Request $request,$id){
-    $chef=User::get($id);
-    $chef=request['ChefProjet'];
-    $Projet->Users()->attach(User::where('Nom',$chef)->first());
-
-}
     /**
      * Display the  Project.
      *
