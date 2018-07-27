@@ -18,23 +18,23 @@
 	</tr>
 </thead>
 <tbody>
-	@foreach($ps as $p)
+	@foreach($ts as $t)
 	<tr>
-		<th scope="row">{{$p->intitulee}}</th>
-		{{-- <td>{{$p->description}}</td> --}}
-		<td>{{$c[$p->id]}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
-		<td>{{($p->deplacement=='O')?'OUI':'NO'}}</td>
-		<td>{{$p->état}}</td>
+		<th scope="row">{{$t->intitulee}}</th>
+		{{-- <td>{{$t->description}}</td> --}}
+		<td>{{$c[$t->id]}}</td>
+		<td>{{date('d-m-Y', strtotime($t->date_limite))}}</td>
+		<td>{{date('d-m-Y', strtotime($t->date_debut))}}</td>
+		<td>{{date('d-m-Y', strtotime($t->date_fin))}}</td>
+		<td>{{($t->deplacement=='O')?'OUI':'NO'}}</td>
+		<td>{{$t->état}}</td>
 		<td>
-			<form action="{{ route('Projets.show',$p->id) }}" method="get">
+			<form action="{{ route('Projets.show',$t->id) }}" method="get">
 				<input type="submit" value="Voir" class="btn btn-primary">
 			</form>
 		</td>
 		<td>
-			<form action="{{ route('Projets.edit',$p->id) }}" method="get">
+			<form action="{{ route('Projets.edit',$t->id) }}" method="get">
 				<input type="submit" value="Modifier" class="btn btn-primary">
 			</form>
 		</td>

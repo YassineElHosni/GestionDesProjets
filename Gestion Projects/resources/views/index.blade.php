@@ -21,10 +21,12 @@
 	<h4>Last Few UnFinished Tasks:</h4>
 	@foreach($LastFewTasks as $t)
 	<div class="alert alert-warning alert-dismissible fade show form-inline" role="alert">
-	  <div class="font-weight-bold col-lg-3">{{$t->état}}</div><div class="col-lg-3">{{$t->description}}</div><div class="col-lg-3">{{$t->updated_at}}</div>
-	 {{--  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button> --}}
+		<div class="font-weight-bold col-lg-3">{{$t->description}}</div>
+		<div class="font-weight-bold col-lg-3">{{$t->état}}</div>
+		<div class="col-lg-3">{{$t->updated_at}}</div>
+		<a class="close" href="./Taches/{{$t->id}}">
+			<span class="badge badge-danger badge-pill" >{{$t->priorité}}</span>
+		</a>
 	</div>
 	@endforeach
 

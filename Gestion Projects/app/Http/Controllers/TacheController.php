@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
 use App\Tache;
 use Illuminate\Http\Request;
 
@@ -14,19 +13,12 @@ class TacheController extends Controller
      */
     public function index()
     {
-/*retrieve the starting date of user&&tache */
-      $user=User::find(1);/*find the user*/
-  //dd($user);
-      foreach($user->taches as $t){/*all task of that user*/
-
-    $tache=$t->description;
-       return $tache;
-    /*  //  $ts=$t->pivot->get();/*getting the starting date ofeach task
-         foreach($ts as $t){
-             $dd= $t->date_debut ;
-             echo $dd;
-         }*/
-     }
+        $ts = Tache::all();
+        foreach ($ts as $t) {
+          $p[$t->id]=Projet::find($t->projet_id)->intitulee;
+        }
+        
+        return view('projets.index' ,compact('ts','p'));
     }
 
 

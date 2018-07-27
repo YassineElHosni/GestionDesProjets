@@ -75,15 +75,6 @@ class ProjetController extends Controller
 
       return redirect()->route('projets.index');
     }
-/*
-* Attribuer représentant User(CHEF_PROJET)->Projets
-*/
-public function AttribuerRep(Request $request,$id){
-    $chef=User::get($id);
-    $chef=request['ChefProjet'];
-    $Projet->Users()->attach(User::where('Nom',$chef)->first());
-
-}
     /**
      * D0isplay the  Project.
      *

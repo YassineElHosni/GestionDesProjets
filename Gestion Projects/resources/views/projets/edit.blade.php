@@ -9,16 +9,18 @@
 
   <div>
 
+      <h3> Modifier le Projet </h3><br>
   <hr>
 
 
   {{--{!! Form::open( ['action' => ['ProjetController@update',$p->id], 'method' => 'POST'] ) !!}--}}
   <form action="{{ route('Projets.update', $p) }}" method="POST" class="form-horizontal">
          <input type="hidden" name="_method" value="PUT">
+         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
   <div class="form-group">
       <label for="intitulee" class="col-form-label" >Sujet:</label>
-       <input type="text" class="form-control " name="intitulee" value="{{$p->intitulee}}" >{{$p->intitulee}}<br>
+       <input type="text" class="form-control " name="intitulee" value="{{$p->intitulee}}" >
   </div>
 
     <div class="col-auto">

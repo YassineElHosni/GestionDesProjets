@@ -12,11 +12,10 @@
 */
 Auth::routes();
 
-Route::resource('/', 'HomeController');
-
-Route::get('/Tache','TacheController@index');
+Route::get('/', 'HomeController@index');
 
 Route::resource('Projets','ProjetController');
+Route::resource('Taches','TacheController');
 
 
 
