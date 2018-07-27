@@ -13,7 +13,7 @@
 	@foreach($LastFewProjects as $p)
 	<div class="alert alert-info alert-dismissible fade show form-inline" role="alert">
 	  <div class="font-weight-bold col-lg-3">{{$p->intitulee}}</div><div class="font-weight-bold col-lg-3">{{$p->état}}</div><div class="col-lg-3">{{$p->updated_at}}</div>
-	  {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	{{--   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	    <span aria-hidden="true">&times;</span>
 	  </button> --}}
 	</div>

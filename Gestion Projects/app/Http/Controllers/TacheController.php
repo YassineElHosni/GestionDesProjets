@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Tache;
+use App\Projet;
+use App\Tache_User;
 use Illuminate\Http\Request;
 
 class TacheController extends Controller
@@ -15,10 +17,16 @@ class TacheController extends Controller
     {
         $ts = Tache::all();
         foreach ($ts as $t) {
-          $p[$t->id]=Projet::find($t->projet_id)->intitulee;
+            //get the name of the project that the current task belongs to.
+            $t->projet_Intitulee=Projet::find($t->projet_id)->intitulee;
+
+            //get the smallest 'date_debut' that all user have on the current task
+                $t->d_d=Tache_User::where('tache_id',$t->id)
+                ->min('date_debut');
+            
         }
-        
-        return view('projets.index' ,compact('ts','p'));
+        // dd($ts);
+        return view('taches.index' ,compact('ts'));
     }
 
 
@@ -86,6 +94,8 @@ class TacheController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $t = Taches::find($id);
+        $t->delete();
+        return redirect()->route('Taches.index');
     }
 }
