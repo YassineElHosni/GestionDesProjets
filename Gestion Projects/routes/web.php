@@ -14,14 +14,9 @@ Auth::routes();
 
 Route::resource('/', 'HomeController');
 
-Route::get('/Projet/create2',function (){
-	return view('projets.create2');
-});
-
-Route::resource('Projets','ProjetController');
 Route::get('/Tache','TacheController@index');
 
-Route::resource('Projet','ProjetController');
+Route::resource('Projets','ProjetController');
 
 
 

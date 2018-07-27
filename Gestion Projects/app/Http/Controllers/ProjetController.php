@@ -19,9 +19,10 @@ class ProjetController extends Controller
         $ps = Projet::all();
         foreach ($ps as $p) {
           $c[$p->id]=Client::find($p->client_id)->Nom;
+          //dd($p->id);
         }
 
-        return view('projets.index' ,compact('ps','c'));
+      return view('projets.index' ,compact('ps','c'));
     }
 
     /**
@@ -72,7 +73,7 @@ class ProjetController extends Controller
             ]);
       $newProjet->save();
 
-      return redirect()->route('Projets.index');
+      return redirect()->route('projets.index');
     }
 /*
 * Attribuer représentant User(CHEF_PROJET)->Projets
@@ -84,7 +85,7 @@ public function AttribuerRep(Request $request,$id){
 
 }
     /**
-     * Display the  Project.
+     * D0isplay the  Project.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -92,8 +93,10 @@ public function AttribuerRep(Request $request,$id){
     public function show($id)
     {
         $p = Projet::find($id);
+        //dd($p);
         $c=Client::find($p->client_id);
-          return view('projets.show')->withProjet($p)->withClient($c);
+
+        return view('projets.show')->withProjet($p)->withClient($c);
     }
 
     /**
@@ -140,9 +143,9 @@ public function AttribuerRep(Request $request,$id){
 
       $projet->save();  /*save*/
       /*flash data with success message*/
-      Session::flash('success','Modification enregistré!');
+    //  Session::flash('success','Modification enregistré!');
       //redirect to show whith the flash messg
-      return redirect()->view('projets.show')->withProjet($projet);
+      return redirect()->view('projets.show',$projet->id)->withProjet($projet);
     }
 
     /**
@@ -162,6 +165,6 @@ public function AttribuerRep(Request $request,$id){
       $projet->Clients()->dissociate();
 
       $projet->delete();
-      return redirect()->view('projets.index');
+      return redirect()->view('projet.index');
     }
 }

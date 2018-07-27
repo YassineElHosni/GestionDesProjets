@@ -33,15 +33,15 @@
 
 
 
-					<td>{!! Form::open(['route' =>['Projet.show',$p->id],'method'=>'get'])!!}
+					<td>{!! Form::open(['route' =>['Projets.show',$p->id],'method'=>'get'])!!}
 		               {{ Form::button('<span class="glyphicons glyphicons-eye-open"></span> Voir', array('class'=>'btn btn-primary form-control', 'type'=>'submit', 'size'=>'5')) }}
 
 		       {!!Form::close()!!}</td>
-					 <td>{!! Form::open(['route' =>['Projet.edit',$p->id],'method'=>'get'])!!}
+					 <td>{!! Form::open(['route' =>['Projets.edit',$p->id],'method'=>'get'])!!}
  		               {{ Form::button('<span class="glyphicon glyphicon-edit"></span> Modifier', array('class'=>'btn btn-primary form-control ', 'type'=>'submit')) }}
  		       {!!Form::close()!!}</td>
 
-					 <td>{!! Form::open(['route' =>['Projet.destroy',$p->id],'method'=>'DELETE'])!!}
+					 <td>{!! Form::open(['route' =>['Projets.destroy',$p->id],'method'=>'DELETE'])!!}
 					 {{ Form::button('<span class="glyphicon glyphicon-remove"></span>  Supprimer', array('class'=>'btn btn-danger form-control', 'type'=>'submit')) }}
 								<!--{!! Form::submit('X',['class'=>'form-btn btn btn-danger btn-justify btn-h1-spacing '])!!}-->
 					 {!!Form::close()!!}</td>
