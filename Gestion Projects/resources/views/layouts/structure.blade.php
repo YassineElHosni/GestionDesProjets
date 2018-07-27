@@ -12,6 +12,7 @@
 
 	<div class="container"><!--Content-->
 		@yield('content')
+
 	</div>
 <br>
 <br>
@@ -23,10 +24,8 @@
 
 </body>
 </html>
-
-<!--recherche barr!-->
-{{-- 	@if(session()->has('flash'))
-	<div class="container">
-		<div class="alert alert-success">{{ session('flash') }}</div>
-	</div>
-	@endif --}}
+<!--@if(session()->has('flash'))
+<div class="container">
+	<div class="alert alert-success">{{ session('flash') }}</div>
+</div>
+@endif-->

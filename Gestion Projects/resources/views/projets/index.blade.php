@@ -1,6 +1,12 @@
 @extends('layouts.structure')
 
 @section('content')
+
+@include('flash::message')
+<style> h2{ color: green; } </style>
+		<div class="form-group align-center">
+			     	 <h2>Liste des Projets</h2>  </div>
+
 <table class="table table-responsive-lg">
 <thead>
 	<tr>
@@ -37,6 +43,15 @@
 			<form action="{{ route('Projets.edit',$p->id) }}" method="get">
 				<input type="submit" value="Modifier" class="btn btn-primary">
 			</form>
+		<td>
+				<form action="{{ route('Projets.destroy',$p->id) }}" method="post">
+					{!! method_field('delete') !!}
+					{!! csrf_field() !!}
+					<button class="btn btn-danger" type="submit">Delete</button>
+		 	</form>
+
+
+</form>
 		</td>
 	</tr>
 	@endforeach

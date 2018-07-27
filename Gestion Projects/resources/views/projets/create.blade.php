@@ -19,7 +19,7 @@
 	<div class="form-group">
 		<label class="col-form-label col-md-2 col-sm-12">Etat:</label>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0">
+			<input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0" checked>
 			<label class="form-check-label" for="EnCours_RadioBtn">en-cours</label>
 		</div>
 		<div class="form-check form-check-inline">

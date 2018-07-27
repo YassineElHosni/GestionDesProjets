@@ -164,7 +164,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         /*added after   dding requires.. in composer.json*/
         Collective\Html\HtmlServiceProvider::class,
-
+        /*added for flush messages */
+          Laracasts\Flash\FlashServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,6 +233,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         /*added */
         'Input' => Illuminate\Support\Facades\Input::class,
+        /*added Flush mssgs*/
+         'Flash' => Laracasts\Flash\Flash::class,
     ],
 
 ];

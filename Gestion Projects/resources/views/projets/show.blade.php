@@ -1,40 +1,53 @@
 @extends('layouts.structure')
 
 @section('content')
+<style> h2{border-bottom:1px dashed green;
+           color: green; } </style>
 
-    <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Intitulee :</label>
-    	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{ $projet->intitulee }}</div>
+  <div class='container'>
+@include('flash::message')
+
+    <div class="form-group align-center">
+    	 <h2>{{ $projet->intitulee }} </h2>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Client :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Client </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{ $client->Nom }}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Description :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Chef Projet </label></strong>
+    	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{ $chef->Nom }}</div>
+    </div>
+
+    <div class="form-group row">
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Description </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{$projet->description}}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Deplacement :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Deplacement </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{($projet->deplacement=='O')?'OUI':'NON'}}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Etat :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Etat </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{($projet->Etat=='en_cours')?'en_cours':'clos'}}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Date Debut :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Date Debut </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_debut))}}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Date Fin :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Date Fin </label></strong>
     	<div class="col-lg-10 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_fin))}}</div>
     </div>
     <div class="form-group row">
-    	<label class="col-lg-2 col-sm-12 col-form-label-lg">Date Limite :</label>
+    	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Date Limite </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_limite))}}</div>
     </div>
 
+</div>
+<form action="{{ route('Projets.edit',$projet->id) }}" method="get">
+  <input type="submit" value="Modifier" class="btn btn-primary">
+</form>
     <br>
     <br>
     <br>
