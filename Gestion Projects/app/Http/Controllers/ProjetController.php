@@ -60,20 +60,22 @@ class ProjetController extends Controller
     {
         /*storing all the new data in new projet*/
         $newProjet = new Projet([
-              'intitulee' => request('intitulee'),
-              'description' => request('description'),
-              'date_limite' => request('date_limite'),
+              'intitulee' => $request->intitulee,
+              'description' => $request->description,
+              'date_limite' => $request->date_limite,
               'date_debut' => '2018-07-26 11:36:04',
               'date_fin' => '2018-07-26 11:36:04',
               'deplacement' =>($request->has('deplacement'))?'O':'N',
-              'état' =>(!$request->input('Etat_RadioBtn'))?'en-cours':'clos',
-              'commentaire' => request('commentaire'),
-              'user_id' =>$request->get('user_id')[0],
-              'client_id'=>$request->get('client_id')[0],
+              'état' =>(!$request->Etat_RadioBtn)?'en-cours':'clos',
+              'commentaire' => $request->commentaire,
+              'user_id' =>$request->user_id[0],
+              'client_id'=>$request->client_id[0],
             ]);
       $newProjet->save();
 
-      return redirect()->route('projets.index');
+     flash('Projet created !')->success();
+
+      return redirect()->route('Projets.index');
     }
     /**
      * D0isplay the  Project.
@@ -87,7 +89,9 @@ class ProjetController extends Controller
         //dd($p);
         $c=Client::find($p->client_id);
 
-        return view('projets.show')->withProjet($p)->withClient($c);
+         $u=User::find($p->user_id);
+
+        return view('projets.show')->withProjet($p)->withClient($c)->withChef($u);
     }
 
     /**
@@ -123,20 +127,22 @@ class ProjetController extends Controller
     {
       $projet =Projet::find($id);//get the data with request
 
-      $projet->intitulee =$request->input('intitulee');//setint the coloms with the new values..
-      $projet->description =$request->input('description');
-      $projet->date_limite =$request->input('date_limite');
-      $projet->deplacement =($request->has('deplacement'))?'O':'N';
-      $projet->état =(!$request->input('Etat_RadioBtn'))?'en-cours':'clos';
-      $projet->commentaire =$request->input('commentaire');
-      $projet->user_id =$request->get('user_id')[0];
-      $projet->client_id =$request->get('client_id')[0];
+      $projet->intitulee =$request->intitulee;//setint the coloms with the new values..
+      $projet->description =$request->description;
+      $projet->date_limite =$request->idate_limite;
+      $projet->deplacement =($request->deplacement)?'O':'N';
+      $projet->état =(!$request->Etat_RadioBtn)?'en-cours':'clos';
+      $projet->commentaire =$request->commentaire;
+      $projet->user_id =$request->user_id[0];
+      $projet->client_id =$request->client_id;
+    //  echo "<pre>";print_r($request->description);exit;
+//dd($request->get('client_id'));
+      //$projet->save();  /*save*/
 
-      $projet->save();  /*save*/
-      /*flash data with success message*/
     //  Session::flash('success','Modification enregistré!');
       //redirect to show whith the flash messg
-      return redirect()->view('projets.show',$projet->id)->withProjet($projet);
+      flash('Projet Saved !')->success();
+      return redirect()->route('Projets.show',$projet->id)->withProjet($projet);
     }
 
     /**
@@ -151,11 +157,12 @@ class ProjetController extends Controller
       //$c=Client::find($p->client_id);
 
       $u=User::find($projet->user_id);
-
+    /*
       $projet->Users()->detach(User::where('id',$u)->first());
       $projet->Clients()->dissociate();
-
+     */
       $projet->delete();
-      return redirect()->view('projet.index');
+    flash('Projet Deleted !')->warning();
+      return redirect()->route('Projets.index',$projet->id);
     }
 }

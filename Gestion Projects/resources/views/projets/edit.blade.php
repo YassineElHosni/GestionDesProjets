@@ -25,7 +25,8 @@
 
     <div class="col-auto">
               <label class="col-sm-3  mr-5 col-form-label">Client:</label>
-                <label class="col-sm-3 col-form-label" name="client_id" value="{{$c->id}}"> {{$c->Nom}}</label>
+                <label class="col-sm-3 col-form-label" > {{$c->Nom}}</label>
+                <input type="hidden" name="client_id" value="{{$c->id}}">
     </div>
 
 
@@ -37,7 +38,7 @@
   <div class="form-group">
 		<label for="date_limite" class="col-md-4 col-form-label">Date Limite</label>
 		<div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-			<input id="date_limite" name="date_limite" class="form-control" size="16" type="text" value="{{ $p->date_limite }}" >
+			<input id="date_limite" name="date_limite" class="form-control" size="16" type="text" value="{{ $p->date_limite }}" readonly>
 			<span class="input-group-append">
 				<span class="input-group-text fa fa-times fa-lg"></span>
 			</span>
@@ -60,7 +61,7 @@
 </div>
 <!--état-->
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0"<?php echo ($etat=='en_cours')?'checked':'' ?>>
+  <input class="form-check-input" type="radio" name="Etat_RadioBtn" id="EnCours_RadioBtn" value="0"<?php echo ($etat=='en-cours')?'checked':'' ?>>
   <label class="form-check-label" for="EnCours_RadioBtn">en-cours</label>
 
 
@@ -71,7 +72,7 @@
 
   <div class="form-groupe">
     <label class="col-form-label" >Commentaire</label>
-    <textarea class="form-control" name="commentaire" value="{{$p->commentaire}}" ></textarea>
+    <textarea class="form-control" name="commentaire" value="" >{{$p->commentaire}}</textarea>
   </div>
 
 
