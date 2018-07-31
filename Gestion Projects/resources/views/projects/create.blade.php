@@ -7,7 +7,14 @@
 @endsection
 
 @section('content')
+@include('flash::message')
 
+<style> h2{ color: green; } </style>
+ <div class="page-header">
+		<div class="form-group align-center">
+			     	 <h2>Nouveau Projet </h2>  </div>
+</div>
+<br><br>
 <form role="form" method="post" action="{{action('ProjectController@store')}}">
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
@@ -30,7 +37,7 @@
 
 	<div class="form-group">
 		<label for="description" class="col-form-label">Description:</label>
-		<textarea class="form-control" rows="6" name="description" id="description">desc</textarea>
+		<textarea class="form-control" rows="6" name="description" id="description"></textarea>
 	</div>
 
 	<div class="form-group">

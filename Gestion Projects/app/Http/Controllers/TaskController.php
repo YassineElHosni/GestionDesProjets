@@ -40,9 +40,9 @@ class TaskController extends Controller
     public function create()
     {
       /*--get all free employee--*/
-      $employee=User::where('role','Like','EMPLOYEE')->get();
-    
-      return view('tasks.create',compact('employee'));
+      $employees=User::where('role','Like','EMPLOYEE')->get();
+      $projects=Project::all();
+      return view('tasks.create',compact('employees','projects'));
     }
 
     /**
@@ -53,7 +53,22 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      /*storing all the new data in new project*/
+      $newTask = new project([
+            'title' => $request->title,
+            'limitDate' => $request->limitDate,
+            'state' =>'IN_PROGRESS',
+            'progress' => 0,
+            'priority' => 0, /* a revoir */
+            'comment' => $request->comment,
+            'user_id' =>$request->user_id[0],
+            'project_id'=>$request->project_id[0],
+          ]);
+      $newTask->save();
+
+      flash('Task created Successfully !')->success();
+
+      return redirect()->route('Tasks.show',$newTask->id)->withTask($newTask);
     }
 
     /**
