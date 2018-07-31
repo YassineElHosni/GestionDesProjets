@@ -34,7 +34,7 @@ $('#RangeProgress').on('change',function(){
 <br><br>
 
 
-<form action="{{ route('Taches.updateProgress', $tache) }}" method="POST">
+<form action="{{ route('Tasks.updateProgress', $task) }}" method="POST">
        <input type="hidden" name="_method" value="PUT">
        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -45,7 +45,7 @@ $('#RangeProgress').on('change',function(){
     <div class="card mr-4" style="width:61rem;">
     <div class="card-body">
       <h5>Priorité:
-        <span class="badge badge-primary badge-pill float-right">{{$tache->priorité }}</span></h5>
+        <span class="badge badge-primary badge-pill float-right">{{$task->priority }}</span></h5>
       </div>
       </div>
     </div>
@@ -54,7 +54,7 @@ $('#RangeProgress').on('change',function(){
   <div class="card mr-4" style="width: 30rem;">
   <div class="card-body form-inline">
     <h5 class="card-title mr-3">Projet related:</h5>
-      <p class="card-text">{{ $projet->intitulee }}</p>
+      <p class="card-text">{{ $project->title }}</p>
     </div>
     </div>
 
@@ -62,7 +62,7 @@ $('#RangeProgress').on('change',function(){
   <div class="card mr-3" style="width: 30rem;">
   <div class="card-body">
     <h5 class="card-title">Description:</h5>
-      <p class="card-text">{{ $tache->description }}</p>
+      <p class="card-text">{{ $task->description }}</p>
     </div>
     </div>
 </div></div></div>
@@ -73,7 +73,7 @@ $('#RangeProgress').on('change',function(){
     <div class="card mr-3" style="width: 30rem;">
     <div class="card-body form-inline ">
       <h5 class="card-title  mr-4">Date Limite :</h5>
-        <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($tache->date_limite))}}</p>
+        <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($task->limitDate))}}</p>
       </div>
       </div>
     </div>
@@ -91,7 +91,7 @@ $("#RangeProgress").rangeSlider({
     <div class="card mr-4"style="width: 30rem;">
     <div class="card-body form-inline">
       <h5 class="card-title mr-3">Progression:</h5>
-  <input type="range" id="RangeProgress" name="déroulement" value="{{$tache->déroulement}}">
+  <input type="range" id="RangeProgress" name="progress" value="{{$task->progress}}">
    </div>
    </div>
 </div>
@@ -112,7 +112,7 @@ var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
     <div class="card mr-5" style="width: 35rem;">
     <div class="card-body">
       <h5 class="card-title mr-3">commentaire:</h5>
-      	<p class="card-text">{{ $tache->commentaire }}</p>
+      	<p class="card-text">{{ $task->comment }}</p>
       </div>
       </div>
     </div>
@@ -120,7 +120,7 @@ var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
       <div class="card mr-3" style="width: 20rem;">
       <div class="card-body form-inline">
         <h5 class="card-title  mr-4">State:</h5>
-          <p class="card-text" name="état">{{$tache->état}}</p>
+          <p class="card-text" name="state">{{$task->state}}</p>
         </div>
         </div>
       </div>
