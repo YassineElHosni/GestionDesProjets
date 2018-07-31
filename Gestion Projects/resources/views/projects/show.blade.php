@@ -22,7 +22,7 @@
       <div class="card mr-4" style="width: 25rem;">
       <div class="card-body form-inline">
         <h5 class="card-title mr-4">State:</h5>
-          <p class="card-text">{{($projet->Etat=='en_cours')?'en_cours':'clos'}}</p>
+          <p class="card-text">{{($project->state)?'en-cours':'clos'}}</p>
         </div>
         </div>
       </div>
