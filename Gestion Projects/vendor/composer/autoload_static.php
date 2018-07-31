@@ -1222,6 +1222,7 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'FullDataBaseRename' => __DIR__ . '/../..' . '/database/migrations/new full migration/2018_07_31_084652_fullDataBaseRename.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',

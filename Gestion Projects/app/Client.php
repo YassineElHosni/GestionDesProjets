@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
   protected $fillable =
-	[ 'numeroClient','Nom','email','adresse','num_tel','commentaire' ];
+	[ 'registrationNumber','name','email','address','phoneNumber','comment' ];
 
-	public function projets(){
-		return $this->hasMany('App\Projet');
+	public function projects(){
+		return $this->hasMany('App\Project');
 	}
 }

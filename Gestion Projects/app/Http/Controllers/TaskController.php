@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\User;
-use App\Tache;
-use App\Projet;
-use App\Tache_User;
+use App\Task;
+use App\Project;
+use App\Task_User;
 use Illuminate\Http\Request;
 
-class TacheController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,18 +16,18 @@ class TacheController extends Controller
      */
     public function index()
     {
-        $ts = Tache::all();
+        $ts = Task::all();
         foreach ($ts as $t) {
             //get the name of the project that the current task belongs to.
-            $t->projet_Intitulee=Projet::find($t->projet_id)->intitulee;
+            $t->project_title=Project::find($t->project_id)->title;
 
             //get the smallest 'date_debut' that all user have on the current task
-            $t->d_d=Tache_User::where('tache_id',$t->id)
-                ->min('date_debut');
+            $t->d_d=Task_User::where('task_id',$t->id)
+                ->min('startDate');
             
         }
         // dd($ts);
-        return view('taches.index' ,compact('ts'));
+        return view('tasks.index' ,compact('ts'));
     }
 
 
@@ -61,9 +61,9 @@ class TacheController extends Controller
      */
     public function show($id)
     {
-      $t=Tache::find($id);/*get tache*/
-      $p=Projet::find($t->projet_id);/*get the projet related to this task*/
-        return view('taches.show')->withTache($t)->withProjet($p);
+      $t=Task::find($id);/*get tache*/
+      $p=Project::find($t->project_id);/*get the projet related to this task*/
+        return view('tasks.show')->withTask($t)->withProject($p);
     }
 
     /**
@@ -86,14 +86,14 @@ class TacheController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tache =Tache::find($id);//get the data with request
-     $tache->update($request->only(['déroulement']));
+        $task =Task::find($id);//get the data with request
+        $task->update($request->only(['progress']));
 
-     $projet->save();
-echo "<pre>";print_r($request->RangeProgress);exit;
+        $project->save();
+        // echo "<pre>";print_r($request->RangeProgress);exit;
 
-      flash('Tache Saved !')->success();
-      return redirect()->route('Tache.show',$tache->id)->withTache($tache);
+        flash('Tache Saved !')->success();
+        return redirect()->route('Task.show',$tache->id)->withTask($task);
 
     }
 
@@ -105,8 +105,8 @@ echo "<pre>";print_r($request->RangeProgress);exit;
      */
     public function destroy($id)
     {
-        $t = Taches::find($id);
+        $t = Task::find($id);
         $t->delete();
-        return redirect()->route('Taches.index');
+        return redirect()->route('Task.index');
     }
 }

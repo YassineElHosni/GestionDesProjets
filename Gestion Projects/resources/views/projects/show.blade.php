@@ -8,9 +8,9 @@
 
 
     <div class="form-group align-center">
-    	 <h2>{{ $projet->intitulee }} </h2>
+    	 <h2>{{ $project->title }} </h2>
     </div>
-    <form action="{{ route('Projets.edit',$projet->id) }}" method="get">
+    <form action="{{ route('Projects.edit',$project->id) }}" method="get">
       <input type="submit" value="Modifier" class="btn btn-primary float-right">
     </form>
 
@@ -19,7 +19,7 @@
         <div class="card mr-4" style="width:30rem;">
         <div class="card-body form-inline">
           <h5 class="card-title mr-3">Client:</h5>
-              <p class="card-text">{{ $client->Nom }}</p>
+              <p class="card-text">{{ $client->name }}</p>
           </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
       <div class="card mr-4" style="width: 30rem;">
       <div class="card-body form-inline">
         <h5 class="card-title mr-3">Chef Projet:</h5>
-          <p class="card-text">{{ $chef->Nom }}</p>
+          <p class="card-text">{{ $chef->name }}</p>
         </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <div class="card mr-4" style="width: 30rem;">
       <div class="card-body">
         <h5 class="card-title">Description:</h5>
-          <p class="card-text">{{ $projet->description }}</p>
+          <p class="card-text">{{ $project->description }}</p>
         </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
         <div class="card mr-4" style="width: 30rem;">
         <div class="card-body form-inline">
           <h5 class="card-title mr-3">Deplacement:</h5>
-          	<p class="card-text">{{($projet->deplacement=='O')?'OUI':'NON'}}</p>
+          	<p class="card-text">{{($project->displacement)?'OUI':'NON'}}</p>
           </div>
           </div>
       </div>
@@ -56,7 +56,7 @@
           <div class="card mr-4" style="width: 30rem;">
           <div class="card-body form-inline">
             <h5 class="card-title mr-3">State:</h5>
-              <p class="card-text">{{($projet->Etat=='en_cours')?'en_cours':'clos'}}</p>
+              <p class="card-text">{{($project->state)?'en_cours':'clos'}}</p>
             </div>
             </div>
           </div>
@@ -65,7 +65,7 @@
           <div class="card mr-4" style="width: 30rem;">
           <div class="card-body form-inline">
             <h5 class="card-title mr-3">Date Limite :</h5>
-              <p class="card-text">{{date("M j Y h:m:s", strtotime($projet->date_limite))}}</p>
+              <p class="card-text">{{date("M j Y h:m:s", strtotime($project->limitDate))}}</p>
             </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
             <div class="card mr-4" style="width: 30rem;">
             <div class="card-body form-inline">
               <h5 class="card-title mr-3">Date Debut :</h5>
-                <p class="card-text">{{date("M j Y h:m:s", strtotime($projet->date_debut))}}</p>
+                <p class="card-text">{{date("M j Y h:m:s", strtotime($project->startDate))}}</p>
               </div>
               </div>
             </div>
@@ -83,7 +83,7 @@
               <div class="card mr-4" style="width: 30rem;">
               <div class="card-body form-inline">
                 <h5 class="card-title mr-3">Date Fin :</h5>
-                  <p class="card-text">{{date("M j Y h:m:s", strtotime($projet->date_fin))}}</p>
+                  <p class="card-text">{{date("M j Y h:m:s", strtotime($project->finishDate))}}</p>
                 </div>
                 </div>
               </div>
@@ -101,114 +101,14 @@
     </tr>
   </thead>
   <tbody>
-    @foreach($taches as $tache)
+    @foreach($tasks as $task)
     <tr>
-      <th scope="row">..titre.. </th>
-      <td>{{$tache->date_limite}}</td>
-      <td>{{$tache->état}}</td>
-      <td><span class="badge badge-primary badge-pill align_center">{{$tache->déroulement }}</span></td>
+      <th scope="row">{{$task->title}}</th>
+      <td>{{$task->limitDate}}</td>
+      <td>{{$task->state}}</td>
+      <td><span class="badge badge-primary badge-pill align_center">{{$task->progress }}</span></td>
     </tr>
     @endforeach
   </tbody>
 </table>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 @endsection

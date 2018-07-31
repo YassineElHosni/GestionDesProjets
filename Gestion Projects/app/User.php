@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'Nom', 'email', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -30,13 +30,13 @@ class User extends Authenticatable
     /*
     * The tasks that belongs to user
      */
-    public function taches(){
+    public function tasks(){
          //return $this->belongsToMany('App\Tache','tache_user','user_id','tache_id')->withPivot('date_debut', 'date_fin');
-     return $this->belongsToMany('App\Tache')->withPivot('date_debut','date_fin');
+     return $this->belongsToMany('App\Task')->withPivot('startDate','finishDate');
     }
-    public function projets(){
+    public function projects(){
 
-     return $this->belongsToMany('App\Projet');
+     return $this->belongsToMany('App\Project');
     }
     /*
     *checking the role of the  authentificated user

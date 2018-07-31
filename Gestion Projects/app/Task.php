@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tache extends Model
+class Task extends Model
 {
   protected $fillable = [
-       'description','date_limite','état',
-       'déroulement','priorité','commentaire','projet_id'
+       'title','limitDate','state',
+       'progress','priority','comment','project_id'
          ];
     //
     /*
@@ -16,10 +16,10 @@ class Tache extends Model
    */
     public function users(){
         // return $this->belongsToMany('App\User','tache_user','tache_id','user_id')->withPivot('date_debut', 'date_fin');
-     return $this->belongsToMany('App\User')->withPivot('date_debut', 'date_fin');
+     return $this->belongsToMany('App\User')->withPivot('startDate', 'finishDate');
     }
 
-	public function projets(){
-		return $this->belongsTo('App\Projet');
+	public function projects(){
+		return $this->belongsTo('App\Project');
 	}
 }

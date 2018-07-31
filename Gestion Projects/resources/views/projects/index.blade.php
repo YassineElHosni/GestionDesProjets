@@ -28,25 +28,25 @@
 <tbody>
 	@foreach($ps as $p)
 	<tr>
-		<th scope="row">{{$p->intitulee}}</th>
+		<th scope="row">{{$p->title}}</th>
 		{{-- <td>{{$p->description}}</td> --}}
-		<td>{{$p->client_Nom}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
-		<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>
-		<td>{{($p->deplacement=='O')?'OUI':'NO'}}</td>
-		<td>{{$p->état}}</td>
+		<td>{{$p->client_name}}</td>
+		<td>{{date('Y-m-d', strtotime($p->limitDate))}}</td>
+		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
+		<td>{{date('Y-m-d', strtotime($p->finishDate))}}</td>
+		<td>{{($p->displacement)?'Oui':'No'}}</td>
+		<td>{{($p->state)?'en-cours':'clos'}}</td>
 		<td>
-			<form action="{{ route('Projets.show',$p->id) }}" method="get">
+			<form action="{{ route('Projects.show',$p->id) }}" method="get">
 				<input type="submit" value="Voir" class="btn btn-primary">
 			</form>
 		</td>
 		<td>
-			<form action="{{ route('Projets.edit',$p->id) }}" method="get">
+			<form action="{{ route('Projects.edit',$p->id) }}" method="get">
 				<input type="submit" value="Modifier" class="btn btn-primary">
 			</form>
 		<td>
-				<form action="{{ route('Projets.destroy',$p->id) }}" method="post">
+				<form action="{{ route('Projects.destroy',$p->id) }}" method="post">
 					{!! method_field('delete') !!}
 					{!! csrf_field() !!}
 					<button class="btn btn-danger" type="submit">Delete</button>
