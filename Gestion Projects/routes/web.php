@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@index');
 Route::resource('Projects','ProjectController');
 Route::resource('Tasks','TaskController');
 
-Route::match(['PUT', 'PATCH'], '/Taches/{id}/save','TacheController@updateProgress')->name('Taches.updateProgress');
+Route::match(['PUT', 'PATCH'], '/Tasks/{id}/save','TaskController@updateProgress')->name('Tasks.updateProgress');
 
 
 ?>

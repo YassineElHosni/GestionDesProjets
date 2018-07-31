@@ -54,14 +54,14 @@ class TaskController extends Controller
     }
 
     /**
-     *voir une tache choisit
+     *voir une task choisit
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-      $t=Task::find($id);/*get tache*/
+      $t=Task::find($id);/*get task*/
       $p=Project::find($t->project_id);/*get the projet related to this task*/
         return view('tasks.show')->withTask($t)->withProject($p);
     }
@@ -81,16 +81,16 @@ class TaskController extends Controller
     */
     public function updateProgress(Request $request, $id)
     {
-          $tache =Tache::find($id);
+          $task =Task::find($id);
 
-          $tache->déroulement=$request->déroulement;
-          if($request->déroulement=="100")
-            $tache->état='fini';
+          $task->progress=$request->progress;
+          if($request->progress=="100")
+            $task->state='FINISHED';
 
-          $tache->save();
+          $task->save();
 
-          flash('Tache Saved !')->success();
-          return redirect()->route('Taches.show',$tache->id)->withTache($tache);
+          flash('task Saved !')->success();
+          return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
     *  Gérant validate or not the task
@@ -115,8 +115,8 @@ class TaskController extends Controller
         $project->save();
         // echo "<pre>";print_r($request->RangeProgress);exit;
 
-        flash('Tache Saved !')->success();
-        return redirect()->route('Task.show',$tache->id)->withTask($task);
+        flash('task Saved !')->success();
+        return redirect()->route('Task.show',$task->id)->withTask($task);
     }
 
     /**
