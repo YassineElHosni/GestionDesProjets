@@ -76,9 +76,32 @@ class TaskController extends Controller
     {
         //
     }
+    /*
+    *  Update progress / state
+    */
+    public function updateProgress(Request $request, $id)
+    {
+          $tache =Tache::find($id);
 
+          $tache->déroulement=$request->déroulement;
+          if($request->déroulement=="100")
+            $tache->état='fini';
+
+          $tache->save();
+
+          flash('Tache Saved !')->success();
+          return redirect()->route('Taches.show',$tache->id)->withTache($tache);
+    }
+    /*
+    *  Gérant validate or not the task
+    */
+    public function updateValidate(Request $request, $id)
+    {
+
+
+    }
     /**
-     * Update the specified resource in storage.
+     * Update Task
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -94,7 +117,6 @@ class TaskController extends Controller
 
         flash('Tache Saved !')->success();
         return redirect()->route('Task.show',$tache->id)->withTask($task);
-
     }
 
     /**
