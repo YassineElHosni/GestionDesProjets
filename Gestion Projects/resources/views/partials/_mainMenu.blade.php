@@ -1,5 +1,5 @@
  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success">
-   <a class="navbar-brand" href="{{ url('/Projects') }}">Projects Connect To All</a>
+   <a class="navbar-brand" href="{{ url('/Projets') }}">Projects Connect To All</a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" style="">
      <span class="navbar-toggler-icon"></span>
    </button>
@@ -24,16 +24,13 @@
                                  @else <!-- si  authentifié -->
                                  <li class="nav-item">
                                    <?php $id=Auth::user()->id ?>
-                                   <a class="nav-link" href="#">Profile</a>
+                                   <a class="nav-link" href="#">Mon profile</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Gestion Users</a>
+                                    <a class="nav-link" href="#">Gestion Utilisateurs</a>
                                  </li>
                                  <li class="nav-item">
                                    <a class="nav-link" href="#">Gestion Projets</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Gestion Clients</a>
                                  </li>
 
                                  <a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>

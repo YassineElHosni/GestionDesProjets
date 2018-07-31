@@ -73,7 +73,7 @@ $('#RangeProgress').on('change',function(){
     <div class="card mr-3" style="width: 30rem;">
     <div class="card-body form-inline ">
       <h5 class="card-title  mr-4">Date Limite :</h5>
-        <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($task->limtDate))}}</p>
+        <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($task->limitDate))}}</p>
       </div>
       </div>
     </div>

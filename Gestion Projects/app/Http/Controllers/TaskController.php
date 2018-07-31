@@ -24,7 +24,7 @@ class TaskController extends Controller
             //get the smallest 'date_debut' that all user have on the current task
             $t->d_d=Task_User::where('task_id',$t->id)
                 ->min('startDate');
-            
+
         }
         // dd($ts);
         return view('tasks.index' ,compact('ts'));
@@ -39,7 +39,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+      /*--get all free employee--*/
+      $employee=User::where('role','Like','EMPLOYEE')->get();
+    
+      return view('tasks.create',compact('employee'));
     }
 
     /**
@@ -109,16 +112,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task =Task::find($id);//get the data with request
-        $task->update($request->only(['progress']));
-
         $project->save();
         // echo "<pre>";print_r($request->RangeProgress);exit;
 
         flash('task Saved !')->success();
         return redirect()->route('Task.show',$task->id)->withTask($task);
     }
-
     /**
      * Remove the specified resource from storage.
      *
