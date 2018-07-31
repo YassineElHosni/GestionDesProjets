@@ -7,7 +7,8 @@
 <script>
 
 $('#RangeProgress').on('change',function(){
-  alert('state changed to : '+ $('#RangeProgress').val());
+  alert('\t state changed to : '+ $('#RangeProgress').val() +'%'
+                                        +'\n Please save your changes !');
 });
   /*  function myFunction(){
     /*  var newvalue =document.getElementById("myRange");
@@ -37,8 +38,8 @@ $('#RangeProgress').on('change',function(){
 <div class="container" >
 
 <div class="col-sm">
-  <div class="form-group row">
-    <div class="card mr-4" style="width:60rem;">
+  <div class="form-group form-row">
+    <div class="card mr-4" style="width:61rem;">
     <div class="card-body">
       <h5>Priorité:
         <span class="badge badge-primary badge-pill float-right">{{$tache->priorité }}</span></h5>
@@ -46,8 +47,8 @@ $('#RangeProgress').on('change',function(){
       </div>
     </div>
 
-  <div class="form-group row">
-  <div class="card mr-4" style="width: 30rem;">
+  <div class="form-group form-row">
+  <div class="card mr-3" style="width: 30rem;">
   <div class="card-body form-inline">
     <h5 class="card-title mr-3">Projet related:</h5>
       <p class="card-text">{{ $projet->intitulee }}</p>
@@ -55,7 +56,7 @@ $('#RangeProgress').on('change',function(){
     </div>
 
 <div class="form-group">
-  <div class="card mr-4" style="width: 30rem;">
+  <div class="card mr-3" style="width: 30rem;">
   <div class="card-body">
     <h5 class="card-title">Description:</h5>
       <p class="card-text">{{ $tache->description }}</p>
@@ -64,17 +65,19 @@ $('#RangeProgress').on('change',function(){
 </div></div></div>
 
 <div class="col-sm">
-  <div class="form-group row">
-    <div class="card mr-4" style="width: 30rem;">
+  <div class="form-row">
+  <div class="form-group ">
+    <div class="card mr-3" style="width: 30rem;">
     <div class="card-body form-inline ">
       <h5 class="card-title  mr-3">Date Limite :</h5>
         <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($tache->date_limite))}}</p>
       </div>
       </div>
+    </div>
 
       <!--progress range bar -->
       <div class="form-group">
-        <div class="card mr-4"style="width: 30rem;">
+        <div class="card mr-3"style="width: 30rem;">
         <div class="card-body form-inline">
           <h5 class="card-title mr-3">Progression:</h5>
       <input type="range" id="RangeProgress" value="{{$tache->déroulement}}">
@@ -82,28 +85,30 @@ $('#RangeProgress').on('change',function(){
        </div>
       </div>
 
-<div class="form-group">
-  <div class="card mr-4" style="width: 30rem;">
-  <div class="card-body form-inline">
-    <h5 class="card-title  mr-3">State:</h5>
-      <p class="card-text">{{($tache->état=='en_cours')?'en_cours':'fini'}}</p>
-    </div>
-    </div>
-  </div></div></div>
+</div></div>
 
 <div class="col-sm">
-  <div class="form-group row">
-    <div class="card mr-4" style="width: 60rem;">
+  <div class="form-row">
+    <div class="form-group">
+    <div class="card mr-5" style="width: 35rem;">
     <div class="card-body">
       <h5 class="card-title mr-3">commentaire:</h5>
       	<p class="card-text">{{ $tache->commentaire }}</p>
       </div>
       </div>
     </div>
-
-</div>
+    <div class="form-group">
+      <div class="card mr-3" style="width: 20rem;">
+      <div class="card-body form-inline">
+        <h5 class="card-title  mr-3">State:</h5>
+          <p class="card-text">{{($tache->état=='en_cours')?'en_cours':'fini'}}</p>
+        </div>
+        </div>
+      </div>
+</div></div>
 
     <!-- button save -->
-    <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+    <button type="submit" name="submit" class="btn btn-primary float-right mr-4">Save</button>
        </form>
 </div>
+@endsection
