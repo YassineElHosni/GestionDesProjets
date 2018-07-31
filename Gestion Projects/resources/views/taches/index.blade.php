@@ -19,7 +19,7 @@
 <tbody>
 	@foreach($ts as $t)
 	<tr>
-		<td>{{$t->description}}</td>
+		<td><b>{{$t->description}}</b></td>
 		<td>{{$t->projet_Intitulee}}</td>
 		<td>{{date('Y-m-d', strtotime($t->date_limite))}}</td>
 		<td>{{($t->d_d)?date('Y-m-d', strtotime($t->d_d)):'-'}}</td>

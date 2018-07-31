@@ -4,7 +4,6 @@
 <style> h2{border-bottom:1px dashed green;
            color: green; } </style>
 
-  <div class='container'>
 @include('flash::message')
 
     <div class="form-group align-center">
@@ -43,109 +42,7 @@
     	<strong><label class="col-lg-2 col-sm-12 col-form-label-lg">Date Limite </label></strong>
     	<div class="col-lg-10 col-sm-12 form-control-plaintext">{{date("M j Y h:m:s", strtotime($projet->date_limite))}}</div>
     </div>
-
-</div>
-<form action="{{ route('Projets.edit',$projet->id) }}" method="get">
-  <input type="submit" value="Modifier" class="btn btn-primary">
-</form>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <form action="{{ route('Projets.edit',$projet->id) }}" method="get">
+        <input type="submit" value="Modifier" class="btn btn-primary">
+    </form>
 @endsection

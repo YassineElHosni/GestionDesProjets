@@ -32,22 +32,11 @@ class ProjetController extends Controller
      */
     public function create()
     {
-
-    //  $user=User::where('id','=',auth()->id())->first();/*l'user authentifié*/
-      /*--select representant--*/
-      $chef_projets=User::where('role','Like','CHEF_PROJET')->get();
-
-      /*$select=array();
-      $selected_id=array();
-
-        foreach($chef_projets as $chef_projet){
-         $select[] =$chef_projet->Nom;
-         $selected_id[]=$chef_projet->id;
-        }
-
-       /*--select client--*/
-       $clients=Client::all();
-     return view('projets.create',compact('chef_projets','clients'));//,compact('chef_projets','selected_client_id'));
+        /*--get all representatives--*/
+        $chef_projets=User::where('role','Like','CHEF_PROJET')->get();
+        // get all clients
+        $clients=Client::all();
+     return view('projets.create',compact('chef_projets','clients'));
     }
 
     /**
@@ -71,11 +60,11 @@ class ProjetController extends Controller
               'user_id' =>$request->user_id[0],
               'client_id'=>$request->client_id[0],
             ]);
-      $newProjet->save();
+        $newProjet->save();
 
-     flash('Projet created !')->success();
+        flash('Projet created !')->success();
 
-      return redirect()->route('Projets.index');
+        return redirect()->route('Projets.index');
     }
     /**
      * D0isplay the  Project.
@@ -86,10 +75,10 @@ class ProjetController extends Controller
     public function show($id)
     {
         $p = Projet::find($id);
-        //dd($p);
+
         $c=Client::find($p->client_id);
 
-         $u=User::find($p->user_id);
+        $u=User::find($p->user_id);
 
         return view('projets.show')->withProjet($p)->withClient($c)->withChef($u);
     }
@@ -142,6 +131,7 @@ class ProjetController extends Controller
     //  Session::flash('success','Modification enregistré!');
       //redirect to show whith the flash messg
       flash('Projet Saved !')->success();
+
       return redirect()->route('Projets.show',$projet->id)->withProjet($projet);
     }
 
