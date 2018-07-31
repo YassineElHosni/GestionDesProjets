@@ -60,7 +60,7 @@
         <div class="card mr-3" style="width: 20rem;">
         <div class="card-body form-inline">
           <h5 class="card-title mr-3">Deplacement:</h5>
-          	<p class="card-text">{{($project->displacement)?'OUI':'NON'}}</p>
+          	<p class="card-text">{{($project->displacement)?'OUI':'NO'}}</p>
           </div>
           </div>
       </div>

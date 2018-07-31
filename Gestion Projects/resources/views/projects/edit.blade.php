@@ -54,9 +54,9 @@
 <div class="form-group col-lg-12">
 <div class="form-check">
   <input class="form-check-input" type="checkbox" name="displacement" id="displacement"
-  <?php echo ($displacement)?'checked':'' ?> >
+  <?php echo ($p->displacement)?'checked':'' ?> >
   <label class="form-check-label" for="displacement">
-  displacement
+  Deplacement
   </label>
 </div>
 </div>

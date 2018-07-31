@@ -121,12 +121,14 @@ class ProjectController extends Controller
 
       $project->title =$request->title;
       $project->description =$request->description;
-      $project->limitDate =$request->idate_limite;
-      $project->diplacement =($request->diplacement);//true == 1 == oui and false == 0 == no
+      $project->limitDate =$request->limitDate;
+      $project->displacement =($request->has('displacement'));//true == 1 == oui and false == 0 == no
       $project->state =($request->state_RadioBtn);//true == 1 == en-cours and false == 0 == fini
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
       $project->client_id =$request->client_id;
+
+      $project->save();
 
       flash('project Saved Successfully !')->success();
 

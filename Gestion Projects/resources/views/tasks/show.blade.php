@@ -119,7 +119,7 @@ var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
     <div class="form-group">
       <div class="card mr-3" style="width: 20rem;">
       <div class="card-body form-inline">
-        <h5 class="card-title  mr-4">State:</h5>
+        <h5 class="card-title  mr-4">étate:</h5>
           <p class="card-text" name="state">{{$task->state}}</p>
         </div>
         </div>
