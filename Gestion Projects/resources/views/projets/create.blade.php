@@ -79,7 +79,7 @@
 		</select>
 	</div>
 
-<input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Ajouter">
+<input type="submit" class="btn btn-success btn-h1-spacing float-right" value="Ajouter">
 </form>
 
 @endsection

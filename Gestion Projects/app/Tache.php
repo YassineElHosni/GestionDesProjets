@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tache extends Model
 {
+  protected $fillable = [
+       'description','date_limite','état',
+       'déroulement','priorité','commentaire','projet_id'
+         ];
     //
     /*
     * The user that concerned by many taches

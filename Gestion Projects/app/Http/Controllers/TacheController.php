@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 use App\Tache;
 use App\Projet;
 use App\Tache_User;
@@ -53,14 +54,16 @@ class TacheController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     *voir une tache choisit
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+      $t=Tache::find($id);/*get tache*/
+      $p=Projet::find($t->projet_id);/*get the projet related to this task*/
+        return view('taches.show')->withTache($t)->withProjet($p);
     }
 
     /**
@@ -83,7 +86,15 @@ class TacheController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $tache =Tache::find($id);//get the data with request
+     $tache->update($request->only(['déroulement']));
+
+     $projet->save();
+echo "<pre>";print_r($request->RangeProgress);exit;
+
+      flash('Tache Saved !')->success();
+      return redirect()->route('Tache.show',$tache->id)->withTache($tache);
+
     }
 
     /**

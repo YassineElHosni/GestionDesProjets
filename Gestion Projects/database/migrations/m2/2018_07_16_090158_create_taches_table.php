@@ -20,7 +20,7 @@ class CreateTachesTable extends Migration
             $table->DateTime('date_limite');
             $table->enum('état',array('en-cours','fini','validée'));
                     //$table->enum('type',array('final','non-final'));
-                    $table->integer('déroulement'); /* avec % */
+                    $table->integer('déroulement'); /* Progression avec % */
                     $table->integer('priorité'); /* de 0....*  colors red...green*/
             $table->longText('commentaire');
 

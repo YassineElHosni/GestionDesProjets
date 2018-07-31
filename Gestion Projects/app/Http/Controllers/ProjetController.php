@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use Input;
+use App\Tache;
 use App\Projet;
 use App\User;
 use App\Client;
@@ -80,7 +81,9 @@ class ProjetController extends Controller
 
         $u=User::find($p->user_id);
 
-        return view('projets.show')->withProjet($p)->withClient($c)->withChef($u);
+        $taches=Tache::where('projet_id','Like',$p->id)->get();/*get all tasks related */
+
+        return view('projets.show')->withProjet($p)->withClient($c)->withChef($u)->withTaches($taches);
     }
 
     /**
@@ -116,7 +119,7 @@ class ProjetController extends Controller
     {
       $projet =Projet::find($id);//get the data with request
 
-      $projet->intitulee =$request->intitulee;//setint the coloms with the new values..
+      $projet->intitulee =$request->intitulee;
       $projet->description =$request->description;
       $projet->date_limite =$request->idate_limite;
       $projet->deplacement =($request->deplacement)?'O':'N';

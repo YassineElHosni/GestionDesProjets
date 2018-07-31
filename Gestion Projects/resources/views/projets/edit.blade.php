@@ -87,7 +87,7 @@
  </div>
 
  <hr>
- <button type="submit" name="submit" class="btn btn-primary">Save</button>
+ <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
     </form>
 
  <hr>
