@@ -24,13 +24,16 @@
                                  @else <!-- si  authentifié -->
                                  <li class="nav-item">
                                    <?php $id=Auth::user()->id ?>
-                                   <a class="nav-link" href="#">Mon profile</a>
+                                   <a class="nav-link" href="#">Profile</a>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">Gestion Utilisateurs</a>
+                                    <a class="nav-link" href="#">Gestion Users</a>
                                  </li>
                                  <li class="nav-item">
                                    <a class="nav-link" href="#">Gestion Projets</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="#">Gestion Clients</a>
                                  </li>
 
                                  <a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
