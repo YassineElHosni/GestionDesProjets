@@ -103,10 +103,10 @@ return [
 
 /*
 //tache
-'description','date_limit','stat','priority','comments'
+'description','date_limite','etat','priorité','comments'
 
 //projet
-'title','description','date_limit','date_start','date_end','deplacement','stat','comment'
+'title','description','date_limite','date_debut','date_fin','deplacement','etat','comment'
 
 //client
 'numeroClient','Nom','email','adresse','num_tel','commentaire'

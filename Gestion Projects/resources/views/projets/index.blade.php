@@ -30,7 +30,7 @@
 	<tr>
 		<th scope="row">{{$p->intitulee}}</th>
 		{{-- <td>{{$p->description}}</td> --}}
-		<td>{{$c[$p->id]}}</td>
+		<td>{{$p->client_Nom}}</td>
 		<td>{{date('d-m-Y', strtotime($p->date_limite))}}</td>
 		<td>{{date('d-m-Y', strtotime($p->date_debut))}}</td>
 		<td>{{date('d-m-Y', strtotime($p->date_fin))}}</td>

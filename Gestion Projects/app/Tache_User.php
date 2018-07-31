@@ -8,4 +8,5 @@ class Tache_User extends Model
 {
 //    protected $fillable = [ 'user_id','projet_id'.. ];
 
+	public $table = "tache_user";
 }

@@ -19,8 +19,8 @@ class ProjetController extends Controller
     {
         $ps = Projet::all();
         foreach ($ps as $p) {
-          $c[$p->id]=Client::find($p->client_id)->Nom;
-          //dd($p->id);
+          // $c[$p->id]=Client::find($p->client_id)->Nom;
+          $p->client_Nom=Client::find($p->client_id)->Nom;
         }
 
       return view('projets.index' ,compact('ps','c'));
