@@ -24,6 +24,8 @@ $('#RangeProgress').on('change',function(){
  @stop
 @section('content')
 
+@include('flash::message')
+
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">
@@ -31,7 +33,8 @@ $('#RangeProgress').on('change',function(){
 </div>
 <br><br>
 
-<form action="{{ route('Taches.update', $tache) }}" method="POST">
+
+<form action="{{ route('Taches.updateProgress', $tache) }}" method="POST">
        <input type="hidden" name="_method" value="PUT">
        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -48,7 +51,7 @@ $('#RangeProgress').on('change',function(){
     </div>
 
   <div class="form-group form-row">
-  <div class="card mr-3" style="width: 30rem;">
+  <div class="card mr-4" style="width: 30rem;">
   <div class="card-body form-inline">
     <h5 class="card-title mr-3">Projet related:</h5>
       <p class="card-text">{{ $projet->intitulee }}</p>
@@ -69,21 +72,37 @@ $('#RangeProgress').on('change',function(){
   <div class="form-group ">
     <div class="card mr-3" style="width: 30rem;">
     <div class="card-body form-inline ">
-      <h5 class="card-title  mr-3">Date Limite :</h5>
+      <h5 class="card-title  mr-4">Date Limite :</h5>
         <p class="card-text float-right">{{date("M j Y h:m:s", strtotime($tache->date_limite))}}</p>
       </div>
       </div>
     </div>
 
-      <!--progress range bar -->
-      <div class="form-group">
-        <div class="card mr-3"style="width: 30rem;">
-        <div class="card-body form-inline">
-          <h5 class="card-title mr-3">Progression:</h5>
-      <input type="range" id="RangeProgress" value="{{$tache->déroulement}}">
-       </div>
-       </div>
-      </div>
+    <script>
+/* Set option value in constructor */
+$("#RangeProgress").rangeSlider({
+  bounds: {min: 0, max: 100},
+  //defaulfValue:{("value")}
+});
+</script>
+
+  <!--progress range bar -->
+  <div class="form-group">
+    <div class="card mr-4"style="width: 30rem;">
+    <div class="card-body form-inline">
+      <h5 class="card-title mr-3">Progression:</h5>
+  <input type="range" id="RangeProgress" name="déroulement" value="{{$tache->déroulement}}">
+   </div>
+   </div>
+</div>
+
+<!--  <script>
+/* Change options after slider creation */
+  $("#RangeProgress").on("change", "bounds", {min: 10, max: 90});
+/* Get option value */
+var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
+</script>
+-->
 
 </div></div>
 
@@ -100,8 +119,8 @@ $('#RangeProgress').on('change',function(){
     <div class="form-group">
       <div class="card mr-3" style="width: 20rem;">
       <div class="card-body form-inline">
-        <h5 class="card-title  mr-3">State:</h5>
-          <p class="card-text">{{($tache->état=='en_cours')?'en_cours':'fini'}}</p>
+        <h5 class="card-title  mr-4">State:</h5>
+          <p class="card-text" name="état">{{$tache->état}}</p>
         </div>
         </div>
       </div>

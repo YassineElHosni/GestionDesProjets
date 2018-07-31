@@ -24,7 +24,7 @@ class TacheController extends Controller
             //get the smallest 'date_debut' that all user have on the current task
             $t->d_d=Tache_User::where('tache_id',$t->id)
                 ->min('date_debut');
-            
+
         }
         // dd($ts);
         return view('taches.index' ,compact('ts'));
@@ -76,9 +76,32 @@ class TacheController extends Controller
     {
         //
     }
+    /*
+    *  Update progress / state
+    */
+    public function updateProgress(Request $request, $id)
+    {
+          $tache =Tache::find($id);
 
+          $tache->déroulement=$request->déroulement;
+          if($request->déroulement=="100")
+            $tache->état='fini';
+
+          $tache->save();
+
+          flash('Tache Saved !')->success();
+          return redirect()->route('Taches.show',$tache->id)->withTache($tache);
+    }
+    /*
+    *  Gérant validate or not the task
+    */
+    public function updateValidate(Request $request, $id)
+    {
+
+
+    }
     /**
-     * Update the specified resource in storage.
+     * Update Task
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -86,15 +109,7 @@ class TacheController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tache =Tache::find($id);//get the data with request
-     $tache->update($request->only(['déroulement']));
-
-     $projet->save();
-echo "<pre>";print_r($request->RangeProgress);exit;
-
-      flash('Tache Saved !')->success();
-      return redirect()->route('Tache.show',$tache->id)->withTache($tache);
-
+dd('hi');
     }
 
     /**
