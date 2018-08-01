@@ -80,7 +80,7 @@
           <div class="card mr-3" style="width: 22rem;">
           <div class="card-body form-inline">
             <h5 class="card-title mr-3">Date Limite :</h5>
-              <p class="card-text">{{date("M j Y h:m:s", strtotime($project->limitDate))}}</p>
+              <p class="card-text">{{date("M j Y H:i", strtotime($project->limitDate))}}</p>
             </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
             <div class="card " style="width: 22rem;">
             <div class="card-body form-inline">
               <h5 class="card-title mr-3">Date Debut :</h5>
-                <p class="card-text">{{date("M j Y h:m:s", strtotime($project->startDate))}}</p>
+                <p class="card-text">{{date("M j Y H:i", strtotime($project->startDate))}}</p>
               </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
               <div class="card " style="width: 22rem;">
               <div class="card-body form-inline">
                 <h5 class="card-title mr-3">Date Fin :</h5>
-                  <p class="card-text">{{date("M j Y h:m:s", strtotime($project->finishDate))}}</p>
+                  <p class="card-text">{{date("M j Y H:i", strtotime($project->finishDate))}}</p>
                 </div>
                 </div>
         </div>
@@ -119,7 +119,7 @@
     @foreach($tasks as $task)
     <tr>
       <th scope="row">{{$task->title}}</th>
-      <td>{{$task->limitDate}}</td>
+      <td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
       <td>{{$task->state}}</td>
       <td><span class="badge badge-primary badge-pill align_center">{{$task->progress }}</span></td>
     </tr>

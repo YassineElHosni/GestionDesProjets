@@ -25,8 +25,8 @@
 
     <div class="col-auto">
               <label class="col-sm-3  mr-5 col-form-label">Client:</label>
-                <label class="col-sm-3 col-form-label" > {{$c->name}}</label>
-                <input type="hidden" name="client_id" value="{{$c->id}}">
+                <label class="col-sm-3 col-form-label" > {{$p->client_name}}</label>
+                <input type="hidden" name="client_id" value="{{$p->client_id}}">
     </div>
 
 
@@ -62,11 +62,12 @@
 </div>
 <!--état-->
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1" <?php echo ($state)?'checked':''?>>
+  <input class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1"
+  <?php echo ($p->state)?'checked':''?>>
   <label class="form-check-label" for="EnCours_RadioBtn">en-cours</label>
 
 
-  <input class="form-check-input ml-3" type="radio" name="state_RadioBtn" id="Clos_RadioBtn" value="0"<?php echo (!$state)?'checked':'' ?>>
+  <input class="form-check-input ml-3" type="radio" name="state_RadioBtn" id="Clos_RadioBtn" value="0"<?php echo (!$p->state)?'checked':'' ?>>
   <label class="form-check-label" for="Clos_RadioBtn">clos</label>
 </div>
 
@@ -101,7 +102,7 @@
 
 @section('jss')
 	@parent
-	<script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
+   <script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker.fr.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}"  type="text/javascript"></script>
-@endsection
+     @endsection

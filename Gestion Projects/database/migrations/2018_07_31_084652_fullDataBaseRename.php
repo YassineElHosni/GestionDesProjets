@@ -32,7 +32,7 @@ class FullDataBaseRename extends Migration
             $table->DateTime('limitDate');
             $table->enum('state',array('IN_PROGRESS','FINISHED','VALIDATED'));//'en-cours', 'fini', 'validée'
             $table->integer('progress');
-            $table->integer('priority');
+            $table->integer('priority');//1==DoRightAway,2==PlanToDoASAP,3==Delegate,4==DumpOrPostPone
             $table->longText('comment');
 
             $table->timestamps();
