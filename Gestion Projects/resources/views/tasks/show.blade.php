@@ -6,18 +6,10 @@
 <!--JQuery script -->
 <script>
 
-$('#RangeProgress').on('change',function(){
+/*$('#RangeProgress').on('change',function(){
   alert('\t state changed to : '+ $('#RangeProgress').val() +'%'
-                                        +'\n Please save your changes !');
+                                        +'\n Please save your changes !');*/
 });
-  /*  function myFunction(){
-    /*  var newvalue =document.getElementById("myRange");
-      var defaultVal =newvalue.value;
-
-      document.getElementById("demo").innerHTML ="The progress pourcentage was:" + defaultVal
-                                                + "<br> The progress was edited to :" + newvalue;
-      $('#demo').html= "Progress changed to : "+ $('#myRange').val();*/
-
 
 </script>
 
@@ -91,11 +83,15 @@ $("#RangeProgress").rangeSlider({
     <div class="card mr-4"style="width: 30rem;">
     <div class="card-body form-inline">
       <h5 class="card-title mr-3">Progression:</h5>
-  <input type="range" id="RangeProgress" name="progress" value="{{$task->progress}}">
+  <input type="range" id="RangeProgress" step="5" name="progress" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+
+      <span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
    </div>
    </div>
 </div>
+<script>
 
+ </script>
 <!--  <script>
 /* Change options after slider creation */
   $("#RangeProgress").on("change", "bounds", {min: 10, max: 90});
