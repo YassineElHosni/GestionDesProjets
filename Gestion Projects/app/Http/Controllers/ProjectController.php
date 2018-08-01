@@ -95,17 +95,12 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $p= Project::find($id);
+        $p->client_name=Client::find($p->client_id)->name;
 
-        $c=Client::find($p->client_id);
-
-        $u=User::find($p->user_id);
-        /*old radio button values*/
-        $displacement=$p->displacement;
-        $state=$p->state;
         /*all chef_projets*/
         $project_managers=User::where('role','Like','PROJECT_MANAGER')->get();
 
-        return view('projects.edit',compact('p','c','u','project_managers'))->withDisplacement($displacement)->withState($state);
+        return view('projects.edit',compact('p','project_managers'));
     }
 
     /**

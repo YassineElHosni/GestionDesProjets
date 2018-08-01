@@ -16,8 +16,8 @@ $factory->define(App\Task::class, function (Faker\Generator $faker) {
     'title' =>$faker->realText($maxNbChars = 20),
     'limitDate' =>$faker->date($format = 'Y-m-d', $max = 'now'),
     'state' =>  $faker->randomElement(['IN_PROGRESS','FINISHED','VALIDATED']),
-    'progress' =>  $faker->randomDigit ,
-    'priority' =>  $faker->randomDigit ,
+    'progress' =>  $faker->numberBetween($min = 0, $max = 100) ,
+    'priority' =>  $faker->numberBetween($min = 1, $max = 4) ,
     'comment' =>  $faker->text,
     'project_id' => random_int(1, App\Project::count())
   ];

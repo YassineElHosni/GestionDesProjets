@@ -92,7 +92,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd(Task_User::makeUnique());
     }
     /*
     *  Update progress / state
@@ -102,7 +102,7 @@ class TaskController extends Controller
           $task =Task::find($id);
 
           $task->progress=$request->progress;
-          if($request->progress=="100")
+          if($request->progress=="100" && $task->state=='IN_PROGRESS')
             $task->state='FINISHED';
 
           $task->save();

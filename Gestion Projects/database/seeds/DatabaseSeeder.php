@@ -32,7 +32,11 @@ class DatabaseSeeder extends Seeder
         //     $p->save();
         // $ts = factory(App\Task::class, 5)->make();
         // foreach ($ts as $t)
+        // {
+        //     if($t->state!='IN_PROGRESS')$t->progress=100;
+        //         else if($t->progress==100)$t->progress=1;
         //     $t->save();
+        // }
 
     }
 }
