@@ -149,7 +149,7 @@ class TaskController extends Controller
       $task->limitDate =$request->limitDate;
       $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
       $task->comment =$request->comment;
-      $task->user_id =$request->user_id[0];/* a revoir */
+      //$task->user_id =$request->user_id[0];/* a revoir */
       $task->progress =$request->progress;
       $task->state =(($request->state)?'VALIDATED':'En-Cours');
 
@@ -176,9 +176,8 @@ class TaskController extends Controller
     public function deleteEmployee($id,$empid){
 
       //$task=Task::find($id);
-      $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
-
-      $employee->tasks()->detach($id);
+      $employee=User::where('id', $empid)->first();/*the employee we want to detach*/
+      $empid->tasks()->detach($task);
       return redirect()->back();
     }
 

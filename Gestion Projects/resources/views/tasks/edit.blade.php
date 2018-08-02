@@ -20,7 +20,7 @@
 			     	 <h2>Modifier la Tache </h2>  </div>
 </div>
 <br><br>
-<form role="form" method="post" action="{{action('TaskController@update',$task->id)}}">
+<form role="form" method="post" action="{{route('Tasks.update',$task->id)}}">
    <input type="hidden" name="_method" value="PUT">
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
@@ -109,7 +109,9 @@
 		{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
 				<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
 				<td class="sm-1">
-						<form action="#" method="get">
+					<form role="form" method="POST" action="{{route('Tasks.deleteEmployee',['id'=>$task->id,'empid'=>$u->id])}}">
+             <input type="hidden" name="_method" value="PUT">
+						 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 							<input type="submit" id="delete_btn" value="X" class="btn btn-danger">
 						</form>
         </td>
