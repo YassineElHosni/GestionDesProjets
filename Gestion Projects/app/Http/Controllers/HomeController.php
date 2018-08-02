@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Projet;
-use App\Tache;
+use App\Project;
+use App\Task;
 
 class HomeController extends Controller
 {
@@ -15,15 +15,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ps=Projet::orderBy('updated_at', 'ASC')
-            ->where('état','like','en-cours')
+        $ps=Project::orderBy('updated_at', 'ASC')
+            ->where('state','=',1)
             ->take(3)
-            ->get(['id', 'intitulee', 'état', 'updated_at']);
+            ->get(['id', 'title', 'state', 'updated_at']);
 
-        $ts=Tache::orderByRaw('priorité - updated_at', 'ASC')
-            ->where('état','like','en-cours')
+        $ts=Task::orderByRaw('priority - updated_at', 'ASC')
+            ->where('state','like','IN_PROGRESS')
             ->take(3)
-            ->get(['id', 'description', 'état', 'priorité', 'updated_at']);
+            ->get(['id', 'title', 'state', 'priority', 'updated_at']);
             
         return view('index')->with('LastFewProjects',$ps)->with('LastFewTasks',$ts);
     }
