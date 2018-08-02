@@ -4,6 +4,11 @@
 	@parent
 	<link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
+	<style>
+	table.hiden{
+		display : none;
+	}
+	</style>
 @endsection
 
 @section('content')
@@ -16,22 +21,31 @@
 </div>
 <br><br>
 <form role="form" method="post" action="{{action('TaskController@update',$task->id)}}">
+   <input type="hidden" name="_method" value="PUT">
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
-	<div class="form-group">
+	<div class="form-group ml-3">
 		<label for="title" class="col-form-label">Sujet:</label>
-		<input type="text" class="form-control" name="title" value="{{$task->title}}">
+		<input type="text" class="form-control col-7" name="title" value="{{$task->title}}">
 	</div>
-
- <div class="form-row">
-	<div class="form-group col-6">
-		<label class="col-form-label">Projet related :</label>
-		<select name = "project_id[]" id="project_id" class="form-control">
-			@foreach ($projects as $project)
-				<option value="{{ $task->project_id }}">{{ $project['title'] }}</option>
-			@endforeach
-		</select>
-	</div>
+<!-- current project related -->
+<div class="col-sm">
+	<div class="form-row">
+				 <div class="form-group mr-4 col-4">
+						<label class="col-form-label mr-3">Project related : </label>
+						<div class="form-control" name="state">{{$project->title}}  </div>
+				 </div>
+		<!-- all other projects -->
+					<div class="form-group col-6">
+						<label class="col-form-label mr-4 ">Change Project:</label>
+						<select name = "project_id[]" id="project_id" class="form-control col-6">
+							@foreach ($projects as $project)
+								<option value="{{ $task->project_id }}">{{ $project['title'] }}</option>
+							@endforeach
+						</select>
+					</div>
+    </div>
+</div>
 
 	<div class="col">
 
@@ -68,47 +82,140 @@
 			<label class="form-check-label" for="level4_RadioBtn">level 4</label>
 		</div>
 	</div>
-</div></div>
+</div>
 
-	<div class="form-group">
-		<label class="col-form-label">Commentaire</label>
-		<textarea type="text" class="form-control" name="comment" value="{{$task->comment}}"></textarea>
-	</div>
-
-	<div class="form-group">
-		<label class="col-form-label">Attribué à :</label>
-		<select name = "user_id[]" id="user_id" class="form-control">
-			@foreach ($employees as $employee)
-				<option value="{{ $task->user_id}}">{{ $employee['name'] }}</option>
+	<div class="form-group ml-3">
+		<label class="col-form-label">Commentaire :</label>
+		<textarea type="text" class="form-control col-7" name="comment" >{{$task->comment}}</textarea>
+	</div><br>
+<!--Current employees -->
+	<h3>Current Workers:</h3>
+	<table class="table table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Email</th>
+				<th scope="col">Comment</th>
+		{{-- 		<th scope="col">Date Debut</th>
+				<th scope="col">Date Fin</th> --}}
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($us as $u)
+			<tr>
+				<th scope="row" class="">{{$u->name}}</th>
+				<th scope="row">{{$u->email}}</th>
+				<th scope="row">{{$u->comment}}</th>
+		{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
+				<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
+				<td class="sm-1">
+						<form action="#" method="get">
+							<input type="submit" id="delete_btn" value="X" class="btn btn-danger">
+						</form>
+        </td>
+			</tr>
 			@endforeach
-		</select>
-	</div>
+		</tbody>
+	</table>
+<br>
+<!-- choose another employee -->
+		<h3>Other Employee:</h3>
+		<table class="table table-bordered">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Nombre de taches</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($employees as $employee)
+				<tr>
+					<th scope="row" class="">{{$employee->name}}</th>
+					<th scope="row">
+
+					   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
+			    </th>
+					<td class="sm-1">
+							<form action="#" method="get">
+								<input type="submit" id="add_btn" value="+" class="btn btn-primary">
+							</form>
+	        </td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+<!--.............................2 hiden tables for data storing .....................................-->
+
+		<!--Current employees -->
+			<table class="hiden">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Nom</th>
+						<th scope="col">Email</th>
+						<th scope="col">Comment</th>
+				{{-- 		<th scope="col">Date Debut</th>
+						<th scope="col">Date Fin</th> --}}
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($us as $u)
+					<tr>
+						<th scope="row" class="">{{$u->name}}</th>
+						<th scope="row">{{$u->email}}</th>
+						<th scope="row">{{$u->comment}}</th>
+				{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
+						<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+		<br>
+		<!-- new employee chosen  -->
+				<table class="hiden">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nom</th>
+							<th scope="col">Nombre de taches</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($employees as $employee)
+						<tr>
+							<th scope="row" class="">{{$employee->name}}</th>
+							<th scope="row">
+
+							   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
+					    </th>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
 
   <div class="col-sm">
     <div class="form-row">
-  <div class="form-group form-inline">
-      	<label class="col-form-label">Progression : </label>
+  <div class="form-group form-inline mr-4">
+      	<label class="col-form-label mr-3">Progression : </label>
         <span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
   </div>
 
-  <div class="form-group form-inline">
-      <label class="col-form-label">Etat : </label>
-        <p name="state">{{$task->state}}  </p>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="valide_state" name="state" checked>
-          <label class="form-check-label" for="valide_state">
+	  <div class="form-group form-inline mr-4">
+	      <label class="col-form-label mr-3">Etat : </label>
+				<div class="form-control" name="state">{{$task->state}}  </div>
+		</div>
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" id="valide_state" name="state">
+          <label class="form-check-label " for="valide_state">
             Validee
           </label>
         </div>
 
       </div>
       </div>
-    </div>
-</div>
 
-<input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Modifier">
+
+<input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
 </form>
-
+</div>
 @endsection
 
 

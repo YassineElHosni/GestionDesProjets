@@ -81,8 +81,8 @@ class TaskController extends Controller
     {
       $t=Task::find($id);/*get task*/
       $p=Project::find($t->project_id);/*get the projet related to this task*/
-      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);
-      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);
+      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
+      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
 
         return view('tasks.show')->withTask($t)->withProject($p)->withUsers($us);
     }
@@ -95,10 +95,19 @@ class TaskController extends Controller
      */
     public function edit($id){
 
-      $employees=User::where('role','Like','EMPLOYEE')->get();
-      $projects=Project::all();
       $t=Task::find($id);
-      return view('tasks.edit',compact('employees','projects'))->withTask($t);
+      $employees=User::where('role','Like','EMPLOYEE')->get();/*all employees*/
+
+      foreach ($employees as $e) { /*count nbr de taches de chaque emplyee*/
+        $e->taskCount = Task_User::where('user_id',$e->id)->get(['task_id'])->count();
+      }
+      $projects=Project::all();/*all projects*/
+
+      $p=Project::find($t->project_id);/*get the projet related to this task*/
+      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
+      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
+
+      return view('tasks.edit',compact('employees','projects','us'))->withTask($t)->withProject($p);
     }
     /*
     *  Employee Update progress / state
