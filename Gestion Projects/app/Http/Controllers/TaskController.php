@@ -159,6 +159,29 @@ class TaskController extends Controller
         flash('Task Saved Successfully!')->success();
         return redirect()->route('Task.show',$task->id)->withTask($task);
     }
+    /*
+    * add employee to a spesific Task
+    */
+    public function addEmployee($id,$empid){
+
+      //$task=Task::find($id);
+      $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
+
+      $employee->tasks()->attach($id);
+      return redirect()->back();
+    }
+    /*
+    * remove employee to from a spesific Task
+    */
+    public function deleteEmployee($id,$empid){
+
+      //$task=Task::find($id);
+      $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
+
+      $employee->tasks()->detach($id);
+      return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
