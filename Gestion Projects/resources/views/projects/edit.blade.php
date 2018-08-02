@@ -13,7 +13,6 @@
   <hr>
 
 
-  {{--{!! Form::open( ['action' => ['ProjetController@update',$p->id], 'method' => 'POST'] ) !!}--}}
   <form action="{{ route('Projects.update', $p) }}" method="POST" class="form-horizontal">
          <input type="hidden" name="_method" value="PUT">
          <input type="hidden" name="_token" value="{{ csrf_token() }}">

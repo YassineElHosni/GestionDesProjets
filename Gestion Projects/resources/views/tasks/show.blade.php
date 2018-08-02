@@ -126,21 +126,5 @@
 
 @section('jss')
 	@parent
-	
-	<script>
-		/*$('#RangeProgress').on('change',function(){
-		alert('\t state changed to : '+ $('#RangeProgress').val() +'%'
-		            +'\n Please save your changes !');
-		});*/
 
-		/* Set option value in constructor */
-		$("#RangeProgress").rangeSlider({
-		bounds: {min: 0, max: 100},
-		//defaulfValue:{("value")}
-		});
-		/* Change options after slider creation */
-		// $("#RangeProgress").on("change", "bounds", {min: 10, max: 90});
-		/* Get option value */
-		// var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
-	</script>
 @endsection

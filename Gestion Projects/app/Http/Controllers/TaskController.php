@@ -53,13 +53,13 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-      /*storing all the new data in new project*/
-      $newTask = new project([
+
+      $newTask = new Task([
             'title' => $request->title,
             'limitDate' => $request->limitDate,
             'state' =>'IN_PROGRESS',
             'progress' => 0,
-            'priority' => 0, /* a revoir */
+            'priority' => ($request->priority_RadioBtn),
             'comment' => $request->comment,
             'user_id' =>$request->user_id[0],
             'project_id'=>$request->project_id[0],
@@ -93,12 +93,15 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        dd(Task_User::makeUnique());
+    public function edit($id){
+
+      $employees=User::where('role','Like','EMPLOYEE')->get();
+      $projects=Project::all();
+      $t=Task::find($id);
+      return view('tasks.edit',compact('employees','projects'))->withTask($t);
     }
     /*
-    *  Update progress / state
+    *  Employee Update progress / state
     */
     public function updateProgress(Request $request, $id)
     {
@@ -114,7 +117,7 @@ class TaskController extends Controller
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
-    *  Gérant validate or not the task
+    *  Project-Manager validate or not the task
     */
     public function updateValidate(Request $request, $id)
     {
@@ -122,7 +125,7 @@ class TaskController extends Controller
 
     }
     /**
-     * Update Task
+     * Update Task (Project Manager..)
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -130,10 +133,21 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $project->save();
+      $task=Task::find($id);
+
+      $task->title =$request->title;
+      $task->project_id =$request->project_id;
+      $task->limitDate =$request->limitDate;
+      $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
+      $task->comment =$request->comment;
+      $task->user_id =$request->user_id[0];/* a revoir */
+      $task->progress =$request->progress;
+      $task->state =(($request->state)?'VALIDATED':'En-Cours');
+
+        $task->save();
         // echo "<pre>";print_r($request->RangeProgress);exit;
 
-        flash('task Saved !')->success();
+        flash('Task Saved Successfully!')->success();
         return redirect()->route('Task.show',$task->id)->withTask($task);
     }
     /**

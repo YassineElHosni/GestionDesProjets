@@ -1,6 +1,13 @@
 @extends('layouts.structure')
 
 @section('content')
+
+<style> h2{ color: green; } </style>
+ <div class="page-header">
+		<div class="form-group align-center">
+			     	 <h2>Tout les Taches </h2>  </div>
+</div>
+<br><br>
 <table class="table table-responsive-lg">
 <thead>
 	<tr>
