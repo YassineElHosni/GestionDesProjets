@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
+use App\Client;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
 	/**
 		* Display a listing of the resource.
@@ -16,9 +16,9 @@ class UserController extends Controller
 		*/
 	public function index()
 	{
-		$us = User::all();
+		$cs = Client::all();
 
-		return view('Users.index')->withUsers($us);
+		return view('Clients.index')->withClients($cs);
 	}
 
 	/**
@@ -28,7 +28,7 @@ class UserController extends Controller
 		*/
 	public function create()
 	{
-		return view('Users.create');
+		return view('Clients.create');
 	}
 
 	/**
@@ -39,17 +39,18 @@ class UserController extends Controller
 		*/
 	public function store(Request $request)
 	{
-		$u = new User([
+		$c = new Client([
+			'registrationNumber' => $request->registrationNumber,
 			'name' => $request->name,
 			'email' => $request->email,
-			'password' => $request->password,
-			'role' => $request->role,
+			'address' => $request->address,
+			'phoneNumber' => $request->phoneNumber,
 			'comment' => $request->comment,
 		]);
-		$u->save();
+		$c->save();
 
-		flash('User Created Successfully !')->success();
-		return route('Users.index');
+		flash('Client Created Successfully !')->success();
+		return route('Clients.index');
 	}
 
 	/**
@@ -60,8 +61,8 @@ class UserController extends Controller
 		*/
 	public function show($id)
 	{
-		$u = User::find($id);
-		return view('Users.show')->withUser($u);
+		$c = Client::find($id);
+		return view('Clients.show')->withClient($c);
 	}
 
 	/**
@@ -72,8 +73,8 @@ class UserController extends Controller
 		*/
 	public function edit($id)
 	{
-		$u = User::find($id);
-		return view('Users.edit')->withUser($u);
+		$c = Client::find($id);
+		return view('Clients.edit')->withClient($c);
 	}
 
 	/**
@@ -85,17 +86,18 @@ class UserController extends Controller
 		*/
 	public function update(Request $request, $id)
 	{
-		$u = User::find($id);
+		$c = Client::find($id);
 
-		$u->name = $request->name;
-		$u->email = $request->email;
-		$u->password = $request->password;
-		$u->role = $request->role;
-		$u->comment = $request->comment;
+		$c->registrationNumber = $request->registrationNumber;
+		$c->name = $request->name;
+		$c->email = $request->email;
+		$c->address = $request->address;
+		$c->phoneNumber = $request->phoneNumber;
+		$c->comment = $request->comment;
 
-		$u->save();
+		$c->save();
 
-		return route('Users.index');
+		return route('Clients.index');
 	}
 
 	/**
@@ -106,11 +108,11 @@ class UserController extends Controller
 		*/
 	public function destroy($id)
 	{
-		$u = User::find($id);
+		$c = Client::find($id);
 
-		$u->delete();
+		$c->delete();
 
-		flash('User Deleted Successfully !')->warning();
-		return route('Users.index');
+		flash('Client Deleted Successfully !')->warning();
+		return route('Clients.index');
 	}
 }

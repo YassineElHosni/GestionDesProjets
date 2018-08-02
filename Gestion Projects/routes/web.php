@@ -19,5 +19,8 @@ Route::resource('Tasks','TaskController');
 
 Route::match(['PUT', 'PATCH'], '/Tasks/{id}/save','TaskController@updateProgress')->name('Tasks.updateProgress');
 
+Route::resource('Clients','ClientController');
+Route::resource('Users','UserController');
+
 
 ?>
