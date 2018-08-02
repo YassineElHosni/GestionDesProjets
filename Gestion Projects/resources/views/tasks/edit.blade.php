@@ -137,13 +137,26 @@
 			    </th>
 					<td class="sm-1">
 							<form action="#" method="get">
-								<input type="submit" id="add_btn" value="+" class="btn btn-primary">
+								<input type="submit" id="add_btn{{$employee->id}}" value="+" class="btn btn-primary" empid="{{$employee->id}}">
 							</form>
 	        </td>
 				</tr>
 				@endforeach
 			</tbody>
 		</table>
+		<!-- jQuery storing data in hiden table -->
+		<script>
+		$(document).ready(function(){
+
+			var t;
+			function addTo(v){
+				t=v;
+				console.log(t);
+			}
+
+		});
+
+		</script>
 <!--.............................2 hiden tables for data storing .....................................-->
 
 		<!--Current employees -->
