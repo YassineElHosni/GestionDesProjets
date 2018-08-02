@@ -81,7 +81,10 @@ class TaskController extends Controller
     {
       $t=Task::find($id);/*get task*/
       $p=Project::find($t->project_id);/*get the projet related to this task*/
-        return view('tasks.show')->withTask($t)->withProject($p);
+      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);
+      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);
+
+        return view('tasks.show')->withTask($t)->withProject($p)->withUsers($us);
     }
 
     /**

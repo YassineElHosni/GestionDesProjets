@@ -94,8 +94,34 @@
 		</div>
 
 		<!-- button save -->
-		<button type="submit" name="submit" class="btn btn-primary float-right mr-4">Save</button>
+		<button type="submit" name="submit" class="btn btn-success float-right mr-4">Save</button>
 	</form>
+<br>
+<br>
+	<h3>Current Workers:</h3>
+	<table class="table table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Email</th>
+				<th scope="col">Comment</th>
+		{{-- 		<th scope="col">Date Debut</th>
+				<th scope="col">Date Fin</th> --}}
+			</tr>
+		</thead>
+		<tbody>
+			@foreach($users as $u)
+			<tr>
+				<th scope="row" class="">{{$u->name}}</th>
+				<th scope="row">{{$u->email}}</th>
+				<th scope="row">{{$u->comment}}</th>
+		{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
+				<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+
 @endsection
 
 @section('jss')
