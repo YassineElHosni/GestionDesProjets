@@ -112,7 +112,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $project =Project::find($id);//get the data with request
+      $project =Project::find($id);
 
       $project->title =$request->title;
       $project->description =$request->description;
@@ -125,7 +125,7 @@ class ProjectController extends Controller
 
       $project->save();
 
-      flash('project Saved Successfully !')->success();
+      flash('Project Saved Successfully !')->success();
 
       return redirect()->route('Projects.show',$project->id)->withProject($project);
     }

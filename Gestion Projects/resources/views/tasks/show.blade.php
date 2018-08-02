@@ -4,14 +4,14 @@
  @parent
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--JQuery script -->
-<script>
+<!--<script>
 
 /*$('#RangeProgress').on('change',function(){
   alert('\t state changed to : '+ $('#RangeProgress').val() +'%'
-                                        +'\n Please save your changes !');*/
-});
+                                        +'\n Please save your changes !');
+});*/
 
-</script>
+</script> -->
 
  @stop
 @section('content')
@@ -53,8 +53,8 @@
 <div class="form-group">
   <div class="card mr-3" style="width: 30rem;">
   <div class="card-body">
-    <h5 class="card-title">Description:</h5>
-      <p class="card-text">{{ $task->description }}</p>
+    <h5 class="card-title">Sujet:</h5>
+      <p class="card-text">{{ $task->title }}</p>
     </div>
     </div>
 </div></div></div>
@@ -115,7 +115,7 @@ var bounds = $("#RangeProgress").rangeSlider("option", "bounds");
     <div class="form-group">
       <div class="card mr-3" style="width: 20rem;">
       <div class="card-body form-inline">
-        <h5 class="card-title  mr-4">étate:</h5>
+        <h5 class="card-title  mr-4">Etat:</h5>
           <p class="card-text" name="state">
             {{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}}
           </p>
