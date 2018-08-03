@@ -94,115 +94,63 @@
 		<thead class="thead-light">
 			<tr>
 				<th scope="col">Nom</th>
-				<th scope="col">Email</th>
-				<th scope="col">Comment</th>
-		{{-- 		<th scope="col">Date Debut</th>
-				<th scope="col">Date Fin</th> --}}
+				<th scope="col">Nombre de taches</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="currentWorkers">
 			@foreach($us as $u)
-			<tr>
+			<tr id="row_CW_{{$u->id}}">
 				<th scope="row" class="">{{$u->name}}</th>
-				<th scope="row">{{$u->email}}</th>
-				<th scope="row">{{$u->comment}}</th>
+				<th scope="row">
+				   <span id="rangeRes" class="badge badge-success badge-pill float-center">
+				   	{{ $u->taskCount }}
+				   </span>
+		    	</th>
 		{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
 				<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
 				<td class="sm-1">
-						<form action="#" method="get">
-							<input type="submit" id="delete_btn" value="X" class="btn btn-danger">
-						</form>
-        </td>
+							<input type="button" id="delete_btn{{$u->id}}"
+							onclick="removeFrom({{$u->id}}, '{{$u->name}}', {{$u->taskCount}})"
+							value="X" class="btn btn-danger">
+        		</td>
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
 <br>
 <!-- choose another employee -->
-		<h3>Other Employee:</h3>
-		<table class="table table-bordered">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Nom</th>
-					<th scope="col">Nombre de taches</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($employees as $employee)
-				<tr>
-					<th scope="row" class="">{{$employee->name}}</th>
-					<th scope="row">
-
-					   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
-			    </th>
-					<td class="sm-1">
-							<form action="#" method="get">
-								<input type="submit" id="add_btn{{$employee->id}}" value="+" class="btn btn-primary" empid="{{$employee->id}}">
-							</form>
-	        </td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-		<!-- jQuery storing data in hiden table -->
-		<script>
-		$(document).ready(function(){
-
-			var t;
-			function addTo(v){
-				t=v;
-				console.log(t);
-			}
-
-		});
-
-		</script>
-<!--.............................2 hiden tables for data storing .....................................-->
-
+	<h3>Other Employees:</h3>
+	<table class="table table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Nombre de taches</th>
+			</tr>
+		</thead>
+		<tbody id="otherEmployees">
+			@foreach($employees as $employee)
+			<tr id="row_OE_{{$employee->id}}">
+				<th scope="row" class="">{{$employee->name}}</th>
+				<th scope="row">
+				   <span id="rangeRes" class="badge badge-success badge-pill float-center">
+				   	{{ $employee->taskCount }}
+				   </span>
+		    	</th>
+				<td class="sm-1">
+							<input type="button" id="add_btn{{$employee->id}}"
+							onclick="addTo({{$employee->id}}, '{{$employee->name}}', {{$employee->taskCount}})"
+							value="+" class="btn btn-primary">
+        		</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+{{-- 2 hiden tables for data storing ................. --}}
 		<!--Current employees -->
-			<table class="hiden">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Nom</th>
-						<th scope="col">Email</th>
-						<th scope="col">Comment</th>
-				{{-- 		<th scope="col">Date Debut</th>
-						<th scope="col">Date Fin</th> --}}
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($us as $u)
-					<tr>
-						<th scope="row" class="">{{$u->name}}</th>
-						<th scope="row">{{$u->email}}</th>
-						<th scope="row">{{$u->comment}}</th>
-				{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
-						<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-		<br>
+			<button hidden id="addTable"></button>
 		<!-- new employee chosen  -->
-				<table class="hiden">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">Nom</th>
-							<th scope="col">Nombre de taches</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($employees as $employee)
-						<tr>
-							<th scope="row" class="">{{$employee->name}}</th>
-							<th scope="row">
-
-							   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
-					    </th>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
+			<button hidden id="removeTable"></button>
+{{-- ********************************************** --}}
 
   <div class="col-sm">
     <div class="form-row">
@@ -229,6 +177,7 @@
 <input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
 </form>
 </div>
+
 @endsection
 
 
@@ -237,4 +186,50 @@
 	<script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker.fr.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}"  type="text/javascript"></script>
+
+		<!-- jQuery storing data in hiden table -->
+		<script>
+			var aTable = [],rTable = [];
+			function contains(t, v){
+				return (t.includes(v));
+			}
+			function addRow(v, isAdd, name, tcount){
+				// console.log(v,isAdd,name,tcount);
+				var ch = '<tr id="row'+((!isAdd)?'_OE_':'_CW_')+v+'">'+
+					'<th scope="row" class="">'+name+'</th>'+
+					'<th scope="row">'+
+					   '<span id="rangeRes" class="badge badge-success badge-pill float-center">'+tcount+
+					   '</span>'+
+			    	'</th>'+
+					'<td class="sm-1">'+
+						'<input type="button"'+
+						'onclick="'+((!isAdd)?'addTo':'removeFrom')+'('+v+', \''+name+'\', '+tcount+')" '+
+						'value="'+((!isAdd)?'+':'X')+'" class="btn btn-'+((!isAdd)?"primary":"danger")+'" empid="'+v+'">'+
+	        		'</td>'+
+				'</tr>';
+				return ch;
+			}
+			function addTo(v, name, tcount){
+				if(!aTable.includes(v))
+				{
+					aTable.push(v);//avoid repited values
+					$('#currentWorkers').append(addRow(v, 1, name, tcount+1));
+					$('#row_OE_'+v).remove();
+					if(rTable.includes(v)) rTable.splice(rTable.indexOf(v), 1); 
+				}
+				$('#addTable').val(aTable);
+				console.log("a: "+aTable+", r: "+rTable);
+			}
+			function removeFrom(v, name, tcount){
+				if(!rTable.includes(v))
+				{
+					rTable.push(v);//avoid repited values
+					$('#otherEmployees').append(addRow(v, 0, name, tcount-1));
+					$('#row_CW_'+v).remove();
+					if(aTable.includes(v)) aTable.splice(aTable.indexOf(v), 1);
+				}
+				$('#removeTable').val(rTable);
+				console.log("a: "+aTable+", r: "+rTable);
+			}
+		</script>
 @endsection

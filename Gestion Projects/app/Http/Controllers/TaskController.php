@@ -105,7 +105,10 @@ class TaskController extends Controller
 
       $p=Project::find($t->project_id);/*get the projet related to this task*/
       $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
-      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
+      $us=User::whereIn('id', $id_us)->get(['id','name','email','comment']);/*get infos of thoes employee from user table*/
+      foreach ($us as $u) { /*count nbr de taches de chaque emplyee*/
+        $u->taskCount = Task_User::where('user_id',$u->id)->get(['task_id'])->count();
+      }
 
       return view('tasks.edit',compact('employees','projects','us'))->withTask($t)->withProject($p);
     }
@@ -149,7 +152,7 @@ class TaskController extends Controller
       $task->limitDate =$request->limitDate;
       $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
       $task->comment =$request->comment;
-      $task->user_id =$request->user_id[0];/* a revoir */
+      // $task->user_id =$request->user_id[0];/* a revoir */
       $task->progress =$request->progress;
       $task->state =(($request->state)?'VALIDATED':'En-Cours');
 
