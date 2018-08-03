@@ -87,16 +87,19 @@
     <div class="form-row">
   <div class="form-group form-inline mr-4">
       	<label class="col-form-label mr-3">Progression : </label>
-        <span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
+        <span id="rangeRes" name="progress" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
+        <input type="hidden" name="progress" value="{{$task->progress }}">
   </div>
 
 	  <div class="form-group form-inline mr-4">
 	      <label class="col-form-label mr-3">Etat : </label>
-				<div class="form-control" name="state">{{$task->state}}  </div>
+				<div class="form-control" name="state">
+					{{ ($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty')) }}
+				</div>
 		</div>
         <div class="form-check ">
-          <input class="form-check-input" type="checkbox" id="valide_state" name="0">
-          <label class="form-check-label " for="valide_state">
+          <input class="form-check-input" type="checkbox" {{ (($task->state=='VALIDATED')?'checked':'') }} id="valide_state" name="validation">
+          <label class="form-check-label " for="valide_state" >
             Validee
           </label>
         </div>
