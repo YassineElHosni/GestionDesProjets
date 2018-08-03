@@ -68,8 +68,8 @@ class FullDataBaseRename extends Migration
 
             $table->primary(['task_id','user_id']);
 
-            $table->DateTime('startDate');
-            $table->DateTime('finishDate');
+            $table->DateTime('startDate')->nullable();
+            $table->DateTime('finishDate')->nullable();
 
             $table->timestamps();
 

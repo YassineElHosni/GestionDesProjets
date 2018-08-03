@@ -86,7 +86,17 @@ class TaskController extends Controller
 
         return view('tasks.show')->withTask($t)->withProject($p)->withUsers($us);
     }
-
+    /*
+    * checking if id user already exist in an array of current users
+    * in order todisplay just the other users not related to an x task
+    */
+    public function IDexist($id,$id_us){
+      if(!in_array("id",$id_us)){/*user not in current workers*/
+        return true;
+      }else {
+        return false;
+      }
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -96,16 +106,23 @@ class TaskController extends Controller
     public function edit($id){
 
       $t=Task::find($id);
-      $employees=User::where('role','Like','EMPLOYEE')->get();/*all employees*/
+      $p=Project::find($t->project_id);/*get the projet related to this task*/
+      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
+      ///////////////// getting the array of worker'ids
+      $id=array();
+      foreach ($id_us as $id_u) {
+        $id[]= $id_u->user_id;
+      }
+      ////////////////
+      $us=User::whereIn('id', $id_us)->get(['id','name','email','comment']);/*get infos of thoes employee from user table*/
 
+
+      $employees=User::where('role','Like','EMPLOYEE')->whereNotIn('id',$id)->get();/*all other employees*/
       foreach ($employees as $e) { /*count nbr de taches de chaque emplyee*/
         $e->taskCount = Task_User::where('user_id',$e->id)->get(['task_id'])->count();
       }
       $projects=Project::all();/*all projects*/
 
-      $p=Project::find($t->project_id);/*get the projet related to this task*/
-      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
-      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
 
       return view('tasks.edit',compact('employees','projects','us'))->withTask($t)->withProject($p);
     }
@@ -157,17 +174,17 @@ class TaskController extends Controller
         // echo "<pre>";print_r($request->RangeProgress);exit;
 
         flash('Task Saved Successfully!')->success();
-        return redirect()->route('Task.show',$task->id)->withTask($task);
+        return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
     * add employee to a spesific Task
     */
     public function addEmployee($id,$empid){
 
-      //$task=Task::find($id);
+      $task=Task::find($id);
       $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
 
-      $employee->tasks()->attach($id);
+      $employee->tasks()->attach($task);
       return redirect()->back();
     }
     /*
@@ -175,9 +192,9 @@ class TaskController extends Controller
     */
     public function deleteEmployee($id,$empid){
 
-      //$task=Task::find($id);
+      $task=Task::find($id);
       $employee=User::where('id', $empid)->first();/*the employee we want to detach*/
-      $empid->tasks()->detach($task);
+      $employee->tasks()->detach($task);
       return redirect()->back();
     }
 
@@ -191,6 +208,6 @@ class TaskController extends Controller
     {
         $t = Task::find($id);
         $t->delete();
-        return redirect()->route('Task.index');
+        return redirect()->route('Tasks.index');
     }
 }
