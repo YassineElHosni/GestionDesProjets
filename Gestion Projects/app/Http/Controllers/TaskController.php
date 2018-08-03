@@ -162,13 +162,11 @@ class TaskController extends Controller
       $task=Task::find($id);
 
       $task->title =$request->title;
-      $task->project_id =$request->project_id;
       $task->limitDate =$request->limitDate;
+      $task->state =(($request->validation)?'VALIDATED':'IN_PROGRESS');
       $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
       $task->comment =$request->comment;
-      //$task->user_id =$request->user_id[0];/* a revoir */
-      $task->progress =$request->progress;
-      $task->state =(($request->state)?'VALIDATED':'En-Cours');
+      //$task->project_id =$request->project_id;
 
         $task->save();
         // echo "<pre>";print_r($request->RangeProgress);exit;
