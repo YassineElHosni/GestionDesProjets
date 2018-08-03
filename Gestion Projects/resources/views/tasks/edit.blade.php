@@ -14,15 +14,25 @@
 @section('content')
 @include('flash::message')
 
-<style> h2{ color: green; } </style>
+<style> h2{ color: green; }
+        #level1_RadioBtn{
+					 color : red; }
+					 #level2_RadioBtn{
+						 color : #FF4600; }
+						 #level3_RadioBtn{
+							 color : #FFD100; }
+							 #level4_RadioBtn{
+								 color : #03B806; }
+
+</style>
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Modifier la Tache </h2>  </div>
 </div>
 <br><br>
-<form role="form" method="post" action="{{action('TaskController@update',$task->id)}}">
+<!--<form role="form" method="post" action="{{route('Tasks.update',$task->id)}}">
    <input type="hidden" name="_method" value="PUT">
-<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+<input type="hidden" name="_token" value="{!! csrf_token() !!}">-->
 
 	<div class="form-group ml-3">
 		<label for="title" class="col-form-label">Sujet:</label>
@@ -66,19 +76,19 @@
 	<div class="form-group">
 		<label class="col-form-label col-md-2 col-sm-12">Priorité:</label>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level1_RadioBtn" value="1" checked>
 			<label class="form-check-label" for="level1_RadioBtn">level 1</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="2">
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level2_RadioBtn" value="2">
 			<label class="form-check-label" for="level2_RadioBtn">level 2</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="3" checked>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level3_RadioBtn" value="3" checked>
 			<label class="form-check-label" for="level3_RadioBtn">level 3</label>
 	  </div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="4">
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level4_RadioBtn" value="4">
 			<label class="form-check-label" for="level4_RadioBtn">level 4</label>
 		</div>
 	</div>
@@ -113,8 +123,14 @@
 							onclick="removeFrom({{$u->id}}, '{{$u->name}}', {{$u->taskCount}})"
 							value="X" class="btn btn-danger">
         		</td>
+{{-- 					<form role="form" method="get" action="{{route('Tasks.deleteEmployee',['id'=>$task->id,'empid'=>$u->id])}}">
+						 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+							<input type="submit" id="delete_btn" value="X" class="btn btn-danger">
+						</form>
+        </td> --}}
 			</tr>
 			@endforeach
+
 		</tbody>
 	</table>
 <br>
@@ -173,9 +189,9 @@
       </div>
       </div>
 
-
+<!--
 <input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
-</form>
+</form>-->
 </div>
 
 @endsection
