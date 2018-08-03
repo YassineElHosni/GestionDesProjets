@@ -15,14 +15,6 @@
 @include('flash::message')
 
 <style> h2{ color: green; }
-        #level1_RadioBtn{
-					 color : red; }
-					 #level2_RadioBtn{
-						 color : #FF4600; }
-						 #level3_RadioBtn{
-							 color : #FFD100; }
-							 #level4_RadioBtn{
-								 color : #03B806; }
 
 </style>
  <div class="page-header">
@@ -30,9 +22,9 @@
 			     	 <h2>Modifier la Tache </h2>  </div>
 </div>
 <br><br>
-<!--<form role="form" method="post" action="{{route('Tasks.update',$task->id)}}">
+<form role="form" method="post" action="{{route('Tasks.update',$task->id)}}">
    <input type="hidden" name="_method" value="PUT">
-<input type="hidden" name="_token" value="{!! csrf_token() !!}">-->
+<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 	<div class="form-group ml-3">
 		<label for="title" class="col-form-label">Sujet:</label>
@@ -43,17 +35,17 @@
 	<div class="form-row">
 				 <div class="form-group mr-4 col-4">
 						<label class="col-form-label mr-3">Project related : </label>
-						<div class="form-control" name="state">{{$project->title}}  </div>
+						<div class="form-control" name="project_id">{{$project->title}}  </div>
 				 </div>
-		<!-- all other projects -->
+		<!-- all $other$ projects
 					<div class="form-group col-6">
 						<label class="col-form-label mr-4 ">Change Project:</label>
-						<select name = "project_id[]" id="project_id" class="form-control col-6">
+						<select name = "project_id[]" id="new_project_id" class="form-control col-6">
 							@foreach ($projects as $project)
 								<option value="{{ $task->project_id }}">{{ $project['title'] }}</option>
 							@endforeach
 						</select>
-					</div>
+					</div>-->
     </div>
 </div>
 
@@ -180,7 +172,7 @@
 				<div class="form-control" name="state">{{$task->state}}  </div>
 		</div>
         <div class="form-check ">
-          <input class="form-check-input" type="checkbox" id="valide_state" name="state">
+          <input class="form-check-input" type="checkbox" id="valide_state" name="0">
           <label class="form-check-label " for="valide_state">
             Validee
           </label>
@@ -189,9 +181,9 @@
       </div>
       </div>
 
-<!--
+
 <input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
-</form>-->
+</form>
 </div>
 
 @endsection
