@@ -104,33 +104,31 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+      
+      $task = Task::find($id);
+      $task->project_title = Project::find($task->project_id)->title;
 
-      $t=Task::find($id);
-      $p=Project::find($t->project_id);/*get the projet related to this task*/
-      $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
-      ///////////////// getting the array of worker'ids
-      $id=array();
-      foreach ($id_us as $id_u) {
-        $id[]= $id_u->user_id;
-      }
-      ////////////////
-      $us=User::whereIn('id', $id_us)->get(['id','name','email','comment']);/*get infos of thoes employee from user table*/
+      //get all project to display on project select input
+      $projects = Project::all();
+
+      //Get current employees for the current task
+      //  and other employees (not working on this task),
+      //Then add for each employee his task count
+      $us_id = Task_User::where('task_id', '=', $task->id)->get(['user_id']);
+
+        $currentEmployees = User::whereIn('id', $us_id)->get(['id', 'name']);
+        $otherEmployees = User::whereNotIn('id', $us_id)
+          ->where('role', 'like', 'EMPLOYEE')->get(['id', 'name']);
+
+        foreach ($currentEmployees as $u) {
+          $u->taskCount = Task_User::where('user_id',$u->id)->count();
+        }
+        foreach ($otherEmployees as $u) {
+          $u->taskCount = Task_User::where('user_id',$u->id)->count();
+        }
 
 
-      $employees=User::where('role','Like','EMPLOYEE')->whereNotIn('id',$id)->get();/*all other employees*/
-      foreach ($employees as $e) { /*count nbr de taches de chaque emplyee*/
-        $e->taskCount = Task_User::where('user_id',$e->id)->get(['task_id'])->count();
-      }
-      $projects=Project::all();/*all projects*/
-
-      // $p=Project::find($t->project_id);/*get the projet related to this task*/
-      // $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
-      // $us=User::whereIn('id', $id_us)->get(['id','name','email','comment']);/*get infos of thoes employee from user table*/
-      // foreach ($us as $u) { /*count nbr de taches de chaque emplyee*/
-      //   $u->taskCount = Task_User::where('user_id',$u->id)->get(['task_id'])->count();
-      // }
-
-      return view('tasks.edit',compact('employees','projects','us'))->withTask($t)->withProject($p);
+      return view('tasks.edit',compact('task', 'projects', 'currentEmployees', 'otherEmployees'));
     }
     /*
     *  Employee Update progress / state
@@ -166,24 +164,45 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
       $task=Task::find($id);
+      $add = explode(",", $request->addTable);
+      $rm = explode(",", $request->removeTable);
+      // $aaa=Task_User::where('task_id', '=', $id)->get(['user_id']);
 
-      $task->title =$request->title;
-      $task->limitDate =$request->limitDate;
-      $task->state =(($request->validation)?'VALIDATED':'IN_PROGRESS');
-      $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
-      $task->comment =$request->comment;
+      if(count($add)>0 && $add[0]!="")
+        foreach ($add as $u_id) {
+          if(!Task_User::Contains($u_id, $id)){
+            $employee=User::where('id', $u_id)->first();
+            $employee->tasks()->attach($task);
+          }
+        }
+
+      if(count($rm)>0 && $rm[0]!="")
+        foreach ($rm as $u_id) {
+          if(Task_User::Contains($u_id, $id)){
+            $employee=User::where('id', $u_id)->first();
+            $employee->tasks()->detach($task);
+          }
+        }
+      //dd($add, $rm, $aaa, Task_User::where('task_id', '=', $id)->get(['user_id']));
 
 
-      //$task->user_id =$request->user_id[0];/* a revoir */
-      $task->progress =$request->progress;
-      $task->state =(($request->state)?'VALIDATED':'En-Cours');
-      //$task->project_id =$request->project_id;
+      // $task->title =$request->title;
+      // $task->limitDate =$request->limitDate;
+      // $task->state =(($request->validation)?'VALIDATED':'IN_PROGRESS');
+      // $task->priority =($request->priority_RadioBtn);/* level1= Urgent == 1  level2 == 2 level3 == 3 level4 == 4*/
+      // $task->comment =$request->comment;
 
-        $task->save();
-        // echo "<pre>";print_r($request->RangeProgress);exit;
 
-        flash('Task Saved Successfully!')->success();
-        return redirect()->route('Tasks.show',$task->id)->withTask($task);
+      // //$task->user_id =$request->user_id[0];/* a revoir */
+      // $task->progress =$request->progress;
+      // $task->state =(($request->state)?'VALIDATED':'En-Cours');
+      // //$task->project_id =$request->project_id;
+
+      // $task->save();
+      // // echo "<pre>";print_r($request->RangeProgress);exit;
+
+      // flash('Task Saved Successfully!')->success();
+       return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
     * add employee to a spesific Task
@@ -192,19 +211,16 @@ class TaskController extends Controller
 
       $task=Task::find($id);
       $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
-
       $employee->tasks()->attach($task);
-      return redirect()->back();
     }
     /*
     * remove employee to from a spesific Task
     */
-    public function deleteEmployee($id,$empid){
+    public function removeEmployee($id,$empid){
 
       $task=Task::find($id);
       $employee=User::where('id', $empid)->first();/*the employee we want to detach*/
       $employee->tasks()->detach($task);
-      return redirect()->back();
     }
 
     /**
