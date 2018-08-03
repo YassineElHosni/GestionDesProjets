@@ -14,7 +14,8 @@
     <form action="{{ route('Projects.edit',$project->id) }}" method="get">
       <input type="submit" value="Modifier" class="btn btn-primary float-right">
     </form>
-<br><br>
+<br><br><hr>
+
 <div class='container'>
 
   <div class="form-row">

@@ -15,6 +15,11 @@
 			     	 <h2>Liste des Clients</h2>  </div>
 </div>
 <br><br>
+
+<div class="float-right">
+  <a class="nav-link" href="{{ route('Clients.create') }}">Nouveau Client</a>
+</div>
+
 <table class="table">
 <thead>
 	<tr>
@@ -48,13 +53,13 @@
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$c->id}}').click();"
-					{{-- id="voir{{$c->id}}" 
+					{{-- id="voir{{$c->id}}"
 					onmouseover="$('#voir{{$c->id}}').val('voir');"
 					onmouseout="$('#voir{{$c->id}}').val('v');" --}}
 				value="v"></i>
 				<i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$c->id}}').click();" value="m"></i>
 				<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$c->id}}').click();" value="s"></i>
-			</div>	
+			</div>
 		</td>
 	</tr>
 	@endforeach

@@ -50,7 +50,7 @@ class ClientController extends Controller
 		$c->save();
 
 		flash('Client Created Successfully !')->success();
-		return route('Clients.index');
+		return route('Clients.show',$c->id)->withClient($c);
 	}
 
 	/**
@@ -96,8 +96,9 @@ class ClientController extends Controller
 		$c->comment = $request->comment;
 
 		$c->save();
+		flash('Client created Successfully !')->success();
 
-		return route('Clients.index');
+		return redirect()->route('Clients.show',$id)->withClient($c);
 	}
 
 	/**
