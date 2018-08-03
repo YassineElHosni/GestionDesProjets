@@ -4,8 +4,9 @@
 
 @include('flash::message')
 	<div class="page-header">
-		<div class="form-group align-center">
-			<h2 style="color:green;">Tache Title </h2>
+		<div style="border-bottom:1px dashed green" class="form-group form-inline align-center">
+					<h2 style="color :green" > Tache : </h2>
+		      <h3 style="color :gray" class="ml-5">{{ $task->title }}</h3>
 		</div>
 	</div>
 	<br>
@@ -34,14 +35,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<div class="card mr-3" style="width: 30rem;">
-						<div class="card-body">
-							<h5 class="card-title">Description:</h5>
-							<p class="card-text">{{ $task->title }}</p>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 

@@ -139,7 +139,7 @@ class TaskController extends Controller
 
           $task->save();
 
-          flash('task Saved !')->success();
+          flash('Task Saved Successfully !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
