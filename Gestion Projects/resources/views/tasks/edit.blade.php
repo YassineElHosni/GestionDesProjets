@@ -35,17 +35,8 @@
 	<div class="form-row">
 				 <div class="form-group mr-4 col-4">
 						<label class="col-form-label mr-3">Project related : </label>
-						<div class="form-control" name="project_id">{{$project->title}}  </div>
+						<div class="form-control" name="project_id">{{$task->project_title}}</div>
 				 </div>
-		<!-- all $other$ projects
-					<div class="form-group col-6">
-						<label class="col-form-label mr-4 ">Change Project:</label>
-						<select name = "project_id[]" id="new_project_id" class="form-control col-6">
-							@foreach ($projects as $project)
-								<option value="{{ $task->project_id }}">{{ $project['title'] }}</option>
-							@endforeach
-						</select>
-					</div>-->
     </div>
 </div>
 
@@ -90,125 +81,7 @@
 		<label class="col-form-label">Commentaire :</label>
 		<textarea type="text" class="form-control col-7" name="comment" >{{$task->comment}}</textarea>
 	</div><br>
-<!--Current employees -->
-	<h3>Current Workers:</h3>
-	<table class="table table-bordered">
-		<thead class="thead-light">
-			<tr>
-				<th scope="col">Nom</th>
-				<th scope="col">Email</th>
-				<th scope="col">Comment</th>
-		{{-- 		<th scope="col">Date Debut</th>
-				<th scope="col">Date Fin</th> --}}
-			</tr>
-		</thead>
-		<tbody>
 
-			@foreach($us as $u)
-			<tr>
-				<th scope="row" class="">{{$u->name}}</th>
-				<th scope="row">{{$u->email}}</th>
-				<th scope="row">{{$u->comment}}</th>
-		{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
-				<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
-				<td class="sm-1">
-					<form role="form" method="get" action="{{route('Tasks.deleteEmployee',['id'=>$task->id,'empid'=>$u->id])}}">
-						 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-							<input type="submit" id="delete_btn" value="X" class="btn btn-danger">
-						</form>
-        </td>
-			</tr>
-			@endforeach
-
-		</tbody>
-	</table>
-<br>
-<!-- choose another employee -->
-		<h3>Other Employee:</h3>
-		<table class="table table-bordered">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Nom</th>
-					<th scope="col">Nombre de taches</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($employees as $employee)
-				<tr>
-					<th scope="row" class="">{{$employee->name}}</th>
-					<th scope="row">
-
-					   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
-			    </th>
-					<td class="sm-1">
-						<form role="form" method="get" action="{{route('Tasks.addEmployee',['id'=>$task->id,'empid'=>$employee->id])}}">
-							 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-								<input type="submit" id="delete_btn" value="+" class="btn btn-success">
-							</form>
-	        </td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-		<!-- jQuery storing data in hiden table -->
-		<script>
-		$(document).ready(function(){
-
-			var t;
-			function addTo(v){
-				t=v;
-				console.log(t);
-			}
-
-		});
-
-		</script>
-<!--.............................2 hiden tables for data storing .....................................-->
-
-		<!--Current employees -->
-			<table class="hiden">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Nom</th>
-						<th scope="col">Email</th>
-						<th scope="col">Comment</th>
-				{{-- 		<th scope="col">Date Debut</th>
-						<th scope="col">Date Fin</th> --}}
-					</tr>
-				</thead>
-				<tbody>
-					@foreach($us as $u)
-					<tr>
-						<th scope="row" class="">{{$u->name}}</th>
-						<th scope="row">{{$u->email}}</th>
-						<th scope="row">{{$u->comment}}</th>
-				{{-- 		<td scope="row">{{date("F j Y H:i", strtotime($u->startDate))}}</td>
-						<td scope="row">{{date("F j Y H:i", strtotime($u->finishDate))}}</td> --}}
-					</tr>
-					@endforeach
-				</tbody>
-			</table>
-		<br>
-		<!-- new employee chosen  -->
-				<table class="hiden">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">Nom</th>
-							<th scope="col">Nombre de taches</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($employees as $employee)
-						<tr>
-							<th scope="row" class="">{{$employee->name}}</th>
-							<th scope="row">
-
-							   <span id="rangeRes" class="badge badge-success badge-pill float-center">{{ $employee->taskCount }}</span>
-					    </th>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
 
   <div class="col-sm">
     <div class="form-row">
@@ -231,10 +104,71 @@
       </div>
       </div>
 
+<!--Current employees -->
+	<h3>Current Employees:</h3>
+	<table class="table table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Nombre de taches</th>
+			</tr>
+		</thead>
+		<tbody id="currentWorkers">
+			@foreach($currentEmployees as $ce)
+			<tr id="row_CW_{{$ce->id}}">
+				<th scope="row" class="">{{$ce->name}}</th>
+				<th scope="row">
+				   <span id="rangeRes" class="badge badge-success badge-pill float-center">
+				   	{{ $ce->taskCount }}
+				   </span>
+		    	</th>
+				<td class="sm-1">
+							<input type="button" id="delete_btn{{$ce->id}}"
+							onclick="removeFrom({{$ce->id}}, '{{$ce->name}}', {{$ce->taskCount}})"
+							value="X" class="btn btn-danger">
+        		</td>
+			</tr>
+			@endforeach
+
+		</tbody>
+	</table>
+<br>
+<!-- choose another employee -->
+	<h3>Other Employees:</h3>
+	<table class="table table-bordered">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Nombre de taches</th>
+			</tr>
+		</thead>
+		<tbody id="otherEmployees">
+			@foreach($otherEmployees as $oe)
+			<tr id="row_OE_{{$oe->id}}">
+				<th scope="row" class="">{{$oe->name}}</th>
+				<th scope="row">
+				   <span id="rangeRes" class="badge badge-success badge-pill float-center">
+				   	{{ $oe->taskCount }}
+				   </span>
+		    	</th>
+				<td class="sm-1">
+							<input type="button" id="add_btn{{$oe->id}}"
+							onclick="addTo({{$oe->id}}, '{{$oe->name}}', {{$oe->taskCount}})"
+							value="+" class="btn btn-primary">
+        		</td>
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+		<!--Current employees -->
+			<input type="hidden" id="addTable" name="addTable" value="">
+		<!-- new employee chosen  -->
+			<input type="hidden" id="removeTable" name="removeTable" value="">
 
 <input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
 </form>
 </div>
+
 @endsection
 
 
@@ -242,5 +176,7 @@
 	@parent
 	<script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker.fr.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}"  type="text/javascript"></script>
+	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}" type="text/javascript"></script>
+	
+	<script src="{{ asset('js/resposive_Task_User_Select.js') }}"  type="text/javascript"></script>
 @endsection
