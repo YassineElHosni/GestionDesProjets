@@ -55,8 +55,7 @@
 					<div class="card mr-4"style="width: 30rem;">
 						<div class="card-body form-inline">
 							<h5 class="card-title mr-3">Progression:</h5>
-							<input type="range" id="RangeProgress" step="5" name="progress" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
-
+							<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
 							<span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
 						</div>
 					</div>

@@ -140,6 +140,7 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
       $task=Task::find($id);
+
       $add = explode(",", $request->addTable);
       $rm = explode(",", $request->removeTable);
       // $aaa=Task_User::where('task_id', '=', $id)->get(['user_id']);
@@ -158,15 +159,18 @@ class TaskController extends Controller
           }
         }
       //dd($add, $rm, $aaa, Task_User::where('task_id', '=', $id)->get(['user_id']));
+
       $task->title =$request->title;
       $task->limitDate =$request->limitDate;
       $task->priority =($request->priority_RadioBtn);
       $task->comment =$request->comment;
+
       if ($request->has('validation')) {
         $task->state = 'VALIDATED';
         $task->progress = 100;
       }else  $task->state = 'IN_PROGRESS';
       $task->save();
+
       flash('Task Saved Successfully!')->success();
        return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
