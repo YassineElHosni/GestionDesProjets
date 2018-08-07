@@ -3,12 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;//added
 use App\Http\Controllers\Controller;
-
+use Auth;
 use App\User;
 
 class UserController extends Controller
 {
+
+	public function showprofile($id){
+
+$user=User::find($id);
+   return view('Users.show',compact('user'))/*->withUser($user)*/;
+
+	}
+
+	public function update_avatar(Request $request,$id){
+
+		 $this->validate($request, [
+		  'avatar'  => 'required|image|mimes:jpg,png,gif|max:2048'
+		 ]);
+
+		 $image = $request->file('avatar');
+
+		 $new_name = rand() . '.' . $image->getClientOriginalExtension();
+
+		 $image->move(public_path('storage/avatars'), $new_name);
+		 /*find the user & add a new image name*/
+		 $user=User::find($id);
+     $user->avatar=$new_name;
+     $user->save();
+		 
+		 return back()->with('success', 'Image Uploaded Successfully')->with('user', $user);
+ }
+		// Handle the user upload of avatar
+		  /*  	if($request->hasFile('avatar')){
+		    		$avatar = $request->file('avatar');
+		    		$avatarname = time() . '.' . $avatar->getClientOriginalExtension();
+		    		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $avatarname ) );
+
+		    		$user =User::find(1); //Auth::user();
+		    		$user->avatar = $avatarname;
+		    		$user->save();
+		    	}
+		    	return view('profile', array('user' => Auth::user() );*/
 	/**
 		* Display a listing of the resource.
 		*
@@ -73,7 +111,7 @@ class UserController extends Controller
 	public function edit($id)
 	{
 		$u = User::find($id);
-		return view('Users.edit')->withUser($u);
+			return view('Users.edit')->withUser($u);
 	}
 
 	/**
@@ -85,17 +123,20 @@ class UserController extends Controller
 		*/
 	public function update(Request $request, $id)
 	{
-		$u = User::find($id);
+
+			$u = User::find($id);
+
 
 		$u->name = $request->name;
 		$u->email = $request->email;
+		$u->role = $request->role;/*attribuer new role*/
 		$u->password = $request->password;
-		$u->role = $request->role;
+
 		$u->comment = $request->comment;
 
 		$u->save();
 
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 
 	/**

@@ -24,6 +24,6 @@ Route::get('Tasks/add/{id}/{empid}','TaskController@addEmployee')->name('Tasks.a
 
 Route::resource('Clients','ClientController');
 Route::resource('Users','UserController');
-
-
+Route::get('/profile/{id}','UserController@showprofile')->name('User.profile');
+Route::post('/profile/{userID}','UserController@update_avatar')->name('User.updateAvatar');
 ?>
