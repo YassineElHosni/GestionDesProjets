@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 
 use App\Client;
 
 class ClientController extends Controller
 {
+
+	public function __construct(){
+
+$this->middleware('admin',['except' => ['show']]);
+}
 	/**
 		* Display a listing of the resource.
 		*
@@ -19,6 +25,7 @@ class ClientController extends Controller
 		$cs = Client::all();
 
 		return view('Clients.index')->withClients($cs);
+
 	}
 
 	/**

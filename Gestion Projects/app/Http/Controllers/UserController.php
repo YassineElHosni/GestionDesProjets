@@ -1,15 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;//added
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
-
+use App\Task;
+use App\Task_User;
 class UserController extends Controller
 {
+
+	public function __construct(){
+   if($this->middleware('auth')){
+  	$this->middleware('admin',['except' => ['showprofile','update_avatar','update']]);
+   }
+	}
 
 	public function showprofile($id){
 
@@ -20,33 +27,25 @@ $user=User::find($id);
 
 	public function update_avatar(Request $request,$id){
 
+		$this->validate($request, [
+		 'avatar'  => 'required|mimes:jpg,jpeg,png'
+     ]);
+			$image =$request->file('avatar');
+			$new_image = rand() . '.' . $image->getClientOriginalExtension();
+      $image->move(public_path('storage/avatars'), $new_image);/*put image in storage folder*/
+
+			$user=User::find($id);
+			$user->avatar=$new_image;
+			$user->save();
+
+		 return back()->with('success', 'Image Uploaded Successfully')->with('user', $user);
+
+		/*
 		 $this->validate($request, [
 		  'avatar'  => 'required|image|mimes:jpg,png,gif|max:2048'
-		 ]);
+		]);*/
+   }
 
-		 $image = $request->file('avatar');
-
-		 $new_name = rand() . '.' . $image->getClientOriginalExtension();
-
-		 $image->move(public_path('storage/avatars'), $new_name);
-		 /*find the user & add a new image name*/
-		 $user=User::find($id);
-     $user->avatar=$new_name;
-     $user->save();
-		 
-		 return back()->with('success', 'Image Uploaded Successfully')->with('user', $user);
- }
-		// Handle the user upload of avatar
-		  /*  	if($request->hasFile('avatar')){
-		    		$avatar = $request->file('avatar');
-		    		$avatarname = time() . '.' . $avatar->getClientOriginalExtension();
-		    		Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $avatarname ) );
-
-		    		$user =User::find(1); //Auth::user();
-		    		$user->avatar = $avatarname;
-		    		$user->save();
-		    	}
-		    	return view('profile', array('user' => Auth::user() );*/
 	/**
 		* Display a listing of the resource.
 		*
@@ -66,9 +65,12 @@ $user=User::find($id);
 		*/
 	public function create()
 	{
-		return view('Users.create');
+		flash('User Created Successfully !')->success();
+		return view('auth.register');
 	}
-
+/*storeAdmin(){
+	admin role
+}*/
 	/**
 		* Store a newly created resource in storage.
 		*
@@ -80,14 +82,15 @@ $user=User::find($id);
 		$u = new User([
 			'name' => $request->name,
 			'email' => $request->email,
-			'password' => $request->password,
+			'password' => bcrypt($request->password),
 			'role' => $request->role,
 			'comment' => $request->comment,
 		]);
+		dd($request->all(),$u);
 		$u->save();
 
 		flash('User Created Successfully !')->success();
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 
 	/**
@@ -148,10 +151,16 @@ $user=User::find($id);
 	public function destroy($id)
 	{
 		$u = User::find($id);
+    if($u->role=='EMPLOYEE'){/*detache tasks from that user employee*/
+			$tasks_id=Task_User::where('user_id',$u->id)->get(['task_id']);
+			$tasks=Task::whereIn('id',$tasks_id)->get();
+			foreach($tasks as $task){
 
+			}
+		}
 		$u->delete();
 
 		flash('User Deleted Successfully !')->warning();
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 }

@@ -76,4 +76,7 @@
     </div>
   </div>
       <hr>
+      <form action="{{ route('Users.edit',$user->id) }}" method="get">
+        <input type="submit" class="btn btn-primary float-right" value="Modifier">
+      </form>
 @endsection

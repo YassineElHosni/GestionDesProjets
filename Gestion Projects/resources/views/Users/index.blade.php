@@ -1,5 +1,15 @@
 @extends('layouts.structure')
 
+@section('jss')
+@parent
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#users_table').DataTable();
+} );
+</script>
+@endsection
+
 @section('csss')
 	@parent
 	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
@@ -14,7 +24,7 @@
 			     	 <h2>Liste des Users</h2>  </div>
 </div>
 <br><br>
-<table class="table table-responsive-lg">
+<table class="table table-responsive-lg" id="users_table" data-order='[[ 1, "asc" ]]' data-page-length='5'>
 <thead>
 	<tr>
 		<th scope="col">name</th>
@@ -23,9 +33,10 @@
 		<th scope="col">role</th>
 		<th scope="col" class="d-none d-lg-block" style="border-bottom:none;">comment</th>
 		<th scope="col"></th>
+
 	</tr>
 </thead>
-<tbody> 
+<tbody>
 	@foreach($users as $u)
 	<tr>
 		<th scope="row">{{$u->name}}</th>
@@ -51,13 +62,17 @@
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$u->id}}').click();"
-					{{-- id="voir{{$u->id}}" 
+					{{-- id="voir{{$u->id}}"
 					onmouseover="$('#voir{{$u->id}}').val('voir');"
 					onmouseout="$('#voir{{$u->id}}').val('v');" --}}
 				value="v"></i>
+        @can('edit',$user)
 				<i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
+        @endcan
+        @can('delete',$user)
 				<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$u->id}}').click();" value="s"></i>
-			</div>	
+        @endcan
+      </div>
 		</td>
 	</tr>
 	@endforeach

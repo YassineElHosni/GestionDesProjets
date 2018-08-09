@@ -10,7 +10,7 @@
 
 	@include('partials._mainMenu')<!--Menu-->
 
-	<div class="container"><!--Content-->
+<div class="container">	<!--Content-->
 		@yield('content')
 
 	</div>

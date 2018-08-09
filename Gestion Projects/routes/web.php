@@ -12,7 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::resource('Projects','ProjectController');
 Route::resource('Tasks','TaskController');
@@ -26,4 +26,5 @@ Route::resource('Clients','ClientController');
 Route::resource('Users','UserController');
 Route::get('/profile/{id}','UserController@showprofile')->name('User.profile');
 Route::post('/profile/{userID}','UserController@update_avatar')->name('User.updateAvatar');
+
 ?>

@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Contracts\Auth\Authenticatable;
 use App\User;
 use App\Task;
 use App\Project;
@@ -124,12 +125,7 @@ class TaskController extends Controller
           flash('Task Saved Successfully !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
-    /*
-    *  Project-Manager validate or not the task
-    */
-    public function updateValidate(Request $request, $id)
-    {
-    }
+  
     /**
      * Update Task (Project Manager..)
      *

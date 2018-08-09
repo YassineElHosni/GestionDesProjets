@@ -50,11 +50,13 @@ class User extends Authenticatable
         return false;
     }
     /*
-    *checking the role of the  authentificated user
+    *getting the role of the  authentificated user
     */
     public static function hasRole($role){
 
       return User::where('role','Like',$role)->get();
     }
+    
+
 
 }

@@ -1,5 +1,12 @@
 @extends('layouts.structure')
+@section('csss')
+@parent
+<style>
+.imageStuff:hover{cursor: progress;}
+.imageStuff:action{cursor: pointer;}
 
+</style>
+@endsection
 @section('jss')
 @parent
  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -8,9 +15,16 @@
  $(document).ready(function(){
    function selectedValue(){
      //var val =document.getElementById('role').value;
-     alert($('#role'));
+     alert($("#role"));
    }
  });
+ </script><script>
+ $(document).ready(function(){
+    $('#avatar').on('change', function(){
+        //  alert($(this).val());
+          $('#submit').click();
+      });
+   });
  </script>
 @endsection
 @section('content')
@@ -20,26 +34,24 @@
 
   <div class="page-header">
     <br>
-          <h2 style="color :gray" class="ml-5">{{$user->name}} Profile</h2>
+          <h2 style="color :gray" class="ml-5">{{$user->name}}</h2>
   </div><hr>
 
 	<div class="row">
+
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="{{URL::to('/')}}/storage/avatars/{{ $user->avatar }}" style="border-radius:50%;height:50% ;width:50%" class="img-circle" alt="avatar">
+          <img id="imgclicked" src="{{URL::to('/')}}/storage/avatars/{{ $user->avatar }}" class="imageStuff" style="border-radius:50%;height:50% ;width:50%" alt="avatar" >
           <h6>{{$user->name}}</h6>
-           <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="form">
-             <input hidden type="file" name="avatar" id="avatar" onclick="$('#pic').prepend(($('<img>',{  src:'{{URL::to('/')}}/storage/avatars/default.png' })); ">
 
-             <div hidden id="pic" onchange="$('#form').submit();">
+           <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="formUpload">
 
-             </div>
-            <!--  <input hidden type="submit" value="Upload" id="submit">-->
-
-             <input  type="submit" id="new_avatar"  class="btn btn-primary" value="Change Avatar" onclick="$('#avatar').click();">
-             <input  hidden value="{{ csrf_token() }}" name="_token">
-           </form>
+               <input type="button" class="btn btn-primary" value="Changer avatar" onclick="$('#avatar').click();">
+               <input  style="display:none" type="file" id="avatar" name="avatar">
+               <input style="display:none" type="submit" value="Changer avatar" id="submit">
+               <input type="hidden" value="{{ csrf_token() }}" name="_token">
+          </form>
         </div>
       </div>
 
@@ -53,10 +65,10 @@
 
 
               <form class="form-horizontal" role="form">
-                <div class="form-group">
+                <div class="form-group ">
                   <label class="col-lg-3 control-label">Nom:</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control sm-2" name="name" value="{{$user->name}}">
+                    <input type="text" class="form-control sm-2 mb-3" name="name" value="{{$user->name}}">
                   </div>
                 </div>
 
@@ -81,28 +93,28 @@
                </div>
             </div>
 
-                <div class="form-group">
+                <div class="form-group mt-3">
                   <label class="col-lg-3 control-label">Email:</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" name="email"  value="{{$user->email}}">
                   </div>
                 </div>
 
-                <div class="form-group"> <!-- must not be seen .. change password-->
+                <!--  <div class="form-group"> must not be seen .. change password
                   <label class="col-md-3 control-label">Password:</label>
                   <div class="col-md-8">
                     <input type="text" class="form-control" name="password"  value="{{$user->password}}">
                   </div>
-                </div>
+                </div>-->
 
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label class="col-md-3 control-label">Commentaire:</label> <!-- seen only by superiors -->
                     <div class="col-md-8">
                       <textarea type="text" class="form-control" name="comment" >{{$user->comment}}</textarea>
                     </div>
                   <hr>
                   <div class="col-md-8">
-                    <input type="submit" class="btn btn-primary" value="Enregistrer">
+                    <input type="submit" class="btn btn-primary float-right" value="Enregistrer">
                     <span></span>
                   </div>
                </div>
