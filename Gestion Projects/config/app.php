@@ -180,6 +180,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //dataTable
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
     ],
 
     /*
@@ -235,6 +238,9 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         /*added Flush mssgs*/
          'Flash' => Laracasts\Flash\Flash::class,
+
+         //
+         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

@@ -12,7 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home.index');
 
 Route::resource('Projects','ProjectController');
 Route::resource('Tasks','TaskController');
@@ -25,5 +25,11 @@ Route::get('Tasks/add/{id}/{empid}','TaskController@addEmployee')->name('Tasks.a
 Route::resource('Clients','ClientController');
 Route::resource('Users','UserController');
 
+
+Route::get('datatables/{name}', 'HomeController@index2')->name('datatables');
+Route::get('datatables/getdata/{name}', 'HomeController@getData')->name('datatables.getdata');
+
+Route::get('ajaxdata/removedata/{name}', 'HomeController@removedata')->name('datatables.removedata');
+Route::get('ajaxdata/massremove/{name}', 'HomeController@massremove')->name('datatables.massremove');
 
 ?>
