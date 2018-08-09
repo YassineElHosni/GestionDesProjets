@@ -21,18 +21,18 @@ class FullDataBaseRename extends Migration
             $table->dateTime('startDate')->nullable();
             $table->dateTime('finishDate')->nullable();
             $table->boolean('displacement');//true == 1 == Oui and false == 0 == Non
-            $table->boolean('state');////true == 1 == en-cours and false == 0 == clos 
+            $table->boolean('state');////true == 1 == en-cours and false == 0 == clos
             $table->longText('comment');
 
             $table->timestamps();
         });
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->longText('description');
+            $table->longText('title');
             $table->DateTime('limitDate');
             $table->enum('state',array('IN_PROGRESS','FINISHED','VALIDATED'));//'en-cours', 'fini', 'validée'
             $table->integer('progress');
-            $table->integer('priority');
+            $table->integer('priority');//1==DoRightAway,2==PlanToDoASAP,3==Delegate,4==DumpOrPostPone
             $table->longText('comment');
 
             $table->timestamps();
@@ -68,8 +68,8 @@ class FullDataBaseRename extends Migration
 
             $table->primary(['task_id','user_id']);
 
-            $table->DateTime('startDate');
-            $table->DateTime('finishDate');
+            $table->DateTime('startDate')->nullable();
+            $table->DateTime('finishDate')->nullable();
 
             $table->timestamps();
 

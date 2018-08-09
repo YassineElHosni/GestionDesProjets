@@ -1,95 +1,142 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.structure')
+@section('csss')
+    @parent
+ {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" /> --}}
 
-        <title>Laravel</title>
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" /> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
+   
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('content')
+<div>
+    <input type="text" value="empty" disabled id="selectedIds">
+    <button type="button" id="mass_delete"
+    name="mass_delete" class="btn btn-danger btn-xs" disabled style="font-size: 0.5rem;">
+        <i class="fa fa-times fa-lg"></i>
+    </button>
+    <input type="button" id="btn_new" value="Ajouter">
+    <input type="button" id="btn_show" value="Afficher" disabled>
+    <input type="button" id="btn_edit" value="Modifier" disabled>
+</div>
+        <table class="text-center table table-responsive-lg table-hover" style="width:100%" id="myTable">
+            <thead class="">
+                <tr style="font-size:16px">
+                    <?php
+                        $ch="";
+                        foreach ($cols as $c) {
+                            $ch = $ch . '<th>'.ucfirst($c).'</th>';
+                        }
+                        echo $ch;
+                    ?>
+                </tr>
+            </thead>
+        </table>
+@endsection
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+@section('jss')
+@parent
+
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> --}}
+
+    
+   
+<script>
+$(function() {
+
+    var selected = [];
+
+    var table = $('#myTable').DataTable(
+    {
+        serverSide: true,
+        ajax: '{!! route('datatables.getdata',$current) !!}',
+        columns: [
+            <?php
+                $ch="";
+                foreach ($cols as $c) {
+                    $ch = $ch . '{ "data": "'.$c.'" },';
+                }
+                echo $ch;
+            ?>
+            // { "data": "action", orderable:false, searchable: false},
+            // { "data":"checkbox", orderable:false, searchable:false}
+        ]
+    }
+    );
+
+    // $(document).on('click', '.delete', function(){
+    //     var id = $(this).attr('id');
+    //     if(confirm("Are you sure you want to Delete this data?"))
+    //     {
+    //         $.ajax({
+    //             url:"{route('datatables.removedata',$current)}}",
+    //             mehtod:"get",
+    //             data:{id:id},
+    //             success:function(data)
+    //             {
+    //                 alert(data);
+    //                 $('#myTable').DataTable().ajax.reload();
+    //             }
+    //         })
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }); 
+
+    $(document).on('click', '#mass_delete', function(){console.log(selected);
+        if(selected.length > 0)
+        {
+            if(confirm("Are you sure you want to Delete this data?"))
+            {
+                // $('.obj_checkbox:checked').each(function(){
+                //     id.push($(this).val());
+                // });
+                // console.log(id);
+                    $.ajax({
+                        url:"{{ route('datatables.massremove',$current)}}",
+                        method:"get",
+                        data:{id:selected},
+                        success:function(data)
+                        {
+                            alert(data);
+                            $('#myTable').DataTable().ajax.reload();
+                        }
+                    });
             }
+        }else alert("Please select atleast one row");
+    });
+ 
+        // "rowCallback": function( row, data ) {
+        //     if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+        //         $(row).addClass('selected');
+        //     }
+        // }
+ 
+    $('#myTable tbody').on('click', 'tr', function () {
+        var id = table.row(this).data().id;
+        var index = $.inArray(id, selected);
+ 
+        if ( index === -1 ) {
+            selected.push( id );
+        } else {
+            selected.splice( index, 1 );
+        }
 
-            .full-height {
-                height: 100vh;
-            }
+        $('#mass_delete').prop("disabled", (!selected.length>0));
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        $('#btn_show,#btn_edit').prop("disabled", (selected.length!=1));
 
-            .position-ref {
-                position: relative;
-            }
+        $('#selectedIds').val(selected);
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        $(this).toggleClass('selected');
+    } );
+});
+</script>
+@endsection 
 
-            .content {
-                text-align: center;
-            }
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>

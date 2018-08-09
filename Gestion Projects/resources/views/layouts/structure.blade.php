@@ -1,23 +1,24 @@
 <!Doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+	
 	@include('partials._metas')
 	@section('csss')<!--styles-->
 		@include('partials._csss')
 	@show
+
 </head>
 <body>
 
-	@include('partials._mainMenu')<!--Menu-->
+		@include('partials._mainMenu')<!--Menu-->
 
-	<div class="container"><!--Content-->
-		@yield('content')
+		<div class="container"><!--Content-->
+			@yield('content')
 
-	</div>
-<br>
-<br>
-<br>
-<br>
+		</div>
+
+		@include('partials._footer')<!--footer-->
+
 	@section('jss')	<!--javaScripts-->
 		@include('partials._jss')
 	@show

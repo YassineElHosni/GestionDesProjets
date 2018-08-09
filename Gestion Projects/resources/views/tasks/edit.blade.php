@@ -23,21 +23,34 @@
 </div>
 <br><br>
 <form role="form" method="post" action="{{route('Tasks.update',$task->id)}}">
-   <input type="hidden" name="_method" value="PUT">
-<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+	<input type="hidden" name="_method" value="PUT">
+	<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 	<div class="form-group ml-3">
 		<label for="title" class="col-form-label">Sujet:</label>
 		<input type="text" class="form-control col-7" name="title" value="{{$task->title}}">
+		
 	</div>
+
+	<div class="form-group">
+      <input class="form-check-input" style="float:right" type="checkbox" {{ (($task->state=='VALIDATED')?'checked':'') }} id="valide_state" name="validation">
+
+      <i id="valIcon" class="fas fa-{{ (($task->state=='VALIDATED')?'check':'times') }}-circle fa-3x"
+      	onClick="console.log('bom');"></i>
+      <label class="form-check-label " for="valide_state" >
+        Validee
+      </label>
+      <button id="btn_test" type="button">Click</button>
+    </div>
+
 <!-- current project related -->
 <div class="col-sm">
 	<div class="form-row">
-				 <div class="form-group mr-4 col-4">
-						<label class="col-form-label mr-3">Project related : </label>
-						<div class="form-control" name="project_id">{{$task->project_title}}</div>
-				 </div>
-    </div>
+		<div class="form-group mr-4 col-4">
+			<label class="col-form-label mr-3">Project related : </label>
+			<div class="form-control" name="project_id">{{$task->project_title}}</div>
+		</div>
+	</div>
 </div>
 
 	<div class="col">
@@ -97,12 +110,7 @@
 					{{ ($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty')) }}
 				</div>
 		</div>
-        <div class="form-check ">
-          <input class="form-check-input" type="checkbox" {{ (($task->state=='VALIDATED')?'checked':'') }} id="valide_state" name="validation">
-          <label class="form-check-label " for="valide_state" >
-            Validee
-          </label>
-        </div>
+       
 
       </div>
       </div>
@@ -182,4 +190,6 @@
 	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}" type="text/javascript"></script>
 	
 	<script src="{{ asset('js/resposive_Task_User_Select.js') }}"  type="text/javascript"></script>
+	<script src="{{ asset('js/validationEvent.js') }}"  type="text/javascript"></script>
+
 @endsection
