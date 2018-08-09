@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 //use Input;
 use App\Task;
@@ -121,7 +122,7 @@ class ProjectController extends Controller
       $project->state =($request->state_RadioBtn);//true == 1 == en-cours and false == 0 == fini
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
-      
+
 
       $project->save();
 

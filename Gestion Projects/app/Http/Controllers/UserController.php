@@ -1,14 +1,51 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;//added
 use App\Http\Controllers\Controller;
-
+use Auth;
 use App\User;
-
+use App\Task;
+use App\Task_User;
 class UserController extends Controller
 {
+
+	public function __construct(){
+   if($this->middleware('auth')){
+  	$this->middleware('admin',['except' => ['showprofile','update_avatar','update']]);
+   }
+	}
+
+	public function showprofile($id){
+
+$user=User::find($id);
+   return view('Users.show',compact('user'))/*->withUser($user)*/;
+
+	}
+
+	public function update_avatar(Request $request,$id){
+
+		$this->validate($request, [
+		 'avatar'  => 'required|mimes:jpg,jpeg,png'
+     ]);
+			$image =$request->file('avatar');
+			$new_image = rand() . '.' . $image->getClientOriginalExtension();
+      $image->move(public_path('storage/avatars'), $new_image);/*put image in storage folder*/
+
+			$user=User::find($id);
+			$user->avatar=$new_image;
+			$user->save();
+
+		 return back()->with('success', 'Image Uploaded Successfully')->with('user', $user);
+
+		/*
+		 $this->validate($request, [
+		  'avatar'  => 'required|image|mimes:jpg,png,gif|max:2048'
+		]);*/
+   }
+
 	/**
 		* Display a listing of the resource.
 		*
@@ -28,9 +65,12 @@ class UserController extends Controller
 		*/
 	public function create()
 	{
-		return view('Users.create');
+		flash('User Created Successfully !')->success();
+		return view('auth.register');
 	}
-
+/*storeAdmin(){
+	admin role
+}*/
 	/**
 		* Store a newly created resource in storage.
 		*
@@ -42,14 +82,15 @@ class UserController extends Controller
 		$u = new User([
 			'name' => $request->name,
 			'email' => $request->email,
-			'password' => $request->password,
+			'password' => bcrypt($request->password),
 			'role' => $request->role,
 			'comment' => $request->comment,
 		]);
+		dd($request->all(),$u);
 		$u->save();
 
 		flash('User Created Successfully !')->success();
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 
 	/**
@@ -73,7 +114,7 @@ class UserController extends Controller
 	public function edit($id)
 	{
 		$u = User::find($id);
-		return view('Users.edit')->withUser($u);
+			return view('Users.edit')->withUser($u);
 	}
 
 	/**
@@ -85,17 +126,20 @@ class UserController extends Controller
 		*/
 	public function update(Request $request, $id)
 	{
-		$u = User::find($id);
+
+			$u = User::find($id);
+
 
 		$u->name = $request->name;
 		$u->email = $request->email;
+		$u->role = $request->role;/*attribuer new role*/
 		$u->password = $request->password;
-		$u->role = $request->role;
+
 		$u->comment = $request->comment;
 
 		$u->save();
 
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 
 	/**
@@ -107,10 +151,16 @@ class UserController extends Controller
 	public function destroy($id)
 	{
 		$u = User::find($id);
+    if($u->role=='EMPLOYEE'){/*detache tasks from that user employee*/
+			$tasks_id=Task_User::where('user_id',$u->id)->get(['task_id']);
+			$tasks=Task::whereIn('id',$tasks_id)->get();
+			foreach($tasks as $task){
 
+			}
+		}
 		$u->delete();
 
 		flash('User Deleted Successfully !')->warning();
-		return route('Users.index');
+		return redirect()->route('Users.index');
 	}
 }

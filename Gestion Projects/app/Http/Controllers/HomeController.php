@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Project;
 use App\Task;
 use App\Client;
@@ -11,6 +12,14 @@ use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
 {
+
+  /*
+  *  check if the database of users is empty
+  */
+   public function CheckFirstRegistration(){
+
+     return($n=User::count()==0);//true -> empty ;; false -> full
+   }
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +34,8 @@ class HomeController extends Controller
     }
     public function index()
     {
+    if($this->CheckFirstRegistration()==false){
+
         $ps=Project::orderBy('updated_at', 'ASC')
             ->where('state','=',1)
             ->take(3)
@@ -34,8 +45,10 @@ class HomeController extends Controller
             ->where('state','like','IN_PROGRESS')
             ->take(3)
             ->get(['id', 'title', 'state', 'priority', 'updated_at']);
-            
+
         return view('index')->with('LastFewProjects',$ps)->with('LastFewTasks',$ts);
+      }else
+        return view('AdminRegistration');
     }
     public function index2($name){
         return view('welcome')

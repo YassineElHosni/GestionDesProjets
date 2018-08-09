@@ -12,11 +12,11 @@
 
 		@include('partials._mainMenu')<!--Menu-->
 
-		<div class="container"><!--Content-->
-			@yield('content')
+			<div class="container"><!--Content-->
+				@yield('content')
 
-		</div>
-
+			</div>
+		
 		@include('partials._footer')<!--footer-->
 
 	@section('jss')	<!--javaScripts-->

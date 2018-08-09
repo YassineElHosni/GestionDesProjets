@@ -52,13 +52,17 @@
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<input type="submit" class="btn btn-success" onclick="$('#show{{$p->id}}').click();"
-					{{-- id="voir{{$p->id}}" 
+					{{-- id="voir{{$p->id}}"
 					onmouseover="$('#voir{{$p->id}}').val('voir');"
 					onmouseout="$('#voir{{$p->id}}').val('v');" --}}
 				value="v">
+        @can('edit',Auth::user())
 				<input type="submit" class="btn btn-primary" onclick="$('#edit{{$p->id}}').click();" value="m">
-				<input type="submit" class="btn btn-danger" onclick="$('#delete{{$p->id}}').click();" value="s">
-			</div>	
+        @endcan
+        @can('delete',Auth::user())
+      	<input type="submit" class="btn btn-danger" onclick="$('#delete{{$p->id}}').click();" value="s">
+        @endcan
+      </div>
 		</td>
 	</tr>
 	@endforeach

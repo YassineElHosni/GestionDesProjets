@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email','avatar','password','role','comment'
     ];
 
     /**
@@ -50,11 +50,13 @@ class User extends Authenticatable
         return false;
     }
     /*
-    *checking the role of the  authentificated user
+    *getting the role of the  authentificated user
     */
     public static function hasRole($role){
 
       return User::where('role','Like',$role)->get();
     }
+    
+
 
 }

@@ -15,7 +15,6 @@
 @include('flash::message')
 
 <style> h2{ color: green; }
-
 </style>
  <div class="page-header">
 		<div class="form-group align-center">
@@ -188,7 +187,7 @@
 	<script src="{{ asset('js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker.fr.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/bootstrap-datetimepicker-setup.js') }}" type="text/javascript"></script>
-	
+
 	<script src="{{ asset('js/resposive_Task_User_Select.js') }}"  type="text/javascript"></script>
 	<script src="{{ asset('js/validationEvent.js') }}"  type="text/javascript"></script>
 
