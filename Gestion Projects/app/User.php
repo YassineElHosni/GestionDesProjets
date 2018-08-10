@@ -42,8 +42,8 @@ class User extends Authenticatable
     *checking the role of the  authentificated user
     */
     public function Auth_hasRole($role){
-      $user=User::where('id','=',auth()->id())->get();/*l'user authentifié*/
-
+      $user=User::find(auth()->id());/*l'user authentifié*/
+      
       if($user->role==$role){
         return true;
       }

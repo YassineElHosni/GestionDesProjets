@@ -7,7 +7,6 @@ use App\User;
 use App\Project;
 use App\Task;
 use App\Client;
-use App\User;
 use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
