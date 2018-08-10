@@ -1,24 +1,52 @@
 @extends('layouts.structure')
 @section('csss')
-    @parent
- {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" /> --}}
+    {{-- @parent --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" />
 
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" /> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
     <link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-   
+   <style>
+     /*  .myBtn-group{
+            position: relative;
+            top:60%;
+            left:30%;
+       }*/
+       table.dataTable tbody tr.selected{background-color:#B0BED9;}
+   </style>
 @endsection
 
 @section('content')
+
+@include('flash::message')
+
 <div>
-    <input type="text" value="empty" disabled id="selectedIds">
-    <button type="button" id="mass_delete"
-    name="mass_delete" class="btn btn-danger btn-xs" disabled style="font-size: 0.5rem;">
-        <i class="fa fa-times fa-lg"></i>
-    </button>
-    <input type="button" id="btn_new" value="Ajouter">
-    <input type="button" id="btn_show" value="Afficher" disabled>
-    <input type="button" id="btn_edit" value="Modifier" disabled>
+    <input type="hidden" value="empty" disabled id="selectedIds" class="float-right">
+
+<div style="position: fixed;left:25%; top: 10%">
+    
+</div>
+    <div class="btn-group btn-group-lg text-light" id="myBtn-group"
+       {{--  style="position: fixed;left:25%; top: 10%"  --}}
+        {{-- style="position: relative;left:25%; top: 50%"  --}}
+        {{-- style="position: fixed;right: 3%;top:50%;" --}}>
+        <form action="{{ route($current.'.create') }}" id="form_add" method="get"></form>
+        <form action="" id="form_show" method="get"></form>
+        <form action="" id="form_edit" method="get"></form>
+
+        <button id="btn_new" class="btn btn-warning text-dark" onclick="$('#form_add').submit();" value="Ajouter">
+            <i class="fas fa-plus"></i>
+        </button>
+        <button id="btn_show" class="btn btn-success text-dark" onclick="$('#form_show').submit();" value="Afficher" disabled>
+            <i class="far fa-eye"></i>
+        </button>
+        <button id="btn_edit" class="btn btn-primary text-dark" onclick="$('#form_edit').submit();" value="Modifier" disabled>
+            <i class="fa fa-pencil-alt"></i>
+        </button>
+        <button type="button" id="mass_delete" class="btn btn-danger text-dark" disabled>
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
 </div>
         <table class="text-center table table-responsive-lg table-hover" style="width:100%" id="myTable">
             <thead class="">
@@ -40,7 +68,7 @@
 
     {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    {{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
     
    
@@ -53,6 +81,11 @@ $(function() {
     {
         serverSide: true,
         ajax: '{!! route('datatables.getdata',$current) !!}',
+         "rowCallback": function( row, data ) {
+            if ( $.inArray(data.id, selected) !== -1 ) {
+                $(row).addClass('selected');
+            }
+        },
         columns: [
             <?php
                 $ch="";
@@ -101,9 +134,13 @@ $(function() {
                         url:"{{ route('datatables.massremove',$current)}}",
                         method:"get",
                         data:{id:selected},
+                        // error:function(data){
+                        //     console.log('error\n'+data);
+                        // },
                         success:function(data)
                         {
-                            alert(data);
+                            console.log(data);
+                            // alert(data);
                             $('#myTable').DataTable().ajax.reload();
                         }
                     });
@@ -130,11 +167,18 @@ $(function() {
         $('#mass_delete').prop("disabled", (!selected.length>0));
 
         $('#btn_show,#btn_edit').prop("disabled", (selected.length!=1));
-
+        if (selected.length==1) {generateActions();}
         $('#selectedIds').val(selected);
 
         $(this).toggleClass('selected');
     } );
+    function generateActions(){
+        var myUrl = '{{ url('/').'/'.$current.'/'}}';
+        $('#form_show').attr('action',myUrl+selected[0]);
+        $('#form_edit').attr('action',myUrl+selected[0]+'/edit');
+        console.log(myUrl+'show/'+selected[0]);
+        console.log(myUrl+'edit/'+selected[0]);
+    }
 });
 </script>
 @endsection 

@@ -10,10 +10,10 @@ class UserPolicy
     use HandlesAuthorization;
     /*allow all actions to admin */
         public function before($user, $ability){
-          /*if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER') {
+          if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER') {
               return true;
           }else {  return false; }
-          */
+          
       }
 
 

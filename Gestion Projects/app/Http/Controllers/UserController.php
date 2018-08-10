@@ -54,8 +54,9 @@ $user=User::find($id);
 	public function index()
 	{
 		$us = User::all();
-
-		return view('Users.index')->withUsers($us);
+		$u = Auth::user();
+		
+		return view('Users.index')->withUsers($us)->withUser($u);
 	}
 
 	/**
@@ -86,7 +87,7 @@ $user=User::find($id);
 			'role' => $request->role,
 			'comment' => $request->comment,
 		]);
-		dd($request->all(),$u);
+		// dd($request->all(),$u);
 		$u->save();
 
 		flash('User Created Successfully !')->success();
