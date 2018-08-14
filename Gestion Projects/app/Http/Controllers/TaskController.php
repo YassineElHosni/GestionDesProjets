@@ -26,6 +26,34 @@ class TaskController extends Controller
         // dd($ts);
         return view('tasks.index' ,compact('ts'));
     }
+
+        /**
+         * Display a listing of the tasks employee.
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function MyTasks($id)
+        {
+
+          $id_ts=Task_User::where('user_id','=',$id)->get(['tasks_id']);/*get the tasks_id related to this user_id*/
+
+              foreach ($id_ts as $id_t) {/*for each task|user get :  */
+
+              $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
+              $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
+              $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
+
+                  foreach ($ts as $t) {
+                      //get the name of the project that the current task belongs to.
+                      $t->project_title=Project::find($t->project_id)->title;
+
+                  }
+              }
+
+
+             dd($ts);
+            return view('tasks.index' ,compact('ts'));
+        }
     /**
      * Show the form for creating a new resource.
      *
@@ -125,7 +153,7 @@ class TaskController extends Controller
           flash('Task Saved Successfully !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
-  
+
     /**
      * Update Task (Project Manager..)
      *

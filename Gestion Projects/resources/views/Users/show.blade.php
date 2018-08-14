@@ -76,7 +76,9 @@
     </div>
   </div>
       <hr>
+      @can('edit',$user)
       <form action="{{ route('Users.edit',$user->id) }}" method="get">
         <input type="submit" class="btn btn-primary float-right" value="Modifier">
       </form>
+      @endcan
 @endsection

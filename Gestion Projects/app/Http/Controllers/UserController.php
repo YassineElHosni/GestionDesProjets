@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;//added
 use App\Http\Controllers\Controller;
+use Session;
 use Auth;
 use App\User;
 use App\Task;
@@ -13,9 +14,12 @@ class UserController extends Controller
 {
 
 	public function __construct(){
-   if($this->middleware('auth')){
-  	$this->middleware('admin',['except' => ['showprofile','update_avatar','update']]);
-   }
+   /*allow guest to change his password */
+	 /*allow all users to update their profil avatar only*/
+	 /*only admin have access to all users database*/
+	 /*only Gerant & Admin can add users ..(Admin add Gerant) */
+  	$this->middleware('admin',['except' => ['showprofile','update_avatar','update','editPassword','updatePassword']]);
+
 	}
 
 	public function showprofile($id){
@@ -116,7 +120,28 @@ $user=User::find($id);
 		$u = User::find($id);
 			return view('Users.edit')->withUser($u);
 	}
+	/*
+	 *  form to edit your password
+	*/
+	public function editPassword()
+	{
 
+			return view('Mail.edit_Password');
+	}
+	/*
+	* modifierpassword
+	*/
+	public function updatePassword(Request $request)
+	{
+
+			$u = User::where('email','=',$request->email)->first();
+		$u->password = bcrypt($request->password);
+
+		$u->save();
+
+    flash('Mot de passe modifié Veuillez vous connecté !')->success();
+	  return	redirect()->route('login');
+	}
 	/**
 		* Update the specified resource in storage.
 		*

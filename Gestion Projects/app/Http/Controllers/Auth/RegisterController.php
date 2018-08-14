@@ -64,6 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+      dd('danger de mort');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -73,6 +74,6 @@ class RegisterController extends Controller
 
             //'rememberToken' => bcrypt($data['password_confirmation']),
         ]);
-        return redirect()->route('home');
+        return redirect()->route('home.index');
     }
 }

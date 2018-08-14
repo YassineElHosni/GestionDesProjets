@@ -32,7 +32,7 @@ h2{border-bottom:1px dashed green;color: green;}
 	<div class="form-group col-3">
 		<div class="card mr-4" style="width: 25rem;">
 			<div class="card-body form-inline">
-				<h5 class="card-title mr-3">Etat:</h5>
+				<h5 class="card-title mr-3">Etat:</h5>  <!-- state shld be in the right top  with soit a big c(clos) or a big ~(en cour..)-->
 				<p class="card-text">{{($project->state)?'en-cours':'clos'}}</p>
 			</div>
 		</div>
@@ -99,12 +99,12 @@ h2{border-bottom:1px dashed green;color: green;}
 		</div>
 	</div>
 </div>
-
+<!-- need to add action of adding task in that project..)-->
 <!-- display tasks related to this project -->
 <br><h3>Taches du Projet :</h3><br>
 <table class="table table-bordered">
 	<thead class="thead-dark">
-	<tr> 
+	<tr>
 		<th scope="col">Title</th>
 		<th scope="col">Date limite</th>
 		<th scope="col">State</th>

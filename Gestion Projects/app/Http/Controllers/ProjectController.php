@@ -69,7 +69,7 @@ class ProjectController extends Controller
         return redirect()->route('Projects.index');
     }
     /**
-     * D0isplay the  Project.
+     * Display the  Project.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -86,7 +86,18 @@ class ProjectController extends Controller
 
         return view('projects.show')->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
+    /**
+     * Display all  Projects of one Projects_Manager.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function ManagerProjets($id)
+    {
+        $ps = Project::where('user_id','Like',$id)->get();
 
+        return view('projects.index',compact('ps'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,120 +1,89 @@
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-success">
-	<a class="navbar-brand" href="{{ url('/#') }}">Projects Connect To All</a>
+<nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg justify-content-between">
+	<a class="navbar-brand mb-0 h1" href="{{ url('/#') }}"> <!-- logo / brand -->
+    <img src="/#" width="30" height="30" class="d-inline-block align-top" alt="">
+    Projects Connect To All
+  </a>
+
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 	data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
 	aria-label="Toggle navigation" style="">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div class="collapse navbar-collapse" id="navbarColor02">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				@yield('bouttons')
-				 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<!-- si non authentifié -->
-		</ul>
-		<ul class="nav navbar-right">
-		{{-- 	<li class="nav-item">
-				<a class="nav-link" href="#">yassine el hosni</a>
-			</li> --}}
-			<li class="nav-item">
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button"
-					id="dropdownMenuButton" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-						yassine el hosni
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Logout</a>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
-</nav>
-<br>
-<br>
-<br>
-<br>
-{{-- @if (Auth::guest())
-			<li class="nav-item"> --}}
-				{{-- <ul class="nav-item navbar-right"> --}}
-				{{-- <a class="nav-link" href="{{ route('login') }}">Login</a> --}}
+	<div class="collapse navbar-collapse" style=" position: relative;" media="" id="navbarColor02">
 
-				<!-- tester si db est vide -- if()..route('register') }}">Register</a>-->
-			{{-- </li> --}}
-	{{-- else si  authentifié --}}
-		{{-- 	<li class="nav-item">
-			<php $id=Auth::user()->id ?>
-			<a class="nav-link" href="#">Mon profile</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#">Gestion Utilisateurs</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#">Gestion Projets</a>
-			</li>
-			<li>
-			<a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
-			</li>
-		</ul>
-		<ul class="nav-item navbar-right">
-			<li class="nav-item">
-			<a class="nav-link" href="{{ route('logout') }}"
-			onclick="event.preventDefault();
-			document.getElementById('logout-form').submit();">
-			{{ Auth::user()->Nom }} <span class="caret"></span> Logout
-			</a>
+		<ul class="nav navbar-nav ml-auto ">
 
-			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-			{{ csrf_field() }}
-			</form>
-			</li>
-	endif --}}
+                           <!-- if (!Auth::guest())  si  authentifié -->
 
-		{{-- </ul> --}}
+             <div class="btn-group" role="group">
+							 <a class="btn btn-info" href="">Rapport</a>
+							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
+							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
+             </div>
 
-		{{-- <form class="form-inline my-2 my-lg-0">
-		<input class="form-control mr-sm-2" placeholder="Search" type="text">
-		<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-		</form> --}}
+						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
-             <li class="nav-item">
-                          @if (Auth::guest())
-                        <!--      <ul class="nav-item navbar-right">
-                             <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        -->
-                           <!-- tester si db est vide if()..route('register') }}">Register</a>-->
-                                </li>
-                              </ul>
-                            @else    <!-- si  authentifié -->
-                            @can('index',App\User::class)<!-- si  allowed -->
+								  <div class="btn-group" role="group">
+								    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								      Gestion Utilisateurs
+								    </button>
+								    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+								      <a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
+								      <a class="dropdown-item" href="{{route('Users.create')}}">Nouveau Utilisateur</a>
+								    </div>
+								  </div>
+
+									<div class="btn-group" role="group">
+									 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										 Gestion Projets
+									 </button>
+									 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										 <a class="dropdown-item" href="{{route('Projects.create')}}">Nouveau Projet</a>
+										 <a class="dropdown-item" href="{{route('Projects.index')}}">Liste des Projets</a>
+									 </div>
+								 </div>
+							</div>
+								 <div class="btn-group" role="group">
+									<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Gestion CLients
+									</button>
+									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										<a class="dropdown-item" href="{{route('Clients.create')}}">Nouveau Client</a>
+										<a class="dropdown-item" href="{{route('Clients.index')}}">Liste des Clients</a>
+									</div>
+								</div>
+
+
+                        <!-- can('index',App\User::class)  si  allowed
                               <li class="nav-item">
                                     <a class="nav-link" href="{{route('Users.index')}}">Gestion Utilisateurs</a>
                               </li>
-                            @endcan
-                              @can('index',App\Projects::class)
+                            endcan
+                              can('index',App\Projects::class)
                                  <li class="nav-item">
                                    <a class="nav-link" href="{{route('Projects.index')}}">Gestion Projets</a>
                                  </li>
-                              @endcan
-                             <!-- ADMIN / GERANT -> all tasks -->
+                              endcan
+                              ADMIN / GERANT -> all tasks
                                 <li class="nav-item">
                                       <a class="nav-link" href="{{route('Tasks.index')}}">Gestion des Taches</a>
                                 </li>
-                             <!-- EMPLOYEE / PROJECT_MANAGER -> his tasks & his projects-->
+                              EMPLOYEE / PROJECT_MANAGER -> his tasks & his projects
                                  <a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
-                                  </li>
+															 </li>  -->
+													 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+															 <a hidden href="{{route('Project.ManagerProjets',Auth::user()->id )}}" id="#notif{{Auth::user()->id}}"></a> <!-- notification-->
+															 <i class="btn btn-primary fa fa-bell-o mx-2" style="border-radius: 70%;font-size:18px;color:#ffffff;" onclick="$('#notif{{Auth::user()->id}}').click();" value="notif"></i>
 
                                   <div class="dropdown show float-right">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                      {{Auth::user()->name}}
 
                                     </a>
 
-                                      <div class="dropdown-menu float-right" aria-labelledby="dropdownMenuLink">
+                                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
 
                                         <a class="dropdown-item" href="{{route('User.profile',Auth::user()->id )}}"><i class="fa fa-btn fa-user mr-1"></i>Profile</a>
                                         <a class="dropdown-item" href="#" onclick="$('#logout-form').submit()"><i class="fa fa-btn fa-sign-out mr-1"></i>Logout</a>
@@ -123,13 +92,11 @@
 
                                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                               {{ csrf_field() }}
-                                            </form>
-                                        </li></ul>
+                                          </form>
+										       </div>
+							</ul>
+					</div>
 
-                              @endif
-                             </ul>
-
-   </div>
  </nav>
  <br>
  <br>
