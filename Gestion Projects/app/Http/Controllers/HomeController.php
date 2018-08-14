@@ -19,6 +19,12 @@ class HomeController extends Controller
 
      return($n=User::count()==0);//true -> empty ;; false -> full
    }
+   public function registerIndex(){
+        return view('auth.register');
+   }
+   public function adminRegisterIndex(){
+        return view('AdminRegistration');
+   }
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +53,7 @@ class HomeController extends Controller
 
         return view('index')->with('LastFewProjects',$ps)->with('LastFewTasks',$ts);
       }else
-        return view('AdminRegistration');
+        return redirect()->route('admin.register.index');
     }
     public function index2($name){
         return view('welcome')
@@ -84,16 +90,16 @@ class HomeController extends Controller
     {
         switch($name)
         {
-            case 'project' :
+            case 'Projects' :
                 $obj = Project::find($request->input('id'));
                 break;
-            case 'task' :
+            case 'Tasks' :
                 $obj = Task::find($request->input('id'));
                 break;
-            case 'client' :
+            case 'Clients' :
                 $obj = Client::find($request->input('id'));
                 break;
-            case 'user' :
+            case 'Users' :
                 $obj = User::find($request->input('id'));
                 break;
 
@@ -113,28 +119,29 @@ class HomeController extends Controller
     {
         switch($name)
         {
-            case 'project' :
+            case 'Projects' :
                 $obj = Project::whereIn('id', $request->input('id'));
                 break;
-            case 'task' :
+            case 'Tasks' :
                 $obj = Task::whereIn('id', $request->input('id'));
                 break;
-            case 'client' :
+            case 'Clients' :
                 $obj = Client::whereIn('id', $request->input('id'));
                 break;
-            case 'user' :
+            case 'Users' :
                 $obj = User::whereIn('id', $request->input('id'));
                 break;
 
-            case null :break;
             default :
                 return back()->with('message', 'nothing happened!');
-
-            if($obj->delete())
-            {
-                return back()->with('message', 'Data Deleted '.$request->input('id'));
-            }
-            return back()->with('message', 'nothing happened!!');
         }
+        if($obj->delete())
+        {   
+            flash('Data Deleted Successfully !')->success();
+            return back();
+        }
+    
+        flash('Nothing happened !')->success();
+        return back();
     }
 }
