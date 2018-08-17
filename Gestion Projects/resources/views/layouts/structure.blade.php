@@ -10,8 +10,9 @@
 </head>
 <body>
 
+	@if(Auth::user())
 		@include('partials._mainMenu')<!--Menu-->
-
+	@endif
 			<div class="container"><!--Content-->
 				@yield('content')
 
