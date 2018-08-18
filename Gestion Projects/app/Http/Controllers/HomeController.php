@@ -25,6 +25,29 @@ class HomeController extends Controller
    public function adminRegisterIndex(){
         return view('AdminRegistration');
    }
+   public function firstAdminStore(Request $request){
+        $this->validate($request, [
+            'name' => 'required|min:3|max:50',
+            'email' => 'email',
+            'comment' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ]);
+//         if ($validator->fails())
+// {
+//     // The given data did not pass validation
+// }
+        $u = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'ADMIN',
+            'comment' => $request->comment,
+        ]);
+         // dd($request->all(),$u);
+        $u->save();
+
+        return  redirect()->route('login');
+   }
     /**
      * Display a listing of the resource.
      *
