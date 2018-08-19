@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-
 <div class="container">
 
 
@@ -20,7 +16,7 @@ $start = $start->format('N')==='1' ? $start : $month->getStartingDay()->modify('
 $weeks=$month->getWeeks();//nbr de weeks
 
 $end=(clone $start)->modify('+'.(6 + 7 * ($weeks -1)).'days');/*ajouter un nbr de jours qui dépend du nbr de semaines*/
-var_dump($start,$end);
+//var_dump($start,$end);
 
 $actual_link = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";/* http:// http url only*/
 $path_only=parse_url($actual_link, PHP_URL_PATH);/*without values*/
@@ -35,17 +31,19 @@ var_dump($events);
 echo '</pre>';*/
 ?>
 
-<div style=" width: 24%;height: 20%;" class="d-flex flex-row align-items-center justify-content-between mx-sm-4">
+<div style=" width: 24%;height: 20%;" class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
 
 
   <a href="{{$path_only}}?month=<?= $month->previousMonth()->month;?>&year=<?= $month->previousMonth()->year;?> " id="prev" class="flech__prev">
    <i style="float: left;border-radius: 70%;font-size:30px;" class="fa" onclick="$('#prev').click();">&#xf104;</i>
     </a>
+    <p  style=" padding-bottom: 5px;
+         border-bottom: 1px solid #d6d6d6;color:grey;
+         font: italic bold 30px/30px Georgia, serif;" class="month__header"><?= $month->toString(); ?></p> <!-- pour afficher le Mois : <h1>Janvier 2018<h1>-->
 
     <a href="{{$path_only}}?month=<?= $month->nextMonth()->month;?>&year=<?= $month->nextMonth()->year;?>" id="next" class="flech__next">
       <i style="  float:right;border-radius: 70%;font-size:30px;" class="flech__next__i fa"onclick="$('#next').click();">&#xf105;</i>
     </a>
-<h3 style="text-align: center;padding-bottom: 10px;border-bottom: 1px solid #d6d6d6;" class="month__header"><?= $month->toString(); ?></h3> <!-- pour afficher le Mois : <h1>Janvier 2018<h1>-->
 
 
 </div>
@@ -72,10 +70,6 @@ echo '</pre>';*/
 
       //  $eventsForDay= $events[$date->format('Y-m-d')] ?? [];Null Coalescing Operator??!! ?>
 
-
-        <!--  php if ($i === 0): ?> j'affiche les jours juste pour la 1ere semaine ($i==0)
-            <div class="calendar__weekday">= $day; </div> nom du jour
-           endif ; -->
 
         <?php if ($month->Iscurrentdate($date)):?><!--la class calendar__active vas s'activer si la date est courrante -->
 
@@ -134,4 +128,3 @@ function myfreeday_out(){
 
 
 </div>
-@endsection

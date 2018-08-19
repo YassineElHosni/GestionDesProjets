@@ -1,9 +1,9 @@
-.month__header h3{
-  position: relative;
+.month__header p{
+
      text-align: center;
      padding-bottom: 10px;
      border-bottom: 1px solid #d6d6d6;
-
+    font: italic bold 30px/30px Georgia, serif;
 }
 .flech__prev a{
 position: fixed;
@@ -20,14 +20,17 @@ font-size:50px;
 }
 
 .calendar__table table{
-
+   border-radius: 25px;
   margin: 100px auto;
+  height: 21.875em;
   background-color: lightgray;
   font-family: 'Kanit', sans-serif;
    width: 70%; /* largeure */
-   height: calc(70vh - 128px);/*100% de la hauteur de ma page -128px*/
+   /*height: calc(80vh - 128px);*/
 }
+
 .calendar__table td{
+
   padding: 10px;
  border: 1px solid #CCC;
  vertical-align: top;
@@ -40,22 +43,23 @@ font-size:50px;
 }
 
 .calendar__weekday{
-  font-weight: bold; /*en gras*/
+  font: italic bold 10px/15px Georgia, serif;
   color: #0273B8;
    background-color: #ddd;
-  font-size: 1.2em;
-  border-bottom: 1px solid;
+  font-size: 1.0em;
+  border-bottom: 2px solid;
   margin: 0;
   padding: 10px 0;
 }
 .calendar__othermonth {/*pr les jours d'autre mois*/
-font-weight: bold;
+
+font: italic bold 14px/14px Georgia, serif;
 color: black;
   opacity: 0.3;
 
 }
 .calendar__active_othermonth {/*date courante && autre mois*/
-  font-weight: bold;
+  font: italic bold 14px/14px Georgia, serif;
    background-color: lightgrey;
     border-style: solid;
     border-width: 2px;
@@ -66,12 +70,12 @@ color: black;
 }
 .calendar__freedays{/*jours férié*/
   color: #0273B8;
-  background-color: lightblue;
-  font-weight: bold;
+  background-color: #d6d6d6;
+  font: italic bold 14px/14px Georgia, serif;
 }
 .calendar__active__freedays {/*date courrante && freeday*/
   border-radius: 50px;
-  background-color: lightblue;
+  background-color: #d6d6d6;
 }
 .calendar__active {/*date courrante*/
   font-weight: bold;
@@ -81,12 +85,12 @@ color: black;
 
 }
 .calendar__day {/*normal day*/
-  font-weight: bold;
+  font: italic bold 14px/14px Georgia, serif;
   color: black;
   opacity: 1;
 }
 .calendar__day__today{
-  font-weight: bold;
+  font: italic bold 14px/14px Georgia, serif;
   color:#00589D;
   opacity: 1;
 }
@@ -97,7 +101,7 @@ color: black;
   opacity: 0.3;
 }
 .calendar__day__free{ /*jour férié*/
-  font-weight: bold;
+  font: italic bold 14px/14px Georgia, serif;
   color:#26C216;
   opacity: 1;
 }
