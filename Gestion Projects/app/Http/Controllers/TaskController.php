@@ -35,9 +35,9 @@ class TaskController extends Controller
         public function MyTasks($id)
         {
 
-          $id_ts=Task_User::where('user_id','=',$id)->get(['tasks_id']);/*get the tasks_id related to this user_id*/
-
-              foreach ($id_ts as $id_t) {/*for each task|user get :  */
+          $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
+          
+              //foreach ($id_ts as $id_t) {/*for each task|user get :  */
 
               $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
               $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
@@ -48,10 +48,9 @@ class TaskController extends Controller
                       $t->project_title=Project::find($t->project_id)->title;
 
                   }
-              }
+              //}
 
 
-             dd($ts);
             return view('tasks.index' ,compact('ts'));
         }
     /**

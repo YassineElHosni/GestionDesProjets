@@ -66,10 +66,10 @@ $(document).ready( function () {
 					onmouseover="$('#voir{{$u->id}}').val('voir');"
 					onmouseout="$('#voir{{$u->id}}').val('v');" --}}
 				value="v"></i>
-        @can('edit',$us)
+        @can('edit',App\User::class)
 				<i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
         @endcan
-        @can('delete',$us)
+        @can('delete',App\User::class)
 				<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$u->id}}').click();" value="s"></i>
         @endcan
       </div>

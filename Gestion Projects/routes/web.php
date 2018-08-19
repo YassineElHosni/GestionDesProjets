@@ -14,7 +14,7 @@ Auth::routes();
 
 
 Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');
-Route::get('/admin/register/save', 'UserController@store')->name('admin.register.save');
+Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 
 Route::get('/register', 'HomeController@registerIndex')->name('register.index');
 Route::get('/register/save', 'UserController@store')->name('register.save');
