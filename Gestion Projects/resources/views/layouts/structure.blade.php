@@ -16,7 +16,7 @@
 
 	<div class="left-side">
 		<!--display calendar -->
-		@include('mycalendar')
+		@include('Calendars.mycalendar')
 	</div>
 	<div class="right-side">
 			<div class="container"><!--Content-->

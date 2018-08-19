@@ -9,6 +9,7 @@ use App\Project;
 use App\User;
 use App\Client;
 use Session;
+use Carbon\Carbon;
 class ProjectController extends Controller
 {
     /**
@@ -49,13 +50,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+      // get the current time  - 2015-12-19 10:10:54
+      $current=Carbon::now();
+      $current=new Carbon();
+      $current=$current->format('Y-m-d H:m:s');
+  
         /*storing all the new data in new project*/
         $newProjet = new project([
               'title' => $request->title,
               'description' => $request->description,
               'limitDate' => $request->limitDate,
-              'startDate' => '2018-07-26 11:36:04',
-              'finishDate' => '2018-07-26 11:36:04',
+              'startDate' => $current,
+              'finishDate' => '0000-00-00 00:00:00',
               'displacement' =>($request->has('displacement')),
               'state' =>($request->state_RadioBtn),
               'comment' => $request->comment,
@@ -124,17 +130,25 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+      // get the current time  - 2015-12-19 10:10:54
+      $current=Carbon::now();
+      $current=new Carbon();
+
       $project =Project::find($id);
 
       $project->title =$request->title;
       $project->description =$request->description;
       $project->limitDate =$request->limitDate;
       $project->displacement =($request->has('displacement'));//true == 1 == oui and false == 0 == no
-      $project->state =($request->state_RadioBtn);//true == 1 == en-cours and false == 0 == fini
+      $project->state =($request->state_RadioBtn);//true == 1 == en-cours and false == 0 == clos
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
 
-
+      if(  $project->state ==0){/*si le projet est clos*/
+          $project->finishDate=$current;/*on precise la date de fin*/
+      }else{
+         $project->finishDate='0000-00-00 00:00:00';
+      }
       $project->save();
 
       flash('Project Saved Successfully !')->success();

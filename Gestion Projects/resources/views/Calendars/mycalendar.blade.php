@@ -17,7 +17,7 @@ function calendarflow(){
 </button>
 <br>
 
-    <div style="display:none" id="calendrier" >
+    <div style="display:block" id="calendrier" >
 <?php
 require '../app/Calendar/Month.php';//je charge Month Class
 //require '../app/Calendar/Projets.php';!!

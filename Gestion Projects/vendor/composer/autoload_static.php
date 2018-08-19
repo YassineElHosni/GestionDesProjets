@@ -299,6 +299,10 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
             ),
+            'MaddHatter\\LaravelFullcalendar' => 
+            array (
+                0 => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src',
+            ),
         ),
         'L' => 
         array (
@@ -340,7 +344,7 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
     );
 
     public static $classMap = array (
-        'AddAvatarToUsers' => __DIR__ . '/../..' . '/database/migrations/2018_08_06_081116_add_avatar_to_users.php',
+        'AddAvatarToUsers' => __DIR__ . '/../..' . '/database/migrations/addAvatar/2018_08_06_081116_add_avatar_to_users.php',
         'AddClientFkeyToProject' => __DIR__ . '/../..' . '/database/migrations/m6/2018_07_20_112939_add_client_fkey_to_project.php',
         'AddProjectFkeyToTask' => __DIR__ . '/../..' . '/database/migrations/m8/2018_07_20_104448_add_project_fkey_to_task.php',
         'AddUserFkeyToProject' => __DIR__ . '/../..' . '/database/migrations/m7/2018_07_20_122020_add_user_fkey_to_project.php',
@@ -351,20 +355,23 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/CalendarController.php',
         'App\\Http\\Controllers\\ClientController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ProjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectController.php',
         'App\\Http\\Controllers\\TaskController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaskController.php',
-
-        'App\\Http\\Controllers\\UploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/UploadController.php',
-
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\CheckAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckAdmin.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Policies\\ClientPolicy' => __DIR__ . '/../..' . '/app/Policies/ClientPolicy.php',
+        'App\\Policies\\ProjectPolicy' => __DIR__ . '/../..' . '/app/Policies/ProjectPolicy.php',
+        'App\\Policies\\TaskPolicy' => __DIR__ . '/../..' . '/app/Policies/TaskPolicy.php',
+        'App\\Policies\\UserPolicy' => __DIR__ . '/../..' . '/app/Policies/UserPolicy.php',
         'App\\Project' => __DIR__ . '/../..' . '/app/Project.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -390,7 +397,7 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
         'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
         'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
         'CreateClientsTable' => __DIR__ . '/../..' . '/database/migrations/m3/2018_07_20_111540_create_clients_table.php',
-        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/m1/2014_10_12_100000_create_password_resets_table.php',
+        'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/passwordReset/2014_10_12_100000_create_password_resets_table.php',
         'CreateProjetUserTable' => __DIR__ . '/../..' . '/database/migrations/mPivot2/2018_07_20_074455_create_projet_user_table.php',
         'CreateProjetsTable' => __DIR__ . '/../..' . '/database/migrations/m3/2018_07_16_084703_create_projets_table.php',
         'CreateTacheUserTable' => __DIR__ . '/../..' . '/database/migrations/mPivot1/2018_07_19_122856_create_tache_user_table.php',
@@ -1235,7 +1242,7 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
-        'FullDataBaseRename' => __DIR__ . '/../..' . '/database/migrations/2018_07_31_084652_fullDataBaseRename.php',
+        'FullDataBaseRename' => __DIR__ . '/../..' . '/database/migrations/new full migration/2018_07_31_084652_fullDataBaseRename.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -2082,6 +2089,13 @@ class ComposerStaticInit62a25033dee10cd8589994a39e214a37
         'League\\Flysystem\\Util\\ContentListingFormatter' => __DIR__ . '/..' . '/league/flysystem/src/Util/ContentListingFormatter.php',
         'League\\Flysystem\\Util\\MimeType' => __DIR__ . '/..' . '/league/flysystem/src/Util/MimeType.php',
         'League\\Flysystem\\Util\\StreamHasher' => __DIR__ . '/..' . '/league/flysystem/src/Util/StreamHasher.php',
+        'MaddHatter\\LaravelFullcalendar\\Calendar' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Calendar.php',
+        'MaddHatter\\LaravelFullcalendar\\Event' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Event.php',
+        'MaddHatter\\LaravelFullcalendar\\EventCollection' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/EventCollection.php',
+        'MaddHatter\\LaravelFullcalendar\\Facades\\Calendar' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/Facades/Calendar.php',
+        'MaddHatter\\LaravelFullcalendar\\IdentifiableEvent' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/IdentifiableEvent.php',
+        'MaddHatter\\LaravelFullcalendar\\ServiceProvider' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/ServiceProvider.php',
+        'MaddHatter\\LaravelFullcalendar\\SimpleEvent' => __DIR__ . '/..' . '/maddhatter/laravel-fullcalendar/src/MaddHatter/LaravelFullcalendar/SimpleEvent.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',

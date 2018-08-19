@@ -57,7 +57,7 @@ $this->middleware('admin',['except' => ['show']]);
 		$c->save();
 
 		flash('Client Created Successfully !')->success();
-		return route('Clients.show',$c->id)->withClient($c);
+		return redirect()->route('Clients.show',$c->id)->withClient($c);
 	}
 
 	/**

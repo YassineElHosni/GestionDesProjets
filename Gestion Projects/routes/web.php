@@ -47,5 +47,6 @@ Route::get('datatables/getdata/{name}', 'HomeController@getData')->name('datatab
 
 // Route::get('ajaxdata/removedata/{name}', 'HomeController@removedata')->name('datatables.removedata');
 Route::get('ajaxdata/massremove/{name}', 'HomeController@massremove')->name('datatables.massremove');
-
+Route::get('calendar','CalendarController@index')->name('calendar.index');
+Route::post('calendar','CalendarController@addProject')->name('calendar.addProject');
 ?>

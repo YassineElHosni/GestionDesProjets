@@ -182,6 +182,8 @@ return [
 
         //dataTable
         Yajra\DataTables\DataTablesServiceProvider::class,
+       /*calendar*/
+       MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
     ],
 
@@ -238,9 +240,11 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         /*added Flush mssgs*/
          'Flash' => Laracasts\Flash\Flash::class,
-
-         //
+         /**/
          'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
+         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+
     ],
 
 ];

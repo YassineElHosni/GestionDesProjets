@@ -9,10 +9,11 @@
 @section('content')
 @include('flash::message')
 
-<style> h2{ color: green; } </style>
+
  <div class="page-header">
 		<div class="form-group align-center">
-			     	 <h2>Nouveau Projet </h2>  </div>
+			     	<h2 style="color :green" >Nouveau Projet </h2>
+	  </div>
 </div>
 <br><br>
 <form role="form" method="post" action="{{action('ProjectController@store')}}">
@@ -33,6 +34,15 @@
 			<input class="form-check-input" type="radio" name="state_RadioBtn" id="Clos_RadioBtn" value="0">
 			<label class="form-check-label" for="Clos_RadioBtn">clos</label>
 		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-form-label">Client</label>
+		<select name = "client_id[]" id="client_id" class="form-control">
+			@foreach ($clients as $client)
+				<option value="{{ $client['id'] }}">{{ $client['name'] }}</option>
+			@endforeach
+		</select>
 	</div>
 
 	<div class="form-group">
@@ -65,7 +75,7 @@
 
 	<div class="form-group">
 		<label class="col-form-label">Commentaire</label>
-		<input type="text" class="form-control" name="comment" value="comment">
+		<textarea class="form-control" rows="6" name="comment" id="comment"></textarea>
 	</div>
 
 	<div class="form-group">
@@ -73,15 +83,6 @@
 		<select name = "user_id[]" id="user_id" class="form-control">
 			@foreach ($project_managers as $project_manager)
 				<option value="{{ $project_manager['id'] }}">{{ $project_manager['name'] }}</option>
-			@endforeach
-		</select>
-	</div>
-
-	<div class="form-group">
-		<label class="col-form-label">Client</label>
-		<select name = "client_id[]" id="client_id" class="form-control">
-			@foreach ($clients as $client)
-				<option value="{{ $client['id'] }}">{{ $client['name'] }}</option>
 			@endforeach
 		</select>
 	</div>
