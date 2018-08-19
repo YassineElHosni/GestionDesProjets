@@ -1,5 +1,6 @@
 .month__header p{
-
+  width: 40%;
+  height: 40%;
      text-align: center;
      padding-bottom: 10px;
      border-bottom: 1px solid #d6d6d6;
@@ -22,13 +23,11 @@ font-size:50px;
 .calendar__table table{
    border-radius: 25px;
   margin: 100px auto;
-  height: 21.875em;
   background-color: lightgray;
   font-family: 'Kanit', sans-serif;
    width: 70%; /* largeure */
-   /*height: calc(80vh - 128px);*/
+   height: calc(80vh - 128px);
 }
-
 .calendar__table td{
 
   padding: 10px;
@@ -105,7 +104,7 @@ color: black;
   color:#26C216;
   opacity: 1;
 }
-#freeday_title{
+#freeday_title{ /* displaying title onmouseover*/
   font-weight: bold;
   border-radius: 2px 15px 15px 15px;
   background-color: lightgreen;

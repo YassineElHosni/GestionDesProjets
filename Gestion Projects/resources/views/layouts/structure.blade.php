@@ -13,12 +13,18 @@
 	@if(Auth::user())
 		@include('partials._mainMenu')<!--Menu-->
 	@endif
-			<div class="container"><!--Content-->
 
+	<div class="left-side">
+		<!--display calendar -->
+		@include('mycalendar')
+	</div>
+	<div class="right-side">
+			<div class="container"><!--Content-->
 
 				@yield('content')
 
 			</div>
+  </div>
 
 		@include('partials._footer')<!--footer-->
 

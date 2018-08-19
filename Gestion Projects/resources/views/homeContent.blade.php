@@ -30,7 +30,7 @@
     @endforeach
   </div>
   <div class="col-md-6">
-    @include('mycalendar')
+    
   </div>
 </div>
 </div>

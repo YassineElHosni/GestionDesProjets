@@ -1,8 +1,23 @@
 <div class="container">
+<script>
 
+function calendarflow(){
+  if($('#calendrier').is(':visible')){
+  document.getElementById('calendrier').style.display="none";
+}else{
+  document.getElementById('calendrier').style.display="block";
+}
+}
 
+</script>
 <!--mon agenda -->
-<div>Agenda :</div>
+
+<button style="width: 90%;"class="btn btn-primary" onclick="calendarflow()">
+  <i class="fas fa-calendar-alt">Aganda</i>
+</button>
+<br>
+
+    <div style="display:none" id="calendrier" >
 <?php
 require '../app/Calendar/Month.php';//je charge Month Class
 //require '../app/Calendar/Projets.php';!!
@@ -30,8 +45,8 @@ $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https"
 var_dump($events);
 echo '</pre>';*/
 ?>
-
-<div style=" width: 24%;height: 20%;" class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
+<br>
+<div style=" " class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
 
 
   <a href="{{$path_only}}?month=<?= $month->previousMonth()->month;?>&year=<?= $month->previousMonth()->year;?> " id="prev" class="flech__prev">
@@ -125,6 +140,6 @@ function myfreeday_out(){
 </tbody>
 </table>
 
-
+</div>
 
 </div>
