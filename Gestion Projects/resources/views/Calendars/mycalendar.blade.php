@@ -34,7 +34,9 @@ $end=(clone $start)->modify('+'.(6 + 7 * ($weeks -1)).'days');/*ajouter un nbr d
 //var_dump($start,$end);
 
 $actual_link = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";/* http:// http url only*/
+
 $path_only=parse_url($actual_link, PHP_URL_PATH);/*without values*/
+
 //var_dump($actual_link,$path_only);
 /*to support both http & https url
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -49,14 +51,14 @@ echo '</pre>';*/
 <div style=" " class="d-flex flex-row align-items-center justify-content-between mx-sm-5">
 
 
-  <a href="{{$path_only}}?month=<?= $month->previousMonth()->month;?>&year=<?= $month->previousMonth()->year;?> " id="prev" class="flech__prev">
+  <a href="?month=<?= $month->previousMonth()->month;?>&year=<?= $month->previousMonth()->year;?> " id="prev" class="flech__prev">
    <i style="float: left;border-radius: 70%;font-size:30px;" class="fa" onclick="$('#prev').click();">&#xf104;</i>
     </a>
     <p  style=" padding-bottom: 5px;
          border-bottom: 1px solid #d6d6d6;color:grey;
          font: italic bold 30px/30px Georgia, serif;" class="month__header"><?= $month->toString(); ?></p> <!-- pour afficher le Mois : <h1>Janvier 2018<h1>-->
 
-    <a href="{{$path_only}}?month=<?= $month->nextMonth()->month;?>&year=<?= $month->nextMonth()->year;?>" id="next" class="flech__next">
+    <a href="?month=<?= $month->nextMonth()->month;?>&year=<?= $month->nextMonth()->year;?>" id="next" class="flech__next">
       <i style="  float:right;border-radius: 70%;font-size:30px;" class="flech__next__i fa"onclick="$('#next').click();">&#xf105;</i>
     </a>
 
