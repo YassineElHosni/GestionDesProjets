@@ -9,23 +9,30 @@
 
 </head>
 <body>
+	
+	@include('partials._mainMenu')<!--Menu-->
 
 	@if(Auth::user())
-		@include('partials._mainMenu')<!--Menu-->
-	@endif
 
-	<div class="left-side">
-		<!--display calendar -->
-		@include('Calendars.mycalendar')
-	</div>
-	<div class="right-side">
+			<div class="left-side">
+				<!--display calendar -->
+				@include('Calendars.mycalendar')
+			</div>
+			<div class="right-side">
+					<div class="container"><!--Content-->
+
+						@yield('content')
+
+					</div>
+		  </div>
+  @else
+
 			<div class="container"><!--Content-->
 
 				@yield('content')
 
 			</div>
-  </div>
-
+	@endif
 		@include('partials._footer')<!--footer-->
 
 	@section('jss')	<!--javaScripts-->

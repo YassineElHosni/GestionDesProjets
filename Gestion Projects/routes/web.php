@@ -32,6 +32,7 @@ Route::get('Tasks/delete/{id}/{empid}','TaskController@deleteEmployee')->name('T
 Route::get('Tasks/add/{id}/{empid}','TaskController@addEmployee')->name('Tasks.addEmployee');
 
 Route::get('/{id}/myTasks','TaskController@MyTasks')->name('Tasks.MyTasks');
+Route::get('/addTask/{id}','TaskController@addTaskToPrj')->name('Tasks.addTaskToPrj');/* ~~ */
 
 Route::resource('Clients','ClientController');
 Route::resource('Users','UserController');

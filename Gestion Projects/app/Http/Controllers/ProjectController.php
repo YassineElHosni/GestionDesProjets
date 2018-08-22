@@ -50,18 +50,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-      // get the current time  - 2015-12-19 10:10:54
-      $current=Carbon::now();
-      $current=new Carbon();
-      $current=$current->format('Y-m-d H:m:s');
-  
+
         /*storing all the new data in new project*/
         $newProjet = new project([
               'title' => $request->title,
               'description' => $request->description,
               'limitDate' => $request->limitDate,
-              'startDate' => $current,
-              'finishDate' => '0000-00-00 00:00:00',
+              'startDate' => date('Y-m-d H:i:s'),
+               //'finishDate' => '0000-00-00 00:00:00', NULL
               'displacement' =>($request->has('displacement')),
               'state' =>($request->state_RadioBtn),
               'comment' => $request->comment,
@@ -89,8 +85,11 @@ class ProjectController extends Controller
         $u=User::find($p->user_id);
 
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
-
-        return view('projects.show')->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
+             foreach($tasks as $task){/*get the users_id related to this task_id*/
+               $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
+               $tasks->worker=User::where('id','=',$ids_user);
+             }
+        return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
     /**
      * Display all  Projects of one Projects_Manager.
@@ -147,7 +146,7 @@ class ProjectController extends Controller
       if(  $project->state ==0){/*si le projet est clos*/
           $project->finishDate=$current;/*on precise la date de fin*/
       }else{
-         $project->finishDate='0000-00-00 00:00:00';
+        // $project->finishDate='0000-00-00 00:00:00';
       }
       $project->save();
 

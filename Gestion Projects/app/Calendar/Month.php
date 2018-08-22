@@ -31,6 +31,8 @@ if($month <1 ){/*if we enter a mistaken number of month it will go back to last 
 }
 if($month >=1 && $month <12 ){
 $month =$month %12;/*ne fonctionne pas avec Decembre 12%12 ==0 */
+}else{/* decembre*/
+  $month = 12;
 }
 
  $this->month= $month;
@@ -70,8 +72,11 @@ public function getWeeks(): int {
 
 $start=$this->getStartingDay(); /*format date début du mois*/
 $end= (clone $start)->modify('+1 month -1 day');/*date de fin du mois-> modification de la copie de $start */
+if($this->month==12){  /*tjr 31 jours en decembre*/
+$weeks= 6;/* 4 weeks and 2 days*/
+}else{
 $weeks= intval($end->format('W'))- intval($start->format('W'))+1;/*nbr de semaine ds ce mois*/
-
+}
 /* format('W'): Numéro de semaine dans l'année  Exemple : 42 (la 42ème semaine de l'année)*/
 
 

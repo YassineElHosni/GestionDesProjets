@@ -78,7 +78,7 @@ color: black;
 }
 .calendar__active {/*date courrante*/
   font-weight: bold;
-  background-color: #00589D;
+  background-color: lightblue;
   border-radius: 50px;
   color: #ffffff;
 

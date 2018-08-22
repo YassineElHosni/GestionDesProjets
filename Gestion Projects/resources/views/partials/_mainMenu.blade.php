@@ -15,14 +15,24 @@
 
 		<ul class="nav navbar-nav ml-auto ">
 
-                           <!-- if (!Auth::guest())  si  authentifié -->
+          @if (!Auth::guest()) <!-- si  authentifié -->
+                <!--can('index',App\Task::class)   si  employee ou chef-projet -->
 
              <div class="btn-group" role="group">
 							 <a class="btn btn-info" href="">Rapport</a>
+               <a class="btn btn-info" href="{{route('calendar.index')}}">Calendrier des Projets</a>
 							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
 							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
              </div>
-
+						 <div class="btn-group" role="group">
+							 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								 Gestion Taches
+							 </button>
+							 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                 <a class="dropdown-item" href="{{route('Tasks.create')}}">Nouvelle Tache</a>
+								 <a class="dropdown-item" href="{{route('Tasks.index')}}">Liste Taches</a>
+							 </div>
+						 </div>
 						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
 								  <div class="btn-group" role="group">
@@ -30,8 +40,8 @@
 								      Gestion Utilisateurs
 								    </button>
 								    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+											<a class="dropdown-item" href="{{route('Users.create')}}">Nouveau Utilisateur</a>
 								      <a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
-								      <a class="dropdown-item" href="{{route('Users.create')}}">Nouveau Utilisateur</a>
 								    </div>
 								  </div>
 
@@ -96,7 +106,7 @@
 										       </div>
 							</ul>
 					</div>
-
+    @endif
  </nav>
  <br>
  <br>

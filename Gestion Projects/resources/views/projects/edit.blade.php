@@ -73,7 +73,7 @@
 			  <input class="form-check-input ml-3" type="radio" name="state_RadioBtn" id="Clos_RadioBtn" value="0"<?php echo (!$p->state)?'checked':'' ?>>
 			  <label class="form-check-label" for="Clos_RadioBtn">clos</label>
 			</div>
-		</div>	
+		</div>
   </div>
 </div>
 
@@ -102,7 +102,7 @@
   </div>
 
  <hr>
- <button type="submit" name="submit" class="btn btn-primary float-right">Save</button>
+ <button type="submit" name="submit" class="btn btn-primary float-right">Enregistrer</button>
     </form>
 
 </div>

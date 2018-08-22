@@ -21,7 +21,17 @@
 				<div class="card mr-4" style="width:61rem;">
 					<div class="card-body">
 						<h5>Priorité:
-							<span class="badge badge-primary badge-pill float-right">{{$task->priority }}</span>
+								<span class="badge badge-primary badge-pill float-right ml-4">{{$task->priority }}</span>
+							@if($task->priority==1)
+								  <div style="color:red;font-weight:bold" class="float-right "> Très Urgent </div>
+								@elseif($task->priority==2)
+									  <div style="color:orange;font-weight:bold" class="float-right ">Urgent </div>
+										 @elseif($task->priority==3)
+											  <div style="color:yellow;font-weight:bold" class="float-right ">Normal </div>
+												@else
+												   <div style="color:green;font-weight:bold" class="float-right ">Peut attendre </div>
+							@endif
+
 						</h5>
 					</div>
 				</div>
@@ -55,7 +65,12 @@
 					<div class="card mr-4"style="width: 30rem;">
 						<div class="card-body form-inline">
 							<h5 class="card-title mr-3">Progression:</h5>
-							<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+							  @can('updateProgress',$task,$users)<!-- only a worker can edit the progress -->
+								<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+								@endcan
+								@cannot('create', App\Post::class)<!-- the disabled range-progress is showed to other visitors-->
+							<input disabled type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+                @endcannot
 							<span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
 						</div>
 					</div>
@@ -85,12 +100,13 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- button save -->
-		<button type="submit" name="submit" class="btn btn-success float-right mr-4">Save</button>
+  @can('updateProgress',$task,$users)<!-- only a worker can edit the progress -->
+		<button type="submit" name="submit" class="btn btn-success float-right mr-4">Enregistrer</button>
+	@endcan
 	</form>
 <br>
 <br>
+<!-- if user allowed action he can add workers for this task -->
 	<h3>Current Workers:</h3>
 	<table class="table table-bordered">
 		<thead class="thead-light">

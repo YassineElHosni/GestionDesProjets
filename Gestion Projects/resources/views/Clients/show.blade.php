@@ -15,7 +15,7 @@
 </div>
 <br>
   <form action="{{ route('Clients.edit',$client->id) }}" method="get">
-    <input type="submit" value="Modifier" class="btn btn-primary float-right">
+  	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
   </form>
 <br><hr>
 

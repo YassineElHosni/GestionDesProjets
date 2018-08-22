@@ -17,6 +17,7 @@
 		{{-- <th>description</th> --}}
 		{{-- <th scope="col">date limite</th> --}}
 		<th scope="col">date debut</th>
+    <th scope="col">date limite</th>
 		<th scope="col">date fin</th>
 		<th scope="col">deplacement</th>
 		<th scope="col">etat</th>
@@ -28,43 +29,48 @@
 </thead>
 <tbody>
 	@foreach($ps as $p)
-	<tr>
-		<td scope="row">{{$p->title}}</th>
-		{{-- <td>{{$p->description}}</td> --}}
-		<td>{{$p->client_name}}</td>
-		{{-- <td>{{date('Y-m-d', strtotime($p->limitDate))}}</td> --}}
-		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
-		<td>{{date('Y-m-d', strtotime($p->finishDate))}}</td>
-		<td>{{($p->displacement)?'Oui':'No'}}</td>
-		<td>{{($p->state)?'en-cours':'clos'}}</td>
-		<td>
-		<td>
-			<form action="{{ route('Projects.show',$p->id) }}" method="get">
-				<input hidden type="submit" id="show{{$p->id}}" class="btn btn-primary">
-			</form>
-			<form action="{{ route('Projects.edit',$p->id) }}" method="get">
-				<input hidden type="submit" id="edit{{$p->id}}" class="btn btn-primary">
-			</form>
-			<form action="{{ route('Projects.destroy',$p->id) }}" method="post">
-				{!! method_field('delete') !!}
-				{!! csrf_field() !!}
-				<input hidden type="submit" class="btn btn-danger" id="delete{{$p->id}}">
-			</form>
-			<div class="btn-group" role="group" aria-label="Basic example">
-				<input type="submit" class="btn btn-success" onclick="$('#show{{$p->id}}').click();"
-					{{-- id="voir{{$p->id}}"
-					onmouseover="$('#voir{{$p->id}}').val('voir');"
-					onmouseout="$('#voir{{$p->id}}').val('v');" --}}
-				value="v">
-        @can('edit',Auth::user())
-				<input type="submit" class="btn btn-primary" onclick="$('#edit{{$p->id}}').click();" value="m">
-        @endcan
-        @can('delete',Auth::user())
-      	<input type="submit" class="btn btn-danger" onclick="$('#delete{{$p->id}}').click();" value="s">
-        @endcan
-      </div>
-		</td>
-	</tr>
+    @if($p->state=='clos')
+  	<tr class="table-success">
+    @else
+    <tr>
+    @endif
+  		<td scope="row">{{$p->title}}</th>
+  		{{-- <td>{{$p->description}}</td> --}}
+  		<td>{{$p->client_name}}</td>
+  		{{-- <td>{{date('Y-m-d', strtotime($p->limitDate))}}</td> --}}
+  		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
+      <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
+      <td> <?php $p->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($p->finishDate));?></td>
+  		<td>{{($p->displacement)?'Oui':'No'}}</td>
+  		<td>{{($p->state)?'en-cours':'clos'}}</td>
+  		<td>
+  		<td>
+  			<form action="{{ route('Projects.show',$p->id) }}" method="get">
+  				<input hidden type="submit" id="show{{$p->id}}" class="btn btn-primary">
+  			</form>
+  			<form action="{{ route('Projects.edit',$p->id) }}" method="get">
+  				<input hidden type="submit" id="edit{{$p->id}}" class="btn btn-primary">
+  			</form>
+  			<form action="{{ route('Projects.destroy',$p->id) }}" method="post">
+  				{!! method_field('delete') !!}
+  				{!! csrf_field() !!}
+  				<input hidden type="submit" class="btn btn-danger" id="delete{{$p->id}}">
+  			</form>
+  			<div class="btn-group" role="group" aria-label="Basic example">
+  				<input type="submit" class="btn btn-success" onclick="$('#show{{$p->id}}').click();"
+  					{{-- id="voir{{$p->id}}"
+  					onmouseover="$('#voir{{$p->id}}').val('voir');"
+  					onmouseout="$('#voir{{$p->id}}').val('v');" --}}
+  				value="v">
+          @can('edit',Auth::user())
+  				<input type="submit" class="btn btn-primary" onclick="$('#edit{{$p->id}}').click();" value="m">
+          @endcan
+          @can('delete',Auth::user())
+        	<input type="submit" class="btn btn-danger" onclick="$('#delete{{$p->id}}').click();" value="s">
+          @endcan
+        </div>
+  		</td>
+  	</tr>
 	@endforeach
 </tbody>
 </table>

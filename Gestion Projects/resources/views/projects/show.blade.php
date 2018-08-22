@@ -13,7 +13,7 @@ h2{border-bottom:1px dashed green;color: green;}
 	<h2>{{ $project->title }} </h2>
 </div>
 <form action="{{ route('Projects.edit',$project->id) }}" method="get">
-	<input type="submit" value="Modifier" class="btn btn-primary float-right">
+	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
 </form>
 <br>
 <br>
@@ -71,6 +71,15 @@ h2{border-bottom:1px dashed green;color: green;}
 
 <div class="col-sm">
 	<div class="form-row">
+
+		<div class="form-group col-md-4">
+			<div class="card " style="width: 22rem;">
+				<div class="card-body form-inline">
+					<h5 class="card-title mr-3">Date Debut :</h5>
+					<p class="card-text">{{date("M j Y H:i", strtotime($project->startDate))}}</p>
+				</div>
+			</div>
+	</div>
 		<div class="form-group col-md-4">
 			<div class="card mr-3" style="width: 22rem;">
 				<div class="card-body form-inline">
@@ -80,31 +89,30 @@ h2{border-bottom:1px dashed green;color: green;}
 			</div>
 		</div>
 
-		<div class="form-group col-md-4">
-			<div class="card " style="width: 22rem;">
-				<div class="card-body form-inline">
-					<h5 class="card-title mr-3">Date Debut :</h5>
-					<p class="card-text">{{date("M j Y H:i", strtotime($project->startDate))}}</p>
-				</div>
-			</div>
-		</div>
+
 
 		<div class="form-group col-md-4">
 			<div class="card " style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Fin :</h5>
-					<p class="card-text">{{date("M j Y H:i", strtotime($project->finishDate))}}</p>
+					<p class="card-text"> <?php $project->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($project->finishDate));?></p>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- need to add action of adding task in that project..)-->
+
+<!-- can add task to this project -->
+<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
+	<button type="submit" class="btn btn-primary float-right"><i class="fas fa-plus"></i></button>
+</form>
+<br>
 <!-- display tasks related to this project -->
 <br><h3>Taches du Projet :</h3><br>
 <table class="table table-bordered">
 	<thead class="thead-dark">
 	<tr>
+		<th scope="col">Intervenant</th>
 		<th scope="col">Title</th>
 		<th scope="col">Date limite</th>
 		<th scope="col">State</th>
@@ -114,6 +122,7 @@ h2{border-bottom:1px dashed green;color: green;}
 	<tbody>
 	@foreach($tasks as $task)
 	<tr>
+		<th scope="row">{{$task->worker}}</th><!--if lot of workers? -->
 		<th scope="row">{{$task->title}}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
 		<td>{{$task->state}}</td>
