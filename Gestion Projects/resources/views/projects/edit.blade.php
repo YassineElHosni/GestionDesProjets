@@ -7,8 +7,7 @@
 
 @section('content')
 
-<div class='container'>
-
+<br>
 		<div class="page-header">
 		  <div style="border-bottom:1px dashed green" class="form-group form-inline align-center">
 		        <h2 style="color :green" > Modifier le Projet : </h2>
@@ -100,12 +99,12 @@
     <label class="col-form-label" >Commentaire :</label></strong>
     <textarea class="form-control" rows="8" name="comment" value="" >{{$p->comment}}</textarea>
   </div>
+<br>
+ <button type="submit" name="submit" class="btn btn-primary float-right"> <i class="fas fa-save"> Enregistrer</i></button>
 
- <hr>
- <button type="submit" name="submit" class="btn btn-primary float-right">Enregistrer</button>
     </form>
-
-</div>
+<hr>
+<br>
 
 
 @endsection

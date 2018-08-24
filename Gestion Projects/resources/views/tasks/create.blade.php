@@ -10,9 +10,10 @@
 @include('flash::message')
 
 <style> h2{ color: green; } </style>
+<br><br>
  <div class="page-header">
 		<div class="form-group align-center">
-			     	 <h2>New Tache </h2>  </div>
+			     	 <h2>Nouvelle Tache </h2>  </div>
 </div>
 <br><br>
 <form role="form" method="post" action="{{action('TaskController@store')}}">
@@ -27,9 +28,13 @@
 	<div class="form-group col-6">
 		<label class="col-form-label">Projet related :</label>
 		<select name = "project_id[]" id="project_id" class="form-control">
-			@foreach ($projects as $project)
-				<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
-			@endforeach
+			@if($project)
+			  <option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+			@elseif($projects)
+				@foreach ($projects as $project)
+					<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+				@endforeach
+			@endif
 		</select>
 	</div>
 

@@ -1,15 +1,20 @@
 @extends('layouts.structure')
 
-@section('content')
+@section('csss')
+	@parent
+	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
+@endsection
 
+@section('content')
+<br>
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Tout les Taches </h2>  </div>
 </div>
 <br><br>
-<table class="table table-responsive-lg">
-<thead>
+<table class="table table-responsive-lg  mr-2">
+<thead class="thead-dark">
 	<tr>
 		<th scope="col">Description</th>
 		<th scope="col">Projet</th>
@@ -50,18 +55,21 @@
         @endif
       </div>
     </td>
-  	<td>{{$t->state}}</td>
+  	<td>
+      <p class="card-text" name="state">
+      {{($t->state=='IN_PROGRESS')?'En-Cours':(($t->state=='FINISHED')?'Fini':(($t->state=='VALIDATED')?'Validée':'empty'))}}
+      </p>
+    </td>
 		<td>{{$t->progress}}</td>
-		<td>
-			<form action="{{ route('Tasks.show',$t->id) }}" method="get">
-				<input type="submit" value="Voir" class="btn btn-primary">
-			</form>
-		</td>
-		<td>
-			<form action="{{ route('Tasks.edit',$t->id) }}" method="get">
-				<input type="submit" value="Modifier" class="btn btn-primary">
-			</form>
-		</td>
+    <td scope="row">
+      <form action="{{ route('Tasks.show',$t->id) }}" id="show{{$t->id}}" method="get"></form>
+      <form action="{{ route('Tasks.edit',$t->id) }}" id="edit{{$t->id}}" method="get"></form>
+      </form>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$t->id}}').submit();"></i>
+        <i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$t->id}}').submit();"></i>
+     </div>
+    </td>
 	</tr>
 	@endforeach
 </tbody>

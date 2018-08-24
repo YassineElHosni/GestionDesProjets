@@ -32,7 +32,7 @@ Route::get('Tasks/delete/{id}/{empid}','TaskController@deleteEmployee')->name('T
 Route::get('Tasks/add/{id}/{empid}','TaskController@addEmployee')->name('Tasks.addEmployee');
 
 Route::get('/{id}/myTasks','TaskController@MyTasks')->name('Tasks.MyTasks');
-Route::get('/addTask/{id}','TaskController@addTaskToPrj')->name('Tasks.addTaskToPrj');/* ~~ */
+Route::get('/addTask/{id_proj}','TaskController@addTaskToPrj')->name('Tasks.addTaskToPrj');/* ~~ */
 
 Route::resource('Clients','ClientController');
 Route::resource('Users','UserController');
@@ -40,7 +40,7 @@ Route::get('User/editPassword','UserController@editPassword')->name('User.editPa
 Route::match(['PUT', 'PATCH'],'User/updatePassword','UserController@updatePassword')->name('User.updatePassword');
 
 
-Route::get('/profile/{id}','UserController@showprofile')->name('User.profile');
+Route::get('/Userprofile/{id}','UserController@showProfile')->name('User.Profile');
 Route::post('/profile/{userID}','UserController@update_avatar')->name('User.updateAvatar');
 
 Route::get('datatables/{name}', 'HomeController@index2')->name('datatables');

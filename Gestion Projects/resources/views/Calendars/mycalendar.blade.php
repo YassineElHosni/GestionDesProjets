@@ -1,4 +1,4 @@
-<div class="container">
+
   <script>
 
   function calendarflow(){
@@ -12,12 +12,12 @@
   </script>
 <!--mon agenda -->
 
-<button style="width: 90%;"class="btn btn-primary" onclick="calendarflow()">
+<button style="width: 80%;"class="btn btn-primary" onclick="calendarflow()">
   <i class="fas fa-calendar-alt">Aganda</i>
 </button>
 <br>
 
-    <div style="display:block" id="calendrier" >
+    <div style="display:block;overflow: auto;" id="calendrier" >
 <?php
 require '../app/Calendar/Month.php';//je charge Month Class
 //require '../app/Calendar/Projets.php';!!
@@ -132,7 +132,5 @@ echo '</pre>';*/
 </tr>
 </tbody>
 </table>
-
-</div>
 
 </div>

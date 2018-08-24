@@ -8,6 +8,7 @@ use App\Task;
 use App\Project;
 use App\User;
 use App\Client;
+use App\Task_User;
 use Session;
 use Carbon\Carbon;
 class ProjectController extends Controller
@@ -93,7 +94,7 @@ class ProjectController extends Controller
     }
     /**
      * Display all  Projects of one Projects_Manager.
-     *
+     * en cours..
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

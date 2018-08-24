@@ -56,7 +56,7 @@ $this->middleware('admin',['except' => ['show']]);
 		]);
 		$c->save();
 
-		flash('Client Created Successfully !')->success();
+		flash('Client Créer avec succé !')->success();
 		return redirect()->route('Clients.show',$c->id)->withClient($c);
 	}
 
@@ -103,7 +103,7 @@ $this->middleware('admin',['except' => ['show']]);
 		$c->comment = $request->comment;
 
 		$c->save();
-		flash('Client created Successfully !')->success();
+		flash('Client enregistré avec succé !')->success();
 
 		return redirect()->route('Clients.show',$id)->withClient($c);
 	}
@@ -120,7 +120,7 @@ $this->middleware('admin',['except' => ['show']]);
 
 		$c->delete();
 
-		flash('Client Deleted Successfully !')->warning();
+		flash('Client supprimé avec succé !')->warning();
 		return route('Clients.index');
 	}
 }

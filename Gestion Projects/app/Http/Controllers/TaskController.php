@@ -84,7 +84,7 @@ class TaskController extends Controller
             'project_id'=>$request->project_id[0],
           ]);
       $newTask->save();
-      flash('Task created Successfully !')->success();
+      flash('Tache créer avec succé !')->success();
       return redirect()->route('Tasks.show',$newTask->id)->withTask($newTask);
     }
     /**
@@ -149,7 +149,7 @@ class TaskController extends Controller
           if($request->progress=="100" && $task->state=='IN_PROGRESS')
             $task->state='FINISHED';
           $task->save();
-          flash('Task Saved Successfully !')->success();
+          flash('Tache Enregistré avec succé !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
 
@@ -194,7 +194,7 @@ class TaskController extends Controller
       }else  $task->state = 'IN_PROGRESS';
       $task->save();
 
-      flash('Task Saved Successfully!')->success();
+      flash('Tache Enregistré avec succé!')->success();
        return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
@@ -208,9 +208,12 @@ class TaskController extends Controller
     /*
     * add Task to a spesific Project
     */
-    public function addTaskToPrj(){
+    public function addTaskToPrj($id){
 
-
+     /*--get all free employee--*/
+     $employees=User::where('role','Like','EMPLOYEE')->get();
+     $project=Project::find($id);/*current project*/
+     return view('tasks.create',compact('employees','project'));
     }
     /*
     * remove employee to from a spesific Task

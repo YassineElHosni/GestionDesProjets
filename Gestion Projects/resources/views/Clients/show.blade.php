@@ -24,12 +24,12 @@
   <div class="col-sm">
   	<div class="form-row">
       <div class="form-group mr-4 col-4">
-        <label class="col-form-label mr-3">Nom Client: </label>
+        <strong><label class="col-form-label mr-3">Nom Client: </label>
          <div class="form-control" name="name">{{ $client->name }}</div>
       </div>
-    	<div class="form-group col-8">
-    		<label for="title" class="col-form-label mr-4">Registration Number:</label>
-      	<div class="form-control col-8" name="registrationNumber">{{$client->registrationNumber}}</div>
+    	<div class="form-group col-6">
+    		<label for="title" class="col-form-label mr-4 ">Numero:</label>
+      	<div class=" col-8" name="registrationNumber">{{$client->registrationNumber}}</div>
     	</div>
     </div>
   </div>
@@ -55,7 +55,7 @@
   </div>
 
   	<div class="form-group ml-3">
-  		<label class="col-form-label">Commentaire :</label>
+  		<label class="col-form-label">Commentaire :</label></strong>
   		<textarea type="text" class="form-control col-8" name="comment" disabled>{{$client->comment}}</textarea>
   	</div><br>
 

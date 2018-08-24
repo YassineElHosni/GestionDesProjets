@@ -18,16 +18,10 @@ class UserController extends Controller
 	 /*allow all users to update their profil avatar only*/
 	 /*only admin have access to all users database*/
 	 /*only Gerant & Admin can add users ..(Admin add Gerant) */
-  	$this->middleware('admin',['except' => ['showprofile','update_avatar','update','editPassword','updatePassword']]);
+  	$this->middleware('admin',['except' => ['showProfile','update_avatar','update','editPassword','updatePassword']]);
 
 	}
 
-	public function showprofile($id){
-
-$user=User::find($id);
-   return view('Users.show',compact('user'))/*->withUser($user)*/;
-
-	}
 
 	public function update_avatar(Request $request,$id){
 
@@ -59,7 +53,7 @@ $user=User::find($id);
 	{
 		$us = User::all();
 		$u = Auth::user();
-		
+
 		return view('Users.index')->withUsers($us)->withUser($u);
 	}
 
@@ -104,10 +98,15 @@ $user=User::find($id);
 		* @param  int  $id
 		* @return \Illuminate\Http\Response
 		*/
-	public function show($id)
+	public function show($id) /*auth profile*/
 	{
 		$u = User::find($id);
 		return view('Users.show')->withUser($u);
+	}
+	public function showProfile($id) /*users profile*/
+	{
+		$u = User::find($id);
+		return view('Users.Profile')->withUser($u);
 	}
 
 	/**
@@ -159,13 +158,13 @@ $user=User::find($id);
 		$u->name = $request->name;
 		$u->email = $request->email;
 		$u->role = $request->role;/*attribuer new role*/
-		$u->password = $request->password;
+	//	$u->password = $request->password;
 
 		$u->comment = $request->comment;
 
 		$u->save();
-
-		return redirect()->route('Users.index');
+    flash('User Enregistré avec succé !')->success();
+		return redirect()->route('User.Profile',$u->id)->withUser($u);
 	}
 
 	/**

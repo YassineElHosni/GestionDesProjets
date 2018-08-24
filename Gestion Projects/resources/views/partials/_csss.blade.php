@@ -3,18 +3,3 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- fa emoticones-->
 <link href="{{ asset('/css/calendar.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-<style>
-.left-side {
-  width: 25%;
-  height: 100%;
-  float: left;
-  overflow-x: hidden;
-  padding-left: 10px;
-}
-
-.right-side {
-  width: 75%;
-  height: 100%;
-  float: right;
-}
-</style>

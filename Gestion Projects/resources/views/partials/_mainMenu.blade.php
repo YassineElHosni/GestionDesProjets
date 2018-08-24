@@ -95,7 +95,7 @@
 
                                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
 
-                                        <a class="dropdown-item" href="{{route('User.profile',Auth::user()->id )}}"><i class="fa fa-btn fa-user mr-1"></i>Profile</a>
+                                        <a class="dropdown-item" href="{{route('Users.show',Auth::user()->id )}}"><i class="fa fa-btn fa-user mr-1"></i>Profile</a>
                                         <a class="dropdown-item" href="#" onclick="$('#logout-form').submit()"><i class="fa fa-btn fa-sign-out mr-1"></i>Logout</a>
                                       </div>
                                   </div>

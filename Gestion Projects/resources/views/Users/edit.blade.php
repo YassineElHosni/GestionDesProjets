@@ -1,6 +1,9 @@
 @extends('layouts.structure')
+
 @section('csss')
-@parent
+	@parent
+	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
+
 <style>
 .imageStuff:hover{cursor: progress;}
 .imageStuff:action{cursor: pointer;}
@@ -44,27 +47,20 @@
         <div class="text-center">
           <img id="imgclicked" src="{{URL::to('/')}}/storage/avatars/{{ $user->avatar }}" class="imageStuff" style="border-radius:50%;height:50% ;width:50%" alt="avatar" >
           <h6>{{$user->name}}</h6>
-
-           <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="formUpload">
-
-               <input type="button" class="btn btn-primary" value="Changer avatar" onclick="$('#avatar').click();">
-               <input  style="display:none" type="file" id="avatar" name="avatar">
-               <input style="display:none" type="submit" value="Changer avatar" id="submit">
-               <input type="hidden" value="{{ csrf_token() }}" name="_token">
-          </form>
         </div>
       </div>
 
         <!-- edit form column -->
     <div class="col-md-9">
-        <form action="{{ route('Users.update', $user) }}" method="POST" class="form-horizontal">
-               <input type="hidden" name="_method" value="PUT">
-               <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
               <h3>Personal info</h3><br>
 
 
-              <form class="form-horizontal" role="form">
+
+                <form action="{{ route('Users.update', $user) }}" method="POST" class="form-horizontal">
+                       <input type="hidden" name="_method" value="PUT">
+                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                 <div class="form-group ">
                   <label class="col-lg-3 control-label">Nom:</label>
                   <div class="col-lg-8">
@@ -114,8 +110,7 @@
                     </div>
                   <hr>
                   <div class="col-md-8">
-                    <input type="submit" class="btn btn-primary float-right" value="Enregistrer">
-                    <span></span>
+                    <button type="submit" name="submit" class="btn btn-success float-right"> <i class="fas fa-save"> Enregistrer</i></button>
                   </div>
                </div>
         </form>

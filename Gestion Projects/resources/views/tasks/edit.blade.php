@@ -16,6 +16,7 @@
 
 <style> h2{ color: green; }
 </style>
+<br>
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Modifier la Tache </h2>  </div>
@@ -28,7 +29,7 @@
 	<div class="form-group ml-3">
 		<label for="title" class="col-form-label">Sujet:</label>
 		<input type="text" class="form-control col-7" name="title" value="{{$task->title}}">
-		
+
 	</div>
 
 	<div class="form-group">
@@ -109,7 +110,7 @@
 					{{ ($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty')) }}
 				</div>
 		</div>
-       
+
 
       </div>
       </div>
@@ -175,10 +176,11 @@
 		<!-- new employee chosen  -->
 			<input type="hidden" id="removeTable" name="removeTable" value="">
 
-<input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
+<button type="submit" name="submit" class="btn btn-success float-right"> <i class="fas fa-save"> Enregistrer</i></button>
+
 </form>
 </div>
-
+<hr><br>
 @endsection
 
 

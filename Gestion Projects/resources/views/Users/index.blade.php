@@ -49,7 +49,7 @@ $(document).ready( function () {
 		</th>
 		<td scope="row" class="d-none d-lg-block">{{$u->comment}}</th>
 		<td scope="row">
-			<form action="{{ route('Users.show',$u->id) }}" method="get">
+			<form action="{{ route('User.Profile',$u->id) }}" method="get">
 				<input hidden type="submit" id="show{{$u->id}}" class="btn btn-primary">
 			</form>
 			<form action="{{ route('Users.edit',$u->id) }}" method="get">
