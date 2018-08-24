@@ -25,7 +25,11 @@
 		<th scope="col">date debut</th>
     <th scope="col">date limite</th>
 		<th scope="col">date fin</th>
-		<th scope="col">deplacement</th>
+			<?php if(isset($func)):?>
+			<th scope="col">Deplacement</th>
+			<?php else: ?>
+			<th scope="col">Chef de Projet</th>
+		<?php endif; ?>
 		<th scope="col">etat</th>
 		<th scope="col"></th>
 		<th scope="col"></th>
@@ -40,6 +44,7 @@
     @else
     <tr>
     @endif
+
   		<td scope="row">{{$p->title}}</th>
   		{{-- <td>{{$p->description}}</td> --}}
   		<td>{{$p->client_name}}</td>
@@ -47,7 +52,11 @@
   		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
       <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
       <td> <?php $p->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($p->finishDate));?></td>
-  		<td>{{($p->displacement)?'Oui':'No'}}</td>
+			<?php if(isset($func)):?>
+	   	<td>{{($p->displacement)?'Oui':'No'}}</td>
+		  <?php else: ?>
+			<td>{{$p->chef}}</td>
+		  <?php endif; ?>
   		<td>{{($p->state)?'en-cours':'clos'}}</td>
   		<td>
   		<td>

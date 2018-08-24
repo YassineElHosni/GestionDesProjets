@@ -24,36 +24,13 @@ class ProjectController extends Controller
         foreach ($ps as $p) {
           // $c[$p->id]=Client::find($p->client_id)->Nom;
           $p->client_name=Client::find($p->client_id)->name;
+          /*chef de projet*/
+          $p->chef=User::find($p->user_id)->name;
         }
 
       return view('projects.index' ,compact('ps','c'));
     }
-    /**
-     * Display a listing of Projects belongs to a project_manager.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function MyProjects($id)
-    {
 
-      $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
-
-          //foreach ($id_ts as $id_t) {/*for each task|user get :  */
-
-          $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
-          $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
-          $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
-
-              foreach ($ts as $t) {
-                  //get the name of the project that the current task belongs to.
-                  $t->project_title=Project::find($t->project_id)->title;
-
-              }
-          //}
-
-
-        return view('tasks.mesTaches' ,compact('ts'));
-    }
     /**
      * Show the form for creating a new Project
      *
@@ -125,10 +102,13 @@ class ProjectController extends Controller
      */
     public function ManagerProjets($id)
     {
-        $ps = Project::where('user_id','Like',$id)->get();
-
-        return view('projects.index',compact('ps'));
-    }
+      $ps = Project::where('user_id','Like',$id)->get();
+      foreach ($ps as $p) {
+        $c=Client::find($p->client_id);
+      }
+      $func=1;
+      return view('projects.index',compact('ps'))->withFunc($func);
+     }
     /**
      * Show the form for editing the specified resource.
      *
