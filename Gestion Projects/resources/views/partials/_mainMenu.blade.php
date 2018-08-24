@@ -1,9 +1,9 @@
 
 <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-lg justify-content-between">
 	<a class="navbar-brand mb-0 h1" href="{{ url('/#') }}"> <!-- logo / brand -->
-    <img src="/#" width="30" height="30" class="d-inline-block align-top" alt="">
-    Projects Connect To All
-  </a>
+		<img src="/#" width="30" height="30" class="d-inline-block align-top" alt="">
+		Projects Connect To All
+	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 	data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
@@ -14,6 +14,7 @@
 	<div class="collapse navbar-collapse" style=" position: relative;" media="" id="navbarColor02">
 
 		<ul class="nav navbar-nav ml-auto ">
+
 
           @if (!Auth::guest()) <!-- si  authentifié -->
                 <!--can('index',App\Task::class)   si  employee ou chef-projet -->

@@ -89,9 +89,16 @@ class ProjectController extends Controller
 
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
              foreach($tasks as $task){/*get the users_id related to this task_id*/
-               $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
-               $task->worker=User::where('id','=',$ids_user)->get(['name']);
+              $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
+                    ->get(['user_id']))
+                      ->get(['name']);
+              // dd($task->worker);
+               // $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
+               // $task->worker=User::whereIn('id',$ids_user)->get(['name','email','comment']);
              }
+    // $t->us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
+    // dd($tasks);
+    //          dd($tasks);
         return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
     /**

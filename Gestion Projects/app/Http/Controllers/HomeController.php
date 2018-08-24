@@ -73,8 +73,21 @@ class HomeController extends Controller
             ->where('state','like','IN_PROGRESS')
             ->take(3)
             ->get(['id', 'title', 'state', 'priority', 'updated_at']);
+//notif stuff
+    // dd(Auth::user()->id);
+    // $user = \App\User::find(25);
+    // $task = \App\Task::find(1);
+    // Notification::send($user, new \App\Notifications\UserNotification($task));
 
-        return view('index')->with('LastFewProjects',$ps)->with('LastFewTasks',$ts);
+    // foreach ($user->unreadNotifications  as $notification) {
+    //     echo $notification->notifiable_id;
+    //     echo $notification->data['title'];
+    //     // $notification->markAsRead();
+    // }
+//
+        return view('index')->with('LastFewProjects',$ps)
+            ->with('LastFewTasks',$ts);
+            // ->withMy_notifs($user->unreadNotifications);
       }else
         return redirect()->route('admin.register.index');
     }
@@ -83,7 +96,16 @@ class HomeController extends Controller
         ->withCurrent($name)
         ->withCols(array_slice(HomeController::All_Cols()[$name], 1));
     }
-    
+    public function notifSeen($id, $date)
+    {
+        $user = \App\User::find($id);
+        foreach ($user->unreadNotifications as $ntf) {
+            if ($ntf->created_at <= $date) {
+                $ntf->markAsRead();
+            }
+        }
+        return redirect()->route('home.index');
+    }
     public function getData($name)
     {
         $GLOBALS['cName'] = $name;

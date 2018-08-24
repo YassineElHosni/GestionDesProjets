@@ -117,7 +117,7 @@ textarea {
 	<tbody>
 	@foreach($tasks as $task)
 	<tr>
-		<th scope="row">{{$task->worker}}</th><!--if lot of workers? -->
+		<th scope="row">@foreach($task->worker as $w) {{$w}} @endforeach</th><!--if lot of workers? -->
 		<th scope="row">{{$task->title}}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
 		<td>{{$task->state}}</td>
