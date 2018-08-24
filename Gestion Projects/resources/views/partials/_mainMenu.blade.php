@@ -14,92 +14,112 @@
 	<div class="collapse navbar-collapse" style=" position: relative;" media="" id="navbarColor02">
 
 		<ul class="nav navbar-nav ml-auto ">
-			<!-- if (!Auth::guest())  si  authentifié -->
-			<div class="btn-group" role="group">
-				<a class="btn btn-info" href="">Rapport</a>
-				<a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
-				<a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
-			</div>
-			<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-				<div class="btn-group" role="group">
-					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Gestion Utilisateurs
-					</button>
-					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
-						<a class="dropdown-item" href="{{route('Users.create')}}">Nouveau Utilisateur</a>
+
+
+          @if (!Auth::guest()) <!-- si  authentifié -->
+                <!--can('index',App\Task::class)   si  employee ou chef-projet -->
+
+             <div class="btn-group" role="group">
+							<!-- Rapport only Admin & Gerant & Project Manager -->
+							 <a class="btn btn-info" href="">Rapport</a>
+               <a class="btn btn-info" href="{{route('calendar.index')}}">Calendrier des Projets</a>
+
+							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
+							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
+               @endif
+
+							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
+							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
+               @endif
+						 </div>
+						 @can('create',App\Task::class)
+						 <div class="btn-group" role="group">
+							 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								 Gestion Taches
+							 </button>
+							 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                 <a class="dropdown-item" href="{{route('Tasks.create')}}">Nouvelle Tache</a>
+								 <a class="dropdown-item" href="{{route('Tasks.index')}}">Liste Taches</a>
+							 </div>
+						 </div>
+						 @endcan
+						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+								@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
+								  <div class="btn-group" role="group">
+
+								    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								      Gestion Utilisateurs
+								    </button>
+								    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+											<a class="dropdown-item" href="{{route('Users.create')}}">Nouveau Utilisateur</a>
+								      <a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
+								    </div>
+								  </div>
+                @endif
+									<div class="btn-group" role="group">
+									 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										 Gestion Projets
+									 </button>
+									 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										 <a class="dropdown-item" href="{{route('Projects.create')}}">Nouveau Projet</a>
+										 <a class="dropdown-item" href="{{route('Projects.index')}}">Liste des Projets</a>
+									 </div>
+								 </div>
+							</div>
+							@if(Auth::user()->Auth_hasRole('ADMIN'))
+								 <div class="btn-group" role="group">
+									<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Gestion Clients
+									</button>
+									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+										<a class="dropdown-item" href="{{route('Clients.create')}}">Nouveau Client</a>
+										<a class="dropdown-item" href="{{route('Clients.index')}}">Liste des Clients</a>
+									</div>
+								</div>
+             @endif
+
+                        <!-- can('index',App\User::class)  si  allowed
+                              <li class="nav-item">
+                                    <a class="nav-link" href="{{route('Users.index')}}">Gestion Utilisateurs</a>
+                              </li>
+                            endcan
+                              can('index',App\Projects::class)
+                                 <li class="nav-item">
+                                   <a class="nav-link" href="{{route('Projects.index')}}">Gestion Projets</a>
+                                 </li>
+                              endcan
+                              ADMIN / GERANT -> all tasks
+                                <li class="nav-item">
+                                      <a class="nav-link" href="{{route('Tasks.index')}}">Gestion des Taches</a>
+                                </li>
+                              EMPLOYEE / PROJECT_MANAGER -> his tasks & his projects
+                                 <a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
+															 </li>  -->
+													 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+															 <a hidden href="{{route('Project.ManagerProjets',Auth::user()->id )}}" id="#notif{{Auth::user()->id}}"></a> <!-- notification-->
+															 <i class="btn btn-primary fa fa-bell-o mx-2" style="border-radius: 70%;font-size:18px;color:#ffffff;" onclick="$('#notif{{Auth::user()->id}}').click();" value="notif"></i>
+
+                                  <div class="dropdown show float-right">
+                                    <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     {{Auth::user()->name}}
+
+                                    </a>
+
+                                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+
+                                        <a class="dropdown-item" href="{{route('Users.show',Auth::user()->id )}}"><i class="fa fa-btn fa-user mr-1"></i>Profile</a>
+                                        <a class="dropdown-item" href="#" onclick="$('#logout-form').submit()"><i class="fa fa-btn fa-sign-out mr-1"></i>Logout</a>
+                                      </div>
+                                  </div>
+
+                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                              {{ csrf_field() }}
+                                          </form>
+										       </div>
+							</ul>
 					</div>
-				</div>
-				<div class="btn-group" role="group">
-					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Gestion Projets
-					</button>
-					<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-						<a class="dropdown-item" href="{{route('Projects.create')}}">Nouveau Projet</a>
-						<a class="dropdown-item" href="{{route('Projects.index')}}">Liste des Projets</a>
-					</div>
-				</div>
-			</div>
-			<div class="btn-group" role="group">
-				<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Gestion CLients
-				</button>
-				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-					<a class="dropdown-item" href="{{route('Clients.create')}}">Nouveau Client</a>
-					<a class="dropdown-item" href="{{route('Clients.index')}}">Liste des Clients</a>
-				</div>
-			</div>
-<!-- can('index',App\User::class)  si  allowed
-	<li class="nav-item">
-		<a class="nav-link" href="{{route('Users.index')}}">Gestion Utilisateurs</a>
-	</li>
-		endcan
-		can('index',App\Projects::class)
-	<li class="nav-item">
-		<a class="nav-link" href="{{route('Projects.index')}}">Gestion Projets</a>
-	</li>
-		endcan
-		ADMIN / GERANT -> all tasks
-	<li class="nav-item">
-		<a class="nav-link" href="{{route('Tasks.index')}}">Gestion des Taches</a>
-	</li>
-		EMPLOYEE / PROJECT_MANAGER -> his tasks & his projects
-	<a class="nav-link" href="/Boite"><span class="badge">*</span>Notifications</a>
-	</li>
--->
-<?php $my_notifs = Auth::user()->unreadNotifications; ?>
-		<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-			{{-- <a hidden href="{{route('Project.ManagerProjets',Auth::user()->id )}}" id="#notif{{Auth::user()->id}}"></a> --}}
-
-			<!-- notification-->
-			<i class="btn btn-primary fa fa-bell-o mx-2" style="border-radius: 70%;font-size:18px;color:#ffffff;margin-left:10px;" onclick="$('#notif{{Auth::user()->id}}').click();" value="notif">
-			<span class="badge badge-danger badge-pill" style="position: absolute;">{{$my_notifs->count()}}</span></i>
-			<div>
-				<form action="{{route('user.notif.seen',array('id'=>25,'data'=>$my_notifs->max('created_at')))}}" id="my_seen"></form>
-				{{-- <?php foreach($my_notifs as $nnn) echo 'tttx' ?> --}}
-				@foreach ($my_notifs as $ntf)
-					<button onclick="$('#my_seen').submit();">{{$ntf->data['title']}}</button>
-				@endforeach
-			</div>
-..
-			<div class="dropdown show float-right">
-				<a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				{{Auth::user()->name}}
-				</a>
-
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="{{route('User.profile',Auth::user()->id )}}"><i class="fa fa-btn fa-user mr-1"></i>Profile</a>
-					<a class="dropdown-item" href="#" onclick="$('#logout-form').submit()"><i class="fa fa-btn fa-sign-out mr-1"></i>Logout</a>
-				</div>
-			</div>
-
-			<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-				{{ csrf_field() }}
-			</form>
-		</div>
-		</ul>
-	</div>
-
+    @endif
  </nav>
  <br>
  <br>

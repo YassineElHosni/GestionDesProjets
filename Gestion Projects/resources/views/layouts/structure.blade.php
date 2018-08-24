@@ -10,21 +10,13 @@
 </head>
 <body>
 
-	@if(Auth::user())
-		@include('partials._mainMenu')<!--Menu-->
-	@endif
+	@include('partials._mainMenu')<!--Menu-->
+	
+					<div class="container">
 
-	<div class="left-side">
-		<!--display calendar -->
-		@include('Calendars.mycalendar')
-	</div>
-	<div class="right-side">
-			<div class="container"><!--Content-->
+						@yield('content')
 
-				@yield('content')
-
-			</div>
-  </div>
+					</div>
 
 		@include('partials._footer')<!--footer-->
 

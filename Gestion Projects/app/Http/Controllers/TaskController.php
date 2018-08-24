@@ -28,7 +28,7 @@ class TaskController extends Controller
     }
 
         /**
-         * Display a listing of the tasks employee.
+         * Display a listing of the tasks employee ($id).
          *
          * @return \Illuminate\Http\Response
          */
@@ -36,7 +36,7 @@ class TaskController extends Controller
         {
 
           $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
-          
+
               //foreach ($id_ts as $id_t) {/*for each task|user get :  */
 
               $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
@@ -51,7 +51,7 @@ class TaskController extends Controller
               //}
 
 
-            return view('tasks.index' ,compact('ts'));
+            return view('tasks.mesTaches' ,compact('ts'));
         }
     /**
      * Show the form for creating a new resource.
@@ -84,7 +84,7 @@ class TaskController extends Controller
             'project_id'=>$request->project_id[0],
           ]);
       $newTask->save();
-      flash('Task created Successfully !')->success();
+      flash('Tache créer avec succé !')->success();
       return redirect()->route('Tasks.show',$newTask->id)->withTask($newTask);
     }
     /**
@@ -149,7 +149,7 @@ class TaskController extends Controller
           if($request->progress=="100" && $task->state=='IN_PROGRESS')
             $task->state='FINISHED';
           $task->save();
-          flash('Task Saved Successfully !')->success();
+          flash('Tache Enregistré avec succé !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
 
@@ -194,7 +194,7 @@ class TaskController extends Controller
       }else  $task->state = 'IN_PROGRESS';
       $task->save();
 
-      flash('Task Saved Successfully!')->success();
+      flash('Tache Enregistré avec succé!')->success();
        return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
     /*
@@ -204,6 +204,16 @@ class TaskController extends Controller
       $task=Task::find($id);
       $employee=User::where('id', $empid)->first();/*get infos of thoes employee from user table*/
       $employee->tasks()->attach($task);
+    }
+    /*
+    * add Task to a spesific Project
+    */
+    public function addTaskToPrj($id){
+
+     /*--get all free employee--*/
+     $employees=User::where('role','Like','EMPLOYEE')->get();
+     $project=Project::find($id);/*current project*/
+     return view('tasks.create',compact('employees','project'));
     }
     /*
     * remove employee to from a spesific Task

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
 	protected $fillable = [
-			 'title','description','limitDate','displacement',
+			 'title','description','limitDate','startDate','finishDate','displacement',
 			 'state','comment','user_id','client_id'
 				 ];
-				 
+		public $timestamps = true;
+
 	public function tasks(){
 		return $this->hasMany('App\Task');
 	}

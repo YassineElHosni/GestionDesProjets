@@ -20,7 +20,7 @@
 
   <div class="page-header">
     <br>
-          <h2 style="color :gray" class="ml-5">Mon Profile</h2>
+          <h2 style="color :gray" class="ml-5">Profile de : {{$user->name}}</h2>
   </div><hr>
 
 	<div class="row">
@@ -29,17 +29,7 @@
         <div class="text-center">
           <img src="{{URL::to('/')}}/storage/avatars/{{ $user->avatar }}" style="border-radius:50%;height:50% ;width:50%" class="img-circle" alt="avatar">
           <h6>{{$user->name}}</h6>
-           <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="form">
-             <input hidden type="file" name="avatar" id="avatar" onclick="$('#pic').prepend(($('<img>',{  src:'{{URL::to('/')}}/storage/avatars/default.png' })); ">
 
-             <div hidden id="pic" onchange="$('#form').submit();">
-
-             </div>
-            <!--  <input hidden type="submit" value="Upload" id="submit">-->
-
-             <input  type="submit" id="new_avatar"  class="btn btn-primary" value="Change Avatar" onclick="$('#avatar').click();">
-             <input  hidden value="{{ csrf_token() }}" name="_token">
-           </form>
         </div>
       </div>
 
@@ -47,6 +37,10 @@
     <div class="col-md-9">
 
               <h3>Personal info</h3><br>
+              <form action="{{ route('Users.edit',$user->id) }}" method="get">
+              	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
+              </form>
+              <br><hr><br>
 
               <form class="form-horizontal" role="form">
                 <div class="form-group form-inline">
@@ -76,5 +70,6 @@
     </div>
   </div>
       <hr>
+
 
 @endsection

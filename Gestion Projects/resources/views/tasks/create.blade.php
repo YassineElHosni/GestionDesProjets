@@ -10,9 +10,10 @@
 @include('flash::message')
 
 <style> h2{ color: green; } </style>
+<br><br>
  <div class="page-header">
 		<div class="form-group align-center">
-			     	 <h2>New Tache </h2>  </div>
+			     	 <h2>Nouvelle Tache </h2>  </div>
 </div>
 <br><br>
 <form role="form" method="post" action="{{action('TaskController@store')}}">
@@ -27,9 +28,13 @@
 	<div class="form-group col-6">
 		<label class="col-form-label">Projet related :</label>
 		<select name = "project_id[]" id="project_id" class="form-control">
-			@foreach ($projects as $project)
-				<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
-			@endforeach
+			@if($project)
+			  <option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+			@elseif($projects)
+				@foreach ($projects as $project)
+					<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+				@endforeach
+			@endif
 		</select>
 	</div>
 
@@ -53,19 +58,19 @@
 		<label class="col-form-label col-md-2 col-sm-12">Priorité:</label>
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
-			<label class="form-check-label" for="level1_RadioBtn">level 1</label>
+			<label class="form-check-label" for="level1_RadioBtn">Très urgent</label>
 		</div>
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="2">
-			<label class="form-check-label" for="level2_RadioBtn">level 2</label>
+			<label class="form-check-label" for="level2_RadioBtn">Urgent</label>
 		</div>
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="3" checked>
-			<label class="form-check-label" for="level3_RadioBtn">level 3</label>
+			<label class="form-check-label" for="level3_RadioBtn">Normal</label>
 	  </div>
 		<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="4">
-			<label class="form-check-label" for="level4_RadioBtn">level 4</label>
+			<label class="form-check-label" for="level4_RadioBtn">Peut attendre</label>
 		</div>
 	</div>
 </div></div>

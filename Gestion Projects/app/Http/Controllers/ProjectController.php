@@ -8,6 +8,7 @@ use App\Task;
 use App\Project;
 use App\User;
 use App\Client;
+use App\Task_User;
 use Session;
 use Carbon\Carbon;
 class ProjectController extends Controller
@@ -27,7 +28,32 @@ class ProjectController extends Controller
 
       return view('projects.index' ,compact('ps','c'));
     }
+    /**
+     * Display a listing of Projects belongs to a project_manager.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function MyProjects($id)
+    {
 
+      $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
+
+          //foreach ($id_ts as $id_t) {/*for each task|user get :  */
+
+          $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
+          $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
+          $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
+
+              foreach ($ts as $t) {
+                  //get the name of the project that the current task belongs to.
+                  $t->project_title=Project::find($t->project_id)->title;
+
+              }
+          //}
+
+
+        return view('tasks.mesTaches' ,compact('ts'));
+    }
     /**
      * Show the form for creating a new Project
      *
@@ -50,18 +76,14 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-      // get the current time  - 2015-12-19 10:10:54
-      $current=Carbon::now();
-      $current=new Carbon();
-      $current=$current->format('Y-m-d H:m:s');
-  
+
         /*storing all the new data in new project*/
         $newProjet = new project([
               'title' => $request->title,
               'description' => $request->description,
               'limitDate' => $request->limitDate,
-              'startDate' => $current,
-              'finishDate' => '0000-00-00 00:00:00',
+              'startDate' => date('Y-m-d H:i:s'),
+               //'finishDate' => '0000-00-00 00:00:00', NULL
               'displacement' =>($request->has('displacement')),
               'state' =>($request->state_RadioBtn),
               'comment' => $request->comment,
@@ -89,12 +111,22 @@ class ProjectController extends Controller
         $u=User::find($p->user_id);
 
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
-
-        return view('projects.show')->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
+             foreach($tasks as $task){/*get the users_id related to this task_id*/
+              $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
+                    ->get(['user_id']))
+                      ->get(['name']);
+              // dd($task->worker);
+               // $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
+               // $task->worker=User::whereIn('id',$ids_user)->get(['name','email','comment']);
+             }
+    // $t->us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
+    // dd($tasks);
+    //          dd($tasks);
+        return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
     /**
      * Display all  Projects of one Projects_Manager.
-     *
+     * en cours..
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -147,7 +179,7 @@ class ProjectController extends Controller
       if(  $project->state ==0){/*si le projet est clos*/
           $project->finishDate=$current;/*on precise la date de fin*/
       }else{
-         $project->finishDate='0000-00-00 00:00:00';
+        // $project->finishDate='0000-00-00 00:00:00';
       }
       $project->save();
 

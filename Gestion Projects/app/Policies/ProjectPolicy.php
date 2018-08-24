@@ -9,26 +9,28 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ProjectPolicy
 {
     use HandlesAuthorization;
-    /*allow all actions to admin */
-        public function before($user, $ability){
-          if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')
-             ||$user->Auth_hasRole('PROJECT_MANAGER')||$user->Auth_hasRole('EMPLOYEE')) {
-              return true;
-          }
-      }
-      public function index(User $user){
+    /*allow all projects actions to admin and manager except MyProjects(for project manager)*/
 
+      public function index(User $user){
+        if(!$user->guest()){
+          return true;
+        }
       }
+
       public function create(User $user){
         if($user->Auth_hasRole('EMPLOYEE')){
           return false;
         }
       }
-
-
-      }
       public function show(User $user, Project $project){
-
+        if(!$user->guest()){
+          return true;
+        }
+      }
+      public function ManagerProjets(User $user, Project $project){
+        if($user->Auth_hasRole('PROJECT_MANAGER')){
+           return true;
+        }
       }
      public function edit(User $user){
        if($user->Auth_hasRole('EMPLOYEE')||$user->Auth_hasRole('PROJECT_MANAGER')){

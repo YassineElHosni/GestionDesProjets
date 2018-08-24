@@ -1,5 +1,9 @@
 @extends('layouts.structure')
 
+@section('csss')
+	@parent
+	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
 @include('flash::message')
@@ -60,7 +64,8 @@
   		<textarea type="text" class="form-control col-8" name="comment" >{{$client->comment}}</textarea>
   	</div><br>
   <hr>
-    <input type="submit" class="btn btn-success btn-h1-spacing float-lg-right" value="Enregistrer">
+
+  <button type="submit" name="submit" class="btn btn-success float-right"> <i class="fas fa-save"> Enregistrer</i></button>
     </form>
 
   </div>

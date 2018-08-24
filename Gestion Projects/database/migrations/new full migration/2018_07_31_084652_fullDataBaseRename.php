@@ -19,7 +19,7 @@ class FullDataBaseRename extends Migration
             $table->longText('description');
             $table->dateTime('limitDate');
             $table->dateTime('startDate')->nullable();
-            $table->dateTime('finishDate')->nullable();
+            $table->dateTime('finishDate')->nullable()->default(null);
             $table->boolean('displacement');//true == 1 == Oui and false == 0 == Non
             $table->boolean('state');////true == 1 == en-cours and false == 0 == clos
             $table->longText('comment');
