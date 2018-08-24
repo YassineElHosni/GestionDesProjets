@@ -12,7 +12,21 @@
 */
 Auth::routes();
 
+Route::get('notif', function(){
+	// echo Auth::user()->Notifications;
+	// $user = \App\User::find(1);
+	// $task = \App\Task::find(4);
+	$task = \App\Task::find(6);
+	Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+	// Notification::send($user, new \App\Notifications\UserNotification($task));
 
+	// foreach ($user->unreadNotifications  as $notification) {
+	//     echo $notification->notifiable_id;
+	//     echo $notification->data['title'];
+	//     // $notification->markAsRead();
+	// }
+});
+Route::get('/user/notif/seen/{id}/{data}','HomeController@notifSeen')->name('user.notif.seen');
 Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');
 Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 
