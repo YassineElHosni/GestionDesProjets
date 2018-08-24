@@ -19,11 +19,19 @@
                 <!--can('index',App\Task::class)   si  employee ou chef-projet -->
 
              <div class="btn-group" role="group">
+							<!-- Rapport only Admin & Gerant & Project Manager -->
 							 <a class="btn btn-info" href="">Rapport</a>
                <a class="btn btn-info" href="{{route('calendar.index')}}">Calendrier des Projets</a>
+
+							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
+               @endif
+
+							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
 							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
-             </div>
+               @endif
+						 </div>
+						 @can('create',App\Task::class)
 						 <div class="btn-group" role="group">
 							 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								 Gestion Taches
@@ -33,9 +41,12 @@
 								 <a class="dropdown-item" href="{{route('Tasks.index')}}">Liste Taches</a>
 							 </div>
 						 </div>
+						 @endcan
 						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
+								@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
 								  <div class="btn-group" role="group">
+
 								    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								      Gestion Utilisateurs
 								    </button>
@@ -44,7 +55,7 @@
 								      <a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
 								    </div>
 								  </div>
-
+                @endif
 									<div class="btn-group" role="group">
 									 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										 Gestion Projets
@@ -55,16 +66,17 @@
 									 </div>
 								 </div>
 							</div>
+							@if(Auth::user()->Auth_hasRole('ADMIN'))
 								 <div class="btn-group" role="group">
 									<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Gestion CLients
+										Gestion Clients
 									</button>
 									<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 										<a class="dropdown-item" href="{{route('Clients.create')}}">Nouveau Client</a>
 										<a class="dropdown-item" href="{{route('Clients.index')}}">Liste des Clients</a>
 									</div>
 								</div>
-
+             @endif
 
                         <!-- can('index',App\User::class)  si  allowed
                               <li class="nav-item">

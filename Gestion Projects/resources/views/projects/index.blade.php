@@ -60,7 +60,7 @@
           <div class="btn-group" role="group" aria-label="Basic example">
             <i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
             <i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
-            <i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>
+            <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
           </div>
         </td>
         {{--

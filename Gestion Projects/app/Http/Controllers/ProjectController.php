@@ -28,7 +28,32 @@ class ProjectController extends Controller
 
       return view('projects.index' ,compact('ps','c'));
     }
+    /**
+     * Display a listing of Projects belongs to a project_manager.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function MyProjects($id)
+    {
 
+      $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
+
+          //foreach ($id_ts as $id_t) {/*for each task|user get :  */
+
+          $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
+          $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
+          $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
+
+              foreach ($ts as $t) {
+                  //get the name of the project that the current task belongs to.
+                  $t->project_title=Project::find($t->project_id)->title;
+
+              }
+          //}
+
+
+        return view('tasks.mesTaches' ,compact('ts'));
+    }
     /**
      * Show the form for creating a new Project
      *
@@ -88,7 +113,7 @@ class ProjectController extends Controller
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
              foreach($tasks as $task){/*get the users_id related to this task_id*/
                $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
-               $tasks->worker=User::where('id','=',$ids_user);
+               $task->worker=User::where('id','=',$ids_user)->get(['name']);
              }
         return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }

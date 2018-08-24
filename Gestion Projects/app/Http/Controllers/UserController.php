@@ -18,7 +18,7 @@ class UserController extends Controller
 	 /*allow all users to update their profil avatar only*/
 	 /*only admin have access to all users database*/
 	 /*only Gerant & Admin can add users ..(Admin add Gerant) */
-  	$this->middleware('admin',['except' => ['showProfile','update_avatar','update','editPassword','updatePassword']]);
+  	$this->middleware('admin',['except' => ['show','update_avatar','update','editPassword','updatePassword']]);
 
 	}
 
@@ -88,7 +88,7 @@ class UserController extends Controller
 		// dd($request->all(),$u);
 		$u->save();
 
-		flash('User Created Successfully !')->success();
+		flash('Utilisateur ajouté avec succé !')->success();
 		return redirect()->route('Users.index');
 	}
 

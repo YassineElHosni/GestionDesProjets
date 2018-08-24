@@ -16,7 +16,6 @@ input[type=text] {
     border: none;
     background-color: #3CBC8D;
     color: white;
-		font-weight: bold;
 }
 textarea {
     width: 100%;
@@ -40,12 +39,9 @@ textarea {
 <div class="form-group align-center">
 	<h1>{{ $project->title }} </h1>
 </div>
-
-@can('edit',App\Project::class)
 <form action="{{ route('Projects.edit',$project->id) }}" method="get">
 	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
 </form>
-@endcan
 <br><hr><br>
 
 <form>
@@ -67,7 +63,7 @@ textarea {
 			<div class="card " style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Debut :</h5>
-					<p style="font-weight: bold;" class="card-text">{{date("M j Y - H:i", strtotime($project->startDate))}}</p>
+					<p class="card-text">{{date("M j Y H:i", strtotime($project->startDate))}}</p>
 				</div>
 			</div>
 	</div>
@@ -75,7 +71,7 @@ textarea {
 			<div class="card mr-3" style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Limite :</h5>
-					<p style="font-weight: bold;" class="card-text">{{date("M j Y - H:i", strtotime($project->limitDate))}}</p>
+					<p class="card-text">{{date("M j Y H:i", strtotime($project->limitDate))}}</p>
 				</div>
 			</div>
 		</div>
@@ -83,7 +79,7 @@ textarea {
 			<div class="card " style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Fin :</h5>
-					<p style="font-weight: bold;" class="card-text"> <?php $project->finishDate=='NULL'? 'inachevé': date("M j Y - H:i", strtotime($project->finishDate));?></p>
+					<p class="card-text"> <?php $project->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($project->finishDate));?></p>
 				</div>
 			</div>
 		</div>

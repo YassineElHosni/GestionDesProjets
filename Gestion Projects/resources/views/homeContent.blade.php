@@ -1,4 +1,5 @@
-<style> /* !!!!! media querys not working !!!!! */
+
+<style> /* !!!!! media querys !!!!! */
 .col-4 {width: 40%;}
 .col-8 {width: 80%;}
 

@@ -9,17 +9,14 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ProjectPolicy
 {
     use HandlesAuthorization;
-    /*allow all projects actions to admin and manager */
-        public function before($user, $ability){
-          if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'){
-              return true;
-          }
-      }
+    /*allow all projects actions to admin and manager except MyProjects(for project manager)*/
+
       public function index(User $user){
         if(!$user->guest()){
           return true;
         }
       }
+
       public function create(User $user){
         if($user->Auth_hasRole('EMPLOYEE')){
           return false;

@@ -16,10 +16,8 @@ input[type=text] {
     border: none;
     background-color: #3CBC8D;
     color: white;
-		font-weight: bold;
 }
-
-.big_box{
+textarea {
     width: 100%;
     height: 150px;
     padding: 12px 20px;
@@ -31,20 +29,6 @@ input[type=text] {
     resize: none;
     overflow :auto;
 }
-.small_box {
-
-	width: 100%;
-	height: 40px;
-	padding: 5px 5px;
-	text-align: center;
-	box-sizing: border-box;
-	border: 2px solid #3CBC8D;
-	border-radius: 4px;
-	background-color: #f8f8f8;
-	font-size: 16px;
-	resize: none;
-
-}
 </style>
 
 
@@ -55,38 +39,38 @@ input[type=text] {
 <div class="form-group align-center">
 	<h1>{{ $project->title }} </h1>
 </div>
-
-@can('edit',App\Task::class)
-<form action="{{ route('Tasks.edit',$task->id) }}" method="get">
+<form action="{{ route('Projects.edit',$project->id) }}" method="get">
 	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
 </form>
-@endcan
 <br><hr><br>
 
 <form>
 	<div class="form-group form-row">
-	 <label  class="form-inline mr-2" for="priority">Priorité :</label>
-	  <label class="small_box" id="priority" name="priority" >
+	 <label  for="priority">Priorité :</label>
+	   <input type="text" id="priority" name="priority" value="">
 			 @if($task->priority==1)
-					 <div style="color:red;font-weight:bold" class="ml-8 ">~ Très Urgent ~</div>
+					 <div style="color:red;font-weight:bold" class="float-right "> Très Urgent </div>
 				 @elseif($task->priority==2)
-						 <div style="color:orange;font-weight:bold" class="ml-8 ">~ Urgent ~</div>
+						 <div style="color:orange;font-weight:bold" class="float-right ">Urgent </div>
 							@elseif($task->priority==3)
-								 <div style="color:yellow;font-weight:bold" class="ml-8 ">~ Normal ~</div>
+								 <div style="color:yellow;font-weight:bold" class="float-right ">Normal </div>
 								 @else
-										<div style="color:green;font-weight:bold" class="ml-8">~ Peut attendre ~</div>
+										<div style="color:green;font-weight:bold" class="float-right ">Peut attendre </div>
 			 @endif
-    </label>
+      </input>
+	 </div>
    <label for="proj">Projet related:</label>
    <input type="text" id="proj" name="proj" value="{{ $project->title }}">
+	 <label for="chef">Chef de Projet :</label>
+   <input type="text" id="chef" name="chef" value="{{ $chef->name }}">
    <label for="comment">commentaire :</label>
-   <textarea class="big_box"id="comment" name="comment" >{{ $task->comment }}</textarea>
-	 <label for="state">Etate :</label>
+   <textarea id="comment" name="comment" >{{ $task->comment }}</textarea>
+	 <label for="state">étate :</label>
    <input type="text" id="state" name="state"
 	 value="{{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}}">
- </div>
-</form>
 
+<div class="col-sm">
+	<div class="form-row">
 		<div class="col-sm">
 			<div class="form-row">
 				<div class="form-group ">
@@ -146,7 +130,11 @@ input[type=text] {
 			</tbody>
 		</table>
 		<hr>
-
+		<!--can('edit',App\Task::class)-->
+			<form action="{{ route('Tasks.edit',$task->id) }}" method="get">
+				<button type="submit" class="btn btn-success float-right"><i class="fa fa-pencil-alt text-dark"></i>Modifier</button>
+			</form>
+		<!-- endcan -->
 		@endsection
 
 		@section('jss')
