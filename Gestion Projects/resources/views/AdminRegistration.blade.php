@@ -58,8 +58,8 @@
 <div class="hero-image">
 	<div class="hero-text">
 		<h1 style="font-size:50px;"><b>Sir, First Admin</b></h1>
-		<p><i>Welcome To the Root Form</i></p>
-		
+		<p><i>Bienvenu à l'interface Admin</i></p>
+
 	</div>
 </div>
 </body>
@@ -145,7 +145,7 @@ h6 {
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="#"><strong>Welcome !</strong></a>
+            <a class="navbar-brand" href="#"><strong>Bienvenu !</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -155,7 +155,7 @@ h6 {
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">Lien</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profile</a>
@@ -180,9 +180,9 @@ h6 {
 	                        <div class="text-light">
 	                            <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now! </h1>
 	                            <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-	                            <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Sir First Admin, welcome to the root page. made to insure an admin registration before any management or data creation, in fact before anything else, you can not enter to the other pages until you create at least one Admin Account.</h6>
+	                            <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Chère Admin, bienvenu à la page d'installation.Afin de pouvoire accéder à votre application et pouvoire ajouter et manipuler les données , une première inscription d'Admine est nécessaire .</h6>
 	                            <br>
-	                            <a class="btn btn-outline-white wow fadeInLeft animated btn_learnMore" data-wow-delay="0.3s" style="">LEARN MORE<b></b></a>
+	                            <a class="btn btn-outline-white wow fadeInLeft animated btn_learnMore" data-wow-delay="0.3s" style="">Apprendre plus<b></b></a>
 	                        </div>
 
 							@if ($errors->any())
@@ -205,41 +205,41 @@ h6 {
 		                            <div class="card-body">
 		                                <!--Header-->
 		                                {{-- <div class="text-center">
-		                                    <h3 class="text-light"><i class="fa fa-user text-light"></i> Register:</h3>
+		                                    <h3 class="text-light"><i class="fa fa-user text-light"></i> Inscription:</h3>
 		                                    <hr class="hr-light">
 		                                </div> --}}
 
 		                                <!--Body-->
 		                                <div class="md-form">
 		                                    <i class="fas fa-user-tie prefix text-light active"></i>
-		                                    <label for="name" class="active">Your name</label>
+		                                    <label for="name" class="active">Votre nom</label>
 		                                    <input type="text" id="name" name="name" class="form-control" required>
 		                                </div>
 		                                <div class="md-form">
 		                                    <i class="fa fa-envelope prefix text-light active"></i>
-		                                    <label for="email" class="active">Your email</label>
+		                                    <label for="email" class="active">Votre email</label>
 		                                    <input type="email" id="email" name="email" class="form-control required" required>
 		                                </div>
 
 		                                <div class="md-form">
 		                                    <i class="fa fa-lock prefix text-light active"></i>
-		                                    <label for="password" class="active">Your password</label>
+		                                    <label for="password" class="active">Votre mot de passe</label>
 		                                    <input type="password" id="password" name="password" class="form-control required" required>
 		                                </div>
 
 		                                <div class="md-form">
 		                                    <i class="fa fa-lock prefix text-light active"></i>
-		                                    <label for="password_confirmation" class="active">Confirm Your password</label>
+		                                    <label for="password_confirmation" class="active">Confirmer le mot de passe</label>
 		                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control required" required>
 		                                </div>
 
 		                                <div class="md-form">
 		                                    {{-- <input type="textar" id="form6" class="form-control"> --}}
-		                                    <label for="comment" class="active">Your comment</label>
+		                                    <label for="comment" class="active">Commentaire</label>
 		                                	<textarea id="comment" name="comment" class="form-control active required" required cols="30" rows="3"></textarea>
 		                                </div>
 		                                <div class="text-center">
-		                                    <button class="btn btn-primary" type="submit" onclick="return checkForm();" style="margin-top:10px;">Sign up</button>
+		                                    <button class="btn btn-primary" type="submit" onclick="return checkForm();" style="margin-top:10px;">s'inscrire</button>
 		                                    <hr class="hr-light mb-3 mt-4">
 
 		                                        <div class="inline-ul text-center d-flex justify-content-center">
@@ -265,7 +265,10 @@ h6 {
         <div class="row py-5">
             <div class="col-md-12 text-center">
 
-                <p>This web site is for Projects Management, meaning the management of all project related date. currently on beta version, but still has alot to offer in the subject. the develpement of this web site is still in developement, please <a href="#">Contact Us</a> if you find problems or feedbacks,<br><br><b>Regards,<br><br>Dev yh</b></p>
+                <p>This web site is for Projects Management, meaning the management of all project related date.
+									currently on beta version, but still has alot to offer in the subject.
+									the develpement of this web site is still in developement, please <a href="#">Contact Us</a>
+									if you find problems or feedbacks,<br><br><b>Regards,<br><br>Dev yh & ng</b></p>
 
             </div>
 

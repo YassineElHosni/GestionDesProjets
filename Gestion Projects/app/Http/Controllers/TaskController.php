@@ -80,7 +80,7 @@ class TaskController extends Controller
             'progress' => 0,
             'priority' => ($request->priority_RadioBtn),
             'comment' => $request->comment,
-            'user_id' =>$request->user_id[0],
+            'user_id' =>$request->user_id[0],/*not stored ! user have to be attached with this task*/
             'project_id'=>$request->project_id[0],
           ]);
       $newTask->save();

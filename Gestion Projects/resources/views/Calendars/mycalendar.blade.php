@@ -13,7 +13,7 @@
 <!--mon agenda -->
 
 <button style="width: 80%;"class="btn btn-primary" onclick="calendarflow()">
-  <i class="fas fa-calendar-alt">Aganda</i>
+  <i class="fa fa-calendar" aria-hidden="true">  Calendrier</i>
 </button>
 <br>
 

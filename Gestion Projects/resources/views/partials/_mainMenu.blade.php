@@ -22,13 +22,13 @@
              <div class="btn-group" role="group">
 							<!-- Rapport only Admin & Gerant & Project Manager -->
 							 <a class="btn btn-info" href="">Rapport</a>
-               <a class="btn btn-info" href="{{route('calendar.index')}}">Calendrier des Projets</a>
+               <a class="btn btn-info" href="{{route('calendar.index')}}">Agenda de Projets</a>
 
 							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
                @endif
 
-							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
+							 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
                @endif
 						 </div>

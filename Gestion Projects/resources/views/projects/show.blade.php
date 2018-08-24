@@ -96,11 +96,11 @@ textarea {
 <!-- display tasks related to this project -->
 <br><h3>Taches du Projet :</h3>
 	<!-- can add task to this project -->
-	@can('addTaskToPrj',App\User::class)
+  <!--can('addTaskToPrj',App\User::class) -->
 	<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
 		<button type="submit" class="btn btn-warning float-right"><i class="fas fa-plus"></i></button>
 	</form>
-	@endcan
+	<!--endcan-->
 <br><hr>
 
 <table class="table table-bordered">
