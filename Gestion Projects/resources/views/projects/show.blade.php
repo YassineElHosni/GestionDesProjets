@@ -41,16 +41,16 @@ textarea {
 	<h1>{{ $project->title }} </h1>
 </div>
 
-@can('edit',App\Project::class)
+@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 <form action="{{ route('Projects.edit',$project->id) }}" method="get">
 	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
 </form>
-@endcan
+@endif
 <br><hr><br>
 
 <form>
 	 <label  for="state">Etat :</label>
-   <input type="text" id="state" name="state" value="{{($project->state)?'en-cours':'clos'}}">
+   <input  type="text" id="state" name="state" value="~ {{($project->state)?'en-cours':'clos'}} ~">
    <label for="client">Client :</label>
    <input type="text" id="client" name="client" value="{{ $client->name }}">
 	 <label for="chef">Chef de Projet :</label>
@@ -117,7 +117,7 @@ textarea {
 	<tbody>
 	@foreach($tasks as $task)
 	<tr>
-		<th scope="row">@foreach($task->worker as $w) {{$w}} @endforeach</th><!--if lot of workers? -->
+		<th scope="row">@foreach($task->worker as $w) {{$w->name}} @endforeach</th><!--if lot of workers? -->
 		<th scope="row">{{$task->title}}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
 		<td>{{$task->state}}</td>

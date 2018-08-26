@@ -56,11 +56,11 @@ input[type=text] {
 	<h1>{{ $project->title }} </h1>
 </div>
 
-@can('edit',App\Task::class)
+@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 <form action="{{ route('Tasks.edit',$task->id) }}" method="get">
 	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
 </form>
-@endcan
+@endif
 <br><hr><br>
 
 <form>

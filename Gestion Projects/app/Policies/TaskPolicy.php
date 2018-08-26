@@ -12,70 +12,63 @@ class TaskPolicy
 
       public function index(User $user)
       {
-          if ($user->Auth_hasRole('ADMIN')||
-          $user->Auth_hasRole('MANAGER')||$user->Auth_hasRole('PROJECT_MANAGER')
-          ||$user->Auth_hasRole('EMPLOYEE')) {
               return true;
-         }
       }
       public function MyTasks(User $user, Task $task){
-       if($user->Auth_hasRole('PROJECT_MANAGER')||$user->Auth_hasRole('EMPLOYEE')) {
-            return true;
-       }
+
+           if($user->Auth_hasRole('PROJECT_MANAGER')||$user->Auth_hasRole('EMPLOYEE')) {
+                return true;
+           }else {  return false; }
       }
+
        public function create(User $user){
-         if ($user->Auth_hasRole('ADMIN')||
-         $user->Auth_hasRole('MANAGER')||$user->Auth_hasRole('PROJECT_MANAGER'){
-             return true;
-        }
+           if(!$user->Auth_hasRole('EMPLOYEE')){
+               return true;
+           }else {  return false; }
       }
      public function show(User $user, Task $task)
     {
-      if ($user->Auth_hasRole('ADMIN')||
-      $user->Auth_hasRole('MANAGER')||$user->Auth_hasRole('PROJECT_MANAGER')
-      ||$user->Auth_hasRole('EMPLOYEE')) {
           return true;
-     }
     }
 
 
     public function edit(User $user, Task $task)
     {
-      if ($user->Auth_hasRole('EMPLOYEE')){
-          return false;
-      }
+          if(!$user->Auth_hasRole('EMPLOYEE')){
+              return true;
+          }else {  return false; }
     }
     public function updateProgress(User $user, Task $task,User $workers )
     {
-        if (in_array($user->id,$workers->id){
-            return true;
-        }else {  return false; }
-      }
-
+          if (in_array($user->id,$workers->id)){
+              return true;
+          }else {  return false; }
     }
 
     public function addEmployee(User $user, Task $task)
     {
-      if ($user->Auth_hasRole('EMPLOYEE'){
-          return false;
-      }
+        if (!$user->Auth_hasRole('EMPLOYEE')){
+            return true;
+        }else {  return flase; }
     }
+
    public function  addTaskToPrj(User $user, Task $task){
-     if ($user->Auth_hasRole('EMPLOYEE'){
-         return false;
-     }
+       if (!$user->Auth_hasRole('EMPLOYEE')){
+           return true;
+       }else {  return false; }
    }
 
     public function removeEmployee(User $user, Task $task)
     {
-      if ($user->Auth_hasRole('EMPLOYEE'){
-          return false;
-      }
+        if (!$user->Auth_hasRole('EMPLOYEE')){
+            return true;
+        }else {  return false; }
     }
 
     public function delete(User $user, Task $task)
     {
-      if ($user->Auth_hasRole('EMPLOYEE'){
-          return false;
-      }
+      if (!$user->Auth_hasRole('EMPLOYEE')){
+          return true;
+      }else {  return false; }
+    }
 }

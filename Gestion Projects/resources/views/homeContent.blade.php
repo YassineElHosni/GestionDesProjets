@@ -1,5 +1,5 @@
 
-<style> /* !!!!! media querys !!!!! */
+<style> /* !!!!! media querys !!!!! A REVOIR */
 .col-4 {width: 40%;}
 .col-8 {width: 80%;}
 

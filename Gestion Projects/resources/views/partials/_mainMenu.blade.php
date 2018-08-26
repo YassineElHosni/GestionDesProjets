@@ -21,18 +21,20 @@
 
              <div class="btn-group" role="group">
 							<!-- Rapport only Admin & Gerant & Project Manager -->
+							@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-info" href="">Rapport</a>
                <a class="btn btn-info" href="{{route('calendar.index')}}">Agenda de Projets</a>
-
+              @endif
+							
 							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
                @endif
 
-							 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
 							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
                @endif
 						 </div>
-						 @can('create',App\Task::class)
+						 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 						 <div class="btn-group" role="group">
 							 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								 Gestion Taches
@@ -42,7 +44,7 @@
 								 <a class="dropdown-item" href="{{route('Tasks.index')}}">Liste Taches</a>
 							 </div>
 						 </div>
-						 @endcan
+						 @endif
 						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
 								@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
@@ -57,6 +59,7 @@
 								    </div>
 								  </div>
                 @endif
+								@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 									<div class="btn-group" role="group">
 									 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										 Gestion Projets
@@ -67,7 +70,8 @@
 									 </div>
 								 </div>
 							</div>
-							@if(Auth::user()->Auth_hasRole('ADMIN'))
+							@endif
+						  @if(Auth::user()->Auth_hasRole('ADMIN'))
 								 <div class="btn-group" role="group">
 									<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Gestion Clients

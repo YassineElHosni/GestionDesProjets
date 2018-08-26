@@ -140,11 +140,8 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id)/*!!!!clotured == finishdate=date()   A REVOIR !!!*/
     {
-      // get the current time  - 2015-12-19 10:10:54
-      $current=Carbon::now();
-      $current=new Carbon();
 
       $project =Project::find($id);
 
@@ -156,15 +153,17 @@ class ProjectController extends Controller
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
 
-      if(  $project->state ==0){/*si le projet est clos*/
-          $project->finishDate=$current;/*on precise la date de fin*/
+      if($project->state==0){/*si le projet est clos*/
+          $project->finishDate=date('Y-m-d H:i:s');/*on precise la date de fin*/
       }else{
         // $project->finishDate='0000-00-00 00:00:00';
       }
       $project->save();
-
-      flash('Project Saved Successfully !')->success();
-
+      if($project->finishDate!=null){
+        flash('Project Cloturé !')->success();
+      }else{
+      flash('Modification enregistré !')->success();
+      }
       return redirect()->route('Projects.show',$project->id)->withProject($project);
     }
 
