@@ -18,23 +18,25 @@
 
           @if (!Auth::guest()) <!-- si  authentifié -->
                 <!--can('index',App\Task::class)   si  employee ou chef-projet -->
-
+           <?php $user=Auth::user(); ?>
              <div class="btn-group" role="group">
 							<!-- Rapport only Admin & Gerant & Project Manager -->
 							@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 							 <a class="btn btn-info" href="">Rapport</a>
-               <a class="btn btn-info" href="{{route('calendar.index')}}">Agenda de Projets</a>
               @endif
-							
-							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
+							<a class="btn btn-info" href="{{route('calendar.index')}}">Agenda de Projets</a>
+               @if(Auth::user()->Auth_hasRole('EMPLOYEE')||Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
+							 <!--can('MyTasks',$user,App\Task::class)-->
 							 <a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
+               <!--endcan-->
                @endif
-
 							 @if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
+							 <!--can('ManagerProjets',$user,App\Project::class)-->
 							 <a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
                @endif
 						 </div>
 						 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+						 <!--can('create',$user)App\Task::class-->
 						 <div class="btn-group" role="group">
 							 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								 Gestion Taches
@@ -48,7 +50,8 @@
 						 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
 								@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
-								  <div class="btn-group" role="group">
+                   <!--can('index',$user)App\User::class-->
+									<div class="btn-group" role="group">
 
 								    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								      Gestion Utilisateurs
@@ -60,6 +63,7 @@
 								  </div>
                 @endif
 								@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+								<!--can('create',$user)App\Project::class-->
 									<div class="btn-group" role="group">
 									 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										 Gestion Projets
@@ -70,8 +74,11 @@
 									 </div>
 								 </div>
 							</div>
+							@else
+							<a class="btn btn-info" href="{{route('Projects.index')}}">Liste des Projets</a>
 							@endif
 						  @if(Auth::user()->Auth_hasRole('ADMIN'))
+									<!--can('index',$user)App\Client::class-->
 								 <div class="btn-group" role="group">
 									<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Gestion Clients

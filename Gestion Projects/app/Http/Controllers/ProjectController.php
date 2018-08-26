@@ -92,15 +92,18 @@ class ProjectController extends Controller
               $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
                     ->get(['user_id']))
                       ->get(['name']);
-              // dd($task->worker);
-               // $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
-               // $task->worker=User::whereIn('id',$ids_user)->get(['name','email','comment']);
+               }
+
+             if($p->projetClos()){
+               $p->finishDate=date('Y-m-d H:i:s');
+             }else{
+                // $project->finishDate='0000-00-00 00:00:00';
              }
-    // $t->us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
-    // dd($tasks);
-    //          dd($tasks);
+               $p->save();
+
         return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
+
     /**
      * Display all  Projects of one Projects_Manager.
      * en cours..
@@ -133,6 +136,10 @@ class ProjectController extends Controller
         return view('projects.edit',compact('p','project_managers'));
     }
 
+    public function updateDateEnd(Request $request, $id){
+
+
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -140,7 +147,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)/*!!!!clotured == finishdate=date()   A REVOIR !!!*/
+    public function update(Request $request, $id)
     {
 
       $project =Project::find($id);
@@ -153,12 +160,8 @@ class ProjectController extends Controller
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
 
-      if($project->state==0){/*si le projet est clos*/
-          $project->finishDate=date('Y-m-d H:i:s');/*on precise la date de fin*/
-      }else{
-        // $project->finishDate='0000-00-00 00:00:00';
-      }
       $project->save();
+
       if($project->finishDate!=null){
         flash('Project Cloturé !')->success();
       }else{

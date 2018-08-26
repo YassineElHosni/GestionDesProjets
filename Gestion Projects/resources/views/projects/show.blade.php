@@ -1,10 +1,5 @@
 @extends('layouts.structure')
 
-@section('csss')
-	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <style>
 h1{border-bottom:1px ;color: grey;}
@@ -42,9 +37,11 @@ textarea {
 </div>
 
 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
-<form action="{{ route('Projects.edit',$project->id) }}" method="get">
-	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
-</form>
+  @if($project->state!=0)<!--we can't edit a clos Project -->
+  <form action="{{ route('Projects.edit',$project->id) }}" method="get">
+  	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</button>
+  </form>
+  @endif
 @endif
 <br><hr><br>
 
@@ -83,7 +80,7 @@ textarea {
 			<div class="card " style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Fin :</h5>
-					<p style="font-weight: bold;" class="card-text"> <?php $project->finishDate=='NULL'? 'inachevé': date("M j Y - H:i", strtotime($project->finishDate));?></p>
+					<p style="font-weight: bold;" class="card-text"> {{date("M j Y - H:i", strtotime($project->finishDate))}}</p>
 				</div>
 			</div>
 		</div>
@@ -97,9 +94,13 @@ textarea {
 <br><h3>Taches du Projet :</h3>
 	<!-- can add task to this project -->
   <!--can('addTaskToPrj',App\User::class) -->
-	<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
-		<button type="submit" class="btn btn-warning float-right"><i class="fas fa-plus"></i></button>
-	</form>
+	@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+    @if($project->state!=0)<!--we can't edit a clos Project -->
+    	<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
+    		<button type="submit" class="btn btn-warning float-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    	</form>
+    @endif  
+	@endif
 	<!--endcan-->
 <br><hr>
 
@@ -124,7 +125,7 @@ textarea {
 		<td><span class="badge badge-primary badge-pill align_center">{{$task->progress }}</span></td>
 
 		<td><form action="{{ route('Tasks.show',$task->id) }}" id="show{{$task->id}}" method="get"> </form>
-			<i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$task->id}}').submit();"></i>
+			<i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$task->id}}').submit();"></i>
 
 	  </td>
 	</tr>

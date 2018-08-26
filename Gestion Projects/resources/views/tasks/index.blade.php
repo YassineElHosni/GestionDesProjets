@@ -1,10 +1,5 @@
 @extends('layouts.structure')
 
-@section('csss')
-	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <br>
 <style> h2{ color: green; } </style>
@@ -25,12 +20,18 @@
 		<th scope="col">Déroulement %</th>
 		{{-- <th>commentaire</th> --}}
 		<th scope="col"></th>
-		<th scope="col"></th>
 	</tr>
 </thead>
 <tbody>
 	@foreach($ts as $t)
-	<tr>
+    @if($t->state=='FINISHED')
+  	<tr class="table-info">
+    @elseif($t->state=='VALIDATED')
+    <tr class="table-success">
+    @else
+   	<tr>
+		@endif
+
 		<td><b>{{$t->title}}</b></td>
 		<td>{{$t->project_title}}</td>
 		<td><div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($t->limitDate))}}</div></td>
@@ -61,15 +62,15 @@
       </p>
     </td>
 		<td>{{$t->progress}}</td>
-    <td scope="row">
-      <form action="{{ route('Tasks.show',$t->id) }}" id="show{{$t->id}}" method="get"></form>
-      <form action="{{ route('Tasks.edit',$t->id) }}" id="edit{{$t->id}}" method="get"></form>
-      </form>
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$t->id}}').submit();"></i>
-        <i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$t->id}}').submit();"></i>
-     </div>
-    </td>
+		<td scope="row">
+			<form action="{{ route('Tasks.show',$t->id) }}" id="show{{$t->id}}" method="get"></form>
+			<form action="{{ route('Tasks.edit',$t->id) }}" id="edit{{$t->id}}" method="get"></form>
+			</form>
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$t->id}}').submit();"></i>
+				<i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$t->id}}').submit();"></i>
+		 </div>
+		</td>
 	</tr>
 	@endforeach
 </tbody>

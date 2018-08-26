@@ -1,11 +1,6 @@
 @extends('layouts.structure')
 
 
-@section('csss')
-	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 @include('flash::message')
 <br>
@@ -67,9 +62,11 @@
             {!! method_field('delete') !!}{!! csrf_field() !!}
           </form>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
-            <i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
+            <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
+						@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+            <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
             <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
+						@endif
           </div>
         </td>
         {{--
