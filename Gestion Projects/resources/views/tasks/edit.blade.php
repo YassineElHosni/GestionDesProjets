@@ -72,20 +72,20 @@
 	<div class="form-group">
 		<label class="col-form-label col-md-2 col-sm-12">Priorité:</label>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level1_RadioBtn" value="1" checked>
-			<label class="form-check-label" for="level1_RadioBtn">level 1</label>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
+			<label class="form-check-label" for="level1_RadioBtn">Très urgent</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level2_RadioBtn" value="2">
-			<label class="form-check-label" for="level2_RadioBtn">level 2</label>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="2">
+			<label class="form-check-label" for="level2_RadioBtn">Urgent</label>
 		</div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level3_RadioBtn" value="3" checked>
-			<label class="form-check-label" for="level3_RadioBtn">level 3</label>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="3" checked>
+			<label class="form-check-label" for="level3_RadioBtn">Normal</label>
 	  </div>
 		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="level4_RadioBtn" value="4">
-			<label class="form-check-label" for="level4_RadioBtn">level 4</label>
+			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="4">
+			<label class="form-check-label" for="level4_RadioBtn">Peut attendre</label>
 		</div>
 	</div>
 </div>
@@ -98,7 +98,7 @@
 
   <div class="col-sm">
     <div class="form-row">
-  <div class="form-group form-inline mr-4">
+  <div hidden class="form-group form-inline mr-4">
       	<label class="col-form-label mr-3">Progression : </label>
         <span id="rangeRes" name="progress" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
         <input type="hidden" name="progress" value="{{$task->progress }}">

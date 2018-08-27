@@ -80,7 +80,7 @@ class TaskController extends Controller
             'progress' => 0,
             'priority' => ($request->priority_RadioBtn),
             'comment' => $request->comment,
-            'user_id' =>$request->user_id[0],
+            'user_id' =>$request->user_id[0],/*not stored ! user have to be attached with this task*/
             'project_id'=>$request->project_id[0],
           ]);
       $newTask->save();
@@ -141,10 +141,12 @@ class TaskController extends Controller
     }
     /*
     *  Employee Update progress / state
+    * and update comment if edited ..
     */
     public function updateProgress(Request $request, $id)
     {
           $task =Task::find($id);
+          $task->comment=$request->comment;
           $task->progress=$request->progress;
           if($request->progress=="100" && $task->state=='IN_PROGRESS')
             $task->state='FINISHED';
@@ -154,7 +156,7 @@ class TaskController extends Controller
     }
 
     /**
-     * Update Task (Project Manager..)
+     * Update Task (changing the current workers)
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

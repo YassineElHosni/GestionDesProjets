@@ -24,36 +24,13 @@ class ProjectController extends Controller
         foreach ($ps as $p) {
           // $c[$p->id]=Client::find($p->client_id)->Nom;
           $p->client_name=Client::find($p->client_id)->name;
+          /*chef de projet*/
+          $p->chef=User::find($p->user_id)->name;
         }
 
       return view('projects.index' ,compact('ps','c'));
     }
-    /**
-     * Display a listing of Projects belongs to a project_manager.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function MyProjects($id)
-    {
 
-      $id_ts=Task_User::where('user_id','=',$id)->get(['task_id']);/*get the tasks_id related to this user_id*/
-
-          //foreach ($id_ts as $id_t) {/*for each task|user get :  */
-
-          $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
-          $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
-          $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
-
-              foreach ($ts as $t) {
-                  //get the name of the project that the current task belongs to.
-                  $t->project_title=Project::find($t->project_id)->title;
-
-              }
-          //}
-
-
-        return view('tasks.mesTaches' ,compact('ts'));
-    }
     /**
      * Show the form for creating a new Project
      *
@@ -115,15 +92,18 @@ class ProjectController extends Controller
               $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
                     ->get(['user_id']))
                       ->get(['name']);
-              // dd($task->worker);
-               // $ids_user=Task_User::where('task_id','=',$task->$id)->get(['user_id']);
-               // $task->worker=User::whereIn('id',$ids_user)->get(['name','email','comment']);
+               }
+
+             if($p->projetClos()){
+               $p->finishDate=date('Y-m-d H:i:s');
+             }else{
+                // $project->finishDate='0000-00-00 00:00:00';
              }
-    // $t->us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
-    // dd($tasks);
-    //          dd($tasks);
+               $p->save();
+
         return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
+
     /**
      * Display all  Projects of one Projects_Manager.
      * en cours..
@@ -132,10 +112,13 @@ class ProjectController extends Controller
      */
     public function ManagerProjets($id)
     {
-        $ps = Project::where('user_id','Like',$id)->get();
-
-        return view('projects.index',compact('ps'));
-    }
+      $ps = Project::where('user_id','Like',$id)->get();
+      foreach ($ps as $p) {
+        $c=Client::find($p->client_id);
+      }
+      $func=1;
+      return view('projects.index',compact('ps'))->withFunc($func);
+     }
     /**
      * Show the form for editing the specified resource.
      *
@@ -153,6 +136,10 @@ class ProjectController extends Controller
         return view('projects.edit',compact('p','project_managers'));
     }
 
+    public function updateDateEnd(Request $request, $id){
+
+
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -162,9 +149,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-      // get the current time  - 2015-12-19 10:10:54
-      $current=Carbon::now();
-      $current=new Carbon();
 
       $project =Project::find($id);
 
@@ -176,15 +160,13 @@ class ProjectController extends Controller
       $project->comment =$request->comment;
       $project->user_id =$request->user_id[0];
 
-      if(  $project->state ==0){/*si le projet est clos*/
-          $project->finishDate=$current;/*on precise la date de fin*/
-      }else{
-        // $project->finishDate='0000-00-00 00:00:00';
-      }
       $project->save();
 
-      flash('Project Saved Successfully !')->success();
-
+      if($project->finishDate!=null){
+        flash('Project Cloturé !')->success();
+      }else{
+      flash('Modification enregistré !')->success();
+      }
       return redirect()->route('Projects.show',$project->id)->withProject($project);
     }
 

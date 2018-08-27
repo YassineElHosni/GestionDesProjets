@@ -62,6 +62,7 @@
 				<input type="hidden" id="dtp_input1" value=""/><br/>
 			</div>
 			<!--état-->
+			@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
 		<div class="form-group col-8">
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1"
@@ -73,6 +74,19 @@
 			  <label class="form-check-label" for="Clos_RadioBtn">clos</label>
 			</div>
 		</div>
+		@else
+		<div class="form-group col-8">
+			<div class="form-check form-check-inline">
+			  <input disabled class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1"
+			  <?php echo ($p->state)?'checked':''?>>
+			  <label  class="form-check-label" for="EnCours_RadioBtn">en-cours</label>
+
+
+			  <input disabled class="form-check-input ml-3" type="radio" name="state_RadioBtn" id="Clos_RadioBtn" value="0"<?php echo (!$p->state)?'checked':'' ?>>
+			  <label class="form-check-label" for="Clos_RadioBtn">clos</label>
+			</div>
+		</div>
+    @endif
   </div>
 </div>
 

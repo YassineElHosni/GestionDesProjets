@@ -86,3 +86,8 @@ day 15: 26
 y/n : tasks to finish ->( ProjetController/views)
 n-> edit /update
 y-> destroy projet+ begin taskController
+
+le reste des jours jusqu'au 26/08/2018: developement et amelioration de l'application 
+                                        (ajout de documentation + modification des diagrammes)
+                                        (redaction du rapport de stage)
+le lundi 27/08 : (finitions - presentation )

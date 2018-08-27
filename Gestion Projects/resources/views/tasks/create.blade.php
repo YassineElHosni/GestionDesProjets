@@ -28,13 +28,13 @@
 	<div class="form-group col-6">
 		<label class="col-form-label">Projet related :</label>
 		<select name = "project_id[]" id="project_id" class="form-control">
-			@if($project)
+			<?php if(isset($project)):?>
 			  <option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
-			@elseif($projects)
+			<?php elseif(isset($projects)): ?>
 				@foreach ($projects as $project)
 					<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
 				@endforeach
-			@endif
+			<?php endif; ?>
 		</select>
 	</div>
 

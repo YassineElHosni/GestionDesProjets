@@ -1,11 +1,6 @@
 @extends('layouts.structure')
 
 
-@section('csss')
-	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 @include('flash::message')
 <br>
@@ -25,7 +20,11 @@
 		<th scope="col">date debut</th>
     <th scope="col">date limite</th>
 		<th scope="col">date fin</th>
-		<th scope="col">deplacement</th>
+			<?php if(isset($func)):?>
+			<th scope="col">Deplacement</th>
+			<?php else: ?>
+			<th scope="col">Chef de Projet</th>
+		<?php endif; ?>
 		<th scope="col">etat</th>
 		<th scope="col"></th>
 		<th scope="col"></th>
@@ -40,6 +39,7 @@
     @else
     <tr>
     @endif
+
   		<td scope="row">{{$p->title}}</th>
   		{{-- <td>{{$p->description}}</td> --}}
   		<td>{{$p->client_name}}</td>
@@ -47,7 +47,11 @@
   		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
       <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
       <td> <?php $p->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($p->finishDate));?></td>
-  		<td>{{($p->displacement)?'Oui':'No'}}</td>
+			<?php if(isset($func)):?>
+	   	<td>{{($p->displacement)?'Oui':'No'}}</td>
+		  <?php else: ?>
+			<td>{{$p->chef}}</td>
+		  <?php endif; ?>
   		<td>{{($p->state)?'en-cours':'clos'}}</td>
   		<td>
   		<td>
@@ -58,9 +62,11 @@
             {!! method_field('delete') !!}{!! csrf_field() !!}
           </form>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
-            <i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
+            <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
+						@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+            <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
             <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
+						@endif
           </div>
         </td>
         {{--

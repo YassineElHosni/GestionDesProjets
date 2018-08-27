@@ -12,7 +12,6 @@ $(document).ready( function () {
 
 @section('csss')
 	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
 	<style> h2{ color: green; } i{padding-top: 10%;}</style>
 @endsection
 
@@ -61,17 +60,27 @@ $(document).ready( function () {
 				<input hidden type="submit" class="btn btn-danger" id="delete{{$u->id}}">
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
-				<i class="btn btn-success far fa-eye text-dark" onclick="$('#show{{$u->id}}').click();"
+        @if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
+          @if($u->role!='ADMIN')<!--ne pas modifier l'admine -->
+				<i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$u->id}}').click();"
 					{{-- id="voir{{$u->id}}"
 					onmouseover="$('#voir{{$u->id}}').val('voir');"
 					onmouseout="$('#voir{{$u->id}}').val('v');" --}}
 				value="v"></i>
-        @can('edit',App\User::class)
-				<i class="btn btn-primary fa fa-pencil-alt text-dark" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
-        @endcan
-        @can('delete',App\User::class)
-				<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$u->id}}').click();" value="s"></i>
-        @endcan
+          @endif
+        @endif
+        <!--can('edit',App\User::class,$u)-->
+      	@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
+          @if($u->role!='ADMIN')<!--ne pas modifier l'admine -->
+				  <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
+          @endif
+        @endif
+        <!--can('delete',App\User::class,$u)-->
+        @if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
+          @if($u->role!='ADMIN')<!--ne pas modifier l'admine -->
+				  <i <i class="btn btn-danger fa fa-trash text-dark" aria-hidden="true" onclick="$('#delete{{$u->id}}').click();" value="s"></i>
+          @endif
+        @endif
       </div>
 		</td>
 	</tr>

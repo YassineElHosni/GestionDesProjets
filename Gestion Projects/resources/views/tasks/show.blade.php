@@ -1,10 +1,5 @@
 @extends('layouts.structure')
 
-@section('csss')
-	@parent
-	<link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <style>
 h1{border-bottom:1px ;color: grey;}
@@ -56,58 +51,61 @@ input[type=text] {
 	<h1>{{ $project->title }} </h1>
 </div>
 
-@can('edit',App\Task::class)
-<form action="{{ route('Tasks.edit',$task->id) }}" method="get">
-	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
-</form>
-@endcan
+@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+  @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
+  <form action="{{ route('Tasks.edit',$task->id) }}" method="get">
+  	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</button>
+  </form>
+  @endif
+@endif
 <br><hr><br>
 
-<form>
-	<div class="form-group form-row">
-	 <label  class="form-inline mr-2" for="priority">Priorité :</label>
-	  <label class="small_box" id="priority" name="priority" >
-			 @if($task->priority==1)
-					 <div style="color:red;font-weight:bold" class="ml-8 ">~ Très Urgent ~</div>
-				 @elseif($task->priority==2)
-						 <div style="color:orange;font-weight:bold" class="ml-8 ">~ Urgent ~</div>
-							@elseif($task->priority==3)
-								 <div style="color:yellow;font-weight:bold" class="ml-8 ">~ Normal ~</div>
-								 @else
-										<div style="color:green;font-weight:bold" class="ml-8">~ Peut attendre ~</div>
-			 @endif
-    </label>
-   <label for="proj">Projet related:</label>
-   <input type="text" id="proj" name="proj" value="{{ $project->title }}">
-   <label for="comment">commentaire :</label>
-   <textarea class="big_box"id="comment" name="comment" >{{ $task->comment }}</textarea>
-	 <label for="state">Etate :</label>
-   <input type="text" id="state" name="state"
-	 value="{{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}}">
- </div>
-</form>
-
-		<div class="col-sm">
-			<div class="form-row">
-				<div class="form-group ">
-					<div class="card mr-3" style="width: 30rem;">
-						<div class="card-body form-inline ">
-							<h5 class="card-title  mr-4">Date Limite :</h5>
-							<p class="card-text float-right">{{date("M j Y h:m:s", strtotime($task->limitDate))}}</p>
+	<form action="{{ route('Tasks.updateProgress',$task->id) }}" method="post">
+		<input type="hidden" name="_method" value="PUT">
+		<input type="hidden" name="_token" value="{!! csrf_token() !!}">
+		<div class="form-group form-row">
+		 <label  class="form-inline mr-2" for="priority">Priorité :</label>
+		  <label class="small_box" id="priority" name="priority" >
+				 @if($task->priority==1)
+						 <div style="color:red;font-weight:bold" class="ml-8 ">~ Très Urgent ~</div>
+					 @elseif($task->priority==2)
+							 <div style="color:orange;font-weight:bold" class="ml-8 ">~ Urgent ~</div>
+								@elseif($task->priority==3)
+									 <div style="color:yellow;font-weight:bold" class="ml-8 ">~ Normal ~</div>
+									 @else
+											<div style="color:green;font-weight:bold" class="ml-8">~ Peut attendre ~</div>
+				 @endif
+      </label>
+		   <label for="proj">Projet related:</label>
+		   <input type="text" id="proj" name="proj" value="{{ $project->title }}">
+		   <label for="comment">commentaire :</label>
+		   <textarea class="big_box"id="comment" name="comment" >{{ $task->comment }}</textarea>
+			 <label for="state">Etate :</label>
+		   <input type="text" id="state" name="state"
+			 value="~ {{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}} ~">
+		</div>
+			<div class="col-sm">
+				<div class="form-row">
+					<div class="form-group ">
+						<div class="card mr-3" style="width: 30rem;">
+							<div class="card-body form-inline ">
+								<h5 class="card-title  mr-4">Date Limite :</h5>
+								<p class="card-text float-right">{{date("M j Y h:m:s", strtotime($task->limitDate))}}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-
 				<!--progress range bar -->
 				<div class="form-group">
 					<div class="card mr-4"style="width: 30rem;">
 						<div class="card-body form-inline">
 							<h5 class="card-title mr-3">Progression:</h5>
-								@can('updateProgress',$task,$users)<!-- only a worker can edit the progress -->
-								<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
-								@endcan
-								@cannot('create', App\Post::class)<!-- the disabled range-progress is showed to other visitors-->
-							<input disabled type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+								@can('updateProgress',App\User::class,$task,$users)<!--!! only a worker can edit the progress -->
+                  @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
+							   	<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+                  @endif
+                @endcan
+								@cannot('updateProgress',App\User::class,$task,$users)<!-- the disabled range-progress is showed to other visitors-->
+							  <input disabled type="range" id="RangeProgress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
 								@endcannot
 							<span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
 						</div>
@@ -115,9 +113,11 @@ input[type=text] {
 				</div>
 			</div>
 		</div>
-		@can('updateProgress',$task,$users)<!-- only a worker can edit the progress -->
-			<button type="submit" name="submit" class="btn btn-success float-right mr-4">Enregistrer</button>
-		@endcan
+		@if(Auth::user()->Auth_hasRole('EMPLOYEE'))<!--can('updateProgress',$task,$users)!! only a worker can edit the progress -->
+      @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
+			 <button type="submit" name="submit" class="btn btn-success float-right mr-4"><i class="fa fa-floppy-o" aria-hidden="true" > Enregistrer </i></button>
+      @endif
+  	@endif
 		</form>
 		<br>
 		<br>
