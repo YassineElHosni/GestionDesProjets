@@ -1,7 +1,7 @@
 <!Doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-
+<title>c2a Projects manager</title>
 	@include('partials._metas')
 	@section('csss')<!--styles-->
 		@include('partials._csss')
