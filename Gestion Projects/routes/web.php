@@ -26,7 +26,7 @@ Route::get('notif', function(){
 	//     // $notification->markAsRead();
 	// }
 });
-Route::get('/user/notif/seen/{id}/{data}','HomeController@notifSeen')->name('user.notif.seen');
+Route::get('/user/notif/seen/{data}','HomeController@notifSeen')->name('user.notif.seen');
 Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');
 Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 

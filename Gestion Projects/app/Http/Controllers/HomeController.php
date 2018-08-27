@@ -8,6 +8,7 @@ use App\Project;
 use App\Task;
 use App\Client;
 use Yajra\Datatables\Datatables;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -96,15 +97,29 @@ class HomeController extends Controller
         ->withCurrent($name)
         ->withCols(array_slice(HomeController::All_Cols()[$name], 1));
     }
-    public function notifSeen($id, $date)
+    // public function notifSeen($id, $date)
+    // {
+    //     $user = \App\User::find($id);
+    //     foreach ($user->unreadNotifications as $ntf) {
+    //         if ($ntf->created_at <= $date) {
+    //             $ntf->markAsRead();
+    //         }
+    //     }
+    //     return redirect()->route('home.index');
+    // }
+    public function notifSeen($objId)
     {
-        $user = \App\User::find($id);
-        foreach ($user->unreadNotifications as $ntf) {
-            if ($ntf->created_at <= $date) {
-                $ntf->markAsRead();
-            }
+        $user = Auth::user();
+        if($obj = Task::find($objId)){
+            $user->Notifications->where('notifiable_id', '=', $user->id)->where('data.id', '=', $obj->id)->markAsRead();
+            return redirect()->route('task.show', $objId);
+        }else if($obj = Project::find($objId)){
+            $user->Notifications->where('notifiable_id', '=', $user->id)->where('data.id', '=', $obj->id)->markAsRead();
+            return redirect()->route('project.show', $objId);
+        }else{
+            flash('Objet non Trouvé !')->danger();
+            return back();
         }
-        return redirect()->route('home.index');
     }
     public function getData($name)
     {
@@ -126,7 +141,8 @@ class HomeController extends Controller
                 break;
 
             default :
-                return back()->with('message', 'nothing happened!');
+                flash('Nothing Happened !')->warning();
+                return back();
         }
         return Datatables::of($obj)->make(true);
 
