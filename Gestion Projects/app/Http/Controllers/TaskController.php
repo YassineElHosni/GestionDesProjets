@@ -212,12 +212,13 @@ class TaskController extends Controller
         $task->state = 'VALIDATED';
         $task->progress = 100;
       }else  $task->state = 'IN_PROGRESS';
+
       $task->save();
 
       
-      $task->title = 'task "' .$newTask->title.'" updated';
+      $task->title = 'task "' .$task->title.'" updated';
       \Notification::send(
-          User::whereIn(Task_User::where('task_id','=',$task->id)->get('user_id'))->get('id'),
+          User::whereIn('id', Task_User::where('task_id','=',$task->id)->get(['user_id']))->get(['id']),
           new \App\Notifications\UserNotification($task));
 
       flash('Tache Enregistré avec succé!')->success();
