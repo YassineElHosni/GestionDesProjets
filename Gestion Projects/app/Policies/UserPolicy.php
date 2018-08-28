@@ -9,7 +9,7 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-	public function showProfile(User $user,$usertarget){
+	public function showProfile(User $user,User $usertarget){
     if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')){
         return true;
     }

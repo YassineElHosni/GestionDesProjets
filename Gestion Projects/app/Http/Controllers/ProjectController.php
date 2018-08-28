@@ -91,7 +91,7 @@ class ProjectController extends Controller
         $c=Client::find($p->client_id);
 
         $u=User::find($p->user_id);
-        
+
         $daysCount = 0;
 
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
@@ -181,10 +181,10 @@ class ProjectController extends Controller
       \Notification::send(User::find($request->user_id[0]), new \App\Notifications\UserNotification($project));
       \Notification::send(User::whereIn('role',array('ADMIN','MANAGER'))->get(), new \App\Notifications\UserNotification($project));
 
-      if($project->finishDate!=null){
+      if($project->finishDate){
         flash('Project Cloturé !')->success();
       }else{
-      flash('Modification enregistré !')->success();
+        flash('Modification enregistré !')->success();
       }
       return redirect()->route('Projects.show',$project->id)->withProject($project);
     }
