@@ -1,0 +1,17 @@
+
+View :
+
+- Home(/):
+	-> mainMenu:
+		- blade links
+		- notification
+
+- Admin Register(/admin/register):
+	- template
+
+- User/Project/Task/Client:
+	- index dataTables
+	- create/update datetimepicker
+
+- Calender(/calender):
+	- 

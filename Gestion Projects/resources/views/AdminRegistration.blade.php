@@ -178,7 +178,7 @@ h6 {
 	                <div class="row flex-center pt-5 mt-3">
 	                    <div class="col-md-6 text-center text-md-left mb-5">
 	                        <div class="text-light">
-	                            <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now! </h1>
+	                            <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Inscrivez-vous! </h1>
 	                            <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
 	                            <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Chère Admin, bienvenu à la page d'installation.Afin de pouvoire accéder à votre application et pouvoire ajouter et manipuler les données , une première inscription d'Admine est nécessaire .</h6>
 	                            <br>
