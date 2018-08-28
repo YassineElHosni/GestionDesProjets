@@ -43,12 +43,19 @@
         Validee
       </label>
     </div>
+<div class="form-group form-inline mr-4" style="position: absolute;right:10%;top:50%;">
+	<label class="col-form-label mr-3">Etat : </label>
+	<div class="form-control" name="state">
+	{{ ($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty')) }}
+	</div>
+</div>
+
 
 <!-- current project related -->
 <div class="col-sm">
 	<div class="form-row">
 		<div class="form-group mr-4 col-4">
-			<label class="col-form-label mr-3">Project related : </label>
+			<label class="col-form-label mr-3">Projet lié: </label>
 			<div class="form-control" name="project_id">{{$task->project_title}}</div>
 		</div>
 	</div>
@@ -97,27 +104,18 @@
 	</div><br>
 
 
-  <div class="col-sm">
-    <div class="form-row">
-  <div hidden class="form-group form-inline mr-4">
-      	<label class="col-form-label mr-3">Progression : </label>
-        <span id="rangeRes" name="progress" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
-        <input type="hidden" name="progress" value="{{$task->progress }}">
-  </div>
-
-	  <div class="form-group form-inline mr-4">
-	      <label class="col-form-label mr-3">Etat : </label>
-				<div class="form-control" name="state">
-					{{ ($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty')) }}
-				</div>
+	<div class="col-sm">
+	<div class="form-row">
+		<div hidden class="form-group form-inline mr-4">
+			<label class="col-form-label mr-3">Progression : </label>
+			<span id="rangeRes" name="progress" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
+			<input type="hidden" name="progress" value="{{$task->progress }}">
 		</div>
-
-
-      </div>
-      </div>
+	</div>
+	</div>
 
 <!--Current employees -->
-	<h3>Current Employees:</h3>
+	<h3>Employés actuels:</h3>
 	<table class="table table-bordered">
 		<thead class="thead-light">
 			<tr>
@@ -146,7 +144,7 @@
 	</table>
 <br>
 <!-- choose another employee -->
-	<h3>Other Employees:</h3>
+	<h3>Autres employés:</h3>
 	<table class="table table-bordered">
 		<thead class="thead-light">
 			<tr>
