@@ -32,15 +32,16 @@
 
 	</div>
 
-	<div class="form-group">
-      <input class="form-check-input" style="float:right" type="checkbox" {{ (($task->state=='VALIDATED')?'checked':'') }} id="valide_state" name="validation">
+	<div class="form-group" style="position: absolute;right:10%;top:25%;"> 
+      <input hidden class="form-check-input" style="float:right" type="checkbox" {{ (($task->state=='VALIDATED')?'checked':'') }} id="valide_state" name="validation">
 
-      <i id="valIcon" class="fas fa-{{ (($task->state=='VALIDATED')?'check':'times') }}-circle fa-3x"
-      	onClick="console.log('bom');"></i>
+      <i id="valIcon" class="fas fa-{{ (($task->state=='VALIDATED')?'check-circle text-success':'times-circle text-danger') }} fa-3x"
+      	onclick="$(this).toggleClass('fa-{{ (($task->state=='VALIDATED')?'check-circle text-success':'times-circle text-danger') }}');
+      			$(this).toggleClass('fa-{{ (($task->state!='VALIDATED')?'check-circle text-success':'times-circle text-danger') }}');
+      			$('#valide_state').click();"></i>
       <label class="form-check-label " for="valide_state" >
         Validee
       </label>
-      <button id="btn_test" type="button">Click</button>
     </div>
 
 <!-- current project related -->
