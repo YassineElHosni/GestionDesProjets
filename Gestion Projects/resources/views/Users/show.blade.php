@@ -27,17 +27,26 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="{{URL::to('/')}}/storage/avatars/{{ $user->avatar }}" style="border-radius:50%;height:50% ;width:50%" class="img-circle" alt="avatar">
+          <img id="mypic" src="{{URL('/')}}/storage/avatars/{{ ($user->avatar)?$user->avatar:'default.png' }}"
+            style="border-radius:50%;height:50% ;width:50%" class="img-circle" alt="avatar">
+          <input id="saveProfile" class="btn btn-success" type="submit" value="save" hidden onclick="$('#form').submit();">
+
           <h6>{{$user->name}}</h6>
            <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="form">
-             <input hidden type="file" name="avatar" id="avatar" onclick="$('#pic').prepend(($('<img>',{  src:'{{URL::to('/')}}/storage/avatars/default.png' })); ">
+             <input  type="file" name="avatar" id="avatar" 
+              onchange="
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                 $('#mypic').attr('src', e.target.result);
+              }
+             reader.readAsDataURL(document.getElementById('avatar').files[0]);
+              // console.log($(this));
+              // $('#mypic').attr('src','{{URL::to('/')}}/storage/avatars/default.png');
 
-             <div hidden id="pic" onchange="$('#form').submit();">
+              $('#saveProfile').attr('hidden',false);
+              " hidden>
 
-             </div>
-            <!--  <input hidden type="submit" value="Upload" id="submit">-->
-
-             <input  type="submit" id="new_avatar"  class="btn btn-primary" value="Change Avatar" onclick="$('#avatar').click();">
+             <input  type="button" id="new_avatar"  class="btn btn-primary" value="Change Avatar" onclick="$('#avatar').click();">
              <input  hidden value="{{ csrf_token() }}" name="_token">
            </form>
         </div>

@@ -145,7 +145,10 @@ h6 {
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <div class="container">
-            <a class="navbar-brand" href="#"><strong>Bienvenu !</strong></a>
+            <a class="navbar-brand" href="#">
+            	{{-- <img src="{{url('/')}}/C2A_light.png" width="60" height="40" alt="c2a" class="btn bg-secondary" style="border-radius: 30%"> --}}
+            	<strong>Bienvenu !</strong>
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -264,11 +267,17 @@ h6 {
     <div class="container">
         <div class="row py-5">
             <div class="col-md-12 text-center">
+<p>Ce site Web est destiné à la gestion de projets, ce qui signifie la gestion de toutes les données relatives au projet. actuellement en version bêta, mais a encore beaucoup à offrir dans le sujet.</p>
 
-                <p>This web site is for Projects Management, meaning the management of all project related date.
+<p>Nous sommes toujours en développement, veuillez nous <a href="#">contacter</a> si vous trouvez des problèmes ou si vous voulez commenter notre travail,</p>
+<br><br>
+<b>Cordialement,</b>
+<br><br>
+<b>Dev yh & ng</b>
+               {{--  <p>This web site is for Projects Management, meaning the management of all project related date.
 									currently on beta version, but still has alot to offer in the subject.
 									the develpement of this web site is still in developement, please <a href="#">Contact Us</a>
-									if you find problems or feedbacks,<br><br><b>Regards,<br><br>Dev yh & ng</b></p>
+									if you find problems or feedbacks,<br><br><b>Regards,<br><br>Dev yh & ng</b></p> --}}
 
             </div>
 

@@ -30,7 +30,7 @@ class UserController extends Controller
      ]);
 			$image =$request->file('avatar');
 			$new_image = rand() . '.' . $image->getClientOriginalExtension();
-      $image->move(public_path('storage/avatars'), $new_image);/*put image in storage folder*/
+      		$image->move(public_path('storage/avatars'), $new_image);/*put image in storage folder*/
 
 			$user=User::find($id);
 			$user->avatar=$new_image;
