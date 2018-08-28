@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{D62CF545-4650-426C-9634-515F168B324D}" Label="" LastModificationDate="1535301858" Name="Diagramme de classes" Objects="60" Symbols="7" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{D62CF545-4650-426C-9634-515F168B324D}" Label="" LastModificationDate="1535328427" Name="Diagramme de classes" Objects="54" Symbols="7" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1397,8 +1397,8 @@ Shadow=0</a:DisplayPreferences>
 <o:AssociationSymbol Id="o6">
 <a:CreationDate>1531819475</a:CreationDate>
 <a:ModificationDate>1535301858</a:ModificationDate>
-<a:Rect>((-51513,744), (-50474,9676))</a:Rect>
-<a:ListOfPoints>((-51513,9676),(-51513,5493),(-50474,5493),(-50474,744))</a:ListOfPoints>
+<a:Rect>((-51513,853), (-50474,9676))</a:Rect>
+<a:ListOfPoints>((-51513,9676),(-51513,5493),(-50474,5493),(-50474,853))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>3592</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -1459,9 +1459,9 @@ MULA 0 Arial,8,N</a:FontList>
 </o:AssociationSymbol>
 <o:ClassSymbol Id="o8">
 <a:CreationDate>1531810536</a:CreationDate>
-<a:ModificationDate>1535301858</a:ModificationDate>
+<a:ModificationDate>1535328427</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-56568,-10724), (-44962,2316))</a:Rect>
+<a:Rect>((-56568,-9825), (-44962,2317))</a:Rect>
 <a:AutoAdjustToText>0</a:AutoAdjustToText>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
@@ -2163,7 +2163,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Java</a:Code>
 <a:CreationDate>1531809821</a:CreationDate>
 <a:Creator>emsi-pc</a:Creator>
-<a:ModificationDate>1531809821</a:ModificationDate>
+<a:ModificationDate>1535328402</a:ModificationDate>
 <a:Modifier>emsi-pc</a:Modifier>
 <a:TargetModelURL>file:///%_OBJLANG%/java5-j2ee14.xol</a:TargetModelURL>
 <a:TargetModelID>0DEDDB90-46E2-45A0-886E-411709DA0DC9</a:TargetModelID>
@@ -2178,7 +2178,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>WSDLJava</a:Code>
 <a:CreationDate>1531809827</a:CreationDate>
 <a:Creator>emsi-pc</a:Creator>
-<a:ModificationDate>1531809827</a:ModificationDate>
+<a:ModificationDate>1535328403</a:ModificationDate>
 <a:Modifier>emsi-pc</a:Modifier>
 <a:TargetModelURL>file:///%_XEM%/WSDLJ2EE.xem</a:TargetModelURL>
 <a:TargetModelID>C8F5F7B2-CF9D-4E98-8301-959BB6E86C8A</a:TargetModelID>

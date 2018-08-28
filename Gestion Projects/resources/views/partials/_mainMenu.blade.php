@@ -11,7 +11,7 @@
 
 
 	@if (!Auth::guest()) <!-- si  authentifié -->
-	
+
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false"
 		aria-label="Toggle navigation" style="">
@@ -22,7 +22,7 @@
 		{{-- <div class="nav navbar-nav ml-auto " style="border:solid 1px red"> --}}
 
 			<!-- logo/brand/icon -->
-			
+
 
 			<div class="btn-group mx-3" role="group">
 				<!-- Rapport only Admin & Gerant & Project Manager -->
@@ -65,6 +65,7 @@
 							</div>
 						</div>
 					@endif
+					@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
 					<div class="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"
@@ -77,7 +78,13 @@
 						</div>
 					</div>
 				</div>
-				@if(Auth::user()->Auth_hasRole('ADMIN'))
+				   @else
+					<div class="btn-group" role="group">
+					  <a class="btn btn-info" href="{{route('Projects.index')}}">Liste des Projets</a>
+	        </div>
+
+					 @endif
+				@can('index',Auth::user()) <!--if(Auth::user()->Auth_hasRole('ADMIN'))-->
 				<div class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
@@ -88,7 +95,7 @@
 						<a class="dropdown-item" href="{{route('Clients.index')}}">Liste des Clients</a>
 					</div>
 				</div>
-				@endif
+				@endcan
 			</div>
 
 			<!-- notification-->

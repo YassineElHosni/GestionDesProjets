@@ -36,7 +36,7 @@ textarea {
 	<h1>
 		{{ $project->title }}
 		<span class="badge badge-primary badge-pill align_center">{{$project->daysCount }} days</span>
-	</h1> 
+	</h1>
 </div>
 
 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
@@ -83,7 +83,7 @@ textarea {
 			<div class="card " style="width: 22rem;">
 				<div class="card-body form-inline">
 					<h5 class="card-title mr-3">Date Fin :</h5>
-					<p style="font-weight: bold;" class="card-text"> {{date("M j Y - H:i", strtotime($project->finishDate))}}</p>
+					<p style="font-weight: bold;" class="card-text">{{ ($project->finishDate) ? date("M j Y - H:i", strtotime($project->finishDate)) : ""}}</p>
 				</div>
 			</div>
 		</div>
@@ -102,7 +102,7 @@ textarea {
     	<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
     		<button type="submit" class="btn btn-warning float-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
     	</form>
-    @endif  
+    @endif
 	@endif
 	<!--endcan-->
 <br><hr>
