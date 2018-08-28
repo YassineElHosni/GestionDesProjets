@@ -80,10 +80,22 @@ class TaskController extends Controller
             'progress' => 0,
             'priority' => ($request->priority_RadioBtn),
             'comment' => $request->comment,
-            'user_id' =>$request->user_id[0],/*not stored ! user have to be attached with this task*/
+            // 'user_id' =>$request->user_id[0],/*not stored ! user have to be attached with this task*/
             'project_id'=>$request->project_id[0],
           ]);
       $newTask->save();
+
+      $newTaskUser = new Task_User([
+            'task_id' => $newTask->id,
+            'user_id' => $request->user_id[0],
+            'startDate' => $newTask->created_at,
+            'finishDate' => null,
+          ]);
+      $newTaskUser->save();
+
+      $newTask->title = 'task "' .$newTask->title.'" created';
+      \Notification::send(User::find($request->user_id[0]), new \App\Notifications\UserNotification($newTask));
+
       flash('Tache créer avec succé !')->success();
       return redirect()->route('Tasks.show',$newTask->id)->withTask($newTask);
     }
@@ -151,6 +163,12 @@ class TaskController extends Controller
           if($request->progress=="100" && $task->state=='IN_PROGRESS')
             $task->state='FINISHED';
           $task->save();
+
+          $task->title = 'task "' .$newTask->title.'" updated';
+          \Notification::send(
+              User::whereIn(Task_User::where('task_id','=',$task->id)->get('user_id'))->get('id'),
+              new \App\Notifications\UserNotification($task));
+
           flash('Tache Enregistré avec succé !')->success();
           return redirect()->route('Tasks.show',$task->id)->withTask($task);
     }
@@ -195,6 +213,12 @@ class TaskController extends Controller
         $task->progress = 100;
       }else  $task->state = 'IN_PROGRESS';
       $task->save();
+
+      
+      $task->title = 'task "' .$newTask->title.'" updated';
+      \Notification::send(
+          User::whereIn(Task_User::where('task_id','=',$task->id)->get('user_id'))->get('id'),
+          new \App\Notifications\UserNotification($task));
 
       flash('Tache Enregistré avec succé!')->success();
        return redirect()->route('Tasks.show',$task->id)->withTask($task);

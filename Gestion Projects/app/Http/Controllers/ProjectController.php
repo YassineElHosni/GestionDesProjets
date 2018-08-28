@@ -11,6 +11,7 @@ use App\Client;
 use App\Task_User;
 use Session;
 use Carbon\Carbon;
+use Auth;
 class ProjectController extends Controller
 {
     /**
@@ -69,6 +70,10 @@ class ProjectController extends Controller
             ]);
         $newProjet->save();
 
+        $newProjet->title = 'project "' .$newProjet->title.'" created';
+        \Notification::send(User::find($request->user_id[0]), new \App\Notifications\UserNotification($newProjet));
+        \Notification::send(User::whereIn('role',array('ADMIN','MANAGER'))->get(), new \App\Notifications\UserNotification($newProjet));
+
         flash('Project created Successfully !')->success();
 
         return redirect()->route('Projects.index');
@@ -86,12 +91,22 @@ class ProjectController extends Controller
         $c=Client::find($p->client_id);
 
         $u=User::find($p->user_id);
+        
+        $daysCount = 0;
 
         $tasks=Task::where('project_id','Like',$p->id)->get();/*get all tasks related */
              foreach($tasks as $task){/*get the users_id related to this task_id*/
               $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
                     ->get(['user_id']))
                       ->get(['name']);
+              if ($task->state == 'IN_PROGRESS') {
+                $from = Carbon::parse($task->created_at);
+                $to = Carbon::now();
+              }else{
+                $from = Carbon::parse($task->created_at);
+                $to = Carbon::parse($task->updated_at);
+              }
+              $daysCount = $p->daysCount + $to->diffInWeekdays($from);
                }
 
              if($p->projetClos()){
@@ -100,7 +115,7 @@ class ProjectController extends Controller
                 // $project->finishDate='0000-00-00 00:00:00';
              }
                $p->save();
-
+               $p->daysCount = $daysCount;
         return view('projects.show',compact('tasks'))->withProject($p)->withClient($c)->withChef($u)->withTasks($tasks);
     }
 
@@ -162,6 +177,10 @@ class ProjectController extends Controller
 
       $project->save();
 
+      $project->title = 'project "' .$project->title.'" updated';
+      \Notification::send(User::find($request->user_id[0]), new \App\Notifications\UserNotification($project));
+      \Notification::send(User::whereIn('role',array('ADMIN','MANAGER'))->get(), new \App\Notifications\UserNotification($project));
+
       if($project->finishDate!=null){
         flash('Project Cloturé !')->success();
       }else{
@@ -182,6 +201,10 @@ class ProjectController extends Controller
       $u=User::find($project->user_id);
 
       $project->delete();
+
+      $project->title = 'project "' .$project->title.'" deleted';
+      \Notification::send(User::find($request->user_id[0]), new \App\Notifications\UserNotification($project));
+      \Notification::send(User::whereIn('role',array('ADMIN','MANAGER'))->get(), new \App\Notifications\UserNotification($project));
 
       flash('project Deleted Successfully !')->warning();
       return redirect()->route('Projects.index',$project->id);

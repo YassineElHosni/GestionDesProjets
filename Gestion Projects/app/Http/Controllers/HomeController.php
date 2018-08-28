@@ -112,12 +112,12 @@ class HomeController extends Controller
         $user = Auth::user();
         if($obj = Task::find($objId)){
             $user->Notifications->where('notifiable_id', '=', $user->id)->where('data.id', '=', $obj->id)->markAsRead();
-            return redirect()->route('task.show', $objId);
+            return redirect()->route('Tasks.show', $objId);
         }else if($obj = Project::find($objId)){
             $user->Notifications->where('notifiable_id', '=', $user->id)->where('data.id', '=', $obj->id)->markAsRead();
-            return redirect()->route('project.show', $objId);
+            return redirect()->route('Projects.show', $objId);
         }else{
-            flash('Objet non Trouvé !')->danger();
+            flash('Objet non Trouvé !')->error();
             return back();
         }
     }

@@ -13,11 +13,47 @@
 Auth::routes();
 
 Route::get('notif', function(){
+	// dd(App\User::whereIn('role',array('ADMIN','MANAGER'))->get());
 	// echo Auth::user()->Notifications;
 	// $user = \App\User::find(1);
 	// $task = \App\Task::find(4);
-	$task = \App\Task::find(6);
-	Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+
+
+
+// $date1 = Carbon\Carbon::createMidnightDate(2018, 8, 1);
+// $date2 = Carbon\Carbon::createMidnightDate(2018, 8, 31);
+
+// echo $date1->diffInDays($date2).' ';                   // 30
+// echo $date1->diffInWeekdays($date2).' ';               // 22
+// echo $date1->diffInWeekendDays($date2).' ';            // 8
+// echo $date1->diffInWeeks($date2).' ';                  // 4
+// echo $date1->diffInMonths($date2).' ';                 // 0
+// echo $date1->diffInYears($date2).' ';                  // 0
+
+// 	$task = \App\Task::find(1);
+
+// 	$from = Carbon\Carbon::parse('2016-01-01 00:00:00');
+// 	$to = Carbon\Carbon::parse('2016-02-01 00:00:00');
+// 	echo date_diff(new DateTime('2016-01-01 00:00:00'), new DateTime('2016-02-01 00:00:00'))->format('%y year(s) %m month(s) %d day(s) %h hour(s) %i minute(s) %s second(s)');
+
+// 	echo $to->diffInWeekdays($from);
+
+	// $task = \App\Task::find(1);
+	// $from = Carbon\Carbon::parse('2018-08-20 00:00:00');
+	// $to = Carbon\Carbon::now();
+
+	// dd($to->diffInWeekdays($from),date_diff($task->created_at,$task->updated_at)->format('%y year(s) %m month(s) %d day(s) %h hour(s) %i minute(s) %s second(s)'));
+
+	// Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+	// $task = \App\Task::find(2);
+	// Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+	// $task = \App\Task::find(3);
+	// Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+	// $task = \App\Task::find(4);
+	// Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+	// $task = \App\Task::find(6);
+	// Notification::send(Auth::user(), new \App\Notifications\UserNotification($task));
+
 	// Notification::send($user, new \App\Notifications\UserNotification($task));
 
 	// foreach ($user->unreadNotifications  as $notification) {

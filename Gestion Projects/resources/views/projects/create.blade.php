@@ -21,7 +21,7 @@
 
 	<div class="form-group">
 		<label for="title" class="col-form-label">Sujet:</label>
-		<input type="text" class="form-control" name="title" value="title">
+		<input type="text" class="form-control" name="title">
 	</div>
 
 	<div class="form-group">

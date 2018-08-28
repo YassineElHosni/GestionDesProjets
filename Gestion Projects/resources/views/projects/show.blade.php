@@ -33,7 +33,10 @@ textarea {
 <br>
 
 <div class="form-group align-center">
-	<h1>{{ $project->title }} </h1>
+	<h1>
+		{{ $project->title }}
+		<span class="badge badge-primary badge-pill align_center">{{$project->daysCount }} days</span>
+	</h1> 
 </div>
 
 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
@@ -118,7 +121,7 @@ textarea {
 	<tbody>
 	@foreach($tasks as $task)
 	<tr>
-		<th scope="row">@foreach($task->worker as $w) {{$w->name}} @endforeach</th><!--if lot of workers? -->
+		<th scope="row">@foreach($task->worker as $w) {{$w->name.'|'}} @endforeach</th><!--if lot of workers? -->
 		<th scope="row">{{$task->title}}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
 		<td>{{$task->state}}</td>

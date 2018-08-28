@@ -48,7 +48,7 @@ input[type=text] {
 <br>
 
 <div class="form-group align-center">
-	<h1>{{ $project->title }} </h1>
+	<h1>{{ $task->title }} </h1>
 </div>
 
 @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))

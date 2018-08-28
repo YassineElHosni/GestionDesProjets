@@ -11,16 +11,16 @@ class UserNotification extends Notification
 {
     use Queueable;
 
-    private $task;
+    private $obj;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct($o)
     {
         //
-        $this->task = $task;
+        $this->obj = $o;
     }
 
     /**
@@ -37,9 +37,9 @@ class UserNotification extends Notification
     public function toDatabase()
     {
         return [
-                    'id' => $this->task->id,
-                    'title' => $this->task->title,
-                    'date' => $this->task->created_at
+                    'id' => $this->obj->id,
+                    'title' => $this->obj->title,
+                    'date' => $this->obj->created_at
         ];
     }
 
