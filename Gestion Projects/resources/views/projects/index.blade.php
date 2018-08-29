@@ -46,7 +46,7 @@
   		{{-- <td>{{date('Y-m-d', strtotime($p->limitDate))}}</td> --}}
   		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
       <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
-      <td> <?php $p->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($p->finishDate));?></td>
+      <td> <div style="color: blue;font-weight:bold">{{ ($p->finishDate) ? date("M j Y - H:i", strtotime($p->finishDate)) : ""}} </div></td>
 			<?php if(isset($func)):?>
 	   	<td>{{($p->displacement)?'Oui':'No'}}</td>
 		  <?php else: ?>
