@@ -98,7 +98,7 @@ class ProjectController extends Controller
              foreach($tasks as $task){/*get the users_id related to this task_id*/
               $task->worker = User::whereIn('id',Task_User::where('task_id','=',$task->id)
                     ->get(['user_id']))
-                      ->get(['name']);
+                      ->get(['id', 'name']);
               if ($task->state == 'IN_PROGRESS') {
                 $from = Carbon::parse($task->created_at);
                 $to = Carbon::now();

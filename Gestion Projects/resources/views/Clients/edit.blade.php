@@ -13,11 +13,11 @@
 </style>
 <div class="page-header">
   <div style="border-bottom:1px dashed green" class="form-group form-inline align-center">
-        <h2 style="color :green" > Modifier Client : </h2>
+        <h2 style="color :green" >Client : </h2>
         <h3 style="color :gray" class="ml-5">{{ $client->name }}</h3>
   </div>
 </div>
-<br><br>
+<br>
 
 <div class='container'>
 
@@ -28,11 +28,11 @@
   <div class="col-sm">
   	<div class="form-row">
       <div class="form-group mr-4 col-4">
-         <label class="col-form-label mr-3">Nom Client: </label>
+         <label class="col-form-label mr-3">Nom : </label>
          <input type="text" class="form-control " name="name" value="{{ $client->name }}">
       </div>
     	<div class="form-group col-6">
-    		<label for="title" class="col-form-label mr-4">Registration Number:</label>
+    		<label for="title" class="col-form-label mr-4">Numéro d'enregistrement :</label>
     		<input type="text" class="form-control col-8" name="registrationNumber" value="{{$client->registrationNumber}}">
     	</div>
     </div>
@@ -54,7 +54,7 @@
 
   <div class="col">
   	<div class="form-group">
-      <label class="col-form-label mr-3">Numero Telephone: </label>
+      <label class="col-form-label mr-3">Numero de Telephone: </label>
       <input type="text" class="form-control col-4" name="phoneNumber" value="{{ $client->phoneNumber }}">
   	</div>
   </div>

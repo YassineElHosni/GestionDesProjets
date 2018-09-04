@@ -18,11 +18,17 @@ class UserController extends Controller
 	 /*allow all users to update their profil avatar only*/
 	 /*only admin have access to all users database*/
 	 /*only Gerant & Admin can add users ..(Admin add Gerant) */
-  	$this->middleware('admin',['except' => ['show','update_avatar','update','editPassword','updatePassword']]);
+  	// $this->middleware('admin',['except' => ['show','update_avatar','update','editPassword','updatePassword']]);
 
 	}
 
-
+	//
+	// returns register
+	//
+	public function registerIndex(){
+		return view('auth.register');
+	}
+	//
 	public function update_avatar(Request $request,$id){
 
 		$this->validate($request, [
@@ -64,7 +70,6 @@ class UserController extends Controller
 		*/
 	public function create()
 	{
-		flash('User Created Successfully !')->success();
 		return view('auth.register');
 	}
 /*storeAdmin(){
