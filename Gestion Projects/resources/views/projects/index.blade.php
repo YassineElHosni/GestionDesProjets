@@ -42,7 +42,12 @@
   		<td>{{$p->client_name}}</td>
   		{{-- <td>{{date('Y-m-d', strtotime($p->startDate))}}</td> --}}
       <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
+
       {{-- <td>{{ ($p->finishDate) ? date("Y-m-d", strtotime($p->finishDate)) : "inachevé"}}</td> --}}
+
+
+      {{-- <td> <div style="color: blue;font-weight:bold">{{ ($p->finishDate) ? date("M j Y - H:i", strtotime($p->finishDate)) : ""}} </div></td> --}}
+
 			<?php if(isset($func)):?>
 	   	<td>{{($p->displacement)?'Oui':'No'}}</td>
 		  <?php else: ?>

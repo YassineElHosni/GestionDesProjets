@@ -40,17 +40,15 @@ class TaskController extends Controller
               //foreach ($id_ts as $id_t) {/*for each task|user get :  */
 
               $ts=Task::whereIn('id', $id_ts)->get(); /*the infos of each task from Tasks table*/
-              $s_d=Task_User::where('user_id','=',$id)->get(['startDate']); /*the start_date */
-              $f_d=Task_User::where('user_id','=',$id)->get(['finishDate']); /*the end_date*/
 
                   foreach ($ts as $t) {
                       //get the name of the project that the current task belongs to.
                       $t->project_title=Project::find($t->project_id)->title;
-
+                      /*startDate & FinishDate ; dev in process*/
+                      $s_d=Task_User::where('user_id','=',$id)->where('task_id','=',$t->id)->get(['startDate']); /*the start_date */
+                      $f_d=Task_User::where('user_id','=',$id)->where('task_id','=',$t->id)->get(['finishDate']); /*the end_date*/
                   }
               //}
-
-
             return view('tasks.mesTaches' ,compact('ts'));
         }
     /**
@@ -215,7 +213,7 @@ class TaskController extends Controller
 
       $task->save();
 
-      
+
       $task->title = 'task "' .$task->title.'" updated';
       \Notification::send(
           User::whereIn('id', Task_User::where('task_id','=',$task->id)->get(['user_id']))->get(['id']),
