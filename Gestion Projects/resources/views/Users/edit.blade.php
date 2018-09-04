@@ -53,7 +53,7 @@
         <!-- edit form column -->
     <div class="col-md-9">
 
-              <h3>Personal info</h3><br>
+              <h3>Informations personnelles</h3><br>
 
 
 
@@ -62,7 +62,7 @@
                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group ">
-                  <label class="col-lg-3 control-label">Nom:</label>
+                  <label class="col-lg-3 control-label">Nom :</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control sm-2 mb-3" name="name" value="{{$user->name}}">
                   </div>
@@ -71,7 +71,7 @@
                 <div class="col-sm"><!-- seen by users -->
                   <div class="form-row form-inline">
                     <div class="form-group mr-4">
-                      <label class="col-lg-3 control-label col-4 mr-2">Role:</label>
+                      <label class="col-lg-3 control-label col-4 mr-2">Role :</label>
                         	<input type="text" class="form-control col-8" value="{{$user->role}}" disabled>
                     </div>
 
@@ -79,7 +79,7 @@
                     <?php $rolearray = array('ADMIN', 'MANAGER', 'PROJECT_MANAGER', 'EMPLOYEE'); ?>
 
                       <select class="custom-select col-6" id="old_role"  onchange="$('#role').val($('#old_role').val());">
-                          <label class="col-lg-3 control-label col-4 mr-2">Changer Role:</label>
+                          <label class="col-lg-3 control-label col-4 mr-2">Changer Role :</label>
                          @foreach($rolearray as $i=>$value)
                              <option  value="{{$rolearray[$i]}}" {{($rolearray[$i]==$user->role)?'selected':''}} >{{ $rolearray[$i] }}</option>
                          @endforeach
@@ -90,7 +90,7 @@
             </div>
 
                 <div class="form-group mt-3">
-                  <label class="col-lg-3 control-label">Email:</label>
+                  <label class="col-lg-3 control-label">Email :</label>
                   <div class="col-lg-8">
                     <input type="text" class="form-control" name="email"  value="{{$user->email}}">
                   </div>
@@ -104,7 +104,7 @@
                 </div>-->
 
                 <div class="form-group mt-3">
-                    <label class="col-md-3 control-label">Commentaire:</label> <!-- seen only by superiors -->
+                    <label class="col-md-3 control-label">Commentaire :</label> <!-- seen only by superiors -->
                     <div class="col-md-8">
                       <textarea type="text" class="form-control" name="comment" >{{$user->comment}}</textarea>
                     </div>

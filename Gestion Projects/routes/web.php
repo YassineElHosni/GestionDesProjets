@@ -66,7 +66,7 @@ Route::get('/user/notif/seen/{data}','HomeController@notifSeen')->name('user.not
 Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');
 Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 
-Route::get('/register', 'HomeController@registerIndex')->name('register.index');
+Route::get('/register', 'UserController@registerIndex')->name('register.index');
 Route::get('/register/save', 'UserController@store')->name('register.save');
 
 Route::get('/', 'HomeController@index')->name('home.index');

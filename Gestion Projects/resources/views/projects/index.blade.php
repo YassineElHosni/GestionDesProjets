@@ -3,11 +3,12 @@
 
 @section('content')
 @include('flash::message')
-<br>
+
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">
-			     	 <h2>Liste des Projets</h2>  </div>
+			<h2>Liste des Projets</h2>
+    </div>
 </div>
 <br><br>
 <table class="table table-responsive-lg mr-2">
@@ -15,21 +16,18 @@
 	<tr>
 		<th scope="col">Title</th>
 		<th scope="col">Client</th>
-		{{-- <th>description</th> --}}
-		{{-- <th scope="col">date limite</th> --}}
-		<th scope="col">date debut</th>
-    <th scope="col">date limite</th>
-		<th scope="col">date fin</th>
+		{{-- <th scope="col">Date debut</th> --}}
+    <th scope="col">Date limite</th>
+		{{-- <th scope="col">Date fin</th> --}}
 			<?php if(isset($func)):?>
 			<th scope="col">Deplacement</th>
 			<?php else: ?>
 			<th scope="col">Chef de Projet</th>
 		<?php endif; ?>
-		<th scope="col">etat</th>
+		<th scope="col">Etat</th>
 		<th scope="col"></th>
 		<th scope="col"></th>
 		<th scope="col"></th>
-		{{-- <th>commentaire</th> --}}
 	</tr>
 </thead>
 <tbody>
@@ -41,12 +39,10 @@
     @endif
 
   		<td scope="row">{{$p->title}}</th>
-  		{{-- <td>{{$p->description}}</td> --}}
   		<td>{{$p->client_name}}</td>
-  		{{-- <td>{{date('Y-m-d', strtotime($p->limitDate))}}</td> --}}
-  		<td>{{date('Y-m-d', strtotime($p->startDate))}}</td>
+  		{{-- <td>{{date('Y-m-d', strtotime($p->startDate))}}</td> --}}
       <td>  <div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($p->limitDate))}}</div></td>
-      <td> <?php $p->finishDate=='NULL'? 'inachevé': date('Y-m-d', strtotime($p->finishDate));?></td>
+      {{-- <td>{{ ($p->finishDate) ? date("Y-m-d", strtotime($p->finishDate)) : "inachevé"}}</td> --}}
 			<?php if(isset($func)):?>
 	   	<td>{{($p->displacement)?'Oui':'No'}}</td>
 		  <?php else: ?>
@@ -62,9 +58,11 @@
             {!! method_field('delete') !!}{!! csrf_field() !!}
           </form>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$p->id}}').submit();" value="v"></i>
+            <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true"
+              onclick="$('#show{{$p->id}}').submit();" value="v"></i>
 						@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
-            <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
+            <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true"
+              onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
             <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
 						@endif
           </div>
@@ -75,7 +73,7 @@
           endcan
           can('delete',Auth::user())
         	<input type="submit" class="btn btn-danger" onclick="$('#delete{{$p->id}}').click();" value="s">
-          endcan ---}}
+          endcan--}}
   	</tr>
 	@endforeach
 </tbody>

@@ -35,7 +35,7 @@ textarea {
 <div class="form-group align-center">
 	<h1>
 		{{ $project->title }}
-		<span class="badge badge-primary badge-pill align_center">{{$project->daysCount }} days</span>
+		<span class="badge badge-primary badge-pill align_center">{{$project->daysCount }} jours</span>
 	</h1>
 </div>
 
@@ -94,7 +94,7 @@ textarea {
 
 <br>
 <!-- display tasks related to this project -->
-<br><h3>Taches du Projet :</h3>
+<br><h3>Tâches du Projet :</h3>
 	<!-- can add task to this project -->
   <!--can('addTaskToPrj',App\User::class) -->
 	@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
@@ -121,10 +121,22 @@ textarea {
 	<tbody>
 	@foreach($tasks as $task)
 	<tr>
-		<th scope="row">@foreach($task->worker as $w) {{$w->name.'|'}} @endforeach</th><!--if lot of workers? -->
+		<th scope="row">
+			<div class="btn-group" role="group">
+				<button id="btnGroupDrop_{{$task->id}}" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					<o>
+				</button>
+				<div class="dropdown-menu" aria-labelledby="btnGroupDrop_{{$task->id}}">
+					@foreach($task->worker as $w)
+						<a class="dropdown-item" href="{{route('Users.show',$w->id)}}">{{$w->name}}</a>
+					@endforeach
+				</div>
+			</div>
+		</th>
 		<th scope="row">{{$task->title}}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
-		<td>{{$task->state}}</td>
+		<td>{{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}}</td>
 		<td><span class="badge badge-primary badge-pill align_center">{{$task->progress }}</span></td>
 
 		<td><form action="{{ route('Tasks.show',$task->id) }}" id="show{{$task->id}}" method="get"> </form>

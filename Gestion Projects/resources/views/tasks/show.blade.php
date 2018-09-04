@@ -45,8 +45,6 @@ input[type=text] {
 
 @include('flash::message')
 
-<br>
-
 <div class="form-group align-center">
 	<h1>{{ $task->title }} </h1>
 </div>
@@ -69,14 +67,14 @@ input[type=text] {
 				 @if($task->priority==1)
 						 <div style="color:red;font-weight:bold" class="ml-8 ">~ Très Urgent ~</div>
 					 @elseif($task->priority==2)
-							 <div style="color:orange;font-weight:bold" class="ml-8 ">~ Urgent ~</div>
+							 <div style="color:orange;font-weight:bold;background-color:gray" class="ml-8 ">~ Urgent ~</div>
 								@elseif($task->priority==3)
-									 <div style="color:yellow;font-weight:bold" class="ml-8 ">~ Normal ~</div>
+									 <div style="color:yellow;font-weight:bold;background-color:gray" class="ml-8 ">~ Normal ~</div>
 									 @else
-											<div style="color:green;font-weight:bold" class="ml-8">~ Peut attendre ~</div>
+											<div style="color:green;font-weight:bold;" class="ml-8">~ Peut attendre ~</div>
 				 @endif
       </label>
-		   <label for="proj">Projet related:</label>
+		   <label for="proj">Projet attaché :</label>
 		   <input type="text" id="proj" name="proj" value="{{ $project->title }}">
 		   <label for="comment">commentaire :</label>
 		   <textarea class="big_box"id="comment" name="comment" >{{ $task->comment }}</textarea>

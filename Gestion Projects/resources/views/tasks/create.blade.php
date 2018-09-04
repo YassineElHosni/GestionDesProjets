@@ -20,63 +20,71 @@
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 	<div class="form-group">
-		<label for="title" class="col-form-label">Sujet:</label>
-		<input type="text" class="form-control" name="title" value="title">
+		<label for="title" class="col-form-label">Sujet :</label>
+		<input type="text" class="form-control" name="title">
 	</div>
 
  <div class="form-row">
-	<div class="form-group col-6">
-		<label class="col-form-label">Projet related :</label>
-		<select name = "project_id[]" id="project_id" class="form-control">
-			<?php if(isset($project)):?>
-			  <option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
-			<?php elseif(isset($projects)): ?>
-				@foreach ($projects as $project)
-					<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
-				@endforeach
-			<?php endif; ?>
-		</select>
-	</div>
+	{{-- <div class="col"> --}}
+		<div class="form-group col-6">
+			<label class="col-form-label">Projet attaché :</label>
+			<select name = "project_id[]" id="project_id" class="form-control">
+				<?php if(isset($project)):?>
+				  <option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+				<?php elseif(isset($projects)): ?>
+					@foreach ($projects as $project)
+						<option value="{{ $project['id'] }}">{{ $project['title'] }}</option>
+					@endforeach
+				<?php endif; ?>
+			</select>
+		</div>
+	{{-- </div> --}}
 
 	<div class="col">
+		<div class="form-group">
+			<label for="date_limite" class="col-md-3 col-form-label">Date Limite :</label>
+			<div class="input-group date form_datetime col-md-5"
+				data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" 
+				data-link-field="dtp_input1"
+				style="min-width: 100%">
 
-	<div class="form-group">
-		<label for="date_limite" class="col-md-3 col-form-label">Date Limite</label>
-		<div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input1">
-			<input id="limitDate" name="limitDate" class="form-control" size="16" type="text" value="2018-07-26 11:36:04" readonly>
-			<span class="input-group-append">
-				<span class="input-group-text fa fa-times fa-lg"></span>
-			</span>
-			<span class="input-group-append">
-				<span class="input-group-text fa fa-calendar-alt fa-lg"></span>
-			</span>
-		</div>
-		<input type="hidden" id="dtp_input1" value=""/><br/>
-	</div>
-
-	<div class="form-group">
-		<label class="col-form-label col-md-2 col-sm-12">Priorité:</label>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
-			<label class="form-check-label" for="level1_RadioBtn">Très urgent</label>
-		</div>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="2">
-			<label class="form-check-label" for="level2_RadioBtn">Urgent</label>
-		</div>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="3" checked>
-			<label class="form-check-label" for="level3_RadioBtn">Normal</label>
-	  </div>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="4">
-			<label class="form-check-label" for="level4_RadioBtn">Peut attendre</label>
+				<input id="limitDate" name="limitDate" class="form-control" size="16" type="text"
+					value="2018-07-26 11:36:04" readonly>
+				<span class="input-group-append">
+					<span class="input-group-text fa fa-times fa-lg"></span>
+				</span>
+				<span class="input-group-append">
+					<span class="input-group-text fa fa-calendar-alt fa-lg"></span>
+				</span>
+			</div>
+			<input type="hidden" id="dtp_input1" value=""/>
+			<br/>
 		</div>
 	</div>
-</div></div>
+</div>
+
+		<div class="form-group text-center">
+			<label class="col-form-label col-md-2 col-sm-12">Priorité :</label>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
+				<label class="form-check-label" for="level1_RadioBtn">Très urgent</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="2">
+				<label class="form-check-label" for="level2_RadioBtn">Urgent</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="priority_RadioBtn" id="EnCours_RadioBtn" value="3" checked>
+				<label class="form-check-label" for="level3_RadioBtn">Normal</label>
+		  </div>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="radio" name="priority_RadioBtn" id="Clos_RadioBtn" value="4">
+				<label class="form-check-label" for="level4_RadioBtn">Peut attendre</label>
+			</div>
+		</div>
 
 	<div class="form-group">
-		<label class="col-form-label">Commentaire</label>
+		<label class="col-form-label">Commentaire :</label>
 		<textarea type="text" class="form-control" name="comment" value="comment"></textarea>
 	</div>
 

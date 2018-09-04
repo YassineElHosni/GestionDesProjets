@@ -27,7 +27,7 @@
     
 </div>
     <div class="btn-group btn-group-lg text-light" id="myBtn-group"
-       {{--  style="position: fixed;left:25%; top: 10%"  --}}
+        style="position: fixed;left:25%; top: 10%" 
         {{-- style="position: relative;left:25%; top: 50%"  --}}
         {{-- style="position: fixed;right: 3%;top:50%;" --}}>
         <form action="{{ route($current.'.create') }}" id="form_add" method="get"></form>
@@ -79,6 +79,30 @@ $(function() {
 
     var table = $('#myTable').DataTable(
     {
+        language: {
+            "decimal":        "",
+            "emptyTable":     "Aucune donnée disponible.",
+            "info":           "Afficher de _START_ à _END_ de _TOTAL_ entrées",
+            "infoEmpty":      "Afficher 0 à 0 de 0 entrées",
+            "infoFiltered":   "(filtré à partir des entrées totales _MAX_)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Afficher _MENU_ entrées",
+            "loadingRecords": "Chargement...",
+            "processing":     "En cours de traitement...",
+            "search":         "Chercher:",
+            "zeroRecords":    "Aucun enregistrements correspondants trouvés",
+            "paginate": {
+                "first":      "Premier",
+                "last":       "Dernier",
+                "next":       "Prochain",
+                "previous":   "Précédent"
+            },
+            "aria": {
+                "sortAscending":  ": activer pour trier par ordre croissant",
+                "sortDescending": ": activer pour trier par ordre descendant"
+            }
+        },
         serverSide: true,
         ajax: '{!! route('datatables.getdata',$current) !!}',
          "rowCallback": function( row, data ) {

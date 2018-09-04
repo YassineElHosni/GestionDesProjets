@@ -8,15 +8,13 @@
 	table.hiden{
 		display : none;
 	}
+	h2{ color: green; }
 	</style>
 @endsection
 
 @section('content')
 @include('flash::message')
 
-<style> h2{ color: green; }
-</style>
-<br>
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Modifier la Tache </h2>  </div>
@@ -55,7 +53,7 @@
 <div class="col-sm">
 	<div class="form-row">
 		<div class="form-group mr-4 col-4">
-			<label class="col-form-label mr-3">Projet lié: </label>
+			<label class="col-form-label mr-3">Projet attaché :</label>
 			<div class="form-control" name="project_id">{{$task->project_title}}</div>
 		</div>
 	</div>
@@ -175,7 +173,7 @@
 		<!-- new employee chosen  -->
 			<input type="hidden" id="removeTable" name="removeTable" value="">
 
-<button type="submit" name="submit" class="btn btn-success float-right"> <i class="fas fa-save"> Enregistrer</i></button>
+<button type="submit" name="submit" class="btn btn-success float-right mt-2"><i class="fas fa-save"></i> Enregistrer</button>
 
 </form>
 </div>

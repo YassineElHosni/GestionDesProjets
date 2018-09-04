@@ -27,7 +27,7 @@
     <hr>
     <div class="row">
       <div class="col-md-12">
-        <h4>Derniers Projects :</h4>
+        <h4>Derniers Projets :</h4>
         @foreach($LastFewProjects as $p)
           <div class="alert alert-info alert-dismissible fade show form-inline " role="alert">
             <div class="font-weight-bold col-lg-3">{{$p->title}}</div>
@@ -38,7 +38,7 @@
             </button> --}}
           </div>
         @endforeach
-        <h4>Dernières Taches :</h4>
+        <h4>Dernières Tâches :</h4>
         @foreach($LastFewTasks as $t)
         <div class="alert alert-warning alert-dismissible fade show form-inline" role="alert">
           <div class="font-weight-bold col-lg-3">{{$t->title}}</div>

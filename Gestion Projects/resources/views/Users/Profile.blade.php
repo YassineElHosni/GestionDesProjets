@@ -20,7 +20,7 @@
 
   <div class="page-header">
     <br>
-          <h2 style="color :gray" class="ml-5">Profile de : {{$user->name}}</h2>
+          <h2 style="color :gray" class="ml-5">Profil de : {{$user->name}}</h2>
   </div><hr>
 
 	<div class="row">
@@ -36,7 +36,7 @@
         <!-- edit form column -->
     <div class="col-md-9">
 
-              <h3>Personal info</h3><br>
+              <h3>Informations personnelles</h3><br>
               <form action="{{ route('Users.edit',$user->id) }}" method="get">
               	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Modifier</button>
               </form>

@@ -5,7 +5,32 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 $(document).ready( function () {
-    $('#users_table').DataTable();
+	$('#users_table').DataTable({
+		language: {
+			"decimal":        "",
+			"emptyTable":     "Aucune donnée disponible.",
+			"info":           "Afficher de _START_ à _END_ de _TOTAL_ entrées",
+			"infoEmpty":      "Afficher 0 à 0 de 0 entrées",
+			"infoFiltered":   "(filtré à partir des entrées totales _MAX_)",
+			"infoPostFix":    "",
+			"thousands":      ",",
+			"lengthMenu":     "Afficher _MENU_ entrées",
+			"loadingRecords": "Chargement...",
+			"processing":     "En cours de traitement...",
+			"search":         "Chercher:",
+			"zeroRecords":    "Aucun enregistrements correspondants trouvés",
+			"paginate": {
+				"first":      "Premier",
+				"last":       "Dernier",
+				"next":       "Prochain",
+				"previous":   "Précédent"
+			},
+			"aria": {
+				"sortAscending":  ": activer pour trier par ordre croissant",
+				"sortDescending": ": activer pour trier par ordre descendant"
+			}
+		}
+	});
 } );
 </script>
 @endsection
@@ -26,11 +51,11 @@ $(document).ready( function () {
 <table class="table table-responsive-lg" id="users_table" data-order='[[ 1, "asc" ]]' data-page-length='5'>
 <thead>
 	<tr>
-		<th scope="col">name</th>
+		<th scope="col">nom</th>
 		<th scope="col" class="d-none d-lg-block" style="border-bottom:none;">email</th>
 		{{-- <th scope="col">password</th> --}}
 		<th scope="col">role</th>
-		<th scope="col" class="d-none d-lg-block" style="border-bottom:none;">comment</th>
+		<th scope="col" class="d-none d-lg-block" style="border-bottom:none;">commentaire</th>
 		<th scope="col"></th>
 
 	</tr>

@@ -20,7 +20,7 @@
 
   <div class="page-header">
     <br>
-          <h2 style="color :gray" class="ml-5">Mon Profile</h2>
+          <h2 style="color :gray" class="ml-5">Mon Profil</h2>
   </div><hr>
 
 	<div class="row">
@@ -29,7 +29,7 @@
         <div class="text-center">
           <img id="mypic" src="{{URL('/')}}/storage/avatars/{{ ($user->avatar)?$user->avatar:'default.png' }}"
             style="border-radius:50%;height:50% ;width:50%" class="img-circle" alt="avatar">
-          <input id="saveProfile" class="btn btn-success" type="submit" value="save" hidden onclick="$('#form').submit();">
+          <input id="saveProfile" class="btn btn-success" type="submit" value="Enregistrer" hidden onclick="$('#form').submit();">
 
           <h6>{{$user->name}}</h6>
            <form action="{{ route('User.updateAvatar',$user->id) }}" method="post" enctype="multipart/form-data" id="form">
@@ -46,7 +46,7 @@
               $('#saveProfile').attr('hidden',false);
               " hidden>
 
-             <input  type="button" id="new_avatar"  class="btn btn-primary" value="Change Avatar" onclick="$('#avatar').click();">
+             <input  type="button" id="new_avatar"  class="btn btn-primary" value="Changer d'Avatar" onclick="$('#avatar').click();">
              <input  hidden value="{{ csrf_token() }}" name="_token">
            </form>
         </div>
@@ -55,7 +55,7 @@
         <!-- edit form column -->
     <div class="col-md-9">
 
-              <h3>Personal info</h3><br>
+              <h3>Informations personnelles</h3><br>
 
               <form class="form-horizontal" role="form">
                 <div class="form-group form-inline">

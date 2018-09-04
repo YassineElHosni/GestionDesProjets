@@ -2,24 +2,24 @@
 
 @section('content')
 @include('flash::message')
-<br>
+
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Nouveau Client </h2>  </div>
 </div>
-<br><br>
+<br>
 <form role="form" method="post" action="{{action('ClientController@store')}}">
 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
 
 	<div class="form-group">
-		<label for="title" class="col-form-label">Registration Number:</label>
+		<label for="title" class="col-form-label">Numéro d'enregistrement :</label>
 		<input type="text" class="form-control" name="registrationNumber" >
 	</div>
 
  <div class="form-row">
   	<div class="form-group col-6">
-  		<label for="title" class="col-form-label">Client Name:</label>
+  		<label for="title" class="col-form-label">Nom :</label>
   		<input type="text" class="form-control" name="name" >
   	</div>
 
@@ -33,13 +33,13 @@
 
  <div class="form-row">
   	<div class="form-group col-6">
-  		<label for="title" class="col-form-label">Address:</label>
+  		<label for="title" class="col-form-label">Adresse:</label>
   		<input type="text" class="form-control" name="address" >
   	</div>
 
   	<div class="col">
       <div class="form-group">
-          <label for="title" class="col-form-label">Phone Number:</label>
+          <label for="title" class="col-form-label">Numéro de téléphone :</label>
           <input type="text" class="form-control" name="phoneNumber" >
       </div>
     </div>
