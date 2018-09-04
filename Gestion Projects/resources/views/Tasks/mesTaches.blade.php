@@ -14,7 +14,7 @@
 		<th scope="col">Description</th>
 		<th scope="col">Projet</th>
 		<th scope="col">Date limite</th>
-		<th scope="col">Date debut</th>
+		<th scope="col">Date fin</th>
 		<th scope="col">Priorité</th>
 		<th scope="col">Etat</th>
 		<th scope="col">Déroulement %</th>
@@ -35,7 +35,7 @@
 		<td><b>{{$t->title}}</b></td>
 		<td>{{$t->project_title}}</td>
 		<td><div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($t->limitDate))}}</div></td>
-		<td>{{($t->d_d)?date('Y-m-d', strtotime($t->d_d)):'-'}}</td>
+		<td>{{($t->f_d)?date('Y-m-d', strtotime($t->f_d)):'-'}}</td>
     <td>
       @if($t->priority==1)
         <div style="color:red;font-weight:bold">
