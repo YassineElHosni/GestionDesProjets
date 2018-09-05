@@ -101,19 +101,23 @@
 			<!-- notification-->
 			<?php $my_notifs = Auth::user()->unreadNotifications; ?>
 			<div class="btn-group dropleft ml-5 mx-3" role="group">
-				<i class="btn btn-primary fa fa-bell fa-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+				<i class="btn btn-primary fa fa-bell fa-md"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 					style="border-radius:70%;"
-					onclick="$('#notif{{Auth::user()->id}}').click();" value="notif">
+					onclick="$('#notif{{Auth::user()->id}}').click();"
+					value="notif">
 					<span class="badge badge-danger badge-pill" style="position: absolute;">{{$my_notifs->count()}}</span>
 				</i>
 				<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+					<!-- all unread notifications -->
 					@foreach ($my_notifs as $ntf)
-						{{-- <button onclick="$('#my_seen').submit();">{{$ntf->data['title']}}</button> --}}
-						<a class="dropdown-item bg-success text-white" href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
+						<a class="dropdown-item bg-success text-white"
+							href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
 					@endforeach
+					<!-- all read notifications -->
 					@foreach (Auth::user()->readNotifications as $ntf)
-						{{-- <button onclick="$('#my_seen').submit();">{{$ntf->data['title']}}</button> --}}
-						<a class="dropdown-item text-secondary" href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
+						<a class="dropdown-item text-secondary"
+							href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
 					@endforeach
 				</div>
 			</div>
