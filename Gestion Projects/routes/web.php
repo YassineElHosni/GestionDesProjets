@@ -13,6 +13,20 @@
 Auth::routes();
 
 Route::get('notif', function(){
+	// dd(Notifications::find('5df53945-a7d6-4fcf-9149-09b913487198'));
+
+	// $u = \App\User::find(25);$t = \App\Task::find(1);
+	// Notification::send($u, new \App\Notifications\UserNotification($t));
+
+	// $t = \App\Task::find(1);
+	// $p = \App\Project::find(1);
+	// dd(get_class($p));
+	// if ($p instanceof \App\Task) {
+	// 	dd('it is a task');
+	// }else if ($p instanceof \App\Project) {
+	// 	dd('it is a project');
+	// }else dd('error');
+
 	// dd(App\User::whereIn('role',array('ADMIN','MANAGER'))->get());
 	// echo Auth::user()->Notifications;
 	// $user = \App\User::find(1);

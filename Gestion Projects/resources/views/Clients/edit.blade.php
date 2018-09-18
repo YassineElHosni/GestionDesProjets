@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-@include('flash::message')
 
 <style> h2{ color: green; }
 

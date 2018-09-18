@@ -42,7 +42,6 @@ $(document).ready( function () {
 
 @section('content')
 
-@include('flash::message')
  <div class="page-header">
 		<div class="form-group align-center">
 			     	 <h2>Liste des Users</h2>  </div>
@@ -97,13 +96,13 @@ $(document).ready( function () {
         <!--can('edit',App\User::class,$u)-->
       	@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
           @if($u->role!='ADMIN')<!--ne pas modifier l'admine -->
-				  <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
+				  <i class="btn btn-primary fas fa-pencil-alt text-dark" aria-hidden="true" onclick="$('#edit{{$u->id}}').click();" value="m"></i>
           @endif
         @endif
         <!--can('delete',App\User::class,$u)-->
         @if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
           @if($u->role!='ADMIN')<!--ne pas modifier l'admine -->
-				  <i <i class="btn btn-danger fa fa-trash text-dark" aria-hidden="true" onclick="$('#delete{{$u->id}}').click();" value="s"></i>
+				  {{-- <i <i class="btn btn-secondary fas fa-file-archive text-dark" aria-hidden="true" onclick="$('#delete{{$u->id}}').click();" value="s"></i> --}}
           @endif
         @endif
       </div>

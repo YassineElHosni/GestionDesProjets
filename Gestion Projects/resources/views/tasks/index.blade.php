@@ -68,7 +68,7 @@
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$t->id}}').submit();"></i>
-				<i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true" onclick="$('#edit{{$t->id}}').submit();"></i>
+				<i class="btn btn-primary fas fa-pencil-alt text-dark" aria-hidden="true" onclick="$('#edit{{$t->id}}').submit();"></i>
 		 </div>
 		</td>
 	</tr>

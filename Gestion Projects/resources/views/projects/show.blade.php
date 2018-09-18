@@ -27,9 +27,6 @@ textarea {
 }
 </style>
 
-
-@include('flash::message')
-
 <br>
 
 <div class="form-group align-center">

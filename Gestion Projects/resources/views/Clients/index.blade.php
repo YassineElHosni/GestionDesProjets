@@ -9,7 +9,6 @@
 
 @section('content')
 
-@include('flash::message')
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">

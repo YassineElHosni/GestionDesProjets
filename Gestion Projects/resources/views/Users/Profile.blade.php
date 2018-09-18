@@ -14,7 +14,6 @@
  </script>
 @endsection
 @section('content')
-@include('flash::message')
 
 <div class="container">
 

@@ -39,7 +39,8 @@ class UserNotification extends Notification
         return [
                     'id' => $this->obj->id,
                     'title' => $this->obj->title,
-                    'date' => $this->obj->created_at
+                    'date' => $this->obj->created_at,
+                    'type' => get_class($this->obj)
         ];
     }
 

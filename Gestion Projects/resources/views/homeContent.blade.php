@@ -1,24 +1,23 @@
 
 <style> /* !!!!! media querys !!!!! A REVOIR */
-.col-4 {width: 40%;}
-.col-8 {width: 80%;}
+/*.col-4 {width: 40%;}
+.col-8 {width: 80%;}*/
 
-@media only screen and (max-width: 1222px) {
+{{--@media only screen and (max-width: 1222px) {
     /* For mobile phones: */
     [class*="col-"] {
         width: 100%;
     }
-}
+}--}}
 </style>
 <br>
 <div class="form-row ">
-  <div class="form-group col-4">
+  <div class="form-group col-md-4 col-sm-12 text-center">
   <!--display calendar -->
-
     @include('Calendars.mycalendar')
 
   </div>
-	<div class="form-group col-8">
+	<div id="lastItems" class="form-group col-md-12  col-sm-12">
     <div class="form-group">
       <div class="col-lg-12">.</div>
       <div class="col-lg-12 h1">Bienvenu {{Auth::user()->name}} </div>

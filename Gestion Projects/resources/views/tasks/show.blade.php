@@ -42,9 +42,6 @@ input[type=text] {
 }
 </style>
 
-
-@include('flash::message')
-
 <div class="form-group align-center">
 	<h1>{{ $task->title }} </h1>
 </div>

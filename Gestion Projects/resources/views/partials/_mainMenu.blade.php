@@ -100,8 +100,8 @@
 
 			<!-- notification-->
 			<?php $my_notifs = Auth::user()->unreadNotifications; ?>
-			<div class="btn-group dropleft ml-5 mx-3" role="group">
-				<i class="btn btn-primary fa fa-bell fa-md"
+			<div class="btn-group dropleft ml-5 mx-3 my-1" role="group">
+				<i class="btn btn-primary fa fa-bell fa-md py-2"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 					style="border-radius:70%;"
 					onclick="$('#notif{{Auth::user()->id}}').click();"
@@ -112,12 +112,12 @@
 					<!-- all unread notifications -->
 					@foreach ($my_notifs as $ntf)
 						<a class="dropdown-item bg-success text-white"
-							href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
+							href="{{route('user.notif.seen',$ntf->id)}}">{{$ntf->data['title']}}</a>
 					@endforeach
 					<!-- all read notifications -->
 					@foreach (Auth::user()->readNotifications as $ntf)
 						<a class="dropdown-item text-secondary"
-							href="{{route('user.notif.seen',$ntf->data['id'])}}">{{$ntf->data['title']}}</a>
+							href="{{route('user.notif.seen',$ntf->id)}}">{{$ntf->data['title']}}</a>
 					@endforeach
 				</div>
 			</div>
@@ -151,4 +151,7 @@
 <br>
 <br>
 <br>
+<div class="container">
+	@include('flash::message')
+</div>
 <br>

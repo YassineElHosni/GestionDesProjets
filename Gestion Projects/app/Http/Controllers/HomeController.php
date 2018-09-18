@@ -80,19 +80,21 @@ class HomeController extends Controller
 	//
 	// set a notification read_at to the current date.
 	//
-	public function notifSeen($objId){
+	public function notifSeen($notifId){
 		$user = Auth::user();
-		if($obj = Task::find($objId)){
-			$user->Notifications->where('notifiable_id', '=', $user->id)
-				->where('data.id', '=', $obj->id)
-				->markAsRead();
-			return redirect()->route('Tasks.show', $objId);
+		$notif =  $user->Notifications
+			->where('id','=',$notifId)[0];
+
+		$objectId = $notif['data']['id'];
+		$istype =  $notif['data']['type'];
+
+		$notif->markAsRead();
+
+		if($istype == 'App\Task'){
+			return redirect()->route('Tasks.show', $objectId);
 		}
-		else if($obj = Project::find($objId)){
-			$user->Notifications->where('notifiable_id', '=', $user->id)
-				->where('data.id', '=', $obj->id)
-				->markAsRead();
-			return redirect()->route('Projects.show', $objId);
+		else if($istype == 'App\Project'){
+			return redirect()->route('Projects.show', $objectId);
 		}
 		else{
 			flash('Objet non Trouvé !')->error();

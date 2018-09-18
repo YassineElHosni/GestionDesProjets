@@ -7,12 +7,29 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
     <link href="{{ asset('fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
    <style>
+         @media only screen and (min-width: 601px) {
+            body {
+                /*background-color: seagreen;*/
+            }
+            #myBtn-group{
+                position: fixed;right: 3%;top:50%;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            body {
+                /*background-color: lightblue;*/
+            }
+            #myBtn-group{
+                position: fixed;left:25%; top: 10%;
+            }
+        }
      /*  .myBtn-group{
             position: relative;
             top:60%;
             left:30%;
        }*/
        table.dataTable tbody tr.selected{background-color:#B0BED9;}
+
    </style>
 @endsection
 
@@ -20,19 +37,20 @@
 
 @include('flash::message')
 
-<div>
-    <input type="hidden" value="empty" disabled id="selectedIds" class="float-right">
+   {{--  <div style="position: fixed;left:25%; top: 10%">
+        
+    </div> --}}
 
-<div style="position: fixed;left:25%; top: 10%">
-    
-</div>
+{{-- management buttons --}}
+    <input type="hidden" value="empty" disabled id="selectedIds" class="float-right" style=";">
+
+    <form action="{{ route($current.'.create') }}" id="form_add" method="get"></form>
+    <form action="" id="form_show" method="get"></form>
+    <form action="" id="form_edit" method="get"></form>
     <div class="btn-group btn-group-lg text-light" id="myBtn-group"
-        style="position: fixed;left:25%; top: 10%" 
+        style="z-index:10;" 
         {{-- style="position: relative;left:25%; top: 50%"  --}}
         {{-- style="position: fixed;right: 3%;top:50%;" --}}>
-        <form action="{{ route($current.'.create') }}" id="form_add" method="get"></form>
-        <form action="" id="form_show" method="get"></form>
-        <form action="" id="form_edit" method="get"></form>
 
         <button id="btn_new" class="btn btn-warning text-dark" onclick="$('#form_add').submit();" value="Ajouter">
             <i class="fas fa-plus"></i>
@@ -41,13 +59,15 @@
             <i class="far fa-eye"></i>
         </button>
         <button id="btn_edit" class="btn btn-primary text-dark" onclick="$('#form_edit').submit();" value="Modifier" disabled>
-            <i class="fa fa-pencil-alt"></i>
+            <i class="fas fa-pencil-alt"></i>
         </button>
-        <button type="button" id="mass_delete" class="btn btn-danger text-dark" disabled>
-            <i class="fa fa-times"></i>
-        </button>
+      {{--   <button type="button" id="mass_delete" class="btn btn-secondary text-dark" disabled>
+            <i class="fas fa-file-archive"></i>
+        </button> --}}
     </div>
-</div>
+{{-- </div> --}}
+{{--  --}}
+
         <table class="text-center table table-responsive-lg table-hover" style="width:100%" id="myTable">
             <thead class="">
                 <tr style="font-size:16px">
@@ -73,12 +93,11 @@
     
    
 <script>
-$(function() {
+$( document ).ready(function() {
 
     var selected = [];
 
-    var table = $('#myTable').DataTable(
-    {
+    var table = $('#myTable').DataTable({
         language: {
             "decimal":        "",
             "emptyTable":     "Aucune donnée disponible.",
@@ -121,8 +140,7 @@ $(function() {
             // { "data": "action", orderable:false, searchable: false},
             // { "data":"checkbox", orderable:false, searchable:false}
         ]
-    }
-    );
+    });
 
     // $(document).on('click', '.delete', function(){
     //     var id = $(this).attr('id');
@@ -203,6 +221,16 @@ $(function() {
         console.log(myUrl+'show/'+selected[0]);
         console.log(myUrl+'edit/'+selected[0]);
     }
+    function myFunction(x) {
+        if (x.matches && !$('#myBtn-group').hasClass('btn-group-vertical')) { // If media query matches
+            /* The viewport is less than, or equal to, 600 pixels wide */
+            $('#myBtn-group').toggleClass('btn-group').toggleClass('btn-group-vertical');
+        }
+    }
+
+    var mylistener = window.matchMedia("(max-width: 600px)");
+    myFunction(mylistener); // Call listener function at run time
+    mylistener.addListener(myFunction); // Attach listener function on state changes
 });
 </script>
 @endsection 

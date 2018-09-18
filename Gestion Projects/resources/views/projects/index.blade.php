@@ -2,7 +2,6 @@
 
 
 @section('content')
-@include('flash::message')
 
 <style> h2{ color: green; } </style>
  <div class="page-header">
@@ -66,7 +65,7 @@
             <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true"
               onclick="$('#show{{$p->id}}').submit();" value="v"></i>
 						@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
-            <i class="btn btn-primary fa fa-pencil text-dark" aria-hidden="true"
+            <i class="btn btn-primary fas fa-pencil-alt text-dark" aria-hidden="true"
               onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
             <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
 						@endif
