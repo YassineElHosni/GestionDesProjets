@@ -6,7 +6,11 @@
 <style> h2{ color: green; } </style>
  <div class="page-header">
 		<div class="form-group align-center">
+      <?php if(isset($func)):?>
+        <h2>Mes Projets</h2>
+      <?php else: ?>
 			<h2>Liste des Projets</h2>
+    <?php endif; ?>
     </div>
 </div>
 <br><br>
@@ -65,10 +69,12 @@
             <i class="btn btn-success fa fa-eye text-dark" aria-hidden="true"
               onclick="$('#show{{$p->id}}').submit();" value="v"></i>
 						@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+              @if($p->state!=0)<!--we can't edit a clos Project -->
             <i class="btn btn-primary fas fa-pencil-alt text-dark" aria-hidden="true"
               onclick="$('#edit{{$p->id}}').submit();" value="m"></i>
             <!--<i class="btn btn-danger fas fa-times text-dark" onclick="$('#delete{{$p->id}}').submit();" value="s"></i>-->
-						@endif
+              @endif
+            @endif
           </div>
         </td>
         {{--

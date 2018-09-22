@@ -128,8 +128,9 @@ class ProjectController extends Controller
     public function ManagerProjets($id)
     {
       $ps = Project::where('user_id','Like',$id)->get();
+
       foreach ($ps as $p) {
-        $c=Client::find($p->client_id);
+          $p->client_name=Client::find($p->client_id)->name;
       }
       $func=1;
       return view('projects.index',compact('ps'))->withFunc($func);

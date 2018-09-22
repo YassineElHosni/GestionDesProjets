@@ -31,7 +31,10 @@
           <div class="alert alert-info alert-dismissible fade show form-inline " role="alert">
             <div class="font-weight-bold col-lg-3">{{$p->title}}</div>
             <div class="font-weight-bold col-lg-3">{{($p->state)?'En-Cours':'Clos'}}</div>
-            <div class="col-lg-2">{{$p->updated_at}}</div>
+            <div class="font-weight-bold col-lg-3" style="border-style: solid;border-top-style: none;border-left-style: none;">  Dernière modification: </div>
+            <div class="font-weight-bold col-lg-3"> {{$p->updated_at}} </div>
+
+
             {{--   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button> --}}
@@ -46,9 +49,21 @@
               {{($t->state=='IN_PROGRESS')?'En-Cours':(($t->state=='FINISHED')?'Fini':(($t->state=='VALIDATED')?'Validée':'empty'))}}
               </p>
             </div>
-          <div class="col-lg-2">{{$t->updated_at}}</div>
+
+          <div class="font-weight-bold col-lg-2" style="border-style: solid;border-top-style: none;border-left-style: none;">  Dernière modification: </div>
+          <div class="font-weight-bold col-lg-3"> {{$t->updated_at}} </div>
           <a class="close" href="./Tasks/{{$t->id}}">
-            <span class="badge badge-danger badge-pill" >{{$t->priority}}</span>
+            <span class="badge badge-default badge-pill" >
+              @if($t->priority==1)
+     						 <div style="color:red;font-weight:bold;" class="ml-8 ">~ Très Urgent ~</div>
+     					 @elseif($t->priority==2)
+     							 <div style="color:orange;font-weight:bold;" class="ml-8 ">~ Urgent ~</div>
+     								@elseif($t->priority==3)
+     									 <div style="color:yellow;font-weight:bold;" class="ml-8 ">~ Normal ~</div>
+     									 @else
+     											<div style="color:#098812 ;font-weight:bold;" class="ml-8">~ Peut attendre ~</div>
+     				  @endif
+            </span>
           </a>
         </div>
         @endforeach

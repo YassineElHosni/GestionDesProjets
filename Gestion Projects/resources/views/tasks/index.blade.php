@@ -11,7 +11,7 @@
 <table class="table table-responsive-lg  mr-2">
 <thead class="thead-dark">
 	<tr>
-		<th scope="col">Projet</th>
+		<th scope="col">Projet relié</th>
 		<th scope="col">Description</th>
 		<th scope="col">Date debut</th>
 		<th scope="col">Date limite</th>
@@ -33,9 +33,9 @@
 		@endif
 
 		<td>{{$t->project_title}}</td>
-		<td><b>{{$t->title}}</b></td>
+		<td><b>{{substr($t->title,0,15)}} {{(strlen($t->title)>15)?'...':'.' }}</b></td>
 		<td>{{($t->d_d)?date('Y-m-d', strtotime($t->d_d)):'-'}}</td>
-		<td><div style="color:green;font-weight:bold">{{date('Y-m-d', strtotime($t->limitDate))}}</div></td>
+		<td><div style="color:blue;font-weight:bold">{{date('Y-m-d', strtotime($t->limitDate))}}</div></td>
 	    <td>
 	      @if($t->priority==1)
 	        <div style="color:red;font-weight:bold">
@@ -68,7 +68,11 @@
 			</form>
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<i class="btn btn-success fa fa-eye text-dark" aria-hidden="true" onclick="$('#show{{$t->id}}').submit();"></i>
+          @if($t->project_state!=0)<!--we can't edit a Task in a clos Project -->
 				<i class="btn btn-primary fas fa-pencil-alt text-dark" aria-hidden="true" onclick="$('#edit{{$t->id}}').submit();"></i>
+          @else
+          <div class="ml-1" style="font-style: italic; color:blue;"> Projet clos </div>
+          @endif
 		 </div>
 		</td>
 	</tr>

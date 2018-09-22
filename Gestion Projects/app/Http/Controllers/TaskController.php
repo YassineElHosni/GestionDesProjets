@@ -19,6 +19,8 @@ class TaskController extends Controller
         foreach ($ts as $t) {
             //get the name of the project that the current task belongs to.
             $t->project_title=Project::find($t->project_id)->title;
+            //get the project state
+            $t->project_state=Project::find($t->project_id)->state;
             //get the smallest 'date_debut' that all user have on the current task
             $t->d_d=Task_User::where('task_id',$t->id)
                 ->min('startDate');
