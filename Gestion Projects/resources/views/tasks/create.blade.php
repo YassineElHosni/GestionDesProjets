@@ -20,7 +20,7 @@
 
 	<div class="form-group">
 		<label for="title" class="col-form-label">Sujet :</label>
-		<input type="text" class="form-control" name="title">
+		<input type="text" class="form-control" name="title" required>
 	</div>
 
  <div class="form-row">
@@ -43,12 +43,12 @@
 		<div class="form-group">
 			<label for="date_limite" class="col-md-3 col-form-label">Date Limite :</label>
 			<div class="input-group date form_datetime col-md-5"
-				data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss" 
+				data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-mm-dd hh:ii:ss"
 				data-link-field="dtp_input1"
 				style="min-width: 100%">
 
 				<input id="limitDate" name="limitDate" class="form-control" size="16" type="text"
-					value="2018-07-26 11:36:04" readonly>
+					value="2018-07-26 11:36:04" readonly required>
 				<span class="input-group-append">
 					<span class="input-group-text fa fa-times fa-lg"></span>
 				</span>
@@ -84,7 +84,7 @@
 
 	<div class="form-group">
 		<label class="col-form-label">Commentaire :</label>
-		<textarea type="text" class="form-control" name="comment" value="comment"></textarea>
+		<textarea type="text" class="form-control" name="comment" value="comment" required></textarea>
 	</div>
 
 	<div class="form-group">

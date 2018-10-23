@@ -5,4 +5,4 @@
 <script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('/js/popper-1.14.3.min.js') }}"></script>
 <script src="{{ asset('/js/bootstrap-4.1.2.min.js') }}"></script>
-
+<script src="{{ asset('/js/freeYearDays.js') }}"></script>

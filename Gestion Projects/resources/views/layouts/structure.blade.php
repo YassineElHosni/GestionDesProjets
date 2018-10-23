@@ -1,7 +1,9 @@
 <!Doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="C2A_dark.png" />
 <title>c2a Projects manager</title>
+
 	@include('partials._metas')
 	@section('csss')<!--styles-->
 		@include('partials._csss')
@@ -11,11 +13,11 @@
 <body>
 
 	@include('partials._mainMenu')<!--Menu-->
-	
+
 					<div class="container">
 
-						@yield('content')
-
+					@yield('content')
+				
 					</div>
 
 		@include('partials._footer')<!--footer-->

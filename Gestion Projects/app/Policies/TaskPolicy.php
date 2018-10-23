@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Policies;
-
+use App\Task_User;
 use App\User;
 use App\Task;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -14,9 +14,9 @@ class TaskPolicy
       {
               return true;
       }
-      public function MyTasks(User $user, Task $task){
+      public function MyTasks(User $user){
 
-           if($user->Auth_hasRole('PROJECT_MANAGER')||$user->Auth_hasRole('EMPLOYEE')) {
+      if($user->Auth_hasRole('PROJECT_MANAGER')||$user->Auth_hasRole('EMPLOYEE')) {
                 return true;
            }else {  return false; }
       }
@@ -32,17 +32,24 @@ class TaskPolicy
     }
 
 
-    public function edit(User $user, Task $task)
+    public function edit(User $user)
     {
           if(!$user->Auth_hasRole('EMPLOYEE')){
               return true;
           }else {  return false; }
     }
-    public function updateProgress(User $user, Task $task,User $workers )
+    public function updateProgress(User $user,Task $task )
     {
-          if (in_array($user->id,$workers->id)){
-              return true;
-          }else {  return false; }
+      $id_us=Task_User::where('task_id','=',$task->id)->get(['user_id']);/*get the employee related to this task*/
+      $workers=User::whereIn('id', $id_us)->get(['id']);/*get infos of thoes employee from user table*/
+
+      foreach($workers as $w){
+        if($w->id == $user->id)/*check if the current user is one of the workers*/
+          return true;
+      }
+         return false;
+        //  return in_array($user,$workers);
+
     }
 
     public function addEmployee(User $user, Task $task)
@@ -52,7 +59,7 @@ class TaskPolicy
         }else {  return flase; }
     }
 
-   public function  addTaskToPrj(User $user, Task $task){
+   public function  addTaskToPrj(User $user){
        if (!$user->Auth_hasRole('EMPLOYEE')){
            return true;
        }else {  return false; }

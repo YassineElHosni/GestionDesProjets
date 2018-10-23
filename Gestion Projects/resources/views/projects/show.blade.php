@@ -36,13 +36,13 @@ textarea {
 	</h1>
 </div>
 
-@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+@can('edit',App\Project::class)
   @if($project->state!=0)<!--we can't edit a clos Project -->
   <form action="{{ route('Projects.edit',$project->id) }}" method="get">
   	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</button>
   </form>
   @endif
-@endif
+@endcan
 <br><hr><br>
 
 <form>
@@ -93,14 +93,13 @@ textarea {
 <!-- display tasks related to this project -->
 <br><h3>Tâches du Projet :</h3>
 	<!-- can add task to this project -->
-  <!--can('addTaskToPrj',App\User::class) -->
-	@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+  @can('addTaskToPrj',App\Task::class)
     @if($project->state!=0)<!--we can't edit a clos Project -->
     	<form action="{{ route('Tasks.addTaskToPrj',$project->id) }}" method="get">
     		<button type="submit" class="btn btn-warning float-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
     	</form>
     @endif
-	@endif
+	@endcan
 	<!--endcan-->
 <br><hr>
 
@@ -108,7 +107,7 @@ textarea {
 	<thead class="thead-dark">
 	<tr>
 		<th scope="col">Intervenant</th>
-		<th scope="col">Title</th>
+		<th scope="col">Description</th>
 		<th scope="col">Date limite</th>
 		<th scope="col">State</th>
 		<th scope="col">Progression (%)</th>
@@ -131,7 +130,7 @@ textarea {
 				</div>
 			</div>
 		</th>
-		<th scope="row">{{$task->title}}</th>
+		<th scope="row">{{substr($task->title,0,15)}} {{(strlen($task->title)>15)?'...':'.' }}</th>
 		<td>{{date("F j Y H:i", strtotime($task->limitDate))}}</td>
 		<td>{{($task->state=='IN_PROGRESS')?'En-Cours':(($task->state=='FINISHED')?'Fini':(($task->state=='VALIDATED')?'Validée':'empty'))}}</td>
 		<td><span class="badge badge-primary badge-pill align_center">{{$task->progress }}</span></td>

@@ -28,7 +28,7 @@ class ProjectPolicy
           return true;
       }
 
-      public function ManagerProjets(User $user, Project $project){
+      public function ManagerProjets(User $user){
         if($user->Auth_hasRole('PROJECT_MANAGER')){
            return true;
         }

@@ -83,7 +83,7 @@ class TaskController extends Controller
             // 'user_id' =>$request->user_id[0],/*not stored ! user have to be attached with this task*/
             'project_id'=>$request->project_id[0],
           ]);
-      $newTask->save();
+      $newTask->save();//lol mamy lol
 
       $newTaskUser = new Task_User([
             'task_id' => $newTask->id,
@@ -110,7 +110,7 @@ class TaskController extends Controller
       $t=Task::find($id);/*get task*/
       $p=Project::find($t->project_id);/*get the projet related to this task*/
       $id_us=Task_User::where('task_id','=',$t->id)->get(['user_id']);/*get the employee related to this task*/
-      $us=User::whereIn('id', $id_us)->get(['name','email','comment']);/*get infos of thoes employee from user table*/
+      $us=User::whereIn('id', $id_us)->get(['id','name','email','comment']);/*get infos of thoes employee from user table*/
         return view('tasks.show')->withTask($t)->withProject($p)->withUsers($us);
     }
     /*
