@@ -19,7 +19,7 @@ class UserController extends Controller
 	 /*only admin have access to all users database*/
 	 /*only Gerant & Admin can add users ..(Admin add Gerant) */
   	// $this->middleware('admin',['except' => ['show','update_avatar','update','editPassword','updatePassword']]);
-
+      $this->middleware('auth');
 	}
 
 	//
@@ -57,6 +57,7 @@ class UserController extends Controller
 		*/
 	public function index()
 	{
+		$this->authorize('index', User::class);
 		$us = User::all();
 		$u = Auth::user();
 
@@ -70,6 +71,7 @@ class UserController extends Controller
 		*/
 	public function create()
 	{
+		 $this->authorize('create', User::class);
 		return view('auth.register');
 	}
 /*storeAdmin(){
@@ -108,9 +110,12 @@ class UserController extends Controller
 		$u = User::find($id);
 		return view('Users.show')->withUser($u);
 	}
+
 	public function showProfile($id) /*users profile*/
 	{
+		 
 		$u = User::find($id);
+		$this->authorize('showProfile',$u);
 		return view('Users.Profile')->withUser($u);
 	}
 
@@ -122,7 +127,10 @@ class UserController extends Controller
 		*/
 	public function edit($id)
 	{
+		
 		$u = User::find($id);
+		 $this->authorize('edit',$u);
+
 			return view('Users.edit')->withUser($u);
 	}
 	/*
@@ -180,7 +188,10 @@ class UserController extends Controller
 		*/
 	public function destroy($id)
 	{
+
 		$u = User::find($id);
+		 $this->authorize('delete',$u);
+
     if($u->role=='EMPLOYEE'){/*detache tasks from that user employee*/
 			$tasks_id=Task_User::where('user_id',$u->id)->get(['task_id']);
 			$tasks=Task::whereIn('id',$tasks_id)->get();

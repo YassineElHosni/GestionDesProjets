@@ -79,4 +79,9 @@
 	@endforeach
 </tbody>
 </table>
+@if(empty($ts))
+  <div class="alert alert-secondary fade show align-center form-inline" role="alert">
+     Aucune tache trouvée actuellement :)
+  </div>                    
+@endif
 @endsection

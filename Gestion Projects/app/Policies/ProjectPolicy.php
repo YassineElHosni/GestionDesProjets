@@ -36,7 +36,7 @@ class ProjectPolicy
       }
 
      public function edit(User $user){
-       if($user->Auth_hasRole('EMPLOYEE')||$user->Auth_hasRole('PROJECT_MANAGER')){
+       if($user->Auth_hasRole('EMPLOYEE')){
          return false;
        }
          return true;
