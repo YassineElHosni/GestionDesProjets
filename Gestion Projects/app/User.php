@@ -57,6 +57,11 @@ class User extends Authenticatable
       return User::where('role','Like',$role)->get();
     }
     
-
+    /*
+    * each user has many timers related to many task
+    */
+    public function timers() {
+     return $this->hasMany('App\Timer');
+    }
 
 }
