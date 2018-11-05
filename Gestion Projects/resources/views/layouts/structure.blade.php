@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
 <title>c2a Projects manager</title>
+<link rel="shortcut icon" type="image/x-icon" href="..\C2A_dark.png" />
 	@include('partials._metas')
 	@section('csss')<!--styles-->
 		@include('partials._csss')
