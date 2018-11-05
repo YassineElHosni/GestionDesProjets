@@ -29,13 +29,15 @@
 				{{-- <a class="btn btn-info" href="">Rapport</a> --}}
 				<a class="btn btn-info" href="{{route('calendar.index')}}">Calendrier des Projets</a>
 
-				@if(Auth::user()->Auth_hasRole('PROJECT_MANAGER')||Auth::user()->Auth_hasRole('EMPLOYEE'))
-					<a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
-				@endif
 
-				@if(Auth::user()->Auth_hasRole('PROJECT_MANAGER'))
+				@can('MyTasks',App\Task::class)
+					<a class="btn btn-secondary" href="{{route('Tasks.MyTasks',Auth::user()->id )}}">Mes Taches</a>
+        @endcan
+
+				<!--endif-->
+				@can('ManagerProjets',App\Project::class)
 					<a class="btn btn-secondary" href="{{route('Project.ManagerProjets',Auth::user()->id )}}">Mes Projets</a>
-				@endif
+				@endcan
 			</div>
 
 			<div class="btn-group" role="group">
@@ -53,7 +55,8 @@
 				@endcan
 
 				<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-					@if(Auth::user()->Auth_hasRole('ADMIN')||Auth::user()->Auth_hasRole('MANAGER'))
+
+          @can('index',App\User::class)
 						<div class="btn-group" role="group">
 							<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">
@@ -64,8 +67,9 @@
 								<a class="dropdown-item" href="{{route('Users.index')}}">Liste Utilisateurs</a>
 							</div>
 						</div>
-					@endif
-					@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+					@endcan
+
+					@can('index',App\Projet::class)
 					<div class="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"
@@ -78,13 +82,15 @@
 						</div>
 					</div>
 				</div>
-				   @else
-					<div class="btn-group" role="group">
-					  <a class="btn btn-info" href="{{route('Projects.index')}}">Liste des Projets</a>
-	        </div>
+				@endcan
+				<!--else -->
+			  @cannot('index',App\User::class)
+				<div class="btn-group" role="group">
+				  <a class="btn btn-info" href="{{route('Projects.index')}}">Liste des Projets</a>
+        </div>
+        @endcannot
 
-					 @endif
-				@can('index',Auth::user()) <!--if(Auth::user()->Auth_hasRole('ADMIN'))-->
+				@can('index',App\Client::class) <!-- if(Auth::user()->Auth_hasRole('ADMIN'))-->
 				<div class="btn-group" role="group">
 					<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
@@ -153,5 +159,16 @@
 <br>
 <div class="container">
 	@include('flash::message')
+
+	@if ($errors->any())
+	<hr>
+			<div class="alert alert-danger">
+					<ul>
+							@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+							@endforeach
+					</ul>
+			</div>
+	@endif
 </div>
 <br>

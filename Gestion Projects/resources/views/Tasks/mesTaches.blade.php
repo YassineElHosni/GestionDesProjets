@@ -23,6 +23,7 @@
 	</tr>
 </thead>
 <tbody>
+
   @foreach($ts as $t)
     @if($t->state=='FINISHED')
   	<tr class="table-info">
@@ -70,6 +71,12 @@
     </td>
 	</tr>
 	@endforeach
+
 </tbody>
 </table>
+@if(empty($ts))
+  <div class="alert alert-secondary fade show align-center form-inline" role="alert">
+     Vous n'avez aucune tache actuellement :)
+  </div>                    
+@endif
 @endsection

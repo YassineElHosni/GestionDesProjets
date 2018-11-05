@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Policies;
-
+use Auth;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -17,17 +17,23 @@ class UserPolicy
   }
 
     public function index(User $user){
-      if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')){
-          return true;
-      }
+      if(!Auth::guest()){
+        if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')){
+            return true;
+        }
+           return false;
+      }    
          return false;
     }
 
     public function create(User $user){
-      if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')) {
-          return true;
+      if(!Auth::guest()){
+        if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')) {
+            return true;
+        }
+           return false;
       }
-         return false;
+           return false;
     }
 
   public function show(User $user, User $usertarget){/*auth profile*/

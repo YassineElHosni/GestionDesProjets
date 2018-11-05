@@ -4,13 +4,14 @@
 .col-8 {width: 80%;}*/
 
 {{--@media only screen and (max-width: 1222px) {
-    /* For mobile phones: */
+    /* For mobile phones:*/
     [class*="col-"] {
         width: 100%;
     }
 }--}}
 </style>
 <br>
+
 <div class="form-row ">
   <div class="form-group col-md-4 col-sm-12 text-center">
   <!--display calendar -->

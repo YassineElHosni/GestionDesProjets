@@ -20,6 +20,9 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        //\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
+        //UnexpectedValueException::class,
+        //NotFoundHttpException::class,
     ];
 
     /**
@@ -44,6 +47,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+    /*   if ($e instanceof HttpException) {
+         $e = new HttpException(503, $e->getMessage());
+         return $this->renderHttpException($e);
+       }
+      // 404 page when a model is not found
+    if ($e instanceof ModelNotFoundException) {
+      $e = new ModelNotFoundException(404, $e->getMessage());
+      return $this->renderModelNotFoundException($e);
+        //return response()->abort(404, 'Page not found!');
+    }
+    // custom error message
+    if ($e instanceof \ErrorException) {
+      $e = new ErrorException(500, $e->getMessage());
+      return $this->renderErrorException($e);
+      //  return response()->abort(500,'Oups somthing went wrong!');
+    } else {
+        return parent::render($request, $e);
+    }*/
+
+    //return parent::render($request, $e);
         return parent::render($request, $exception);
     }
 
@@ -62,4 +85,19 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest(route('login'));
     }
+    /*
+    *generate error msg due to a missing value
+    */
+    /*protected function missingvalue($request,UnexpectedValueException $exception)
+    {
+
+        return 'Oups something went wrong  !';
+    });
+    /*
+    *handling routing exception error ResourceNotFoundException
+    *
+    protected function routingException($request,NotFoundHttpException $exception)
+    {
+      abort(500, 'Oups the page you are looking for is missing ');
+    });*/
 }

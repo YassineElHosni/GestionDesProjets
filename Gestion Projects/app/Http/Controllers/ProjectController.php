@@ -14,6 +14,11 @@ use Carbon\Carbon;
 use Auth;
 class ProjectController extends Controller
 {
+
+  public function __construct(){
+    
+      $this->middleware('auth');
+  }
     /**
      * Display a listing of all Projects
      *
@@ -39,6 +44,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+      $this->authorize('create', Project::class);
         /*--get all representatives--*/
         $project_managers=User::where('role','Like','PROJECT_MANAGER')->get();
         // get all clients
@@ -86,8 +92,11 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+
         $p = Project::find($id);
 
+       $this->authorize('show',$p);
+    
         $c=Client::find($p->client_id);
 
         $u=User::find($p->user_id);
@@ -127,6 +136,8 @@ class ProjectController extends Controller
      */
     public function ManagerProjets($id)
     {
+       $this->authorize('ManagerProjets', Project::class);
+
       $ps = Project::where('user_id','Like',$id)->get();
 
       foreach ($ps as $p) {
@@ -143,7 +154,10 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+      
+
         $p= Project::find($id);
+         $this->authorize('edit', $p);
         $p->client_name=Client::find($p->client_id)->name;
 
         /*all chef_projets*/
@@ -198,7 +212,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+
       $project =project::find($id);
+       $this->authorize('delete', $project);
       $u=User::find($project->user_id);
 
       $project->delete();

@@ -88,4 +88,11 @@
 	@endforeach
 </tbody>
 </table>
+
+@if(!$ps)
+  <div class="alert alert-secondary fade show align-center form-inline" role="alert">
+     Aucun Projet trouvé actuellement :)
+  </div>                    
+@endif
+
 @endsection

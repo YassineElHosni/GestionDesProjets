@@ -46,13 +46,13 @@ input[type=text] {
 	<h1>{{ $task->title }} </h1>
 </div>
 
-@if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
-  @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
+@can('edit',App\Task::class)
+  @if($project->state==1)<!--we can't edit a Task in a clos Project -->
   <form action="{{ route('Tasks.edit',$task->id) }}" method="get">
   	<button type="submit" class="btn btn-primary float-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modifier</button>
   </form>
   @endif
-@endif
+@endcan
 <br><hr><br>
 
 	<form action="{{ route('Tasks.updateProgress',$task->id) }}" method="post">
@@ -94,13 +94,14 @@ input[type=text] {
 					<div class="card mr-4"style="width: 30rem;">
 						<div class="card-body form-inline">
 							<h5 class="card-title mr-3">Progression:</h5>
-								@can('updateProgress',App\User::class,$task,$users)<!--!! only a worker can edit the progress -->
-                  @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
-							   	<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+
+  							@can('updateProgress',[App\Task::class,$task])<!--!! only a worker can edit the progress -->
+                  @if($project->state==1)<!--we can't edit a Task in a clos Project -->
+  							 	<input type="range" id="RangeProgress" name="progress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());"  onchange="$('#saveBtn').show();" value="{{$task->progress}}">
                   @endif
                 @endcan
-								@cannot('updateProgress',App\User::class,$task,$users)<!-- the disabled range-progress is showed to other visitors-->
-							  <input disabled type="range" id="RangeProgress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
+								@cannot('updateProgress',[App\Task::class,$task]) <!--the disabled range-progress is showed to other visitors -->
+							    <input disabled type="range" id="RangeProgress" step="5" oninput="$('#rangeRes').html($('#RangeProgress').val());" value="{{$task->progress}}">
 								@endcannot
 							<span id="rangeRes" class="badge badge-success badge-pill float-right">{{$task->progress }}</span>
 						</div>
@@ -108,15 +109,23 @@ input[type=text] {
 				</div>
 			</div>
 		</div>
-		@if(Auth::user()->Auth_hasRole('EMPLOYEE'))<!--can('updateProgress',$task,$users)!! only a worker can edit the progress -->
-      @if($project->state!=0)<!--we can't edit a Task in a clos Project -->
-			 <button type="submit" name="submit" class="btn btn-success float-right mr-4"><i class="fa fa-floppy-o" aria-hidden="true" > Enregistrer </i></button>
-      @endif
-  	@endif
+		@can('updateProgress',[App\Task::class,$task])
+      <!--!! the button is hidden and appears when we modify -->
+			 <button  id="saveBtn" type="submit" name="submit" style='display:none;' class="btn btn-success float-right mr-4"><i class="fa fa-floppy-o" aria-hidden="true" > Enregistrer </i></button>
+
+  	@endcan
 		</form>
 		<br>
 		<br>
 		<!-- if user allowed action he can add workers for this task -->
+    <!-- adding employees -->
+    {{-- @if(!Auth::user()->Auth_hasRole('EMPLOYEE'))
+      @if($project->state!=0)<!--we can't edit a clos Project -->
+      	<form action="{{ route('Tasks.addTaskEmpl',$project->id) }}" method="get">
+      		<button type="submit" class="btn btn-warning float-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+      	</form>
+      @endif
+  	@endif  --}}
 		<h3>Employés reliés:</h3>
 		<table class="table table-bordered">
 			<thead class="thead-light">

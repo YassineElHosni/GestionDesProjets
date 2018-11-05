@@ -77,10 +77,10 @@ Route::get('notif', function(){
 	// }
 });
 Route::get('/user/notif/seen/{data}','HomeController@notifSeen')->name('user.notif.seen');
-Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');
+Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index')->middleware('admin');
 Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 
-Route::get('/register', 'UserController@registerIndex')->name('register.index');
+Route::get('/register', 'UserController@registerIndex')->name('register.index');/*->middleware('can:create,App\User');*/
 Route::get('/register/save', 'UserController@store')->name('register.save');
 
 Route::get('/', 'HomeController@index')->name('home.index');

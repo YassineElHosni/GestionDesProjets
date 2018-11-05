@@ -216,7 +216,7 @@ h6 {
 		                                <div class="md-form">
 		                                    <i class="fas fa-user-tie prefix text-light active"></i>
 		                                    <label for="name" class="active">Votre nom</label>
-		                                    <input type="text" id="name" name="name" class="form-control" required>
+		                                    <input type="text" id="name" name="name" class="form-control">
 		                                </div>
 		                                <div class="md-form">
 		                                    <i class="fa fa-envelope prefix text-light active"></i>

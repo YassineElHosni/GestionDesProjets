@@ -1,16 +1,36 @@
 
-  <script>
 
-  function calendarflow(){
-    if($('#calendrier').is(':visible')){
-    document.getElementById('calendrier').style.display="none";
-    }else{
-      document.getElementById('calendrier').style.display="block";
-    }
-    $('#lastItems').toggleClass('col-md-8').toggleClass('col-md-12');
+  <!-- jour fériés national from a web_page
+
+  var name = "codemzy";
+  $.get('https://www.freecodecamp.com/'  + name, function(response) {
+    console.log(response);
+  });
+  /////other methode/////
+  function doJSONP(response){
+    console.log(response.data);
   }
+  let script=document.createElement('script');
+  script.src='https://www.joursferies.fr/pays/maroc.php?callback=doJSONP'
 
-  </script>
+  document.getElementsByTagName('table')[0].appendChild(script);
+
+
+-->
+<script>
+
+    function calendarflow(){
+      if($('#calendrier').is(':visible')){
+      document.getElementById('calendrier').style.display="none";
+      }else{
+        document.getElementById('calendrier').style.display="block";
+      }
+      $('#lastItems').toggleClass('col-md-8').toggleClass('col-md-12');
+    }
+    /*$(document).ready(function(){
+      nationaldays(date)
+    });*/
+</script>
 <!--mon agenda -->
 
 <button style="width: 80%;"class="btn btn-primary" onclick="calendarflow();">
@@ -71,11 +91,23 @@
 
    <?php $week_days=array('Lun','Mar','Mer','Jeu','Ven','Sam','Dim');?>
    <thead>
-         <tr>
+      <!--<tr>
+        php
+           $string = file_get_contents("/Gestion Projects/public/js/freeYearDays.json");
+             $array_decod = json_decode($string, true);
+              foreach($array_decod as $key => $obj ){// national_days
+                echo $key ,':' ;
+                foreach($obj as $key => $value ){
+                 echo $key, ' : ', $value;
+                }
+              }
+         ?>     
+      </tr>-->
+      <tr>
        @foreach ($week_days as $week_day)
              <th class="calendar__weekday">{{$week_day}}</th>
        @endforeach
-         </tr>
+      </tr>
    </thead>
 
   <tbody>
