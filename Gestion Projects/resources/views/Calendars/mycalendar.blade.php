@@ -1,29 +1,13 @@
 
-
-  <!-- jour fériés national from a web_page
-
-  var name = "codemzy";
-  $.get('https://www.freecodecamp.com/'  + name, function(response) {
-    console.log(response);
-  });
-  /////other methode/////
-  function doJSONP(response){
-    console.log(response.data);
-  }
-  let script=document.createElement('script');
-  script.src='https://www.joursferies.fr/pays/maroc.php?callback=doJSONP'
-
-  document.getElementsByTagName('table')[0].appendChild(script);
-
-
--->
 <script>
 
     function calendarflow(){
       if($('#calendrier').is(':visible')){
       document.getElementById('calendrier').style.display="none";
+      document.getElementById('bubble').style.visibility="hidden";
       }else{
         document.getElementById('calendrier').style.display="block";
+        document.getElementById('bubble').style.visibility="hidden";
       }
       $('#lastItems').toggleClass('col-md-8').toggleClass('col-md-12');
     }
@@ -32,7 +16,10 @@
     });*/
 </script>
 <!--mon agenda -->
-
+<div id="bubble" class="speech-bubble" style="visibility: visible ,overflow: auto;">
+    <p><strong>Check me!</strong></p>
+  
+</div>
 <button style="width: 80%;"class="btn btn-primary" onclick="calendarflow();">
   <i class="fa fa-calendar" aria-hidden="true">Calendrier</i>
 </button>
@@ -87,22 +74,11 @@
 
   </div>
 
+
   <table class="calendar__table calendar__table--<?= $weeks; ?>weeks col-lg-12"><!--je defini cette class a voir dans \css\calendar.css-->
 
    <?php $week_days=array('Lun','Mar','Mer','Jeu','Ven','Sam','Dim');?>
    <thead>
-      <!--<tr>
-        php
-           $string = file_get_contents("/Gestion Projects/public/js/freeYearDays.json");
-             $array_decod = json_decode($string, true);
-              foreach($array_decod as $key => $obj ){// national_days
-                echo $key ,':' ;
-                foreach($obj as $key => $value ){
-                 echo $key, ' : ', $value;
-                }
-              }
-         ?>     
-      </tr>-->
       <tr>
        @foreach ($week_days as $week_day)
              <th class="calendar__weekday">{{$week_day}}</th>
@@ -167,3 +143,4 @@
   </table>
 
 </div>
+

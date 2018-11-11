@@ -1,8 +1,5 @@
 
-<style> /* !!!!! media querys !!!!! A REVOIR */
-/*.col-4 {width: 40%;}
-.col-8 {width: 80%;}*/
-
+<style> 
 {{--@media only screen and (max-width: 1222px) {
     /* For mobile phones:*/
     [class*="col-"] {
@@ -20,7 +17,7 @@
   </div>
 	<div id="lastItems" class="form-group col-md-12  col-sm-12">
     <div class="form-group">
-      <div class="col-lg-12">.</div>
+      <div class="col-lg-12"> </div>
       <div class="col-lg-12 h1">Bienvenu {{Auth::user()->name}} </div>
     </div>
     <br>

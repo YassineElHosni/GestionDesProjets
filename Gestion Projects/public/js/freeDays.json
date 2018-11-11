@@ -1,0 +1,24 @@
+{          
+      "2018": [
+      {"title":"Al Mawlid", "month": "11" ,"dayStart" :"20" , "dayEnd": "20" },
+      {"title":"Aïd el Fitr" ,"month": "06" ,"dayStart" : "15" , "dayEnd": "15" },
+      {"title":"Jour de l'An Hégire" ,"month": "09" ,"dayStart" : "12", "dayEnd": "12" },
+      {"title":"Aïd al-Adha" ,"month": "08" ,"dayStart" : "21", "dayEnd": "23" }
+      ],
+
+      "2019": [
+      {"title":"Al Mawlid" ,"month": "11" ,"dayStart" :"09" , "dayEnd": "09" },
+      {"title":"Aïd el Fitr" ,"month": "06" ,"dayStart" : "05" , "dayEnd": "05" },
+      {"title":"Jour de l'An Hégire" ,"month": "09" ,"dayStart" : "01", "dayEnd": "01" },
+      {"title":"Aïd al-Adha" ,"month": "08" ,"dayStart" : "11", "dayEnd": "13" }
+      ],
+
+      "2020": [
+       {"title":"Al Mawlid" ,"month": "10" ,"dayStart" :"28" , "dayEnd": "28" },
+       {"title":"Aïd el Fitr" ,"month": "05" ,"dayStart" : "24" , "dayEnd": "24" },
+       {"title":"Jour de l'An Hégire","month": "08" ,"dayStart" : "20", "dayEnd": "20" },
+       {"title":"Aïd al-Adha" ,"month": "07" ,"dayStart" : "30", "dayEnd": "32" }
+
+      ]
+
+}

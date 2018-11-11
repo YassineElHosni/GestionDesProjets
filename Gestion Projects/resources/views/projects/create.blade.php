@@ -20,14 +20,14 @@
 
 	<div class="form-group">
 		<label for="title" class="col-form-label">Sujet :</label>
-		<input type="text" class="form-control" name="title">
+		<input  type="text" class="form-control" name="title" required>
 	</div>
 
 	<div class="form-row">
 		<div class="form-group col">
 			<label class="col-form-label col-md-2 col-sm-12">Etat :</label>
 			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1" checked>
+				<input class="form-check-input" type="radio" name="state_RadioBtn" id="EnCours_RadioBtn" value="1" checked >
 				<label class="form-check-label" for="EnCours_RadioBtn">En-cours</label>
 			</div>
 			<div class="form-check form-check-inline">
@@ -85,12 +85,12 @@
 
 	<div class="form-group">
 		<label for="description" class="col-form-label">Description :</label>
-		<textarea class="form-control" rows="6" name="description" id="description"></textarea>
+		<textarea class="form-control" rows="6" name="description" id="description" required></textarea>
 	</div>
 
 	<div class="form-group">
 		<label class="col-form-label">Commentaire :</label>
-		<textarea class="form-control" rows="6" name="comment" id="comment"></textarea>
+		<textarea class="form-control" rows="6" name="comment" id="comment" required></textarea>
 	</div>
 
 <input type="submit" class="btn btn-success btn-h1-spacing float-right" value="Ajouter">

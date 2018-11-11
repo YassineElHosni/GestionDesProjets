@@ -69,7 +69,7 @@
 						</div>
 					@endcan
 
-					@can('index',App\Projet::class)
+					@can('create',App\Project::class)
 					<div class="btn-group" role="group">
 						<button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"
@@ -84,7 +84,7 @@
 				</div>
 				@endcan
 				<!--else -->
-			  @cannot('index',App\User::class)
+			  @cannot('create',App\Project::class)
 				<div class="btn-group" role="group">
 				  <a class="btn btn-info" href="{{route('Projects.index')}}">Liste des Projets</a>
         </div>
@@ -102,6 +102,7 @@
 					</div>
 				</div>
 				@endcan
+
 			</div>
 
 			<!-- notification-->

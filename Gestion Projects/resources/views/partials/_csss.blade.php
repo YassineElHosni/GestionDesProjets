@@ -6,3 +6,4 @@
 <link href="{{ asset('/css/jquery.dataTables.css') }}" rel="stylesheet">
 <link href="{{ asset('/fonts/fontawesome-5.1.1/css/all.css') }}" rel="stylesheet">
 <link href="{{ asset('/css/calendar.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/cssBubble.css') }}" rel="stylesheet">
