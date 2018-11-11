@@ -108,6 +108,10 @@ class UserController extends Controller
 	public function show($id) /*auth profile*/
 	{
 		$u = User::find($id);
+
+		if($u->role == 'EMPLOYEE')
+			$u->hoursCount = User::getEmployeHoursCount($id);
+		
 		return view('Users.show')->withUser($u);
 	}
 
@@ -116,6 +120,12 @@ class UserController extends Controller
 		 
 		$u = User::find($id);
 		$this->authorize('showProfile',$u);
+
+		if($u->role == 'EMPLOYEE')
+			$u->hoursCount = User::getEmployeHoursCount($id);
+
+
+
 		return view('Users.Profile')->withUser($u);
 	}
 

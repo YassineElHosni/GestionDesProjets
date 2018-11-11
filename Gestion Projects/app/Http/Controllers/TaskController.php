@@ -5,6 +5,12 @@ use App\User;
 use App\Task;
 use App\Project;
 use App\Task_User;
+
+use Session;
+use Auth;
+
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 class TaskController extends Controller
 {
@@ -95,6 +101,8 @@ class TaskController extends Controller
             'user_id' => $request->user_id[0],
             'startDate' => $newTask->created_at,
             'finishDate' => null,
+            'hoursCount' => 0,
+            'needCalculating' => 0,
           ]);
       $newTaskUser->save();
 
@@ -162,16 +170,40 @@ class TaskController extends Controller
     */
     public function updateProgress(Request $request, $id)
     {
+      // dd(auth::user()->id);
           $task =Task::find($id);
+          $t_u = Task_User::where('user_id','=',auth::user()->id)
+                ->where('task_id','=',$task->id)->get();
+
           $task->comment=$request->comment;
           $task->progress=$request->progress;
-          if($request->progress=="100" && $task->state=='IN_PROGRESS')
-            $task->state='FINISHED';
-          $task->save();
 
-          $task->title = 'task "' .$newTask->title.'" updated';
-          \Notification::send(
-              User::whereIn(Task_User::where('task_id','=',$task->id)->get('user_id'))->get('id'),
+          if($request->progress=="100" && $task->state=='IN_PROGRESS'){
+            $task->state='FINISHED';
+            
+            $t_u->finishDate = date('Y-m-d H:i:s');
+            $t_u->needCalculating = 1;
+          }else{
+            $task->state='IN_PROGRESS';
+
+            $from = Carbon::parse($t_u->startDate);
+            $to = Carbon::parse($t_u->finishDate);
+            $t_u->hoursCount = $to->diffInMinutes($from);
+
+            $t_u->startDate = date('Y-m-d H:i:s');
+            $t_u->finishDate = null;
+            $t_u->needCalculating = 0;
+          }
+
+          $task->save();
+          $t_u->save();
+          // if($t_u->needCalculating)//close task
+          // dd();
+
+
+          $task->title = 'task "' .$task->title.'" and it relations updated';
+          \Notification::send(User::whereIn(Task_User::where('task_id','=',$task->id)
+              ->get('user_id'))->get('id'),
               new \App\Notifications\UserNotification($task));
 
           flash('Tache Enregistré avec succé !')->success();

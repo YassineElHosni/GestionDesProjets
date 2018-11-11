@@ -20,6 +20,7 @@
   <div class="page-header">
     <br>
           <h2 style="color :gray" class="ml-5">Mon Profil</h2>
+          <h6 style="color :seagreen" class="ml-5 pl-5">{{$user->hoursCount}}</h6>
   </div><hr>
 
 	<div class="row">

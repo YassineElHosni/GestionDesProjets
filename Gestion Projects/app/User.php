@@ -1,8 +1,10 @@
 <?php
 
 namespace App;
-use App\Tache;
+use App\Task;
 use App\Projet;
+use App\Task_User;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -62,6 +64,13 @@ class User extends Authenticatable
     */
     public function timers() {
      return $this->hasMany('App\Timer');
+    }
+
+    public static function getEmployeHoursCount($id){
+        $t_us = Task_User::where('user_id',$id)->get();
+
+        // dd(Project::useData_toCalculateHoursCount($t_us));
+        return Project::useData_toCalculateHoursCount($t_us);
     }
 
 }
