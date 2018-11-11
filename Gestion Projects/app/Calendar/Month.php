@@ -108,71 +108,58 @@ return $this->getStartingDay()->format('Y-m') === $date->format('Y-m');
 
 }
 /*
-*Est-ce que le jour est un jour férié
-* pour 2018 2019 2020
+* Free days :for 2018 2019 2020 
+* and national days
 */
   public function Isfreeday(\DateTime $date){
     $day_free=array();
-    /*national freedays*/
-    if($date->format('m-d')=='01-01'){
-     $day_free[]="Jour de l\'an";
-   }elseif($date->format('m-d')=='01-11'){
-     $day_free[]="Manifeste de l\'Indépendance";
-   }elseif($date->format('m-d')=='05-01'){
-    $day_free[]="Fête du travail";
-   }elseif($date->format('m-d')=='07-30'){
-    $day_free[]="Fête du trône";
-   }elseif($date->format('m-d')=='08-14'){
-   $day_free[]="Allégeance Oued Eddahab";
-   }elseif($date->format('m-d')=='08-20'){
-     $day_free[]="La Révolution du Roi et du peuple";
-   }elseif($date->format('m-d')=='08-21'){
-     $day_free[]="Fête de la jeunesse";
-  }elseif($date->format('m-d')=='10-06'){
-   $day_free[]="La marche verte";
-  }elseif($date->format('m-d')=='10-18'){
-    $day_free[]="Fête de l\'Indépendance";
-  }
-/*jours fériés pour 2018*/
- if($date->format('Y')=='2018'){
+   //////////////// for national_days://////////////////////////////////////////////
+  $path_nd="C:/xampp/htdocs/GestionDesProjets/Gestion Projects/public/js/nationalDays.json";
+ 
+   $national_days = file_get_contents($path_nd); 
+   $array_decod = json_decode($national_days, true);
 
-   if($date->format('m-d')=='11-20'){
-     $day_free[]="Al Mawlid";
-   }elseif($date->format('m-d')=='06-15'){
-    $day_free[]="L\'Aïd el Fitr";
-   }elseif($date->format('m-d')=='09-12'){
-   $day_free[]="Jour de l\'An Hégire";
-   }elseif(($date->format('m-d')=='08-21')||($date->format('m-d')=='08-22')||($date->format('m-d')=='08-23')){
-    $day_free[]="Aïd al-Adha";
-   }
+  foreach($array_decod as $key => $value ){
+    
+     if($date->format('m')==$value["date"][0] && $date->format('d')==$value["date"][1]){
+       $day_free[]=$value["day"];
+     }
+  
+    }
+    /////////////// for normal free_days: 2018 2019 2020/////////////////////////////
+    $path_fd="C:/xampp/htdocs/GestionDesProjets/Gestion Projects/public/js/freeDays.json";
+      $data = file_get_contents($path_fd);     
+      $array_decod = json_decode($data,true);
+
+
+     if($date->format('Y')==2018){/*jours fériés pour 2018*/
+        foreach ($array_decod["2018"] as $key => $value) {
+         if($date->format('m')==$value["month"] && $date->format('d')>=$value["dayStart"] && $date->format('d')<=$value["dayEnd"]){
+            // $value["title"]);
+            $day_free[]=$value["title"];
+            }
+          }
+        }else if($date->format('Y')==2019){/*jours fériés pour 2018*/
+        foreach ($array_decod["2019"] as $key => $value) {
+         if($date->format('m')==$value["month"] && $date->format('d')>=$value["dayStart"] && $date->format('d')<=$value["dayEnd"]){
+            // $value["title"]);
+            $day_free[]=$value["title"];
+            }
+          }
+        }else if($date->format('Y')==2020){/*jours fériés pour 2018*/
+        foreach ($array_decod["2020"] as $key => $value) {
+         if($date->format('m')==$value["month"] && $date->format('d')>=$value["dayStart"] && $date->format('d')<=$value["dayEnd"]){
+            // $value["title"]);
+            $day_free[]=$value["title"];
+            }
+          }
+        }
+        
+     $result=implode(",",$day_free);
 /*jours fériés pour 2019*/
-}elseif($date->format('Y')=='2019'){
 
-   if($date->format('m-d')=='11-09'){
-     $day_free[]="Al Mawlid";
-  }elseif($date->format('m-d')=='06-05'){
-    $day_free[]="L\'Aïd el Fitr";
-  }elseif($date->format('m-d')=='09-01'){
-   $day_free[]="Jour de l\'An Hégire";
-  }elseif(($date->format('m-d')=='08-11')||($date->format('m-d')=='08-12')||($date->format('m-d')=='08-13')){
-    $day_free[]="Aïd al-Adha";
-  }
 /*jours fériés pour 2020*/
-}elseif($date->format('Y')=='2020'){
-
-   if($date->format('m-d')=='10-28'){
-     $day_free[]="l Mawlid";
-
-  }elseif($date->format('m-d')=='05-24'){
-    $day_free[]="L\'Aïd el Fitr";
-
-  }elseif($date->format('m-d')=='08-20'){
-    $day_free[]="Jour de l'An Hégire";
-  }elseif(($date->format('m-d')=='07-30')||($date->format('m-d')=='07-31')||($date->format('m-d')=='07-32')){
-    $day_free[]="Aïd al-Adha";
-  }
-}
-    print join('\n',$day_free);
+return $result;
 }
 /*
 *Est-ce que la date est le jour courant

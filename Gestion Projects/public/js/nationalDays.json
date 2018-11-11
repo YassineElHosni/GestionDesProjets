@@ -1,0 +1,29 @@
+     [
+      {
+        "day": "Jour de l'an" ,"date": ["01","15"] 
+      },
+      {  
+        "day": "Manifeste de l'Indépendance" ,"date" :["01","11"]
+      },
+      {
+        "day": "Fête du travail" ,"date" :["05","01"]
+      },
+      {
+        "day": "Fête du trône" ,"date" :["07","30"]
+      },
+      {
+        "day": "Allégeance Oued Eddahab","date" :["08","14"]
+      },
+      {
+        "day": "La Révolution du Roi et du peuple" ,"date" :["08","20"]
+      },
+      {
+        "day": "Fête de la jeunesse","date" :["08","21"]
+      },
+      {  
+        "day": "La marche verte" ,"date" :["11","06"]
+      },
+      {
+        "day": "Fête de l'Indépendance" ,"date" :["10","18"]
+      }  
+     ]

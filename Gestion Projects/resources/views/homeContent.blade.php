@@ -1,8 +1,5 @@
 
-<style> /* !!!!! media querys !!!!! A REVOIR */
-/*.col-4 {width: 40%;}
-.col-8 {width: 80%;}*/
-
+<style> 
 {{--@media only screen and (max-width: 1222px) {
     /* For mobile phones:*/
     [class*="col-"] {
