@@ -13,19 +13,19 @@
 
 	<div class="form-group">
 		<label for="title" class="col-form-label">Numéro d'enregistrement :</label>
-		<input type="text" class="form-control" name="registrationNumber" >
+		<input type="text" class="form-control" name="registrationNumber" required >
 	</div>
 
  <div class="form-row">
   	<div class="form-group col-6">
   		<label for="title" class="col-form-label">Nom :</label>
-  		<input type="text" class="form-control" name="name" >
+  		<input type="text" class="form-control" name="name" required>
   	</div>
 
   	<div class="col">
       <div class="form-group">
           <label for="title" class="col-form-label">Email:</label>
-          <input type="text" class="form-control" name="email" placeholder="email@exemple.com" >
+          <input type="text" class="form-control" name="email" placeholder="email@exemple.com" required>
       </div>
     </div>
 </div>
@@ -33,19 +33,19 @@
  <div class="form-row">
   	<div class="form-group col-6">
   		<label for="title" class="col-form-label">Adresse:</label>
-  		<input type="text" class="form-control" name="address" >
+  		<input type="text" class="form-control" name="address" required>
   	</div>
 
   	<div class="col">
       <div class="form-group">
           <label for="title" class="col-form-label">Numéro de téléphone :</label>
-          <input type="text" class="form-control" name="phoneNumber" >
+          <input type="text" class="form-control" name="phoneNumber" required>
       </div>
     </div>
 </div>
 	<div class="form-group">
 		<label class="col-form-label">Commentaire</label>
-		<textarea type="text" class="form-control" name="comment" value="comment"></textarea>
+		<textarea type="text" class="form-control" name="comment" value="comment" required></textarea>
 	</div>
 
 
