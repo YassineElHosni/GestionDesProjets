@@ -17,7 +17,7 @@
   </div>
 	<div id="lastItems" class="form-group col-md-12  col-sm-12">
     <div class="form-group">
-      <div class="col-lg-12">.</div>
+      <div class="col-lg-12"> </div>
       <div class="col-lg-12 h1">Bienvenu {{Auth::user()->name}} </div>
     </div>
     <br>

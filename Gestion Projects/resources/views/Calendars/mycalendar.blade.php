@@ -4,8 +4,10 @@
     function calendarflow(){
       if($('#calendrier').is(':visible')){
       document.getElementById('calendrier').style.display="none";
+      document.getElementById('bubble').style.visibility="hidden";
       }else{
         document.getElementById('calendrier').style.display="block";
+        document.getElementById('bubble').style.visibility="hidden";
       }
       $('#lastItems').toggleClass('col-md-8').toggleClass('col-md-12');
     }
@@ -14,7 +16,10 @@
     });*/
 </script>
 <!--mon agenda -->
-
+<div id="bubble" class="speech-bubble" style="visibility: visible ,overflow: auto;">
+    <p><strong>Check me!</strong></p>
+  
+</div>
 <button style="width: 80%;"class="btn btn-primary" onclick="calendarflow();">
   <i class="fa fa-calendar" aria-hidden="true">Calendrier</i>
 </button>
