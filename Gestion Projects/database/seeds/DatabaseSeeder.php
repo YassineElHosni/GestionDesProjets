@@ -72,35 +72,26 @@ function example1(){
     }
 
         // App\User // name,email,password,role,comment,remember_token
-        createUser(['u_name1','u_email1','password1','ADMIN','u_comment1']);
-        createUser(['u_name2','u_email2','password2','ADMIN','u_comment2']);
+        createUser(['u_name1','u_email1@mail.com','password1','ADMIN','u_comment1']);
+        createUser(['u_name2','u_email2@mail.com','password2','ADMIN','u_comment2']);
 
-        createUser(['u_name3','u_email3','password3','MANAGER','u_comment3']);
-        createUser(['u_name4','u_email4','password4','MANAGER','u_comment4']);
+        createUser(['u_name3','u_email3@mail.com','password3','MANAGER','u_comment3']);
+        createUser(['u_name4','u_email4@mail.com','password4','MANAGER','u_comment4']);
 
-        createUser(['u_name5','u_email5','password5','PROJECT_MANAGER','u_comment5']);
-        createUser(['u_name6','u_email6','password6','PROJECT_MANAGER','u_comment6']);
+        createUser(['u_name5','u_email5@mail.com','password5','PROJECT_MANAGER','u_comment5']);
+        createUser(['u_name6','u_email6@mail.com','password6','PROJECT_MANAGER','u_comment6']);
 
-        createUser(['u_name7','u_email7','password7','EMPLOYEE','u_comment7']);
-        createUser(['u_name8','u_email8','password8','EMPLOYEE','u_comment8']);
-        createUser(['u_name9','u_email9','password9','EMPLOYEE','u_comment9']);
-        createUser(['u_name10','u_email10','password10','EMPLOYEE','u_comment10']);
-        createUser(['u_name11','u_email11','password11','EMPLOYEE','u_comment11']);
-        createUser(['u_name12','u_email12','password12','EMPLOYEE','u_comment12']);
-
-
+        createUser(['u_name7','u_email7@mail.com','password7','EMPLOYEE','u_comment7']);
+        createUser(['u_name8','u_email8@mail.com','password8','EMPLOYEE','u_comment8']);
+        createUser(['u_name9','u_email9@mail.com','password9','EMPLOYEE','u_comment9']);
+        createUser(['u_name10','u_email10@mail.com','password10','EMPLOYEE','u_comment10']);
+        createUser(['u_name11','u_email11@mail.com','password11','EMPLOYEE','u_comment11']);
+        createUser(['u_name12','u_email12@mail.com','password12','EMPLOYEE','u_comment12']);
 
         // App\Client // registrationNumber,name,email,address,phoneNumber,comment
-            // new App\User({'c_registrationNumber'.$faker->numberBetween($min = 10000, $max = 90000),
-            //     'c_name1','c_email1','c_address1',$faker->e164PhoneNumber,'c_comment1'})->save();
-            // new App\User({'c_registrationNumber'.$faker->numberBetween($min = 10000, $max = 90000),
-            //     'c_name2','c_email2','c_address2',$faker->e164PhoneNumber,'c_comment2'})->save();
-            // new App\User({'c_registrationNumber'.$faker->numberBetween($min = 10000, $max = 90000),
-            //     'c_name3','c_email3','c_address3',$faker->e164PhoneNumber,'c_comment3'})->save();
-
-        createClient(['c_name1','c_email1','c_address1','c_comment1']);
-        createClient(['c_name2','c_email2','c_address2','c_comment2']);
-        createClient(['c_name3','c_email3','c_address3','c_comment3']);
+        createClient(['c_name1','c_email1@mail.com','c_address1','c_comment1']);
+        createClient(['c_name2','c_email2@mail.com','c_address2','c_comment2']);
+        createClient(['c_name3','c_email3@mail.com','c_address3','c_comment3']);
 
         // App\Project // title,description,limitDate,startDate,finishDate,displacement,state, comment,client_id,user_id
         createProject(['p_title1','p_description1',$cM.'18',$cM.'12',null        ,0,1,'p_comment1',1,5]);

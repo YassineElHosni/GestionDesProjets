@@ -10,30 +10,21 @@ class UserPolicy
     use HandlesAuthorization;
 
 	public function showProfile(User $user,User $usertarget){
-    if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')){
-        return true;
-    }
-       return false;
+    return ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'));
   }
 
     public function index(User $user){
       if(!Auth::guest()){
-        if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')){
-            return true;
-        }
-           return false;
+          return ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'));
       }    
-         return false;
+      return false;
     }
 
     public function create(User $user){
       if(!Auth::guest()){
-        if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')) {
-            return true;
-        }
-           return false;
-      }
-           return false;
+        return ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'));
+      }    
+      return false;
     }
 
   public function show(User $user, User $usertarget){/*auth profile*/
@@ -42,15 +33,11 @@ class UserPolicy
   }
 
   public function edit(User $user, User $usertarget){
-    if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')) {
-        return true;
-    }
-       return false;
+    return ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'));
   }
 
   	public function editPassword(User $user){/*forgotten password*/
-      if ($user->guest()){ return true; }
-
+       return ($user->guest());
     }
 
     public function update_avatar(User $user, User $usertarget)
@@ -60,15 +47,11 @@ class UserPolicy
     }
     public function updatePassword(User $user, User $usertarget)
   	{
-       if ($user->guest()){ return true; }
-
+       return ($user->guest());
     }
 
     public function delete(User $user, User $usertarget)
     {
-      if ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER')) {
-          return true;
-      }
-          return false;
+      return ($user->Auth_hasRole('ADMIN')||$user->Auth_hasRole('MANAGER'));
     }
 }

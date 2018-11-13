@@ -89,9 +89,9 @@ class ProjectController extends Controller
 	}
 	
 	public static function calculateHoursCount($id){
-		$t_us = Task_User::whereIn('task_id',Task::where('project_id','Like',$id)->get(['id']))->get();
+		$t_u = Task_User::whereIn('task_id',Task::where('project_id','Like',$id)->get(['id']))->get();
 
-		dd($t,Project::useData_toCalculateHoursCount($t_u));
+		// dd($t,Project::useData_toCalculateHoursCount($t_u));
 		return Project::useData_toCalculateHoursCount($t_u);
 	}
 

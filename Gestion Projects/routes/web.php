@@ -77,7 +77,7 @@ Route::get('notif', function(){
 	// }
 });
 Route::get('/user/notif/seen/{data}','HomeController@notifSeen')->name('user.notif.seen');
-Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index')->middleware('admin');
+Route::get('/admin/register', 'HomeController@adminRegisterIndex')->name('admin.register.index');//->middleware('admin')
 Route::post('/admin/register/save', 'HomeController@firstAdminStore')->name('admin.register.save');
 
 Route::get('/register', 'UserController@registerIndex')->name('register.index');/*->middleware('can:create,App\User');*/

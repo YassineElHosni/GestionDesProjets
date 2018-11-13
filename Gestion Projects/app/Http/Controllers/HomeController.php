@@ -21,13 +21,15 @@ class HomeController extends Controller
 	//  check if the database of users is empty.
 	//
 	public function CheckFirstRegistration(){
-		return ($n=User::count()==0);//true -> empty ;; false -> full
+		return (User::where('role','like','ADMIN')->count() == 0);//true -> empty ;; false -> full
 	}
 	//
 	// returns the admin first registration page.
 	//
 	public function adminRegisterIndex(){
-		return view('AdminRegistration');
+		if((Auth::guest() && $this->CheckFirstRegistration()) || (!Auth::guest() && auth::user()->role == 'ADMIN'))
+			return view('AdminRegistration');
+		else return redirect()->route('home.index');
 	}
 	//
 	// create the first admin user account.
@@ -59,7 +61,7 @@ class HomeController extends Controller
 	// returns home page index.
 	//
 	public function index(){
-		if($this->CheckFirstRegistration()==false){
+		if(!Auth::guest()){
 			$ps=Project::orderBy('updated_at', 'ASC')
 				->where('state','=',1)
 				->take(3)
@@ -72,7 +74,9 @@ class HomeController extends Controller
 
 			return view('index')->with('LastFewProjects',$ps)
 				->with('LastFewTasks',$ts);
-		}else return redirect()->route('admin.register.index');
+		}else if($this->CheckFirstRegistration())
+				return redirect()->route('admin.register.index');
+			else return  redirect()->route('login');
 	}
 /////////////////////////////  ///////////////////  //////////////////////////
 
